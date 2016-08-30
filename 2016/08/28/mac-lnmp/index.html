@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="yupeng" />
+
+
+
+<meta name="description" content="安装Homebrew从零开始安装Mac下LNMP环境的过程
+
+确保系统已经安装xcode，然后使用一行命令安装依赖管理工具Homebrew
+
+1ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+之后就可以使用1brew install FORMULA
+来安装所需要的依赖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac下安装LNMP(Nginx+PHP5.6)环境">
+<meta property="og:url" content="http://upeng.github.io/2016/08/28/mac-lnmp/index.html">
+<meta property="og:site_name" content="paul的学习站">
+<meta property="og:description" content="安装Homebrew从零开始安装Mac下LNMP环境的过程
+
+确保系统已经安装xcode，然后使用一行命令安装依赖管理工具Homebrew
+
+1ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+之后就可以使用1brew install FORMULA
+来安装所需要的依赖">
+<meta property="og:updated_time" content="2016-08-30T15:50:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac下安装LNMP(Nginx+PHP5.6)环境">
+<meta name="twitter:description" content="安装Homebrew从零开始安装Mac下LNMP环境的过程
+
+确保系统已经安装xcode，然后使用一行命令安装依赖管理工具Homebrew
+
+1ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+之后就可以使用1brew install FORMULA
+来安装所需要的依赖">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="paul的学习站" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Mac下安装LNMP(Nginx+PHP5.6)环境 | paul的学习站</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: false,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://tva2.sinaimg.cn/crop.0.0.180.180.180/e9efd211jw1f64yr3e7boj20500503yg.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">yupeng</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:yupeng0906@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/upfriend" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/upeng" title="GitHub"></a>
+                            
+                                <a class="fa Twitter" href="https:twitter.com/happyupfriend" title="Twitter"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/">JQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcacheq/">memcacheq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinking/">thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vagrant/">vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zephir/">zephir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱折腾的PHPer</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">yupeng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://tva2.sinaimg.cn/crop.0.0.180.180.180/e9efd211jw1f64yr3e7boj20500503yg.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">yupeng</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:yupeng0906@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/upfriend" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/upeng" title="GitHub"></a>
+                            
+                                <a class="fa Twitter" target="_blank" href="https:twitter.com/happyupfriend" title="Twitter"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-mac-lnmp" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/28/mac-lnmp/" class="article-date">
+      <time datetime="2016-08-28T14:28:49.000Z" itemprop="datePublished">2016-08-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mac下安装LNMP(Nginx+PHP5.6)环境
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h2><p>从零开始安装Mac下LNMP环境的过程</p>
+<blockquote>
+<p>确保系统已经安装xcode，然后使用一行命令安装依赖管理工具Homebrew</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
+<p>之后就可以使用<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>FORMULA</div></pre></td></tr></table></figure></p>
+<p>来安装所需要的依赖了.更详细的信息参考Homebrew的[官方Cookbook][1]</p>
+<p>因此使用Homebrew常见的流程是：</p>
+<ol>
+<li>增加一个程序源（新增一个水龙头） brew tap homebrew/php</li>
+<li>更新程序源 brew update</li>
+<li>安装程序包（按照配方酿酒） brew install git</li>
+<li>查看配置 brew config 可以看到程序包默认安装在/usr/local/Cellar下 （酒桶放在地窖内）</li>
+</ol>
+<h2 id="安装PHP5-6（FPM方式）"><a href="#安装PHP5-6（FPM方式）" class="headerlink" title="安装PHP5.6（FPM方式）"></a>安装PHP5.6（FPM方式）</h2><p>首先加入Homebrew官方的几个软件源<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span>tap homebrew/dupes</div><div class="line"><span class="keyword">brew </span>tap homebrew/versions</div><div class="line"><span class="keyword">brew </span>tap homebrew/php</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>PHP如果采用默认配置安装，会编译mod_php模块并只运行在Apache环境下，为了使用Nginx，这里需要编译php-fpm并且禁用apache，主要通过参数<code>--without-fpm --without-apache</code>来实现。完整的安装指令为<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">brew install php56 \</div><div class="line">-<span class="ruby">-without-snmp \</span></div><div class="line">-<span class="ruby">-without-apache \</span></div><div class="line">-<span class="ruby">-with-debug \</span></div><div class="line">-<span class="ruby">-with-fpm \</span></div><div class="line">-<span class="ruby">-with-intl \</span></div><div class="line">-<span class="ruby">-with-homebrew-curl \</span></div><div class="line">-<span class="ruby">-with-homebrew-libxslt \</span></div><div class="line">-<span class="ruby">-with-homebrew-openssl \</span></div><div class="line">-<span class="ruby">-with-imap \</span></div><div class="line">-<span class="ruby">-with-mysql \</span></div><div class="line">-<span class="ruby">-with-tidy</span></div></pre></td></tr></table></figure></p>
+<p>由于OSX已经自带了PHP5.5环境，因此需要修改系统路径，优先运行brew安装的版本，在<code>~/.bashrc</code>里加入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="string">"/usr/local/bin:/usr/local/sbin:<span class="variable">$PATH</span>"</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这时运行 php -v查看版本是否是5.6<br>运行php -m 查看PHP安装都扩展列表</p>
+</blockquote>
+<p>如果要安装新的php扩展，可以直接安装而不用每次重新编译php，所有的扩展可以通过<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span>search php56</div></pre></td></tr></table></figure></p>
+<p>看到，下面是我自己所需要的扩展，可以支持Phalcon框架：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install php56-gearman php56-msgpack php56-memcache php56-memcached php56-mongo  php56-phalcon php56-redis php56-xdebug</div></pre></td></tr></table></figure></p>
+<h3 id="PHP-FPM的加载与启动"><a href="#PHP-FPM的加载与启动" class="headerlink" title="PHP-FPM的加载与启动"></a>PHP-FPM的加载与启动</h3><p>php-fpm.conf  php.ini<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>php<span class="regexp">/5.6</span></div></pre></td></tr></table></figure></p>
+<p>php-fpm进程<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="keyword">local</span>/sbin</div></pre></td></tr></table></figure></p>
+<p><strong>安装完毕后可以通过以下指令启动和停止php-fpm</strong><br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./php-fpm -D    <span class="comment">//进入sbin目录</span></div><div class="line"></div><div class="line">killall php-fpm</div></pre></td></tr></table></figure></p>
+<p>同时可以将php-fpm加入开机启动<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ln -sfv /usr/local/opt/php56/*.plist ~/<span class="keyword">Library</span>/LaunchAgents</div><div class="line"></div><div class="line">launchctl load ~/<span class="keyword">Library</span>/LaunchAgents/homebrew.mxcl.php56.plist</div></pre></td></tr></table></figure></p>
+<h3 id="查看php-fpm进程"><a href="#查看php-fpm进程" class="headerlink" title="查看php-fpm进程"></a>查看php-fpm进程</h3><p>查看9000端口<br><code>lsof -i:9000</code><br>或者<br><code>ps -ef | grep php-fpm</code></p>
+<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>nginx</div></pre></td></tr></table></figure>
+<p>安装完毕后可以通过<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nginx</div><div class="line">nginx <span class="_">-s</span> quit</div></pre></td></tr></table></figure></p>
+<p>启动和关闭，同时也支持重载配置文件等操作<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -s reload|<span class="type">reopen</span>|<span class="type">stop</span>|<span class="type">quit</span></div></pre></td></tr></table></figure></p>
+<p>nginx安装后默认监听8080端口，可以访问<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 查看状态。如果要想监听80端口需要root权限，运行</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo chown <span class="string">root:</span>wheel <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>nginx<span class="regexp">/1.6.2/</span>bin/nginx</div><div class="line">sudo chmod u+s <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>nginx<span class="regexp">/1.6.2/</span>bin/nginx</div></pre></td></tr></table></figure>
+<blockquote>
+<p>我是直接在nginx配置中改成80端口，然后重启生效<br>并使用root权限启动</p>
+</blockquote>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">sudo nginx</span></div></pre></td></tr></table></figure>
+<p>开机启动<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ln -sfv /usr/local/opt/nginx/*.plist ~/<span class="keyword">Library</span>/LaunchAgents</div><div class="line"></div><div class="line">launchctl load ~/<span class="keyword">Library</span>/LaunchAgents/homebrew.mxcl.nginx.plist</div></pre></td></tr></table></figure></p>
+<h2 id="Nginx-PHP-FPM配置"><a href="#Nginx-PHP-FPM配置" class="headerlink" title="Nginx + PHP-FPM配置"></a>Nginx + PHP-FPM配置</h2><p>好文：<a href="http://www.nginx.cn/nginx-how-to" target="_blank" rel="external">http://www.nginx.cn/nginx-how-to</a></p>
+<p>Nginx一般都会运行多个域名（虚拟主机）</p>
+<blockquote>
+<p>按Ubuntu的文件夹结构来存放Nginx的配置文件</p>
+</blockquote>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/<span class="keyword">var</span>/logs/nginx</div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/sites-available</div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/sites-enabled</div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/<span class="keyword">conf</span>.<span class="built_in">d</span></div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/ssl</div></pre></td></tr></table></figure>
+<blockquote>
+<p>联想到work中，vhost和fpm.d目录，新增域名与目录时，只需要增加两个配置文件；前提时php-fpm.conf和nginx.conf主配置文件中都有</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">include</span> vhost/<span class="regexp">*.conf</span></div><div class="line">include fpm.d/<span class="regexp">*.conf</span></div></pre></td></tr></table></figure>
+<p><strong>上述都conf.d等同于fpm.d，sites-enabled等同于vhost</strong></p>
+<h3 id="编辑Nginx全局配置"><a href="#编辑Nginx全局配置" class="headerlink" title="编辑Nginx全局配置"></a>编辑Nginx全局配置</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/nginx.conf</span></div></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">worker_processes</span>  <span class="number">1</span>;</div><div class="line"><span class="attribute">error_log</span>   /usr/local/var/logs/nginx/error.log <span class="literal">debug</span>;</div><div class="line"><span class="attribute">pid</span>        /usr/local/var/run/nginx.pid;</div><div class="line"></div><div class="line"><span class="section">events</span> &#123;</div><div class="line">    <span class="attribute">worker_connections</span>  <span class="number">256</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="section">http</span> &#123;</div><div class="line">    <span class="attribute">include</span>       mime.types;</div><div class="line">    <span class="attribute">default_type</span>  application/octet-stream;</div><div class="line"></div><div class="line">    <span class="attribute">log_format</span> main <span class="string">'<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] '</span></div><div class="line">        <span class="string">'"<span class="variable">$request</span>" <span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> '</span></div><div class="line">        <span class="string">'"<span class="variable">$http_referer</span>" "<span class="variable">$http_user_agent</span>" '</span></div><div class="line">        <span class="string">'"<span class="variable">$http_x_forwarded_for</span>" <span class="variable">$host</span> <span class="variable">$request_time</span> <span class="variable">$upstream_response_time</span> <span class="variable">$scheme</span> '</span></div><div class="line">        <span class="string">'<span class="variable">$cookie_evalogin</span>'</span>;</div><div class="line"></div><div class="line">    <span class="attribute">access_log</span>  /usr/local/var/logs/access.log  main;</div><div class="line"></div><div class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</div><div class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</div><div class="line">    <span class="attribute">port_in_redirect</span> <span class="literal">off</span>;</div><div class="line"></div><div class="line">    <span class="attribute">include</span> /usr/local/etc/nginx/sites-enabled/*;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样一来首先可以把一些可复用配置独立出来放在<code>/usr/local/etc/nginx/conf.d</code>下，比如fastcgi的设置就可以独立出来<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/conf.d/</span>php-fpm</div></pre></td></tr></table></figure></p>
+<p>内容为<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> <span class="regexp">~ \.php$</span> &#123;</div><div class="line">    <span class="attribute">try_files</span>                   <span class="variable">$uri</span> = <span class="number">404</span>;</div><div class="line">    <span class="attribute">fastcgi_pass</span>                <span class="number">127.0.0.1:9000</span>;</div><div class="line">    <span class="attribute">fastcgi_index</span>               index.php;</div><div class="line">    <span class="attribute">fastcgi_intercept_errors</span>    <span class="literal">on</span>;</div><div class="line">    <span class="attribute">include</span> /usr/local/etc/nginx/fastcgi.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后<code>/usr/local/etc/nginx/sites-enabled</code>目录下可以一个文件对应一个域名的配置，比如web服务器目录是<code>/opt/htdocs</code><br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/sites-enabled/</span><span class="keyword">default</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="section">server</span> &#123;</div><div class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</div><div class="line">    <span class="attribute">server_name</span>  localhost;</div><div class="line">    <span class="attribute">root</span>         /opt/htdocs/;</div><div class="line"></div><div class="line">    <span class="attribute">location</span> / &#123;</div><div class="line">        <span class="attribute">index</span>  index.html index.htm index.php;</div><div class="line">        <span class="attribute">include</span>     /usr/local/etc/nginx/conf.d/php-fpm;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此时启动了php-fpm并且启动了Nginx后，就可以通过<a href="http://localhost来运行php程序了" target="_blank" rel="external">http://localhost来运行php程序了</a></p>
+<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>mysql</div></pre></td></tr></table></figure>
+<p>可以通过<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql<span class="selector-class">.server</span> start</div><div class="line">mysql<span class="selector-class">.server</span> stop</div></pre></td></tr></table></figure></p>
+<p>来启动／停止，启动后默认应为空密码，可以通过mysqladmin设置一个密码<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">mysqladmin</span> -uroot password <span class="string">"mypassword"</span></div></pre></td></tr></table></figure></p>
+<p>但是在操作的时候出现了空密码无法登入的情况，最终只能通过mysqld_safe来设置<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo mysqld_safe --skip-grant-tables</div><div class="line">mysql -u root</div><div class="line">mysql&gt; UPDATE mysql.user <span class="keyword">SET</span> Password=PASSWORD(<span class="string">'mypassword'</span>) WHERE <span class="comment">User=</span><span class="comment">'root'</span>;</div><div class="line">mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure></p>
+<p><strong>依旧报错</strong></p>
+<blockquote>
+<p><strong>坑1</strong>：一直出现mysql.sock错误，<code>mysql -uroot -p</code>;<br><strong>填坑1</strong>：<code>mysql -h 127.0.0.1 -u root -p</code>  why?</p>
+<p><strong>坑2</strong>：设置密码报错：<code>Password</code>字段不存在<br><strong>填坑2</strong>：mysql5.7已将<code>Password</code>字段去掉，改成<code>authentication_string</code>；所以正确都姿势如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> mysql.user <span class="keyword">set</span> authentication_string=<span class="keyword">password</span>(<span class="string">'123qwe'</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">'root</span></div></pre></td></tr></table></figure></p>
+<p>老版本mysql没变</p>
+</blockquote>
+<p>最后将MySQL加入开机启动<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/my</span>sql<span class="regexp">/5.6.22/</span>homebrew.mxcl.mysql.plist ~<span class="regexp">/Library/</span>LaunchAgents<span class="regexp">/</span></div></pre></td></tr></table></figure></p>
+<h2 id="查看服务列表"><a href="#查看服务列表" class="headerlink" title="查看服务列表"></a>查看服务列表</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew services <span class="built_in">list</span></div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Name  Status  User    Plist</div><div class="line">mysql started root    /Library/LaunchDaemons/homebrew<span class="selector-class">.mxcl</span><span class="selector-class">.mysql</span><span class="selector-class">.plist</span></div><div class="line">nginx started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew<span class="selector-class">.mxcl</span><span class="selector-class">.nginx</span><span class="selector-class">.plist</span></div><div class="line">php56 started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew<span class="selector-class">.mxcl</span><span class="selector-class">.php56</span><span class="selector-class">.plist</span></div></pre></td></tr></table></figure>
+<p>安装redis和memcache过程省略，详见下面博文，本文也是参考此<br><a href="http://avnpc.com/pages/install-lnmp-on-osx" target="_blank" rel="external">http://avnpc.com/pages/install-lnmp-on-osx</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/08/28/mac-lnmp/">Mac下安装LNMP(Nginx+PHP5.6)环境</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">yupeng</a></p>
+        <p><span>发布时间:</span>2016-08-28, 22:28:49</p>
+        <p><span>最后更新:</span>2016-08-30, 23:50:49</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/28/mac-lnmp/" title="Mac下安装LNMP(Nginx+PHP5.6)环境">http://upeng.github.io/2016/08/28/mac-lnmp/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://upeng.github.io/2016/08/28/mac-lnmp/　　作者: yupeng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/08/28/mac-primary/">
+                    首次折腾Mac
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Homebrew"><span class="toc-number">1.</span> <span class="toc-text">安装Homebrew</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装PHP5-6（FPM方式）"><span class="toc-number">2.</span> <span class="toc-text">安装PHP5.6（FPM方式）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-FPM的加载与启动"><span class="toc-number">2.1.</span> <span class="toc-text">PHP-FPM的加载与启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看php-fpm进程"><span class="toc-number">2.2.</span> <span class="toc-text">查看php-fpm进程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Nginx"><span class="toc-number">3.</span> <span class="toc-text">安装Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx-PHP-FPM配置"><span class="toc-number">4.</span> <span class="toc-text">Nginx + PHP-FPM配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编辑Nginx全局配置"><span class="toc-number">4.1.</span> <span class="toc-text">编辑Nginx全局配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装MySQL"><span class="toc-number">5.</span> <span class="toc-text">安装MySQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看服务列表"><span class="toc-number">6.</span> <span class="toc-text">查看服务列表</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Mac下安装LNMP(Nginx+PHP5.6)环境　| paul的学习站　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/08/28/mac-lnmp/" data-title="Mac下安装LNMP(Nginx+PHP5.6)环境" data-url="http://upeng.github.io/2016/08/28/mac-lnmp/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"upeng"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/08/28/mac-primary/" title="下一篇: 首次折腾Mac">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/28/mac-lnmp/">Mac下安装LNMP(Nginx+PHP5.6)环境</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/28/mac-primary/">首次折腾Mac</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/15/laravel-basic/">laravel基础任务学习清单</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/17/vuejs/">vuejs与后台数据的交互实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/13/vagrant/">vagrant-快速搭建linux开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/memcacheq/">MCQ学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/zephir/">使用zephir快速编写php扩展</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/25/normal/">数据库范式的思考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/thinking-1/">In Recent Days</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/thinking/">standing on the shoulders of the giants</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/laravel-auth/">laravel学习笔记-用户认证</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/php-detail/">几个值得深思的 PHP 面试问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/laravel-migration/">laravel migration</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/29/laravel-blade/">laravel的blade视图模板引擎</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/27/mysqlperformance03/">mysql数据库之索引优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/laravel-primary/">laravel初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/mysqlperformance01/">mysql之sql优化-慢查询日志开启和查看（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/23/tmux工具/">tmux linux下的终端复用工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/20/hexo-guidebook/">hexo+github搭建blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/mysql-grant/">mysql添加用户管理员及授权</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/mysql-think/">一个脚本引发的思考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/31/linux-awk/">Linux常用命令-awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/30/linux命令/">linux常用命令（总是forget）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/28/linux-bash/">常用的bash命令快捷建</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/14/php-design-single/">PHP设计模式-单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/12/php-design-model/">PHP设计模式-工厂模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/13/php-ci1/">CI模型-视图-控制器 命名规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/03/mysql导入导出/">linux下导入、导出mysql数据库命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/15/html-js/">jquery中html()、text()、val()与js中的对应属性</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 yupeng
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 6;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

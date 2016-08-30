@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="yupeng" />
+
+
+    
+    
+
+
+<meta name="description" content="PHP|Linux|Laravel|WEB|MySQL学习笔记总结">
+<meta property="og:type" content="website">
+<meta property="og:title" content="paul的学习站">
+<meta property="og:url" content="http://upeng.github.io/page/2/index.html">
+<meta property="og:site_name" content="paul的学习站">
+<meta property="og:description" content="PHP|Linux|Laravel|WEB|MySQL学习笔记总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="paul的学习站">
+<meta name="twitter:description" content="PHP|Linux|Laravel|WEB|MySQL学习笔记总结">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="paul的学习站" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>paul的学习站</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: false,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://tva2.sinaimg.cn/crop.0.0.180.180.180/e9efd211jw1f64yr3e7boj20500503yg.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">yupeng</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:yupeng0906@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/upfriend" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/upeng" title="GitHub"></a>
+                            
+                                <a class="fa Twitter" href="https:twitter.com/happyupfriend" title="Twitter"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/">JQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcacheq/">memcacheq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinking/">thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vagrant/">vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zephir/">zephir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱折腾的PHPer</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">yupeng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://tva2.sinaimg.cn/crop.0.0.180.180.180/e9efd211jw1f64yr3e7boj20500503yg.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">yupeng</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:yupeng0906@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/upfriend" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/upeng" title="GitHub"></a>
+                            
+                                <a class="fa Twitter" target="_blank" href="https:twitter.com/happyupfriend" title="Twitter"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap">
+  
+    <article id="post-laravel-auth" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/29/laravel-auth/" class="article-date">
+      <time datetime="2016-05-29T00:17:07.000Z" itemprop="datePublished">2016-05-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/29/laravel-auth/">laravel学习笔记-用户认证</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>在平时开发过程中，用户登录注册是非常常见的场景，比如大部分后台管理、论坛等等；用户一般web访问流程从业务来说是这样的：<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/05/29/laravel-auth/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-php-detail" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/28/php-detail/" class="article-date">
+      <time datetime="2016-05-27T16:04:26.000Z" itemprop="datePublished">2016-05-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/28/php-detail/">几个值得深思的 PHP 面试问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>5个值得深思的 PHP 面试问题<br>文章所罗列的问题虽然看似简单，但是每个背后都涵盖了一个或几个大家容易忽视的基础知识点，希望能够帮助到你的面试和平时工作。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/05/28/php-detail/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-laravel-migration" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/07/laravel-migration/" class="article-date">
+      <time datetime="2016-05-07T12:10:00.000Z" itemprop="datePublished">2016-05-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/07/laravel-migration/">laravel migration</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="laravel-migration工具"><a href="#laravel-migration工具" class="headerlink" title="laravel migration工具"></a>laravel migration工具</h2><h3 id="新建表articles步骤"><a href="#新建表articles步骤" class="headerlink" title="新建表articles步骤"></a>新建表<code>articles</code>步骤</h3><ul>
+<li>migrations下生成<code>2015_12_13_104637_create_articles_table.php</code>文件<br><code>php artisan make:migration create_articles_table --create=articles</code></li>
+<li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Schema::create(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">    $table-&gt;increments(<span class="string">'id'</span>);</div><div class="line">    $table-&gt;string(<span class="string">'title'</span>);</div><div class="line">    $table-&gt;text(<span class="string">'content'</span>);</div><div class="line">    $table-&gt;timestamp(<span class="string">'published_at'</span>);</div><div class="line">    $table-&gt;timestamps();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>保存文件，执行下面命令，数据库中生成articls表<br><code>php artisan migrate</code></li>
+</ul>
+<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//回退操作</span></div><div class="line">php artisan <span class="string">migrate:</span>rollback</div></pre></td></tr></table></figure>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/05/07/laravel-migration/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-laravel-blade" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/29/laravel-blade/" class="article-date">
+      <time datetime="2016-04-28T16:18:00.000Z" itemprop="datePublished">2016-04-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/29/laravel-blade/">laravel的blade视图模板引擎</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="blade模板引擎使用"><a href="#blade模板引擎使用" class="headerlink" title="blade模板引擎使用"></a>blade模板引擎使用</h3><p>很多时候，我们的view模板有很多重复的地方，比如head、footer部分，当然可以定义一些共用的部分，置于common文件夹下，然后使用include将其引入进来。而blade有一套自己的策略</p>
+<p>比如定义一个<code>common.blade.php</code>文件，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Laravel<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css?family=Lato:100"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></div><div class="line">            <span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;<span class="attribute">height</span>: <span class="number">100%</span>;&#125;</div><div class="line">            <span class="selector-tag">body</span> &#123;<span class="attribute">margin</span>: <span class="number">0</span>;<span class="attribute">width</span>: <span class="number">100%</span>;<span class="attribute">display</span>: table;<span class="attribute">font-weight</span>: <span class="number">100</span>;<span class="attribute">font-family</span>: <span class="string">'Lato'</span>;&#125;</div><div class="line">            <span class="selector-class">.container</span> &#123;<span class="attribute">text-align</span>: center;<span class="attribute">display</span>: table-cell;<span class="attribute">vertical-align</span>: middle;</div><div class="line">            &#125;</div><div class="line">            <span class="selector-class">.content</span> &#123;<span class="attribute">text-align</span>: center;<span class="attribute">display</span>: inline-block;&#125;</div><div class="line">            <span class="selector-class">.title</span> &#123;<span class="attribute">font-size</span>: <span class="number">96px</span>;&#125;</div><div class="line">            <span class="selector-class">.footer</span>&#123;<span class="attribute">color</span>: green;<span class="attribute">font-size</span>: <span class="number">100px</span>;&#125;</div><div class="line">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">            @yield('content')</div><div class="line">            @yield('footer')</div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/04/29/laravel-blade/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mysqlperformance03" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/27/mysqlperformance03/" class="article-date">
+      <time datetime="2016-04-26T16:44:33.000Z" itemprop="datePublished">2016-04-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/27/mysqlperformance03/">mysql数据库之索引优化</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="如何选择合适的列建立索引"><a href="#如何选择合适的列建立索引" class="headerlink" title="如何选择合适的列建立索引?"></a>如何选择合适的列建立索引?</h2><ol>
+<li>在where从句、group by从句、order by从句、on从句中出现的列</li>
+<li>索引字段越小越好</li>
+<li>离散度大的列放到联合索引的前面</li>
+</ol>
+<blockquote>
+<p>理解离散度<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> payment <span class="keyword">where</span> staff_id = <span class="number">2</span> <span class="keyword">AND</span> customer_id = <span class="number">584</span>;</div></pre></td></tr></table></figure></p>
+<p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
+</blockquote>
+<p><strong>备注</strong>：比较staff_id和customer_id两者的离散度，那个离散度高，那个列就放置到联合索引的前面<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/04/27/mysqlperformance03/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-laravel-primary" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/25/laravel-primary/" class="article-date">
+      <time datetime="2016-04-25T12:10:00.000Z" itemprop="datePublished">2016-04-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/25/laravel-primary/">laravel初体验</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="访问流程"><a href="#访问流程" class="headerlink" title="访问流程"></a>访问流程</h3><blockquote>
+<p>路由文件routes.php</p>
+</blockquote>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*默认是以匿名函数的方式进行路由,/是当前域名下加载视图文件welcome.blade.php */</span></div><div class="line"></div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'welcome'</span>);</div><div class="line">&#125;);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'about'</span>);</div><div class="line">&#125;);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/blog'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'blog.content'</span>);  <span class="comment">//其中的“.”可以用“/”代替</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//如果使用非匿名函数的方式</span></div><div class="line"></div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="string">'UserController@index'</span>);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="string">'UserController@about'</span>);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/blog'</span>, <span class="string">'UserController@blog'</span>);</div></pre></td></tr></table></figure>
+<h3 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h3><blockquote>
+<ol>
+<li>可以手动创建Controller，也可以使用命令行创建控制器<code>php artisan</code>工具</li>
+<li>参数 –plain使用则不会生成一些默认的方法如index，create等</li>
+</ol>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:controller</span> <span class="selector-tag">UserController</span></div><div class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:controller</span> <span class="selector-tag">TestController</span> <span class="selector-tag">--plain</span></div></pre></td></tr></table></figure>
+<h3 id="视图的加载"><a href="#视图的加载" class="headerlink" title="视图的加载"></a>视图的加载</h3><blockquote>
+<p>加载视图的方法</p>
+</blockquote>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'welcome'</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'blog/title'</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'blog.content'</span>)</span></span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>怎么向blade视图传递变量</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$name = <span class="string">'&lt;p style="color:red"&gt;upfriend&lt;/p&gt;'</span>;</div><div class="line">$time = date(<span class="string">'Y-m-d'</span>, time());</div><div class="line">$arr = <span class="keyword">array</span>(<span class="string">'first'</span> =&gt; <span class="string">'jerry'</span>, <span class="string">'last'</span> =&gt; <span class="string">'bool'</span>);</div><div class="line"></div><div class="line"><span class="comment">//传递变量-通用方式传递给$data数组</span></div><div class="line">$data[<span class="string">'name'</span>] = $name;</div><div class="line">$data[<span class="string">'time'</span>] = $time; </div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>, $data);</div><div class="line"></div><div class="line"><span class="comment">//Laravel链式操作方式 </span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>)-&gt;(<span class="string">'name'</span> =&gt; $name);  <span class="comment">//传递一个变量</span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>)-&gt;with(<span class="keyword">array</span>(<span class="string">'name'</span> =&gt; $name, <span class="string">'time'</span> =&gt; $time));  <span class="comment">//传递数组变量</span></div><div class="line"></div><div class="line"><span class="comment">//compact方法</span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>, compact(<span class="string">'name'</span>, <span class="string">'time'</span>, <span class="string">'arr'</span>));  <span class="comment">//去掉$的变量名</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>如何正确输出变量的值</p>
+</blockquote>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="xml">//原生PHP输出数据方式，默认会对变量中的字符会进行转义（xss?）</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="php"><span class="meta">&lt;?</span>=name<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>   </div><div class="line"></div><div class="line">//Laravel的blade模板引擎渲染方式，两个大括号<span class="template-variable">&#123;&#123;&#125;</span><span class="xml">&#125;表示转义后输出</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="template-variable">&#123;&#123;name&#125;</span><span class="xml">&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  //浏览器输出<span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red"</span>&gt;</span>upfriend<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="template-variable">&#123;!!name!!&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  //会见变量作为html,输出红色字体的upfriend</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mysqlperformance01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/24/mysqlperformance01/" class="article-date">
+      <time datetime="2016-04-23T19:25:05.000Z" itemprop="datePublished">2016-04-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/24/mysqlperformance01/">mysql之sql优化-慢查询日志开启和查看（1）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>如何发现有问题的SQL？使用慢查询日志【slow_query_log】对有效率问题的sql进行监控</p>
+<h3 id="查看慢查询日志开启状态"><a href="#查看慢查询日志开启状态" class="headerlink" title="查看慢查询日志开启状态"></a>查看慢查询日志开启状态</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variable</span>  s <span class="keyword">like</span> <span class="string">'slow_query_log'</span></div></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png" alt=""></p>
+<h3 id="记录未使用索引的查询"><a href="#记录未使用索引的查询" class="headerlink" title="记录未使用索引的查询"></a>记录未使用索引的查询</h3><p>未使用索引的查询默认是关闭的，如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'log_queries_not_using_indexes'</span>;</div></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/2655ccd1-69ab-4c54-b7bf-50b01b2b45e5.png" alt=""><br>需要打开未使用索引的查询，即未使用索引的查询会记录在案<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">global</span> log_queries_not_using_indexes=<span class="keyword">on</span></div></pre></td></tr></table></figure></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/04/24/mysqlperformance01/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-tmux工具" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/23/tmux工具/" class="article-date">
+      <time datetime="2016-04-22T17:10:45.000Z" itemprop="datePublished">2016-04-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/23/tmux工具/">tmux linux下的终端复用工具</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="tmux常用命令"><a href="#tmux常用命令" class="headerlink" title="tmux常用命令"></a>tmux常用命令</h2><p><code>tmux</code>打开tmux服务，列出几个最常用的命令<br>①：ctrl+B ②：字符<br>如：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ctrl+B % 纵向切屏，将屏幕切成左右两半</div><div class="line"></div><div class="line">ctrl+B <span class="comment">" 单个双引号，水平切割屏幕上下两半</span></div><div class="line"></div><div class="line">ctrl+B <span class="keyword">x</span> 确定关掉当前面板（回话）吗？ <span class="string">'y'</span> -&gt;删除当前会话</div><div class="line"></div><div class="line">ctrl+B t 显示当前时间</div><div class="line"></div><div class="line">ctrl+B ↑ ↓ → ← 会话之间跳转</div></pre></td></tr></table></figure></p>
+<p>更多命令参考<br><a href="http://kumu-linux.github.io/blog/2013/08/06/tmux/" target="_blank" rel="external">http://kumu-linux.github.io/blog/2013/08/06/tmux/</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/">tmux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-hexo-guidebook" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/20/hexo-guidebook/" class="article-date">
+      <time datetime="2016-04-20T13:31:48.000Z" itemprop="datePublished">2016-04-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/20/hexo-guidebook/">hexo+github搭建blog</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>hexo是一个快速、简介且高效的博客框架！</p>
+<h2 id="安装前置服务"><a href="#安装前置服务" class="headerlink" title="安装前置服务"></a>安装前置服务</h2><p>hexo依赖nodejs和git </p>
+<ul>
+<li>由于依赖nodejs，因此安装hexo之前需要先安装nodejs</li>
+<li>使用github搭建静态博客，因此需要安装git客户端（使用hexo命令编译并上传至github）</li>
+</ul>
+<blockquote>
+<p><a href="http://pan.baidu.com/s/1dENChzF" target="_blank" rel="external">百度云盘下载链接</a></p>
+</blockquote>
+<h2 id="快速创建博客页面"><a href="#快速创建博客页面" class="headerlink" title="快速创建博客页面"></a>快速创建博客页面</h2><h3 id="hexo-server"><a href="#hexo-server" class="headerlink" title="hexo server"></a>hexo server</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//启动本地服务，查看博客主页</div><div class="line">$ hexo server</div><div class="line">INFO  <span class="keyword">Start</span> processing</div><div class="line">INFO  Hexo <span class="keyword">is</span> running <span class="keyword">at</span> <span class="keyword">http</span>://localhost:<span class="number">4000</span>/. Press Ctrl+C <span class="keyword">to</span> stop.</div></pre></td></tr></table></figure>
+<h3 id="hexo-new-“my-new-post”"><a href="#hexo-new-“my-new-post”" class="headerlink" title="hexo new “my new post”"></a>hexo new “my new post”</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建文章页</span></div><div class="line">$ hexo <span class="keyword">new</span> <span class="string">"hexo guidebook"</span></div><div class="line">INFO  <span class="string">Created:</span> <span class="string">g:</span>\hexo\source\_posts\hexo-guidebook.md</div></pre></td></tr></table></figure>
+<h3 id="hexo-new-page-“categories”"><a href="#hexo-new-page-“categories”" class="headerlink" title="hexo new page “categories”"></a>hexo new page “categories”</h3><blockquote>
+<p>创建单页面，比如分类，关于</p>
+</blockquote>
+<h3 id="hexo-g-hexo-generate"><a href="#hexo-g-hexo-generate" class="headerlink" title="hexo g (hexo generate)"></a>hexo g (hexo generate)</h3><blockquote>
+<p>生成静态页面</p>
+</blockquote>
+<h3 id="hexo-deploy-（上传至github）"><a href="#hexo-deploy-（上传至github）" class="headerlink" title="hexo deploy （上传至github）"></a>hexo deploy （上传至github）</h3><blockquote>
+<p>如果没有建立github与本地git的关联，会报错，因为本地和github没有建立信任机制是不能随意上传至github的</p>
+</blockquote>
+<h2 id="补充：如何建立信任机制"><a href="#补充：如何建立信任机制" class="headerlink" title="补充：如何建立信任机制"></a>补充：如何建立信任机制</h2><h3 id="生成新的Key："><a href="#生成新的Key：" class="headerlink" title="生成新的Key："></a>生成新的Key：</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C <span class="string">"your_email@youremail.com"</span>  <span class="comment">//（引号内的内容替换为你自己的邮箱）</span></div></pre></td></tr></table></figure>
+<ul>
+<li>输出显示</li>
+</ul>
+<blockquote>
+<p>Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</p>
+</blockquote>
+<ul>
+<li>直接回车，不要修改默认路劲。</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Enter passphrase (<span class="built_in">empty</span> <span class="keyword">for</span> <span class="keyword">no</span> passphrase): </div><div class="line">Enter same passphrase again:</div></pre></td></tr></table></figure>
+<ul>
+<li>设置一个密码短语，在每次远程操作之前会要求输入密码短语！闲麻烦可以直接回车，不设置。成功：</li>
+</ul>
+<blockquote>
+<p>Your identification has been saved in /Users/your_user_directory/.ssh/id_rsa. Your public key has been saved in /Users/your_user_directory/.ssh/id_rsa.pub. The key fingerprint is: … …</p>
+</blockquote>
+<h3 id="提交公钥："><a href="#提交公钥：" class="headerlink" title="提交公钥："></a>提交公钥：</h3><ul>
+<li><p>找到.ssh文件夹，用文本编辑器打开“id_rsa.pub”文件，复制内容到剪贴板。</p>
+</li>
+<li><p>打开 <a href="https://github.com/settings/ssh" target="_blank" rel="external">https://github.com/settings/ssh</a> ，点击 Add SSH Key 按钮，粘贴进去保存即可。</p>
+</li>
+</ul>
+<h2 id="踩到的坑"><a href="#踩到的坑" class="headerlink" title="踩到的坑"></a>踩到的坑</h2><p>hexo deploy后报一堆错误如下，在初次使用git命令也许会遇到<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">warning: LF will be replaced <span class="keyword">by</span> CRLF <span class="keyword">in</span> <span class="params">...</span>..</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>有效解决方法：</p>
+</blockquote>
+<ol>
+<li><p>在git bash  输入下面的命令：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --<span class="keyword">global</span> core.autocrlf  <span class="literal">false</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>删掉项目中的.git文件夹 <code>rm -rf .git</code></p>
+</li>
+<li><p>重新<br>git init<br>hexo deploy<br>问题解决！</p>
+</li>
+</ol>
+<p>参考【其他一些主题配置文章】<br><a href="http://jianghao.wang/2015/hexo-github/" target="_blank" rel="external">http://jianghao.wang/2015/hexo-github/</a><br><a href="http://zhiho.github.io/2015/09/29/hexo-next/" target="_blank" rel="external">http://zhiho.github.io/2015/09/29/hexo-next/</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mysql-grant" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/10/mysql-grant/" class="article-date">
+      <time datetime="2016-04-10T06:26:00.000Z" itemprop="datePublished">2016-04-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/10/mysql-grant/">mysql添加用户管理员及授权</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="mysql添加用户管理员及授权"><a href="#mysql添加用户管理员及授权" class="headerlink" title="mysql添加用户管理员及授权"></a>mysql添加用户管理员及授权</h2><p>比如添加test用户，grant 高级 DBA 管理 MySQL 中所有数据库的权限</p>
+<h3 id="step1-创建用户"><a href="#step1-创建用户" class="headerlink" title="step1 创建用户"></a>step1 创建用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"%"</span>,<span class="string">"test"</span>,<span class="keyword">password</span>(<span class="string">"123qwe"</span>));</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"localhost"</span>,<span class="string">"test"</span>,<span class="keyword">password</span>(<span class="string">"123qwe"</span>));</div><div class="line">注：%和localhost的区别</div><div class="line">此处的"localhost"，是指该用户只能在本地登录，不能在另外一台机器上远程登录。如果想远程登录的话，将"localhost"改为"%"，表示在任何一台电脑上都可以登录。也可以指定某台机器可以远程登录。</div></pre></td></tr></table></figure>
+<h3 id="step2-为用户授权"><a href="#step2-为用户授权" class="headerlink" title="step2 为用户授权"></a>step2 为用户授权</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">授权格式：<span class="keyword">grant</span> 权限 <span class="keyword">on</span> 数据库.* <span class="keyword">to</span> 用户名@登录主机 <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">"密码"</span>;　</div><div class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> testDB.testTable <span class="keyword">to</span> <span class="keyword">test</span>@localhost <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'1234'</span>;</div><div class="line"><span class="keyword">grant</span> all <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="keyword">test</span>@<span class="string">'%'</span>;  //全部数据库表的权限</div></pre></td></tr></table></figure>
+<h3 id="step3-刷新系统权限表"><a href="#step3-刷新系统权限表" class="headerlink" title="step3 刷新系统权限表"></a>step3 刷新系统权限表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>; //刷新系统权限表</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    </nav>
+  
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 yupeng
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 6;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
