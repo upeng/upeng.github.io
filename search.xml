@@ -17,7 +17,6 @@
 </ol>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="built_in">number</span> <span class="comment"># 显示行号</span></div><div class="line"><span class="keyword">set</span> autoindent <span class="comment"># 自动缩进</span></div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="vim键盘图"><a href="#vim键盘图" class="headerlink" title="vim键盘图"></a>vim键盘图</h3><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/vim-keyboard.png" alt="vim-keyboard"></p>
 <h3 id="vim模式"><a href="#vim模式" class="headerlink" title="vim模式"></a>vim模式</h3><p>我们知道vim的模式【insert模式、普通模式、visual模式】中<strong>insert模式</strong>和<strong>visual模式</strong>是不能直接互跳的，必须先返回到<strong>普通模式</strong>！普通模式下<code>:</code>进入命令模式<br>快速进入insert模式：普通模式下输入 i/o/a，esc返回到普通模式<br>快速进入visual模式：普通模式下输入 v，再次v返回到普通模式</p>
 <h3 id="普通模式下快速跳转"><a href="#普通模式下快速跳转" class="headerlink" title="普通模式下快速跳转"></a>普通模式下快速跳转</h3><p>不要只会箭头上下左右了！这个能提高效率<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gg(<span class="number">1</span>G)  <span class="comment"># 文件顶部 </span></div><div class="line">G 	<span class="comment"># 文件尾部</span></div><div class="line">control + [	<span class="comment"># 向上片段移动</span></div><div class="line">control + ] <span class="comment"># 向下片段移动 </span></div><div class="line"><span class="keyword">j </span><span class="comment"># 下一行</span></div><div class="line">k <span class="comment"># 上一行</span></div><div class="line">w <span class="comment"># 下一个单词</span></div><div class="line"><span class="keyword">b </span><span class="comment"># 上一个单词</span></div></pre></td></tr></table></figure></p>
 <h3 id="复制粘贴一块代码"><a href="#复制粘贴一块代码" class="headerlink" title="复制粘贴一块代码"></a>复制粘贴一块代码</h3><ol>
@@ -31,12 +30,13 @@
 <p>下面命令必须先将鼠标移动到指定位置或指定行</p>
 </blockquote>
 <ul>
-<li><code>x</code> 删除当前定位的字母</li>
+<li>字母<code>x</code> 删除当前定位的字母</li>
 <li><code>dw</code> 删除当前鼠标所在的单词 <code>db</code>向前删除一个单词  </li>
 <li><code>5dd</code>删除从当前行开始（包括当前行在内）的5行</li>
 <li><code>dG</code> 输入<code>d</code>，然后<code>shift+g</code>(或大写<code>G</code>)</li>
-<li>删除21-94行之间的内容，鼠标在第10行，如何快速删除！记住！总是忘记！<code>:21,94d</code><h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3>普通模式下<code>/</code>搜索，n下一个，N上一个<br>普通模式下<code>:e filepath/file</code>打开file<br>批量替换<code>:%s/word1/word2/g</code><br>复制一个文件全部内容到当前文件的指定位置<code>:read filepath/file</code></li>
+<li>删除21-94行之间的内容，鼠标在第10行，如何快速删除！记住！总是忘记！<code>:21,94d</code></li>
 </ul>
+<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><p>普通模式下<code>/</code>搜索，n下一个，N上一个<br>普通模式下<code>:e filepath/file</code>打开file<br>批量替换<code>:%s/word1/word2/g</code><br>复制一个文件全部内容到当前文件的指定位置<code>:read filepath/file</code></p>
 <h3 id="撤销或重做"><a href="#撤销或重做" class="headerlink" title="撤销或重做"></a>撤销或重做</h3><p><code>u</code>撤销，<code>ctrl+r</code>重做（像sublime的cmd+y）</p>
 <h3 id="快速进入insert模式"><a href="#快速进入insert模式" class="headerlink" title="快速进入insert模式"></a>快速进入insert模式</h3><p>普通模式下，随处都可以进入编辑模式，可能之前你只注意到<code>i</code>命令，其实还有两个<strong>非常实用</strong>的命令<code>a</code>和<code>o</code><br><code>a</code>–从当前鼠标定位开始,立刻可编辑<br><code>o</code>–立刻换行编辑</p>
 <h3 id="代码注释"><a href="#代码注释" class="headerlink" title="代码注释"></a>代码注释</h3><blockquote>
@@ -57,6 +57,8 @@
 <li>按d或x删除注释符</li>
 </ul>
 <p>通过学习，效率有所提高，但vim更加丰富的功能还需要进一步探索，计划上面的命令使用非常熟练自如后再进行第二阶段的学习和探索–命令模式和目录可视化的打造。</p>
+<h3 id="vim键盘图"><a href="#vim键盘图" class="headerlink" title="vim键盘图"></a>vim键盘图</h3><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/vim-keyboard.png" alt="vim-keyboard"></p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://www.shiyanlou.com/questions/3176" target="_blank" rel="external">https://www.shiyanlou.com/questions/3176</a><br><a href="http://harttle.com/2015/11/07/vim-cursor.html" target="_blank" rel="external">http://harttle.com/2015/11/07/vim-cursor.html</a></p>
 ]]></content>
     </entry>
     
