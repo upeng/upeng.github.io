@@ -308,17 +308,9 @@
 <blockquote>
 <p>确保系统已经安装xcode，然后使用一行命令安装依赖管理工具Homebrew</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
-<p>之后就可以使用<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>FORMULA</div></pre></td></tr></table></figure></p>
+<p>安装完xcode之后可以使用<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>FORMULA</div></pre></td></tr></table></figure></p>
 <p>来安装所需要的依赖了.更详细的信息参考Homebrew的[官方Cookbook][1]</p>
-<p>因此使用Homebrew常见的流程是：</p>
-<ol>
-<li>增加一个程序源（新增一个水龙头） brew tap homebrew/php</li>
-<li>更新程序源 brew update</li>
-<li>安装程序包（按照配方酿酒） brew install git</li>
-<li>查看配置 brew config 可以看到程序包默认安装在/usr/local/Cellar下 （酒桶放在地窖内）</li>
-</ol>
-<h2 id="安装PHP5-6（FPM方式）"><a href="#安装PHP5-6（FPM方式）" class="headerlink" title="安装PHP5.6（FPM方式）"></a>安装PHP5.6（FPM方式）</h2><p>首先加入Homebrew官方的几个软件源<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span>tap homebrew/dupes</div><div class="line"><span class="keyword">brew </span>tap homebrew/versions</div><div class="line"><span class="keyword">brew </span>tap homebrew/php</div></pre></td></tr></table></figure></p>
+<p>因此使用Homebrew常见的流程是：<br>
           
       
     </div>
@@ -1032,22 +1024,6 @@
     </div>
     
 <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var iPad = window.navigator.userAgent.indexOf('iPad');
-            if (iPad > -1 || $(".left-col").css("display") === "none") {
-                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
-                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
-                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
-            }
-            else {
-                var backgroundnum = 6;
-                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
-            }
-        })
-    </script>
 
 
 

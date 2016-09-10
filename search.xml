@@ -10,10 +10,9 @@
 <blockquote>
 <p>确保系统已经安装xcode，然后使用一行命令安装依赖管理工具Homebrew</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
-<p>之后就可以使用<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>FORMULA</div></pre></td></tr></table></figure></p>
+<p>安装完xcode之后可以使用<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>FORMULA</div></pre></td></tr></table></figure></p>
 <p>来安装所需要的依赖了.更详细的信息参考Homebrew的[官方Cookbook][1]</p>
-<p>因此使用Homebrew常见的流程是：</p>
+<p>因此使用Homebrew常见的流程是：<br><a id="more"></a></p>
 <ol>
 <li>增加一个程序源（新增一个水龙头） brew tap homebrew/php</li>
 <li>更新程序源 brew update</li>
@@ -21,7 +20,6 @@
 <li>查看配置 brew config 可以看到程序包默认安装在/usr/local/Cellar下 （酒桶放在地窖内）</li>
 </ol>
 <h2 id="安装PHP5-6（FPM方式）"><a href="#安装PHP5-6（FPM方式）" class="headerlink" title="安装PHP5.6（FPM方式）"></a>安装PHP5.6（FPM方式）</h2><p>首先加入Homebrew官方的几个软件源<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span>tap homebrew/dupes</div><div class="line"><span class="keyword">brew </span>tap homebrew/versions</div><div class="line"><span class="keyword">brew </span>tap homebrew/php</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
 <p>PHP如果采用默认配置安装，会编译mod_php模块并只运行在Apache环境下，为了使用Nginx，这里需要编译php-fpm并且禁用apache，主要通过参数<code>--without-fpm --without-apache</code>来实现。完整的安装指令为<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">brew install php56 \</div><div class="line">-<span class="ruby">-without-snmp \</span></div><div class="line">-<span class="ruby">-without-apache \</span></div><div class="line">-<span class="ruby">-with-debug \</span></div><div class="line">-<span class="ruby">-with-fpm \</span></div><div class="line">-<span class="ruby">-with-intl \</span></div><div class="line">-<span class="ruby">-with-homebrew-curl \</span></div><div class="line">-<span class="ruby">-with-homebrew-libxslt \</span></div><div class="line">-<span class="ruby">-with-homebrew-openssl \</span></div><div class="line">-<span class="ruby">-with-imap \</span></div><div class="line">-<span class="ruby">-with-mysql \</span></div><div class="line">-<span class="ruby">-with-tidy</span></div></pre></td></tr></table></figure></p>
 <p>由于OSX已经自带了PHP5.5环境，因此需要修改系统路径，优先运行brew安装的版本，在<code>~/.bashrc</code>里加入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="string">"/usr/local/bin:/usr/local/sbin:<span class="variable">$PATH</span>"</span></div></pre></td></tr></table></figure></p>
 <blockquote>
