@@ -192,7 +192,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/">JQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LNMP/">LNMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcacheq/">memcacheq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinking/">thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vagrant/">vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zephir/">zephir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/">JQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LNMP/">LNMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcacheq/">memcacheq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinking/">thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vagrant/">vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zephir/">zephir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主从复制/">主从复制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
                     </div>
                 </section>
                 
@@ -270,6 +270,126 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-hexo-guidebook" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/20/hexo-guidebook/" class="article-date">
+      <time datetime="2016-04-20T13:31:48.000Z" itemprop="datePublished">2016-04-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/20/hexo-guidebook/">hexo+github搭建blog</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>hexo是一个快速、简介且高效的博客框架！</p>
+<h2 id="安装前置服务"><a href="#安装前置服务" class="headerlink" title="安装前置服务"></a>安装前置服务</h2><p>hexo依赖nodejs和git </p>
+<ul>
+<li>由于依赖nodejs，因此安装hexo之前需要先安装nodejs</li>
+<li>使用github搭建静态博客，因此需要安装git客户端（使用hexo命令编译并上传至github）</li>
+</ul>
+<blockquote>
+<p><a href="http://pan.baidu.com/s/1dENChzF" target="_blank" rel="external">百度云盘下载链接</a></p>
+</blockquote>
+<h2 id="快速创建博客页面"><a href="#快速创建博客页面" class="headerlink" title="快速创建博客页面"></a>快速创建博客页面</h2><h3 id="hexo-server"><a href="#hexo-server" class="headerlink" title="hexo server"></a>hexo server</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//启动本地服务，查看博客主页</div><div class="line">$ hexo server</div><div class="line">INFO  <span class="keyword">Start</span> processing</div><div class="line">INFO  Hexo <span class="keyword">is</span> running <span class="keyword">at</span> <span class="keyword">http</span>://localhost:<span class="number">4000</span>/. Press Ctrl+C <span class="keyword">to</span> stop.</div></pre></td></tr></table></figure>
+<h3 id="hexo-new-“my-new-post”"><a href="#hexo-new-“my-new-post”" class="headerlink" title="hexo new “my new post”"></a>hexo new “my new post”</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建文章页</span></div><div class="line">$ hexo <span class="keyword">new</span> <span class="string">"hexo guidebook"</span></div><div class="line">INFO  <span class="string">Created:</span> <span class="string">g:</span>\hexo\source\_posts\hexo-guidebook.md</div></pre></td></tr></table></figure>
+<h3 id="hexo-new-page-“categories”"><a href="#hexo-new-page-“categories”" class="headerlink" title="hexo new page “categories”"></a>hexo new page “categories”</h3><blockquote>
+<p>创建单页面，比如分类，关于</p>
+</blockquote>
+<h3 id="hexo-g-hexo-generate"><a href="#hexo-g-hexo-generate" class="headerlink" title="hexo g (hexo generate)"></a>hexo g (hexo generate)</h3><blockquote>
+<p>生成静态页面</p>
+</blockquote>
+<h3 id="hexo-deploy-（上传至github）"><a href="#hexo-deploy-（上传至github）" class="headerlink" title="hexo deploy （上传至github）"></a>hexo deploy （上传至github）</h3><blockquote>
+<p>如果没有建立github与本地git的关联，会报错，因为本地和github没有建立信任机制是不能随意上传至github的</p>
+</blockquote>
+<h2 id="补充：如何建立信任机制"><a href="#补充：如何建立信任机制" class="headerlink" title="补充：如何建立信任机制"></a>补充：如何建立信任机制</h2><h3 id="生成新的Key："><a href="#生成新的Key：" class="headerlink" title="生成新的Key："></a>生成新的Key：</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C <span class="string">"your_email@youremail.com"</span>  <span class="comment">//（引号内的内容替换为你自己的邮箱）</span></div></pre></td></tr></table></figure>
+<ul>
+<li>输出显示</li>
+</ul>
+<blockquote>
+<p>Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</p>
+</blockquote>
+<ul>
+<li>直接回车，不要修改默认路劲。</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Enter passphrase (<span class="built_in">empty</span> <span class="keyword">for</span> <span class="keyword">no</span> passphrase): </div><div class="line">Enter same passphrase again:</div></pre></td></tr></table></figure>
+<ul>
+<li>设置一个密码短语，在每次远程操作之前会要求输入密码短语！闲麻烦可以直接回车，不设置。成功：</li>
+</ul>
+<blockquote>
+<p>Your identification has been saved in /Users/your_user_directory/.ssh/id_rsa. Your public key has been saved in /Users/your_user_directory/.ssh/id_rsa.pub. The key fingerprint is: … …</p>
+</blockquote>
+<h3 id="提交公钥："><a href="#提交公钥：" class="headerlink" title="提交公钥："></a>提交公钥：</h3><ul>
+<li><p>找到.ssh文件夹，用文本编辑器打开“id_rsa.pub”文件，复制内容到剪贴板。</p>
+</li>
+<li><p>打开 <a href="https://github.com/settings/ssh" target="_blank" rel="external">https://github.com/settings/ssh</a> ，点击 Add SSH Key 按钮，粘贴进去保存即可。</p>
+</li>
+</ul>
+<h2 id="踩到的坑"><a href="#踩到的坑" class="headerlink" title="踩到的坑"></a>踩到的坑</h2><p>hexo deploy后报一堆错误如下，在初次使用git命令也许会遇到<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">warning: LF will be replaced <span class="keyword">by</span> CRLF <span class="keyword">in</span> <span class="params">...</span>..</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>有效解决方法：</p>
+</blockquote>
+<ol>
+<li><p>在git bash  输入下面的命令：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --<span class="keyword">global</span> core.autocrlf  <span class="literal">false</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>删掉项目中的.git文件夹 <code>rm -rf .git</code></p>
+</li>
+<li><p>重新<br>git init<br>hexo deploy<br>问题解决！</p>
+</li>
+</ol>
+<p>参考【其他一些主题配置文章】<br><a href="http://jianghao.wang/2015/hexo-github/" target="_blank" rel="external">http://jianghao.wang/2015/hexo-github/</a><br><a href="http://zhiho.github.io/2015/09/29/hexo-next/" target="_blank" rel="external">http://zhiho.github.io/2015/09/29/hexo-next/</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-mysql-grant" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -970,75 +1090,9 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
 
 
   
-    <article id="post-html-js" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/15/html-js/" class="article-date">
-      <time datetime="2015-07-15T10:03:00.000Z" itemprop="datePublished">2015-07-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/15/html-js/">jquery中html()、text()、val()与js中的对应属性</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="html"><a href="#html" class="headerlink" title="html()"></a>html()</h3><p>类似于javascript的InnerHtml属性，可以用来读取或者设置某个元素中的HTML内容<br> 例如：Javascript代码<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="params">&lt;p&gt;</span><span class="params">&lt;strong&gt;</span>Hello world<span class="params">&lt;/strong&gt;</span><span class="params">&lt;/p&gt;</span>  </div><div class="line"> alert($(<span class="string">'p'</span>).html());   </div><div class="line">返回： <span class="params">&lt;strong&gt;</span>Hello world<span class="params">&lt;/strong&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="text"><a href="#text" class="headerlink" title="text()"></a>text()</h3><p> 类似于javascript的InnerText属性，可以用来读取或者设置某个元素的文本内容<br>  例如：  Javascript代码<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>   </div><div class="line">  alert($(<span class="string">'p'</span>).text());   </div><div class="line">返回：  Hello world</div></pre></td></tr></table></figure></p>
-<h3 id="val"><a href="#val" class="headerlink" title="val()"></a>val()</h3><p> 类似于javascript中的value属性，可以用来设置或者获取元素的值，无论元素是文本框，下拉列表还是单选框，如果元素时多选，则返回一个包含所有选择的值的数组。 </p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JQuery/">JQuery</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>

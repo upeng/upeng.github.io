@@ -14,11 +14,14 @@
 <meta name="author" content="yupeng" />
 
 
+    
+    
+
 
 <meta name="description" content="PHP|Linux|Laravel|WEB|MySQL学习笔记总结">
 <meta property="og:type" content="website">
 <meta property="og:title" content="paul的学习站">
-<meta property="og:url" content="http://upeng.github.io/tags/php/index.html">
+<meta property="og:url" content="http://upeng.github.io/page/4/index.html">
 <meta property="og:site_name" content="paul的学习站">
 <meta property="og:description" content="PHP|Linux|Laravel|WEB|MySQL学习笔记总结">
 <meta name="twitter:card" content="summary">
@@ -53,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Tag: php | paul的学习站</title>
+<title>paul的学习站</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -62,10 +65,10 @@
     var yiliaConfig = {
         fancybox: true,
         animate: false,
-        isHome: false,
+        isHome: true,
         isPost: false,
         isArchive: false,
-        isTag: true,
+        isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -268,58 +271,77 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-html-js" class="article article-type-post" itemscope itemprop="blogPost">
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/05/28/php-detail/" class="archive-article-date">
-      <time datetime="2016-05-27T16:04:26.000Z" itemprop="datePublished">05-28</time>
+    <div class="article-meta">
+      <a href="/2015/07/15/html-js/" class="article-date">
+      <time datetime="2015-07-15T10:03:00.000Z" itemprop="datePublished">2015-07-15</time>
 </a>
 
 
-        </div>
-         
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/28/php-detail/">几个值得深思的 PHP 面试问题</a>
+      <a class="article-title" href="/2015/07/15/html-js/">jquery中html()、text()、val()与js中的对应属性</a>
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      </header>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="html"><a href="#html" class="headerlink" title="html()"></a>html()</h3><p>类似于javascript的InnerHtml属性，可以用来读取或者设置某个元素中的HTML内容<br> 例如：Javascript代码<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="params">&lt;p&gt;</span><span class="params">&lt;strong&gt;</span>Hello world<span class="params">&lt;/strong&gt;</span><span class="params">&lt;/p&gt;</span>  </div><div class="line"> alert($(<span class="string">'p'</span>).html());   </div><div class="line">返回： <span class="params">&lt;strong&gt;</span>Hello world<span class="params">&lt;/strong&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="text"><a href="#text" class="headerlink" title="text()"></a>text()</h3><p> 类似于javascript的InnerText属性，可以用来读取或者设置某个元素的文本内容<br>  例如：  Javascript代码<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>   </div><div class="line">  alert($(<span class="string">'p'</span>).text());   </div><div class="line">返回：  Hello world</div></pre></td></tr></table></figure></p>
+<h3 id="val"><a href="#val" class="headerlink" title="val()"></a>val()</h3><p> 类似于javascript中的value属性，可以用来设置或者获取元素的值，无论元素是文本框，下拉列表还是单选框，如果元素时多选，则返回一个包含所有选择的值的数组。 </p>
 
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JQuery/">JQuery</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+  
 </div>
       <footer id="footer">
     <div class="outer">
