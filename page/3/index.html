@@ -271,6 +271,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-mysqlperformance01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/24/mysqlperformance01/" class="article-date">
+      <time datetime="2016-04-23T19:25:05.000Z" itemprop="datePublished">2016-04-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/24/mysqlperformance01/">mysql之sql优化-慢查询日志开启和查看（1）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>如何发现有问题的SQL？使用慢查询日志【slow_query_log】对有效率问题的sql进行监控</p>
+<h3 id="查看慢查询日志开启状态"><a href="#查看慢查询日志开启状态" class="headerlink" title="查看慢查询日志开启状态"></a>查看慢查询日志开启状态</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variable</span>  s <span class="keyword">like</span> <span class="string">'slow_query_log'</span></div></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png" alt=""></p>
+<h3 id="记录未使用索引的查询"><a href="#记录未使用索引的查询" class="headerlink" title="记录未使用索引的查询"></a>记录未使用索引的查询</h3><p>未使用索引的查询默认是关闭的，如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'log_queries_not_using_indexes'</span>;</div></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/2655ccd1-69ab-4c54-b7bf-50b01b2b45e5.png" alt=""><br>需要打开未使用索引的查询，即未使用索引的查询会记录在案<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">global</span> log_queries_not_using_indexes=<span class="keyword">on</span></div></pre></td></tr></table></figure></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/04/24/mysqlperformance01/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-tmux工具" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -933,126 +1005,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-php-ci1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/13/php-ci1/" class="article-date">
-      <time datetime="2015-08-13T11:47:00.000Z" itemprop="datePublished">2015-08-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/13/php-ci1/">CI模型-视图-控制器 命名规范</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="controller："><a href="#controller：" class="headerlink" title="controller："></a>controller：</h3><pre><code>控制器类名必须以大写字母开头
-         class  User  extends  CI_Controller{}          //建议写法
-         class  BlogUser  extends  CI_Controller{}  //建议写法  
- 以下这样写是无效的
-         class  blog  extends  CI_Controller{}
-         class  blogUser  extends  CI_Controller{}
-
- 控制器类的方法没有要求
-
- 控制器文件名也没有要求，但是建议全部小写，且注意文件名和类名同一个单词
- controller/blog.php 、controller/bloguser.php 
-</code></pre><h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><pre><code>模型类名首字母也必须大写，其他小写
-例如：
-class  Blog_model  extends  CI_Model {    //class BlogModel extends  CI_Model也可
-    function __construct(){
-        parent::__construct();
-    }
-}
-
-载入model以及使用model
-$this-&gt;load-&gt;model(&apos;Blog_model&apos;);    //model类名  $this-&gt;load-&gt;model(&apos;BlogModel&apos;); 
-$this-&gt;Blog_model-&gt;function();         //载入之后可直接通过类名访问其方法$this-&gt;BlogModel-&gt;function();
-
-模型的文件名没有要求，但是建议全部小写,且注意文件名和类名同一个单词 
-例如：model/blog_model.php   //       model/blogmodel.php
-</code></pre><h3 id="view"><a href="#view" class="headerlink" title="view"></a>view</h3><pre><code>文件名是 views/viewname.php
-载入视图 $this-&gt;load-&gt;view(&quot;viewname&quot;);
-总之：文件名和载入一致即可，大小写没有特别要求
-例如：文件名为views/viewName.php  载入时$this-&gt;load-&gt;view(&quot;viewName&quot;);
-
-用子文件夹存储视图
-views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&quot;);
-
-
-
-总结，对于模型和控制器，类名的首字母必须大写，其他字母无要求，可根据个人习惯
-          文件名没有特别要求，建议首字母小写或全小写，名字与类名一致（除大小写可不一致）载入的模型和模型类名一致
-
-          对于视图，文件名和载入时一致即可，载入时不带后缀 
-
-  因为model和controller如果很多，载入model时不可能一个一个打开查看其类名，但是可以快速根据文件名确定其类名
-
-  那就要求对文件的命名和类的命名要有一个一致的规范
-
-我的习惯（保持）
-  【1】controller,类名User或UserBlog，文件名user.php或userblog.php
-  【2】model，类名UserModel或UserBlogModel ，文件名usermodel.php或userblogmodel.php
-   载入方法$this-&gt;load-&gt;model(&quot;UserModel&quot;);
-   用在构造方法里如下：
-   class BlogModel  extends  CI_Controller{
-       function __construct(){
-            parent::__construct();
-            $this-&gt;load-&gt;model(&apos;UserModel&apos;); 
-        }
-    }
-  【3】view，文件名userblog.php 或user/blog.php  载入方法$this-&gt;load-&gt;view(&quot;userblog&quot;);或
-    $this-&gt;load-&gt;view(&quot;user/blog&quot;);
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI/">CI</a></li></ul>
     </div>
 
       

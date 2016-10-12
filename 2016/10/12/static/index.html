@@ -15,19 +15,28 @@
 
 
 
-<meta name="description" content="mysql添加用户管理员及授权比如添加test用户，grant 高级 DBA 管理 MySQL 中所有数据库的权限
-step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&quot;,&quot;test&quot;,password(&quot;123qwe&quot;));insert into mysql.user(Host,User,Password) valu">
+<meta name="description" content="title: 静态方法和静态成员变量date: 2016-10-12 20:34:26tags: [static,OOP]categories: PHP编程
+
+问题来源：
+
+写了一个Model_User，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在__construct()中，然后去调用Mode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql添加用户管理员及授权">
-<meta property="og:url" content="http://upeng.github.io/2016/04/10/mysql-grant/index.html">
+<meta property="og:title" content="paul的学习站">
+<meta property="og:url" content="http://upeng.github.io/2016/10/12/static/index.html">
 <meta property="og:site_name" content="paul的学习站">
-<meta property="og:description" content="mysql添加用户管理员及授权比如添加test用户，grant 高级 DBA 管理 MySQL 中所有数据库的权限
-step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&quot;,&quot;test&quot;,password(&quot;123qwe&quot;));insert into mysql.user(Host,User,Password) valu">
-<meta property="og:updated_time" content="2016-08-30T15:50:49.000Z">
+<meta property="og:description" content="title: 静态方法和静态成员变量date: 2016-10-12 20:34:26tags: [static,OOP]categories: PHP编程
+
+问题来源：
+
+写了一个Model_User，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在__construct()中，然后去调用Mode">
+<meta property="og:updated_time" content="2016-10-12T15:37:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql添加用户管理员及授权">
-<meta name="twitter:description" content="mysql添加用户管理员及授权比如添加test用户，grant 高级 DBA 管理 MySQL 中所有数据库的权限
-step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&quot;,&quot;test&quot;,password(&quot;123qwe&quot;));insert into mysql.user(Host,User,Password) valu">
+<meta name="twitter:title" content="paul的学习站">
+<meta name="twitter:description" content="title: 静态方法和静态成员变量date: 2016-10-12 20:34:26tags: [static,OOP]categories: PHP编程
+
+问题来源：
+
+写了一个Model_User，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在__construct()中，然后去调用Mode">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -57,7 +66,7 @@ step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>mysql添加用户管理员及授权 | paul的学习站</title>
+<title>paul的学习站</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -270,11 +279,11 @@ step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-mysql-grant" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-static" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/10/mysql-grant/" class="article-date">
-      <time datetime="2016-04-10T06:26:00.000Z" itemprop="datePublished">2016-04-10</time>
+      <a href="/2016/10/12/static/" class="article-date">
+      <time datetime="2016-10-12T15:37:47.000Z" itemprop="datePublished">2016-10-12</time>
 </a>
 
 
@@ -285,39 +294,29 @@ step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      mysql添加用户管理员及授权
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="mysql添加用户管理员及授权"><a href="#mysql添加用户管理员及授权" class="headerlink" title="mysql添加用户管理员及授权"></a>mysql添加用户管理员及授权</h2><p>比如添加test用户，grant 高级 DBA 管理 MySQL 中所有数据库的权限</p>
-<h3 id="step1-创建用户"><a href="#step1-创建用户" class="headerlink" title="step1 创建用户"></a>step1 创建用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"%"</span>,<span class="string">"test"</span>,<span class="keyword">password</span>(<span class="string">"123qwe"</span>));</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"localhost"</span>,<span class="string">"test"</span>,<span class="keyword">password</span>(<span class="string">"123qwe"</span>));</div><div class="line">注：%和localhost的区别</div><div class="line">此处的"localhost"，是指该用户只能在本地登录，不能在另外一台机器上远程登录。如果想远程登录的话，将"localhost"改为"%"，表示在任何一台电脑上都可以登录。也可以指定某台机器可以远程登录。</div></pre></td></tr></table></figure>
-<h3 id="step2-为用户授权"><a href="#step2-为用户授权" class="headerlink" title="step2 为用户授权"></a>step2 为用户授权</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">授权格式：<span class="keyword">grant</span> 权限 <span class="keyword">on</span> 数据库.* <span class="keyword">to</span> 用户名@登录主机 <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">"密码"</span>;　</div><div class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> testDB.testTable <span class="keyword">to</span> <span class="keyword">test</span>@localhost <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'1234'</span>;</div><div class="line"><span class="keyword">grant</span> all <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="keyword">test</span>@<span class="string">'%'</span>;  //全部数据库表的权限</div></pre></td></tr></table></figure>
-<h3 id="step3-刷新系统权限表"><a href="#step3-刷新系统权限表" class="headerlink" title="step3 刷新系统权限表"></a>step3 刷新系统权限表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>; //刷新系统权限表</div></pre></td></tr></table></figure>
+        <hr>
+<p>title: 静态方法和静态成员变量<br>date: 2016-10-12 20:34:26<br>tags: [static,OOP]<br>categories: PHP编程</p>
+<blockquote>
+<p>问题来源：</p>
+</blockquote>
+<p>写了一个<code>Model_User</code>，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在<code>__construct()</code>中，然后去调用<code>Model_User</code>的静态方法<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model_User::fu<span class="symbol">nc1</span><span class="comment">()</span>;</div></pre></td></tr></table></figure></p>
+<p><code>报错：</code><br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Creating <span class="keyword">default</span> <span class="keyword">object</span> <span class="keyword">from</span> empty <span class="keyword">value</span>。。。</div><div class="line">Using $<span class="keyword">this</span> <span class="keyword">when</span> not <span class="keyword">in</span> <span class="keyword">object</span> context <span class="keyword">in</span>。。。。</div></pre></td></tr></table></figure></p>
+<p>因为我们直接使用类调用静态方法的方式，是根本不会走到构造方法的，而构造方法只有在new实例的时候才会调用。同时因为<code>$this</code>本身就是一个instance（实例）而我们根本就没有new 对象，所以。。。</p>
+<p><strong>注意</strong></p>
+<ol>
+<li>如果使用类调用静态方法的形式，那么要注意<code>__construct</code>里面的操作就over了，因为<code>__construct</code>不会调用；</li>
+<li>不能在静态方法中使用<code>$this</code>去调用普通成员变量和成员函数，因为你没有实例化对象，而$this就是一个instance;就算这样也是不可行的<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"><span class="meta-keyword">$obj</span> = new Model_User</span></div><div class="line"><span class="meta"><span class="meta-keyword">$obj</span>-&gt;func1();</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>正常情况下，静态方法中是不能调用非静态成员变量或非静态方法的！</p>
+</blockquote>
+<p>静态成员变量和静态方法存储在堆中(一个公共的池子)。<br>所有实例化的对象instance都可以使用和操作它。<br>举例子：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> $a = <span class="number">1</span>;</div><div class="line">	<span class="keyword">public</span> $b = <span class="number">1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">(<span class="number">2</span>)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">self</span>::$a = $num; </div><div class="line">		<span class="keyword">$this</span>-&gt;b = $num;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">array</span>(<span class="keyword">self</span>::$a, <span class="keyword">$this</span>-&gt;b);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$apple1 = <span class="keyword">new</span> Apple();</div><div class="line">$apple1-&gt;set(<span class="number">2</span>);</div><div class="line">$res1 = $apple1-&gt;get();</div><div class="line"></div><div class="line">$apple2 = <span class="keyword">new</span> Apple();</div><div class="line">$res2 = $apple2-&gt;get();</div><div class="line"></div><div class="line">print_r($res1);  <span class="comment">//array(2,2)</span></div><div class="line">print_r($res2);  <span class="comment">//array(2,1)</span></div></pre></td></tr></table></figure></p>
+<p>很明显，静态成员变量和普通成员变量的区别；在实际应用场景中，需要合理使用</p>
+
       
     </div>
     
@@ -325,13 +324,13 @@ step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/04/10/mysql-grant/">mysql添加用户管理员及授权</a></p>
+        <p><span>本文标题:</span><a href="/2016/10/12/static/"></a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">yupeng</a></p>
-        <p><span>发布时间:</span>2016-04-10, 14:26:00</p>
-        <p><span>最后更新:</span>2016-08-30, 23:50:49</p>
+        <p><span>发布时间:</span>2016-10-12, 23:37:47</p>
+        <p><span>最后更新:</span>2016-10-12, 23:37:47</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/04/10/mysql-grant/" title="mysql添加用户管理员及授权">http://upeng.github.io/2016/04/10/mysql-grant/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://upeng.github.io/2016/04/10/mysql-grant/　　作者: yupeng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/12/static/" title="">http://upeng.github.io/2016/10/12/static/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://upeng.github.io/2016/10/12/static/　　作者: yupeng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -343,16 +342,10 @@ step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/04/20/hexo-guidebook/">
-                    hexo+github搭建blog
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/02/25/mysql-think/">
-                    一个脚本引发的思考
+                <a href="/2016/10/11/publish-laravel-package/">
+                    从编写到发布laravel扩展
                 </a>
             </div>
         
@@ -364,7 +357,7 @@ step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql添加用户管理员及授权"><span class="toc-number">1.</span> <span class="toc-text">mysql添加用户管理员及授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#step1-创建用户"><span class="toc-number">1.1.</span> <span class="toc-text">step1 创建用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#step2-为用户授权"><span class="toc-number">1.2.</span> <span class="toc-text">step2 为用户授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#step3-刷新系统权限表"><span class="toc-number">1.3.</span> <span class="toc-text">step3 刷新系统权限表</span></a></li></ol></li></ol>
+            
         
     </div>
     <style>
@@ -400,7 +393,7 @@ step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"mysql添加用户管理员及授权　| paul的学习站　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"　| paul的学习站　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -416,7 +409,7 @@ step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/04/10/mysql-grant/" data-title="mysql添加用户管理员及授权" data-url="http://upeng.github.io/2016/04/10/mysql-grant/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/12/static/" data-title="" data-url="http://upeng.github.io/2016/10/12/static/"></div>
     <script>
         var duoshuoQuery = {short_name:"upeng"};
         var loadComment = function(){
@@ -439,15 +432,13 @@ step1 创建用户1234insert into mysql.user(Host,User,Password) values(&quot;%&
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/04/20/hexo-guidebook/" title="上一篇: hexo+github搭建blog">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/02/25/mysql-think/" title="下一篇: 一个脚本引发的思考">
+            <a href="/2016/10/11/publish-laravel-package/" title="下一篇: 从编写到发布laravel扩展">
                 <i class="fa fa-angle-right"></i>
             </a>
         
