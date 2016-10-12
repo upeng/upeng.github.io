@@ -192,7 +192,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/">JQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LNMP/">LNMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/composer/">composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcacheq/">memcacheq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacakgist/">pacakgist</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinking/">thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vagrant/">vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zephir/">zephir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主从复制/">主从复制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/">JQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LNMP/">LNMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/composer/">composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcacheq/">memcacheq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacakgist/">pacakgist</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/static/">static</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinking/">thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vagrant/">vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zephir/">zephir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主从复制/">主从复制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
                     </div>
                 </section>
                 
@@ -275,7 +275,7 @@
   
     <div class="article-meta">
       <a href="/2016/10/12/static/" class="article-date">
-      <time datetime="2016-10-12T15:37:47.000Z" itemprop="datePublished">2016-10-12</time>
+      <time datetime="2016-10-12T12:34:26.000Z" itemprop="datePublished">2016-10-12</time>
 </a>
 
 
@@ -286,37 +286,47 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/12/static/">静态方法和静态成员变量</a>
+    </h1>
+  
+
+      </header>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <hr>
-<p>title: 静态方法和静态成员变量<br>date: 2016-10-12 20:34:26<br>tags: [static,OOP]<br>categories: PHP编程</p>
-<blockquote>
+              <blockquote>
 <p>问题来源：</p>
 </blockquote>
 <p>写了一个<code>Model_User</code>，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在<code>__construct()</code>中，然后去调用<code>Model_User</code>的静态方法<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model_User::fu<span class="symbol">nc1</span><span class="comment">()</span>;</div></pre></td></tr></table></figure></p>
 <p><code>报错：</code><br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Creating <span class="keyword">default</span> <span class="keyword">object</span> <span class="keyword">from</span> empty <span class="keyword">value</span>。。。</div><div class="line">Using $<span class="keyword">this</span> <span class="keyword">when</span> not <span class="keyword">in</span> <span class="keyword">object</span> context <span class="keyword">in</span>。。。。</div></pre></td></tr></table></figure></p>
-<p>因为我们直接使用类调用静态方法的方式，是根本不会走到构造方法的，而构造方法只有在new实例的时候才会调用。同时因为<code>$this</code>本身就是一个instance（实例）而我们根本就没有new 对象，所以。。。</p>
-<p><strong>注意</strong></p>
-<ol>
-<li>如果使用类调用静态方法的形式，那么要注意<code>__construct</code>里面的操作就over了，因为<code>__construct</code>不会调用；</li>
-<li>不能在静态方法中使用<code>$this</code>去调用普通成员变量和成员函数，因为你没有实例化对象，而$this就是一个instance;就算这样也是不可行的<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"><span class="meta-keyword">$obj</span> = new Model_User</span></div><div class="line"><span class="meta"><span class="meta-keyword">$obj</span>-&gt;func1();</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>正常情况下，静态方法中是不能调用非静态成员变量或非静态方法的！</p>
-</blockquote>
-<p>静态成员变量和静态方法存储在堆中(一个公共的池子)。<br>所有实例化的对象instance都可以使用和操作它。<br>举例子：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> $a = <span class="number">1</span>;</div><div class="line">	<span class="keyword">public</span> $b = <span class="number">1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">(<span class="number">2</span>)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">self</span>::$a = $num; </div><div class="line">		<span class="keyword">$this</span>-&gt;b = $num;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">array</span>(<span class="keyword">self</span>::$a, <span class="keyword">$this</span>-&gt;b);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$apple1 = <span class="keyword">new</span> Apple();</div><div class="line">$apple1-&gt;set(<span class="number">2</span>);</div><div class="line">$res1 = $apple1-&gt;get();</div><div class="line"></div><div class="line">$apple2 = <span class="keyword">new</span> Apple();</div><div class="line">$res2 = $apple2-&gt;get();</div><div class="line"></div><div class="line">print_r($res1);  <span class="comment">//array(2,2)</span></div><div class="line">print_r($res2);  <span class="comment">//array(2,1)</span></div></pre></td></tr></table></figure></p>
-<p>很明显，静态成员变量和普通成员变量的区别；在实际应用场景中，需要合理使用</p>
-
+<p>因为我们直接使用类调用静态方法的方式，是根本不会走到构造方法的，而构造方法只有在new实例的时候才会调用。同时因为<code>$this</code>本身就是一个instance（实例）而我们根本就没有new 对象，所以。。。<br>
+          
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
+    </div>
+
 
       
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/static/">static</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/10/12/static/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
