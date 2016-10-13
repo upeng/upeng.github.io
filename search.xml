@@ -4,6 +4,12 @@
   
     
     <entry>
+      <title><![CDATA[34]]></title>
+      <url>http://upeng.github.io/2016/10/13/34/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[静态方法和静态成员变量]]></title>
       <url>http://upeng.github.io/2016/10/12/static/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -22,6 +28,22 @@
 </blockquote>
 <p>静态成员变量和静态方法存储在堆中(一个公共的池子)。<br>所有实例化的对象instance都可以使用和操作它。<br>举例子：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> $a = <span class="number">1</span>;</div><div class="line">	<span class="keyword">public</span> $b = <span class="number">1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">(<span class="number">2</span>)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">self</span>::$a = $num; </div><div class="line">		<span class="keyword">$this</span>-&gt;b = $num;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">array</span>(<span class="keyword">self</span>::$a, <span class="keyword">$this</span>-&gt;b);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$apple1 = <span class="keyword">new</span> Apple();</div><div class="line">$apple1-&gt;set(<span class="number">2</span>);</div><div class="line">$res1 = $apple1-&gt;get();</div><div class="line"></div><div class="line">$apple2 = <span class="keyword">new</span> Apple();</div><div class="line">$res2 = $apple2-&gt;get();</div><div class="line"></div><div class="line">print_r($res1);  <span class="comment">//array(2,2)</span></div><div class="line">print_r($res2);  <span class="comment">//array(2,1)</span></div></pre></td></tr></table></figure></p>
 <p>很明显，静态成员变量和普通成员变量的区别；在实际应用场景中，需要合理使用</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[CooKie详解]]></title>
+      <url>http://upeng.github.io/2016/10/12/35/</url>
+      <content type="html"><![CDATA[<h2 id="cookie的基本概念及设置"><a href="#cookie的基本概念及设置" class="headerlink" title="cookie的基本概念及设置"></a>cookie的基本概念及设置</h2><p>#从实现上说，cookie是存储在客户端上的一小段数据，浏览器（client）通过HTTP协议和服务器端进行Cookie交互<br>#</p>
+<p>#<code>注</code>：cookie独立于语言存在，及无论是<strong>php/jsp种下</strong> 的cookie，本质相同，<strong>客户端的js脚本均能读取</strong>到。其实这些语言都只是对cookie进行<strong>间接</strong>操作，即发送HTTP命令，浏览器收到指令便操作cookie，并返回给服务器。因此，<strong>cookie是由浏览器实现和管理的</strong>。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[CooKie详解]]></title>
+      <url>http://upeng.github.io/2016/10/12/36/</url>
+      <content type="html"><![CDATA[<h2 id="cookie的基本概念及设置"><a href="#cookie的基本概念及设置" class="headerlink" title="cookie的基本概念及设置"></a>cookie的基本概念及设置</h2><p>#从实现上说，cookie是存储在客户端上的一小段数据，浏览器（client）通过HTTP协议和服务器端进行Cookie交互<br>#</p>
+<p>#<code>注</code>：cookie独立于语言存在，及无论是<strong>php/jsp种下</strong> 的cookie，本质相同，<strong>客户端的js脚本均能读取</strong>到。其实这些语言都只是对cookie进行<strong>间接</strong>操作，即发送HTTP命令，浏览器收到指令便操作cookie，并返回给服务器。因此，<strong>cookie是由浏览器实现和管理的</strong>。</p>
 ]]></content>
     </entry>
     

@@ -196,7 +196,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/">JQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LNMP/">LNMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/composer/">composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcacheq/">memcacheq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacakgist/">pacakgist</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/static/">static</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinking/">thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vagrant/">vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zephir/">zephir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主从复制/">主从复制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/">JQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LNMP/">LNMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/composer/">composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memcacheq/">memcacheq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacakgist/">pacakgist</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/static/">static</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thinking/">thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vagrant/">vagrant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuejs/">vuejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zephir/">zephir</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主从复制/">主从复制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
                     </div>
                 </section>
                 
@@ -274,6 +274,220 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-vuejs" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/17/vuejs/" class="article-date">
+      <time datetime="2016-07-17T07:58:17.000Z" itemprop="datePublished">2016-07-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/17/vuejs/">vuejs与后台数据的交互实践</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>Vuejs是MVVM框架，数据和DOM视图双向绑定，数据驱动的 web 界面的库。</p>
+<p><strong>响应的数据绑定</strong>：数据与DOM保持同步非常简单，数据发生变化的时候，如果我们使用JQuery操作DOM的话自然是可行的，但是jQuery操作DOM代码复杂容易出错，就拿一个简单的例子，在列表中新增一行数据，使用JQuery可能会刷新整个DOM,并对页面refresh。但是vue实现数据与DOM的绑定后，只要数据发生变化，就自动改动DOM，所以我们的工作重点就是修改数据，不必与DOM更新搅在一起。</p>
+<p><strong>我的理解</strong>：Vuejs简化了操作DOM或者不再去手动操作DOM，一个简单的API就搞定了DOM的自动更新，让我们脱离了使用Js操作DOM的复杂流程。这也是Vue的迷人之处吧，其他的优点诸如：组件化、模块化、体积小等优点我就不再罗列了，本文重点也不在此。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/07/17/vuejs/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-vagrant" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/13/vagrant/" class="article-date">
+      <time datetime="2016-07-13T15:32:54.000Z" itemprop="datePublished">2016-07-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/13/vagrant/">vagrant-快速搭建linux开发环境</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>平时开发测试使用公司提供的弹性开发机（Centos），自己想折腾一些东西又不方面在上面部署,鉴于</p>
+<ul>
+<li>学习linux考虑（比如经常装扩展插件啥的），装WAMP有些low而且不适合扩展。</li>
+<li>在windows上装linux虚拟机（VMare等）又太占内存（o(╯□╰)o我的笔记本只有4G内存。。。）</li>
+</ul>
+<p>有没有那种快捷的搭建linux开发环境的东东呢？答案是肯定的。偶然间发现了vagrant，它就像一个容器一样（Docker？），部署LAMP十分快捷；<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vagrant/">vagrant</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/07/13/vagrant/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-memcacheq" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/11/memcacheq/" class="article-date">
+      <time datetime="2016-07-11T15:29:55.000Z" itemprop="datePublished">2016-07-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/11/memcacheq/">MCQ学习笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>初次接触MCQ源于蓝v，之前也听同事说微博的消息推送也是使用MCQ。认识MCQ之前感觉它很神秘，用之后才发现并也不过如此，所以很多知识不能只凭想象或者言传，需要自身实践才可知晓。这里想记录一下自己使用MCQ的过程，以及MCQ的使用场景、优缺点等等。</p>
+<blockquote>
+<p>MemcacheQ - Simple Queue Service over Memcache<br>在memcache基础上的简单队列服务，所以它兼具memcache和队列的特点。</p>
+</blockquote>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memcacheq/">memcacheq</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/07/11/memcacheq/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-zephir" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -745,238 +959,6 @@
         <p class="article-more-link">
           <a href="/2016/05/07/laravel-migration/#more">阅读全文 >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-laravel-blade" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/29/laravel-blade/" class="article-date">
-      <time datetime="2016-04-28T16:18:00.000Z" itemprop="datePublished">2016-04-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/29/laravel-blade/">laravel的blade视图模板引擎</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="blade模板引擎使用"><a href="#blade模板引擎使用" class="headerlink" title="blade模板引擎使用"></a>blade模板引擎使用</h3><p>很多时候，我们的view模板有很多重复的地方，比如head、footer部分，当然可以定义一些共用的部分，置于common文件夹下，然后使用include将其引入进来。而blade有一套自己的策略</p>
-<p>比如定义一个<code>common.blade.php</code>文件，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Laravel<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css?family=Lato:100"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></div><div class="line">            <span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;<span class="attribute">height</span>: <span class="number">100%</span>;&#125;</div><div class="line">            <span class="selector-tag">body</span> &#123;<span class="attribute">margin</span>: <span class="number">0</span>;<span class="attribute">width</span>: <span class="number">100%</span>;<span class="attribute">display</span>: table;<span class="attribute">font-weight</span>: <span class="number">100</span>;<span class="attribute">font-family</span>: <span class="string">'Lato'</span>;&#125;</div><div class="line">            <span class="selector-class">.container</span> &#123;<span class="attribute">text-align</span>: center;<span class="attribute">display</span>: table-cell;<span class="attribute">vertical-align</span>: middle;</div><div class="line">            &#125;</div><div class="line">            <span class="selector-class">.content</span> &#123;<span class="attribute">text-align</span>: center;<span class="attribute">display</span>: inline-block;&#125;</div><div class="line">            <span class="selector-class">.title</span> &#123;<span class="attribute">font-size</span>: <span class="number">96px</span>;&#125;</div><div class="line">            <span class="selector-class">.footer</span>&#123;<span class="attribute">color</span>: green;<span class="attribute">font-size</span>: <span class="number">100px</span>;&#125;</div><div class="line">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">            @yield('content')</div><div class="line">            @yield('footer')</div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/04/29/laravel-blade/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mysqlperformance03" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/27/mysqlperformance03/" class="article-date">
-      <time datetime="2016-04-26T16:44:33.000Z" itemprop="datePublished">2016-04-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/27/mysqlperformance03/">mysql数据库之索引优化</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="如何选择合适的列建立索引"><a href="#如何选择合适的列建立索引" class="headerlink" title="如何选择合适的列建立索引?"></a>如何选择合适的列建立索引?</h2><ol>
-<li>在where从句、group by从句、order by从句、on从句中出现的列</li>
-<li>索引字段越小越好</li>
-<li>离散度大的列放到联合索引的前面</li>
-</ol>
-<blockquote>
-<p>理解离散度<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> payment <span class="keyword">where</span> staff_id = <span class="number">2</span> <span class="keyword">AND</span> customer_id = <span class="number">584</span>;</div></pre></td></tr></table></figure></p>
-<p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
-</blockquote>
-<p><strong>备注</strong>：比较staff_id和customer_id两者的离散度，那个离散度高，那个列就放置到联合索引的前面<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/04/27/mysqlperformance03/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-laravel-primary" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/25/laravel-primary/" class="article-date">
-      <time datetime="2016-04-25T12:10:00.000Z" itemprop="datePublished">2016-04-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/25/laravel-primary/">laravel初体验</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="访问流程"><a href="#访问流程" class="headerlink" title="访问流程"></a>访问流程</h3><blockquote>
-<p>路由文件routes.php</p>
-</blockquote>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*默认是以匿名函数的方式进行路由,/是当前域名下加载视图文件welcome.blade.php */</span></div><div class="line"></div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'welcome'</span>);</div><div class="line">&#125;);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'about'</span>);</div><div class="line">&#125;);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/blog'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'blog.content'</span>);  <span class="comment">//其中的“.”可以用“/”代替</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//如果使用非匿名函数的方式</span></div><div class="line"></div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="string">'UserController@index'</span>);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="string">'UserController@about'</span>);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/blog'</span>, <span class="string">'UserController@blog'</span>);</div></pre></td></tr></table></figure>
-<h3 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h3><blockquote>
-<ol>
-<li>可以手动创建Controller，也可以使用命令行创建控制器<code>php artisan</code>工具</li>
-<li>参数 –plain使用则不会生成一些默认的方法如index，create等</li>
-</ol>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:controller</span> <span class="selector-tag">UserController</span></div><div class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:controller</span> <span class="selector-tag">TestController</span> <span class="selector-tag">--plain</span></div></pre></td></tr></table></figure>
-<h3 id="视图的加载"><a href="#视图的加载" class="headerlink" title="视图的加载"></a>视图的加载</h3><blockquote>
-<p>加载视图的方法</p>
-</blockquote>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'welcome'</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'blog/title'</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'blog.content'</span>)</span></span>;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>怎么向blade视图传递变量</p>
-</blockquote>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$name = <span class="string">'&lt;p style="color:red"&gt;upfriend&lt;/p&gt;'</span>;</div><div class="line">$time = date(<span class="string">'Y-m-d'</span>, time());</div><div class="line">$arr = <span class="keyword">array</span>(<span class="string">'first'</span> =&gt; <span class="string">'jerry'</span>, <span class="string">'last'</span> =&gt; <span class="string">'bool'</span>);</div><div class="line"></div><div class="line"><span class="comment">//传递变量-通用方式传递给$data数组</span></div><div class="line">$data[<span class="string">'name'</span>] = $name;</div><div class="line">$data[<span class="string">'time'</span>] = $time; </div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>, $data);</div><div class="line"></div><div class="line"><span class="comment">//Laravel链式操作方式 </span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>)-&gt;(<span class="string">'name'</span> =&gt; $name);  <span class="comment">//传递一个变量</span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>)-&gt;with(<span class="keyword">array</span>(<span class="string">'name'</span> =&gt; $name, <span class="string">'time'</span> =&gt; $time));  <span class="comment">//传递数组变量</span></div><div class="line"></div><div class="line"><span class="comment">//compact方法</span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>, compact(<span class="string">'name'</span>, <span class="string">'time'</span>, <span class="string">'arr'</span>));  <span class="comment">//去掉$的变量名</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>如何正确输出变量的值</p>
-</blockquote>
-<figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="xml">//原生PHP输出数据方式，默认会对变量中的字符会进行转义（xss?）</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="php"><span class="meta">&lt;?</span>=name<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>   </div><div class="line"></div><div class="line">//Laravel的blade模板引擎渲染方式，两个大括号<span class="template-variable">&#123;&#123;&#125;</span><span class="xml">&#125;表示转义后输出</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="template-variable">&#123;&#123;name&#125;</span><span class="xml">&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  //浏览器输出<span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red"</span>&gt;</span>upfriend<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="template-variable">&#123;!!name!!&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  //会见变量作为html,输出红色字体的upfriend</span></div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>

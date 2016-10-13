@@ -15,15 +15,19 @@
 
 
 
-<meta name="description" content="PHP|Linux|Laravel|WEB|MySQL学习笔记总结">
-<meta property="og:type" content="website">
-<meta property="og:title" content="paul的学习站">
-<meta property="og:url" content="http://upeng.github.io/tags/memcacheq/index.html">
+<meta name="description" content="cookie的基本概念及设置#从实现上说，cookie是存储在客户端上的一小段数据，浏览器（client）通过HTTP协议和服务器端进行Cookie交互#
+#注：cookie独立于语言存在，及无论是php/jsp种下 的cookie，本质相同，客户端的js脚本均能读取到。其实这些语言都只是对cookie进行间接操作，即发送HTTP命令，浏览器收到指令便操作cookie，并返回给服务器。因此，coo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CooKie详解">
+<meta property="og:url" content="http://upeng.github.io/2016/10/12/36/index.html">
 <meta property="og:site_name" content="paul的学习站">
-<meta property="og:description" content="PHP|Linux|Laravel|WEB|MySQL学习笔记总结">
+<meta property="og:description" content="cookie的基本概念及设置#从实现上说，cookie是存储在客户端上的一小段数据，浏览器（client）通过HTTP协议和服务器端进行Cookie交互#
+#注：cookie独立于语言存在，及无论是php/jsp种下 的cookie，本质相同，客户端的js脚本均能读取到。其实这些语言都只是对cookie进行间接操作，即发送HTTP命令，浏览器收到指令便操作cookie，并返回给服务器。因此，coo">
+<meta property="og:updated_time" content="2016-10-13T15:40:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="paul的学习站">
-<meta name="twitter:description" content="PHP|Linux|Laravel|WEB|MySQL学习笔记总结">
+<meta name="twitter:title" content="CooKie详解">
+<meta name="twitter:description" content="cookie的基本概念及设置#从实现上说，cookie是存储在客户端上的一小段数据，浏览器（client）通过HTTP协议和服务器端进行Cookie交互#
+#注：cookie独立于语言存在，及无论是php/jsp种下 的cookie，本质相同，客户端的js脚本均能读取到。其实这些语言都只是对cookie进行间接操作，即发送HTTP命令，浏览器收到指令便操作cookie，并返回给服务器。因此，coo">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -55,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Tag: memcacheq | paul的学习站</title>
+<title>CooKie详解 | paul的学习站</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -65,9 +69,9 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
-        isTag: true,
+        isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -268,60 +272,196 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-36" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/07/11/memcacheq/" class="archive-article-date">
-      <time datetime="2016-07-11T15:29:55.000Z" itemprop="datePublished">07-11</time>
+    <div class="article-meta">
+      <a href="/2016/10/12/36/" class="article-date">
+      <time datetime="2016-10-12T04:03:00.000Z" itemprop="datePublished">2016-10-12</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/11/memcacheq/">MCQ学习笔记</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CooKie详解
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
+    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memcacheq/">memcacheq</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cookie/">Cookie</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="cookie的基本概念及设置"><a href="#cookie的基本概念及设置" class="headerlink" title="cookie的基本概念及设置"></a>cookie的基本概念及设置</h2><p>#从实现上说，cookie是存储在客户端上的一小段数据，浏览器（client）通过HTTP协议和服务器端进行Cookie交互<br>#</p>
+<p>#<code>注</code>：cookie独立于语言存在，及无论是<strong>php/jsp种下</strong> 的cookie，本质相同，<strong>客户端的js脚本均能读取</strong>到。其实这些语言都只是对cookie进行<strong>间接</strong>操作，即发送HTTP命令，浏览器收到指令便操作cookie，并返回给服务器。因此，<strong>cookie是由浏览器实现和管理的</strong>。</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/12/36/">CooKie详解</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">yupeng</a></p>
+        <p><span>发布时间:</span>2016-10-12, 12:03:00</p>
+        <p><span>最后更新:</span>2016-10-13, 23:40:31</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/12/36/" title="CooKie详解">http://upeng.github.io/2016/10/12/36/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://upeng.github.io/2016/10/12/36/　　作者: yupeng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/12/35/">
+                    CooKie详解
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/11/publish-laravel-package/">
+                    从编写到发布laravel扩展
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie的基本概念及设置"><span class="toc-number">1.</span> <span class="toc-text">cookie的基本概念及设置</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
 
     
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"CooKie详解　| paul的学习站　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
 
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/12/36/" data-title="CooKie详解" data-url="http://upeng.github.io/2016/10/12/36/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"upeng"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/10/12/35/" title="上一篇: CooKie详解">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/11/publish-laravel-package/" title="下一篇: 从编写到发布laravel扩展">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/34/">34</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/static/">静态方法和静态成员变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/35/">CooKie详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/12/36/">CooKie详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/publish-laravel-package/">从编写到发布laravel扩展</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/12/mysql-master-slave/">mysql主从复制原理理解与实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/11/vim/">vim学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/28/mac-lnmp/">Mac下安装LNMP(Nginx+PHP5.6)环境</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/28/mac-primary/">首次折腾Mac</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/15/laravel-basic/">laravel基础任务学习清单</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/17/vuejs/">vuejs与后台数据的交互实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/13/vagrant/">vagrant-快速搭建linux开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/11/memcacheq/">MCQ学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/30/zephir/">使用zephir快速编写php扩展</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/25/normal/">数据库范式的思考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/thinking-1/">In Recent Days</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/thinking/">standing on the shoulders of the giants</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/laravel-auth/">laravel学习笔记-用户认证</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/28/php-detail/">几个值得深思的 PHP 面试问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/laravel-migration/">laravel migration</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/29/laravel-blade/">laravel的blade视图模板引擎</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/27/mysqlperformance03/">mysql数据库之索引优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/laravel-primary/">laravel初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/mysqlperformance01/">mysql之sql优化-慢查询日志开启和查看（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/23/tmux工具/">tmux linux下的终端复用工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/20/hexo-guidebook/">hexo+github搭建blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/mysql-grant/">mysql添加用户管理员及授权</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/mysql-think/">一个脚本引发的思考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/31/linux-awk/">Linux常用命令-awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/30/linux命令/">linux常用命令（总是forget）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/28/linux-bash/">常用的bash命令快捷建</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/14/php-design-single/">PHP设计模式-单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/12/php-design-model/">PHP设计模式-工厂模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/13/php-ci1/">CI模型-视图-控制器 命名规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/03/mysql导入导出/">linux下导入、导出mysql数据库命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/15/html-js/">jquery中html()、text()、val()与js中的对应属性</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
