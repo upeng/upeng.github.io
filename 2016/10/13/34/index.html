@@ -15,21 +15,16 @@
 
 
 
-<meta name="description" content="Vuejs是MVVM框架，数据和DOM视图双向绑定，数据驱动的 web 界面的库。
-响应的数据绑定：数据与DOM保持同步非常简单，数据发生变化的时候，如果我们使用JQuery操作DOM的话自然是可行的，但是jQuery操作DOM代码复杂容易出错，就拿一个简单的例子，在列表中新增一行数据，使用JQuery可能会刷新整个DOM,并对页面refresh。但是vue实现数据与DOM的绑定后，只要数据发生变">
+<meta name="description" content="— title: CooKie详解 date: 2016-10-12 12:03 tags: Cookie categories: PHP编程 — cookie和session是web开发中必不可少的两个概念，经常的理解是：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vuejs与后台数据的交互实践">
-<meta property="og:url" content="http://upeng.github.io/2016/07/17/vuejs/index.html">
+<meta property="og:title" content="paul的学习站">
+<meta property="og:url" content="http://upeng.github.io/2016/10/13/34/index.html">
 <meta property="og:site_name" content="paul的学习站">
-<meta property="og:description" content="Vuejs是MVVM框架，数据和DOM视图双向绑定，数据驱动的 web 界面的库。
-响应的数据绑定：数据与DOM保持同步非常简单，数据发生变化的时候，如果我们使用JQuery操作DOM的话自然是可行的，但是jQuery操作DOM代码复杂容易出错，就拿一个简单的例子，在列表中新增一行数据，使用JQuery可能会刷新整个DOM,并对页面refresh。但是vue实现数据与DOM的绑定后，只要数据发生变">
-<meta property="og:image" content="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/vuedemo.png">
-<meta property="og:updated_time" content="2016-08-30T15:50:49.000Z">
+<meta property="og:description" content="— title: CooKie详解 date: 2016-10-12 12:03 tags: Cookie categories: PHP编程 — cookie和session是web开发中必不可少的两个概念，经常的理解是：">
+<meta property="og:updated_time" content="2016-10-13T06:01:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vuejs与后台数据的交互实践">
-<meta name="twitter:description" content="Vuejs是MVVM框架，数据和DOM视图双向绑定，数据驱动的 web 界面的库。
-响应的数据绑定：数据与DOM保持同步非常简单，数据发生变化的时候，如果我们使用JQuery操作DOM的话自然是可行的，但是jQuery操作DOM代码复杂容易出错，就拿一个简单的例子，在列表中新增一行数据，使用JQuery可能会刷新整个DOM,并对页面refresh。但是vue实现数据与DOM的绑定后，只要数据发生变">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/vuedemo.png">
+<meta name="twitter:title" content="paul的学习站">
+<meta name="twitter:description" content="— title: CooKie详解 date: 2016-10-12 12:03 tags: Cookie categories: PHP编程 — cookie和session是web开发中必不可少的两个概念，经常的理解是：">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -61,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>vuejs与后台数据的交互实践 | paul的学习站</title>
+<title>paul的学习站</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -274,11 +269,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-vuejs" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-34" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/17/vuejs/" class="article-date">
-      <time datetime="2016-07-17T07:58:17.000Z" itemprop="datePublished">2016-07-17</time>
+      <a href="/2016/10/13/34/" class="article-date">
+      <time datetime="2016-10-13T06:01:11.000Z" itemprop="datePublished">2016-10-13</time>
 </a>
 
 
@@ -289,53 +284,10 @@
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      vuejs与后台数据的交互实践
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Vuejs是MVVM框架，数据和DOM视图双向绑定，数据驱动的 web 界面的库。</p>
-<p><strong>响应的数据绑定</strong>：数据与DOM保持同步非常简单，数据发生变化的时候，如果我们使用JQuery操作DOM的话自然是可行的，但是jQuery操作DOM代码复杂容易出错，就拿一个简单的例子，在列表中新增一行数据，使用JQuery可能会刷新整个DOM,并对页面refresh。但是vue实现数据与DOM的绑定后，只要数据发生变化，就自动改动DOM，所以我们的工作重点就是修改数据，不必与DOM更新搅在一起。</p>
-<p><strong>我的理解</strong>：Vuejs简化了操作DOM或者不再去手动操作DOM，一个简单的API就搞定了DOM的自动更新，让我们脱离了使用Js操作DOM的复杂流程。这也是Vue的迷人之处吧，其他的优点诸如：组件化、模块化、体积小等优点我就不再罗列了，本文重点也不在此。<br><a id="more"></a><br>那么问题来了</p>
-<h2 id="vuejs与后端（比如PHP）是如何交互的？"><a href="#vuejs与后端（比如PHP）是如何交互的？" class="headerlink" title="vuejs与后端（比如PHP）是如何交互的？"></a>vuejs与后端（比如PHP）是如何交互的？</h2><p>怎么使用Vuejs与后台数据（这里是指后台的数据库，不是vuejs的model，因为我理解的vuejs的model仍是前端数据）交互？其实这个问题本身就存在问题，（这是最初是对vuejs不怎么了解的情况下做出的提问），事实上vuejs <strong>关注点</strong>是如何优雅的操作DOM或者减少手动操作DOM，至于与后台的交互，这是js（当然vuejs也是基于js啊）要做的事情，所以<strong>正确的提问姿势</strong>应该是：<em>js怎样和后端交互？</em> 那么现在这个问题就变得简单了。我们知道js是不能直接操作数据库的，但是ajax却架起前后端的桥梁，能让前后端数据进行交互。</p>
-<blockquote>
-<p>当然vuejs作为js衍生出的框架，它除了具有js的特性外，还有自己的特色呢，所以vuejs可以使用vue-resource来与后端交互。</p>
-</blockquote>
-<p>下面使用ajax(基于jquery)、vuejs、php实现简单的数据的增删改查。</p>
-<figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> <span class="built_in">url</span> = <span class="string">'http://localhost:8080/vuejs/api/book.php'</span>;</div><div class="line">getJson(<span class="built_in">url</span>, pushDom);</div></pre></td></tr></table></figure>
-<p>分析getJson函数【已经封装】</p>
-<ol>
-<li>初始化信息列表</li>
-<li>两个参数：<br>（1）第一个是获取列表的接口地址url；<br>（2）第二个是回调函数名</li>
-<li>流程分析：<br>在getJson中通过ajax调取接口url获取数据data，然后将data作为参数调用pushDom函数，pushDom是展示、或者使用vue操作DOM的功能函数。那么怎么使用jquey、ajax配合vue进行后端数据库增删改查。<br>首先需要对vue的增删改查机制了如指掌才行；methods事件触发，我们可以在methods中定义add、delete、modify完成数据的绑定，异步刷新显示；同时将获取的数据传递给封装好的ajax函数中，与后端交互【正确的流程应该与后台交互成功才会自动更新DOM，这里不细论】；例如<br><strong>添加数据</strong>：<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">methods:&#123;</div><div class="line">    addBook:function()&#123;</div><div class="line">        <span class="keyword">this</span>.book.id=parseInt(postData(<span class="keyword">this</span>.book));</div><div class="line">        <span class="keyword">this</span>.books.push(<span class="keyword">this</span>.book);</div><div class="line">        <span class="keyword">this</span>.book=<span class="string">''</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>我们从前端拿到的数据<code>this.book</code>，然后调用<code>postData(this.book)</code>;<code>postData</code>就是一个与后端交互的封装了ajax的函数<br>期间遇到了一点小意外，总是获取不到ajax的返回值，关于如何获取ajax返回值和为何获取不到ajax中的值问题，<code>postData</code>函数中写的很清楚<br><code>async: false</code>, 默认是<code>true</code></p>
-<p>代码见：<a href="https://github.com/upeng/learn-vuejs" target="_blank" rel="external">github</a><br>demo页：<img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/vuedemo.png" alt="demo"></p>
+        <p>— title: CooKie详解 date: 2016-10-12 12:03 tags: Cookie categories: PHP编程 — cookie和session是web开发中必不可少的两个概念，经常的理解是：</p>
 
       
     </div>
@@ -344,13 +296,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/07/17/vuejs/">vuejs与后台数据的交互实践</a></p>
+        <p><span>本文标题:</span><a href="/2016/10/13/34/"></a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">yupeng</a></p>
-        <p><span>发布时间:</span>2016-07-17, 15:58:17</p>
-        <p><span>最后更新:</span>2016-08-30, 23:50:49</p>
+        <p><span>发布时间:</span>2016-10-13, 14:01:11</p>
+        <p><span>最后更新:</span>2016-10-13, 14:01:17</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/07/17/vuejs/" title="vuejs与后台数据的交互实践">http://upeng.github.io/2016/07/17/vuejs/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://upeng.github.io/2016/07/17/vuejs/　　作者: yupeng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/13/34/" title="">http://upeng.github.io/2016/10/13/34/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://upeng.github.io/2016/10/13/34/　　作者: yupeng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -362,16 +314,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/08/15/laravel-basic/">
-                    laravel基础任务学习清单
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/07/13/vagrant/">
-                    vagrant-快速搭建linux开发环境
+                <a href="/2016/10/12/static/">
+                    静态方法和静态成员变量
                 </a>
             </div>
         
@@ -383,7 +329,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vuejs与后端（比如PHP）是如何交互的？"><span class="toc-number">1.</span> <span class="toc-text">vuejs与后端（比如PHP）是如何交互的？</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -419,7 +365,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"vuejs与后台数据的交互实践　| paul的学习站　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"　| paul的学习站　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -435,7 +381,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/17/vuejs/" data-title="vuejs与后台数据的交互实践" data-url="http://upeng.github.io/2016/07/17/vuejs/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/13/34/" data-title="" data-url="http://upeng.github.io/2016/10/13/34/"></div>
     <script>
         var duoshuoQuery = {short_name:"upeng"};
         var loadComment = function(){
@@ -458,15 +404,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/08/15/laravel-basic/" title="上一篇: laravel基础任务学习清单">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/07/13/vagrant/" title="下一篇: vagrant-快速搭建linux开发环境">
+            <a href="/2016/10/12/static/" title="下一篇: 静态方法和静态成员变量">
                 <i class="fa fa-angle-right"></i>
             </a>
         

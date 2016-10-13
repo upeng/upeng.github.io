@@ -275,6 +275,92 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-laravel-primary" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/25/laravel-primary/" class="article-date">
+      <time datetime="2016-04-25T12:10:00.000Z" itemprop="datePublished">2016-04-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/25/laravel-primary/">laravel初体验</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="访问流程"><a href="#访问流程" class="headerlink" title="访问流程"></a>访问流程</h3><blockquote>
+<p>路由文件routes.php</p>
+</blockquote>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*默认是以匿名函数的方式进行路由,/是当前域名下加载视图文件welcome.blade.php */</span></div><div class="line"></div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'welcome'</span>);</div><div class="line">&#125;);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'about'</span>);</div><div class="line">&#125;);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/blog'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'blog.content'</span>);  <span class="comment">//其中的“.”可以用“/”代替</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//如果使用非匿名函数的方式</span></div><div class="line"></div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="string">'UserController@index'</span>);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="string">'UserController@about'</span>);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/blog'</span>, <span class="string">'UserController@blog'</span>);</div></pre></td></tr></table></figure>
+<h3 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h3><blockquote>
+<ol>
+<li>可以手动创建Controller，也可以使用命令行创建控制器<code>php artisan</code>工具</li>
+<li>参数 –plain使用则不会生成一些默认的方法如index，create等</li>
+</ol>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:controller</span> <span class="selector-tag">UserController</span></div><div class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:controller</span> <span class="selector-tag">TestController</span> <span class="selector-tag">--plain</span></div></pre></td></tr></table></figure>
+<h3 id="视图的加载"><a href="#视图的加载" class="headerlink" title="视图的加载"></a>视图的加载</h3><blockquote>
+<p>加载视图的方法</p>
+</blockquote>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'welcome'</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'blog/title'</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'blog.content'</span>)</span></span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>怎么向blade视图传递变量</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$name = <span class="string">'&lt;p style="color:red"&gt;upfriend&lt;/p&gt;'</span>;</div><div class="line">$time = date(<span class="string">'Y-m-d'</span>, time());</div><div class="line">$arr = <span class="keyword">array</span>(<span class="string">'first'</span> =&gt; <span class="string">'jerry'</span>, <span class="string">'last'</span> =&gt; <span class="string">'bool'</span>);</div><div class="line"></div><div class="line"><span class="comment">//传递变量-通用方式传递给$data数组</span></div><div class="line">$data[<span class="string">'name'</span>] = $name;</div><div class="line">$data[<span class="string">'time'</span>] = $time; </div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>, $data);</div><div class="line"></div><div class="line"><span class="comment">//Laravel链式操作方式 </span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>)-&gt;(<span class="string">'name'</span> =&gt; $name);  <span class="comment">//传递一个变量</span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>)-&gt;with(<span class="keyword">array</span>(<span class="string">'name'</span> =&gt; $name, <span class="string">'time'</span> =&gt; $time));  <span class="comment">//传递数组变量</span></div><div class="line"></div><div class="line"><span class="comment">//compact方法</span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>, compact(<span class="string">'name'</span>, <span class="string">'time'</span>, <span class="string">'arr'</span>));  <span class="comment">//去掉$的变量名</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>如何正确输出变量的值</p>
+</blockquote>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="xml">//原生PHP输出数据方式，默认会对变量中的字符会进行转义（xss?）</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="php"><span class="meta">&lt;?</span>=name<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>   </div><div class="line"></div><div class="line">//Laravel的blade模板引擎渲染方式，两个大括号<span class="template-variable">&#123;&#123;&#125;</span><span class="xml">&#125;表示转义后输出</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="template-variable">&#123;&#123;name&#125;</span><span class="xml">&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  //浏览器输出<span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red"</span>&gt;</span>upfriend<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="template-variable">&#123;!!name!!&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  //会见变量作为html,输出红色字体的upfriend</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-mysqlperformance01" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -941,76 +1027,6 @@
         <p class="article-more-link">
           <a href="/2015/10/14/php-design-single/#more">阅读全文 >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-php-design-model" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/12/php-design-model/" class="article-date">
-      <time datetime="2015-10-12T14:12:00.000Z" itemprop="datePublished">2015-10-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/12/php-design-model/">PHP设计模式-工厂模式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><p>直接上代码，直观了解工厂模式！<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line"><span class="comment">//接口，是客户端和服务端共同遵守的开发规范</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">db</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span>&#123;&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//服务端</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dbmysql</span> <span class="keyword">implements</span> <span class="title">db</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'connected the mysql'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dbsqlite</span> <span class="keyword">implements</span> <span class="title">db</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'connected the sqlite'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//客户端 </span></div><div class="line">$mysql = <span class="keyword">new</span> Dbmysql();</div><div class="line">$mysql-&gt;conn();</div><div class="line"></div><div class="line">$sqlite = <span class="keyword">new</span> Dbsqlite();</div><div class="line">$sqlite-&gt;conn();</div><div class="line"></div><div class="line"><span class="comment">//如果服务端不想让客户端知道自己内部类的实现细节，统一一个固定的入口，这样就是我们所说的</span></div><div class="line"><span class="comment">//使用方知道的越少越好！将上述两个类封装起来</span></div><div class="line"></div><div class="line"><span class="comment">//服务端，开发接口Dbconnect::type(@param)</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dbconnect</span> </span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">type</span><span class="params">($type)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> ($type == <span class="string">'mysql'</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Dbmysql();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ($type == <span class="string">'sqlite'</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Dbsqlite();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"Error type is not exist"</span>, <span class="number">1</span>);</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//客户端</span></div><div class="line">$mysql = Dbconnect::type(<span class="string">'mysql'</span>);</div><div class="line">$mysql-&gt;conn();</div><div class="line"></div><div class="line">$sqlite = Dbconnect::type(<span class="string">'sqlite'</span>);</div><div class="line">$sqlite-&gt;conn();</div></pre></td></tr></table></figure></p>
-<p>在我们使用围脖的接口时，和这个有点类似，一个业务需求给你一个方法如showbatch(),friendship(),show()；当然他们是某个类的静态方法，我们不需要知道它是如何具体实现的，只要知道，当我们传递合适的参数，使用这个接口，就可以获得自己想要的数据即可</p>
-<p><code>Q:现在如果需要连接oracle、PDO、SqlServer，怎么办？当然php可以直接修改服务端的代码，增加else if，但是对于java,c++而言，如果修改代码，还需要再次编译，这是非常耗时的!</code></p>
-<blockquote>
-<p><strong>在面向对象设计（OOD）设计法则中，重要的开闭原则：对于修改是封闭，对于扩展是开放的</strong></p>
-</blockquote>
-<h2 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h2><p><strong>注意开闭原则</strong><br>//<strong>服务端</strong><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Factory</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span><span class="params">()</span></span>&#123;&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">mysqlFactory</span> <span class="keyword">implements</span> <span class="title">Factory</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Dbmysql();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">sqliteFactory</span> <span class="keyword">implements</span> <span class="title">Factory</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Dbsqlite();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//**客户端**</span></div><div class="line"><span class="comment">//由于开放了两个接口，一个是创建数据库，一个是连接数据库</span></div><div class="line"></div><div class="line">$fact = <span class="keyword">new</span> mysqlFactory();</div><div class="line">$db = $fact-&gt;createDb();</div><div class="line">$db-&gt;conn();</div><div class="line"></div><div class="line">$fact = <span class="keyword">new</span> sqliteFactory();</div><div class="line">$db-&gt;$fact-&gt;createDb();</div><div class="line">$db-&gt;conn(); </div><div class="line"></div><div class="line"><span class="comment">//现在如果新增了oracle数据库连接，就可以扩展oracle，不需要修改代码，扩展如下：</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dboracle</span> <span class="keyword">implements</span> <span class="title">db</span>()</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        echo <span class="string">'connected oracle database'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">oracleFactory</span> <span class="keyword">implements</span> <span class="title">Factory</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Dboracle();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">$fact = <span class="keyword">new</span> oracleFactory();</div><div class="line">$db = $fact-&gt;createDb();</div><div class="line">$db-&gt;conn();</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/PHP编程/">PHP编程</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>
