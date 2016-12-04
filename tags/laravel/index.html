@@ -125,7 +125,7 @@
         
           <span class="meta-info">
             <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP编程/' title=''>PHP编程</a>
+            <a href='/categories/PHP/' title=''>PHP</a>
           </span>
         
       
@@ -163,7 +163,7 @@
         
           <span class="meta-info">
             <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP编程/' title=''>PHP编程</a>
+            <a href='/categories/PHP/' title=''>PHP</a>
           </span>
         
       
@@ -200,7 +200,7 @@
         
           <span class="meta-info">
             <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP编程/' title=''>PHP编程</a>
+            <a href='/categories/PHP/' title=''>PHP</a>
           </span>
         
       
@@ -227,21 +227,7 @@
         
           <h2 id="laravel-migration工具"><a href="#laravel-migration工具" class="headerlink" title="laravel migration工具"></a>laravel migration工具</h2><h3 id="新建表articles步骤"><a href="#新建表articles步骤" class="headerlink" title="新建表articles步骤"></a>新建表<code>articles</code>步骤</h3><ul>
 <li>migrations下生成<code>2015_12_13_104637_create_articles_table.php</code>文件<br><code>php artisan make:migration create_articles_table --create=articles</code></li>
-<li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code></li>
-</ul>
-<pre><code>Schema::create(&#39;articles&#39;, function (Blueprint $table) {
-    $table-&gt;increments(&#39;id&#39;);
-    $table-&gt;string(&#39;title&#39;);
-    $table-&gt;text(&#39;content&#39;);
-    $table-&gt;timestamp(&#39;published_at&#39;);
-    $table-&gt;timestamps();
-});
-</code></pre><ul>
-<li>保存文件，执行下面命令，数据库中生成articls表<br><code>php artisan migrate</code></li>
-</ul>
-<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><pre><code>//回退操作
-php artisan migrate:rollback
-</code></pre>
+<li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code>
         
       </div>
       <p class="repo-list-meta">
@@ -253,7 +239,7 @@ php artisan migrate:rollback
         
           <span class="meta-info">
             <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP编程/' title=''>PHP编程</a>
+            <a href='/categories/PHP/' title=''>PHP</a>
           </span>
         
       
@@ -314,7 +300,7 @@ php artisan migrate:rollback
         
           <span class="meta-info">
             <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP编程/' title=''>PHP编程</a>
+            <a href='/categories/PHP/' title=''>PHP</a>
           </span>
         
       

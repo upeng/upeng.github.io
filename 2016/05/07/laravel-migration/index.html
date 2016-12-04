@@ -60,7 +60,7 @@
                     
                         <span class="meta-info">
                             <span class="octicon octicon-file-directory"></span>
-                            <a href='/categories/PHP编程/' title=''>PHP编程</a>
+                            <a href='/categories/PHP/' title=''>PHP</a>
                         </span>
                     
                 </div>
@@ -75,7 +75,8 @@
             <article class="article-content markdown-body">
                 <h2 id="laravel-migration工具"><a href="#laravel-migration工具" class="headerlink" title="laravel migration工具"></a>laravel migration工具</h2><h3 id="新建表articles步骤"><a href="#新建表articles步骤" class="headerlink" title="新建表articles步骤"></a>新建表<code>articles</code>步骤</h3><ul>
 <li>migrations下生成<code>2015_12_13_104637_create_articles_table.php</code>文件<br><code>php artisan make:migration create_articles_table --create=articles</code></li>
-<li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code></li>
+<li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code><a id="more"></a>
+</li>
 </ul>
 <pre><code>Schema::create(&#39;articles&#39;, function (Blueprint $table) {
     $table-&gt;increments(&#39;id&#39;);
@@ -89,8 +90,7 @@
 </ul>
 <h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><pre><code>//回退操作
 php artisan migrate:rollback
-</code></pre><a id="more"></a>
-<h3 id="增加表字段"><a href="#增加表字段" class="headerlink" title="增加表字段"></a>增加表字段</h3><ol>
+</code></pre><h3 id="增加表字段"><a href="#增加表字段" class="headerlink" title="增加表字段"></a>增加表字段</h3><ol>
 <li><p>如果将table drop后在create中添加字段,会删除表中已有数据。</p>
 </li>
 <li><p>在migrations下新建文件<code>add_intro_into_articles</code><br>```<br>php artisan make:migration add_intro_into_articles –table=articles</p>
