@@ -403,7 +403,7 @@
             var handleGithub = function(){
                 var popularContainer = $(".popular-container");
 
-                var repos = "ysale-sms,scude-answer,cordova-plugin-alipay".split(",");
+                var repos = "".split(",");
                 for(var i in repos){
                     var name = repos[i];
                     $.get("https://api.github.com/repos/upeng/"+name,handle);
