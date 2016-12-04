@@ -38,30 +38,25 @@
               <a href="/message/"  class=" site-header-nav-item hvr-underline-from-center" title="Message">Message</a>
         
               
-              <a href="/about/"  class=" site-header-nav-item hvr-underline-from-center" title="About">About</a>
+              <a href="/about/"  class=" selected  site-header-nav-item hvr-underline-from-center" title="About">About</a>
         
       </nav>
   </div>
 </header>
 
 	
-<section class="collection-head geopattern" data-pattern-id="mysql添加用户管理员及授权" >
+<section class="collection-head geopattern" data-pattern-id="关于" >
     <div class="container">
         <div class="collection-title">
             <h1 class="collection-header">
-                mysql添加用户管理员及授权
+                关于
             </h1>
             
                 <div class="collection-info">
                     <span class="meta-info">
                         <span class="octicon octicon-calendar"></span>
-                        <time datetime="2016-04-10T06:26:00.000Z" itemprop="datePublished">2016-04-10</time>
+                        <time datetime="2015-07-02T13:40:27.000Z" itemprop="datePublished">2015-07-02</time>
                     </span>
-                    
-                        <span class="meta-info">
-                            <span class="octicon octicon-file-directory"></span>
-                            <a href='/categories/MySQL/' title=''>MySQL</a>
-                        </span>
                     
                 </div>
             
@@ -73,16 +68,13 @@
         <!-- -->
         <div class="column three-fourths">
             <article class="article-content markdown-body">
-                <h2 id="mysql添加用户管理员及授权"><a href="#mysql添加用户管理员及授权" class="headerlink" title="mysql添加用户管理员及授权"></a>mysql添加用户管理员及授权</h2><p>比如添加test用户，grant 高级 DBA 管理 MySQL 中所有数据库的权限</p>
-<h3 id="step1-创建用户"><a href="#step1-创建用户" class="headerlink" title="step1 创建用户"></a>step1 创建用户</h3><pre><code>insert into mysql.user(Host,User,Password) values(&quot;%&quot;,&quot;test&quot;,password(&quot;123qwe&quot;));
-insert into mysql.user(Host,User,Password) values(&quot;localhost&quot;,&quot;test&quot;,password(&quot;123qwe&quot;));
-注：%和localhost的区别
-此处的&quot;localhost&quot;，是指该用户只能在本地登录，不能在另外一台机器上远程登录。如果想远程登录的话，将&quot;localhost&quot;改为&quot;%&quot;，表示在任何一台电脑上都可以登录。也可以指定某台机器可以远程登录。
-</code></pre><h3 id="step2-为用户授权"><a href="#step2-为用户授权" class="headerlink" title="step2 为用户授权"></a>step2 为用户授权</h3><pre><code>授权格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by &quot;密码&quot;;　
-grant all privileges on testDB.testTable to test@localhost identified by &#39;1234&#39;;
-grant all on *.* to test@&#39;%&#39;;  //全部数据库表的权限
-</code></pre><h3 id="step3-刷新系统权限表"><a href="#step3-刷新系统权限表" class="headerlink" title="step3 刷新系统权限表"></a>step3 刷新系统权限表</h3><pre><code>flush privileges; //刷新系统权限表
-</code></pre>
+                <h3 id="YUPENG"><a href="#YUPENG" class="headerlink" title="YUPENG"></a>YUPENG</h3><ul>
+<li>邮箱：yupeng3031#gmail.com</li>
+<li>主页：<a href="http://upeng.github.io">http://upeng.github.io</a></li>
+<li>微博：<a href="http://weibo.com/upfriend" target="_blank" rel="external">@up鹏</a></li>
+<li>推荐：<a href="http://shareup.sinaapp.com" target="_blank" rel="external">http://shareup.sinaapp.com</a></li>
+</ul>
+
             </article>
             
                 <div class="share">
@@ -96,7 +88,7 @@ grant all on *.* to test@&#39;%&#39;;  //全部数据库表的权限
             
                 
 <div class="comments">
-	<div class="ds-thread" data-thread-key="mysql-grant" data-title="mysql添加用户管理员及授权" data-url="http://upeng.github.io/2016/04/10/mysql-grant/"></div>
+	<div class="ds-thread" data-thread-key="关于" data-title="关于" data-url="http://upeng.github.io/about/index.html"></div>
 	<script type="text/javascript">
 	var duoshuoQuery = {short_name:"yumemor"};
 		(function() {
@@ -123,7 +115,7 @@ grant all on *.* to test@&#39;%&#39;;  //全部数据库表的权限
 <div id="post-directory-module">
 	<section class="post-directory">
 		<p><strong class="toc-title">文章目录</strong></p>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql添加用户管理员及授权"><span class="toc-text">mysql添加用户管理员及授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#step1-创建用户"><span class="toc-text">step1 创建用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#step2-为用户授权"><span class="toc-text">step2 为用户授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#step3-刷新系统权限表"><span class="toc-text">step3 刷新系统权限表</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#YUPENG"><span class="toc-text">YUPENG</span></a></li></ol>
 	</section>
 </div>
             
