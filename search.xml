@@ -33,16 +33,21 @@ kill 59683
     </entry>
     
     <entry>
-      <title><![CDATA[php常用的命令行]]></title>
+      <title><![CDATA[工作中经常使用到的几个命令行linux&php]]></title>
       <url>http://upeng.github.io/2016/11/13/php-command/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>经常使用到的命令行</p>
-</blockquote>
-<ul>
-<li>查看php文件是否有语法错误<br><code>php -ln filename.php</code></li>
-</ul>
-<a id="more"></a>
-<ul>
+      <content type="html"><![CDATA[<h3 id="nc命令使用方法"><a href="#nc命令使用方法" class="headerlink" title="nc命令使用方法"></a>nc命令使用方法</h3><p>同一局域网（公司内网）下经常会进行文件的传输，使用<code>nc</code>命令非常方便。<br><a id="more"></a><br>A向B发送文件，A端命令<br>A@localhost:~ nc B的ip 约定端口 &lt; 传输文件名<br>B端命令，先处于listen状态<br>B@localhost:~ nc -l 约定端口 &gt; 传输文件名</p>
+<p>example</p>
+<pre><code>机器A 192.168.1.100
+机器B 192.168.1.101
+
+机器A发送文件（test.txt）到机器B
+A@localhost:~ nc 192.168.1.101  8888 &lt; test.txt 
+
+机器B监听8888端口（自定义）
+B@localhost:~ nc -l 8888 &gt; test.txt
+</code></pre><h3 id="php经常使用到的命令行"><a href="#php经常使用到的命令行" class="headerlink" title="php经常使用到的命令行"></a>php经常使用到的命令行</h3><ul>
+<li><p>查看php文件是否有语法错误<br><code>php -ln filename.php</code></p>
+</li>
 <li><p>执行php文件<br><code>php filename.php</code><br><code>php -f filename.php</code></p>
 </li>
 <li><p>搜索php.ini关键词信息<br><code>php -i | grep keyword</code></p>
@@ -51,13 +56,11 @@ kill 59683
 </li>
 <li><p>查看php扩展模块<br><code>php -m</code></p>
 </li>
-<li><p>查看php版本<br><code>php -v</code></p>
-</li>
 </ul>
-<p>/<strong>待补充</strong>/</p>
 <blockquote>
-<p>上述<code>查询php.ini</code>和<code>检测语法错误</code>很好用，源于查看session配置和运行脚本没有任何输出。<br>先学会命令行，再用IDE吧，啥？VIM~</p>
+<p>上述<code>查询php.ini</code>和<code>检测语法错误</code>很好用，源于查看session配置和运行脚本没有任何输出。</p>
 </blockquote>
+<p>备注：关于git命令，特别是与远程仓库的交互，待整理和总结</p>
 ]]></content>
     </entry>
     
