@@ -95,6 +95,46 @@
     <div class="columns">
         <div class="column two-thirds">
             
+                  <article id="post-mysql-think" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2016/02/25/mysql-think/">一个脚本引发的思考</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <h2 id="问题来源："><a href="#问题来源：" class="headerlink" title="问题来源："></a>问题来源：</h2><p>前段时间写了一个crontab脚本，每5分钟连接一次数据库，遍历库中待处理的任务，一旦发现待处理(status=0)的任务,则将该任务状态置为处理中(status=1)，然后开始执行这个任务（dealing process），执行完成status=2</p>
+<blockquote>
+<p>最初我是一次性将所有任务设为处理中，然后一个一个串行处理，这样效率极低，一个任务可能要1个小时，其他的只能排队等。</p>
+</blockquote>
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2016-02-24T16:19:00.000Z" itemprop="datePublished">2016-02-25</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/MySQL/' title=''>MySQL</a>
+          </span>
+        
+      
+        <!--
+          
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
                   <article id="post-linux-awk" class="repo-list">
     <div class="repo-list-item" >
       <h3 class="repo-list-name" itemprop="name">

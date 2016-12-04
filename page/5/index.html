@@ -95,6 +95,53 @@
     <div class="columns">
         <div class="column two-thirds">
             
+                  <article id="post-mysqlperformance03" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2016/04/27/mysqlperformance03/">mysql数据库之索引优化</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <h2 id="如何选择合适的列建立索引"><a href="#如何选择合适的列建立索引" class="headerlink" title="如何选择合适的列建立索引?"></a>如何选择合适的列建立索引?</h2><ol>
+<li>在where从句、group by从句、order by从句、on从句中出现的列</li>
+<li>索引字段越小越好</li>
+<li>离散度大的列放到联合索引的前面</li>
+</ol>
+<blockquote>
+<p>理解离散度</p>
+<pre><code>SELECT * FROM payment where staff_id = 2 AND customer_id = 584;
+</code></pre><p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
+</blockquote>
+<p><strong>备注</strong>：比较staff_id和customer_id两者的离散度，那个离散度高，那个列就放置到联合索引的前面<br>
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2016-04-26T16:44:33.000Z" itemprop="datePublished">2016-04-27</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/MySQL/' title=''>MySQL</a>
+          </span>
+        
+      
+        <!--
+          
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
                   <article id="post-laravel-primary" class="repo-list">
     <div class="repo-list-item" >
       <h3 class="repo-list-name" itemprop="name">
@@ -313,46 +360,6 @@ grant all on *.* to test@&#39;%&#39;;  //全部数据库表的权限
         <span class="meta-info">
           <span class="octicon octicon-calendar"></span>
            <time datetime="2016-04-10T06:26:00.000Z" itemprop="datePublished">2016-04-10</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/MySQL/' title=''>MySQL</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-mysql-think" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/02/25/mysql-think/">一个脚本引发的思考</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <h2 id="问题来源："><a href="#问题来源：" class="headerlink" title="问题来源："></a>问题来源：</h2><p>前段时间写了一个crontab脚本，每5分钟连接一次数据库，遍历库中待处理的任务，一旦发现待处理(status=0)的任务,则将该任务状态置为处理中(status=1)，然后开始执行这个任务（dealing process），执行完成status=2</p>
-<blockquote>
-<p>最初我是一次性将所有任务设为处理中，然后一个一个串行处理，这样效率极低，一个任务可能要1个小时，其他的只能排队等。</p>
-</blockquote>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-02-24T16:19:00.000Z" itemprop="datePublished">2016-02-25</time>
         </span>
 
         

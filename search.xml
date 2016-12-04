@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title><![CDATA[打造自己的终端和命令行item2和zsh]]></title>
+      <url>http://upeng.github.io/2016/12/04/zsh-and-item2/</url>
+      <content type="html"><![CDATA[<p>关于zsh和item2的关系可以理解为，zsh就是linux下bash shell的升级版；iterm2是termainal的升级版，可以自定义terminal主题配色；<code>cmd + ,</code>呼出配置。可以新增配置，并将之设置默认，（默认配置前有个⭐）<br><a id="more"></a></p>
+<h3 id="zsh的高效命令（常用）"><a href="#zsh的高效命令（常用）" class="headerlink" title="zsh的高效命令（常用）"></a>zsh的高效命令（常用）</h3><ol>
+<li><p>zsh 的命令<strong>补全</strong>功能非常强大，可以补齐路径，补齐命令，补齐参数等。你记住 tar 的所有参数了吗 ，只要 tar -加 tab 键</p>
+</li>
+<li><p>按下 tab 键显示出所有待选项后，再按一次 tab 键，即进入选择模式.进入选择模式后，按 tab 切向下一个选项，按 <code>shift+tab</code> 键切向上一个选项，<code>ctrl+f/b/n/p</code>可以向前后左右切换</p>
+</li>
+<li><p><code>ps aux | grep xxx</code>查进程的 PID，然后kill PID有了 zsh，直接kill xxx然后按下 tab 键即可</p>
+<pre><code>kill emac
+# 按下 tab，变成：
+kill 59683
+</code></pre></li>
+<li><p>zsh的历史记录跨 session，可以共享。历史记录支持受限查找。比如，输入git，再按向上箭头，会搜索用过的所有 git 命令</p>
+</li>
+<li><p>zsh 的目录跳转更为智能，你无需输入cd，直接输入路径即可。<code>..</code>表示后退一级目录，<code>../../</code>表示后退两级，依次类推。（<code>...</code>的作用和<code>../../</code>相同）</p>
+</li>
+<li><p>输入d回车，将列出当前 session 访问过的所有目录，再输入提示的数字即可进入相应目录。</p>
+</li>
+</ol>
+<h3 id="zsh配置"><a href="#zsh配置" class="headerlink" title="zsh配置"></a>zsh配置</h3><p>位于 ~/.zshrc，可以修改theme,当前使用cloud,可以自定义alias</p>
+<h3 id="iterm2的配置"><a href="#iterm2的配置" class="headerlink" title="iterm2的配置"></a>iterm2的配置</h3><p>color配色方案：colors import我们githubs主题即可，更多关于iterm的信息见<a href="https://item2.com。" target="_blank" rel="external">https://item2.com。</a><br>比如选择dracula配色方案<a href="https://github.com/dracula/iterm" target="_blank" rel="external">https://github.com/dracula/iterm</a> </p>
+<blockquote>
+<p><code>working directory：Reuse previous&#39;directory</code> //directory总是展示当前dirname</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[php常用的命令行]]></title>
       <url>http://upeng.github.io/2016/11/13/php-command/</url>
       <content type="html"><![CDATA[<blockquote>

@@ -95,6 +95,46 @@
     <div class="columns">
         <div class="column two-thirds">
             
+                  <article id="post-thinking" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2016/05/29/thinking/">standing on the shoulders of the giants</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <blockquote>
+<p>It’s never too <strong>late</strong> to learn !</p>
+</blockquote>
+<p>周末学习laravel，然后写了一篇关于laravel认证相关的学习总结。写完后google类似的文章，意外发现了一个同学（不认识），<a href="http://aevit.xyz/">博主</a>华师的，通过他的文章找到了他的github，然后一发不可收拾。<br>
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2016-05-29T11:18:09.000Z" itemprop="datePublished">2016-05-29</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/其他/' title=''>其他</a>
+          </span>
+        
+      
+        <!--
+          
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thinking/">thinking</a></li></ul>
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
                   <article id="post-laravel-auth" class="repo-list">
     <div class="repo-list-item" >
       <h3 class="repo-list-name" itemprop="name">
@@ -276,53 +316,6 @@ php artisan migrate:rollback
         <!--
           
             <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-mysqlperformance03" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/04/27/mysqlperformance03/">mysql数据库之索引优化</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <h2 id="如何选择合适的列建立索引"><a href="#如何选择合适的列建立索引" class="headerlink" title="如何选择合适的列建立索引?"></a>如何选择合适的列建立索引?</h2><ol>
-<li>在where从句、group by从句、order by从句、on从句中出现的列</li>
-<li>索引字段越小越好</li>
-<li>离散度大的列放到联合索引的前面</li>
-</ol>
-<blockquote>
-<p>理解离散度</p>
-<pre><code>SELECT * FROM payment where staff_id = 2 AND customer_id = 584;
-</code></pre><p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
-</blockquote>
-<p><strong>备注</strong>：比较staff_id和customer_id两者的离散度，那个离散度高，那个列就放置到联合索引的前面<br>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-04-26T16:44:33.000Z" itemprop="datePublished">2016-04-27</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/MySQL/' title=''>MySQL</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
           
         -->
 

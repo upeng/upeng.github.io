@@ -95,227 +95,31 @@
     <div class="columns">
         <div class="column two-thirds">
             
-                  <article id="post-thinking" class="repo-list">
+                  <article id="post-zsh-and-item2" class="repo-list">
     <div class="repo-list-item" >
       <h3 class="repo-list-name" itemprop="name">
         
   
-      <a class="article-title" href="/2016/05/29/thinking/">standing on the shoulders of the giants</a>
+      <a class="article-title" href="/2016/12/04/zsh-and-item2/">打造自己的终端和命令行item2和zsh</a>
   
 
       </h3>
       <div class="repo-list-description">
         
-          <blockquote>
-<p>It’s never too <strong>late</strong> to learn !</p>
-</blockquote>
-<p>周末学习laravel，然后写了一篇关于laravel认证相关的学习总结。写完后google类似的文章，意外发现了一个同学（不认识），<a href="http://aevit.xyz/">博主</a>华师的，通过他的文章找到了他的github，然后一发不可收拾。<br>
+          <p>关于zsh和item2的关系可以理解为，zsh就是linux下bash shell的升级版；iterm2是termainal的升级版，可以自定义terminal主题配色；<code>cmd + ,</code>呼出配置。可以新增配置，并将之设置默认，（默认配置前有个⭐）<br>
         
       </div>
       <p class="repo-list-meta">
         <span class="meta-info">
           <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-05-29T11:18:09.000Z" itemprop="datePublished">2016-05-29</time>
+           <time datetime="2016-12-04T13:34:48.000Z" itemprop="datePublished">2016-12-04</time>
         </span>
 
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/其他/' title=''>其他</a>
-          </span>
         
       
         <!--
           
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thinking/">thinking</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-laravel-auth" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/05/29/laravel-auth/">laravel学习笔记-用户认证</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <p>在平时开发过程中，用户登录注册是非常常见的场景，比如大部分后台管理、论坛等等；用户一般web访问流程从业务来说是这样的：<br>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-05-29T00:17:07.000Z" itemprop="datePublished">2016-05-29</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP编程/' title=''>PHP编程</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-php-detail" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/05/28/php-detail/">几个值得深思的 PHP 面试问题</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <p>5个值得深思的 PHP 面试问题<br>文章所罗列的问题虽然看似简单，但是每个背后都涵盖了一个或几个大家容易忽视的基础知识点，希望能够帮助到你的面试和平时工作。<br>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-05-27T16:04:26.000Z" itemprop="datePublished">2016-05-28</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP编程/' title=''>PHP编程</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-laravel-migration" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/05/07/laravel-migration/">laravel migration</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <h2 id="laravel-migration工具"><a href="#laravel-migration工具" class="headerlink" title="laravel migration工具"></a>laravel migration工具</h2><h3 id="新建表articles步骤"><a href="#新建表articles步骤" class="headerlink" title="新建表articles步骤"></a>新建表<code>articles</code>步骤</h3><ul>
-<li>migrations下生成<code>2015_12_13_104637_create_articles_table.php</code>文件<br><code>php artisan make:migration create_articles_table --create=articles</code></li>
-<li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code></li>
-</ul>
-<pre><code>Schema::create(&#39;articles&#39;, function (Blueprint $table) {
-    $table-&gt;increments(&#39;id&#39;);
-    $table-&gt;string(&#39;title&#39;);
-    $table-&gt;text(&#39;content&#39;);
-    $table-&gt;timestamp(&#39;published_at&#39;);
-    $table-&gt;timestamps();
-});
-</code></pre><ul>
-<li>保存文件，执行下面命令，数据库中生成articls表<br><code>php artisan migrate</code></li>
-</ul>
-<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><pre><code>//回退操作
-php artisan migrate:rollback
-</code></pre>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-05-07T12:10:00.000Z" itemprop="datePublished">2016-05-07</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP编程/' title=''>PHP编程</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-laravel-blade" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/04/29/laravel-blade/">laravel的blade视图模板引擎</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <h3 id="blade模板引擎使用"><a href="#blade模板引擎使用" class="headerlink" title="blade模板引擎使用"></a>blade模板引擎使用</h3><p>很多时候，我们的view模板有很多重复的地方，比如head、footer部分，当然可以定义一些共用的部分，置于common文件夹下，然后使用include将其引入进来。而blade有一套自己的策略</p>
-<p>比如定义一个<code>common.blade.php</code>文件，如下：</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;Laravel&lt;/title&gt;
-        &lt;link href=&quot;https://fonts.googleapis.com/css?family=Lato:100&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
-        &lt;style&gt;
-            html, body {height: 100%;}
-            body {margin: 0;width: 100%;display: table;font-weight: 100;font-family: &#39;Lato&#39;;}
-            .container {text-align: center;display: table-cell;vertical-align: middle;
-            }
-            .content {text-align: center;display: inline-block;}
-            .title {font-size: 96px;}
-            .footer{color: green;font-size: 100px;}
-        &lt;/style&gt;
-    &lt;/head&gt;
-    &lt;body&gt; 
-        &lt;div class=&quot;container&quot;&gt;
-            @yield(&#39;content&#39;)
-            @yield(&#39;footer&#39;)
-        &lt;/div&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-04-28T16:18:00.000Z" itemprop="datePublished">2016-04-29</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP编程/' title=''>PHP编程</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/item2/">item2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zsh/">zsh</a></li></ul>
           
         -->
 
@@ -418,12 +222,6 @@ php artisan migrate:rollback
         </div>
     </div>
 
-    
-      <div class="pagination text-align">
-          <div class="btn-group">
-              <a class="extend prev" rel="prev" href="/page/3/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">&raquo;</a>
-          </div>
-      </div>
     
 </section>
 
