@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <link rel="icon" href="/favicon.ico">
-  <title>paul的学习站</title>
+  <title>小于的学习站</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox-1.3.4.css">
   <!--在这里倒入jquery 方便处理部分页面的jquery-->
@@ -16,7 +16,7 @@
 <body>
 	<header class="site-header navfixed-false">
   <div class="container">
-      <h1><a href="/" title="paul的学习站"><span class="octicon octicon-mark-github"></span> paul的学习站</a></h1>
+      <h1><a href="/" title="小于的学习站"><span class="octicon octicon-mark-github"></span> 小于的学习站</a></h1>
       <nav class="site-header-nav" role="navigation">
         
               
@@ -86,7 +86,7 @@
 <p>如果要安装新的php扩展，可以直接安装而不用每次重新编译php，所有的扩展可以通过<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span>search php56</div></pre></td></tr></table></figure></p>
 <p>看到，下面是我自己所需要的扩展，可以支持Phalcon框架：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install php56-gearman php56-msgpack php56-memcache php56-memcached php56-mongo  php56-phalcon php56-redis php56-xdebug</div></pre></td></tr></table></figure></p>
 <h3 id="PHP-FPM的加载与启动"><a href="#PHP-FPM的加载与启动" class="headerlink" title="PHP-FPM的加载与启动"></a>PHP-FPM的加载与启动</h3><p>php-fpm.conf  php.ini<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>php<span class="regexp">/5.6</span></div></pre></td></tr></table></figure></p>
-<p>php-fpm进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/sbin</div></pre></td></tr></table></figure></p>
+<p>php-fpm进程<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="keyword">local</span>/sbin</div></pre></td></tr></table></figure></p>
 <p><strong>安装完毕后可以通过以下指令启动和停止php-fpm</strong><br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./php-fpm -D    <span class="comment">//进入sbin目录</span></div><div class="line"></div><div class="line">killall php-fpm</div></pre></td></tr></table></figure></p>
 <p>同时可以将php-fpm加入开机启动<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ln -sfv /usr/local/opt/php56/*.plist ~/<span class="keyword">Library</span>/LaunchAgents</div><div class="line"></div><div class="line">launchctl load ~/<span class="keyword">Library</span>/LaunchAgents/homebrew.mxcl.php56.plist</div></pre></td></tr></table></figure></p>
 <h3 id="查看php-fpm进程"><a href="#查看php-fpm进程" class="headerlink" title="查看php-fpm进程"></a>查看php-fpm进程</h3><p>查看9000端口<br><code>lsof -i:9000</code><br>或者<br><code>ps -ef | grep php-fpm</code></p>
@@ -148,7 +148,7 @@
 <div class="comments">
 	<div class="ds-thread" data-thread-key="mac-lnmp" data-title="Mac下安装LNMP(Nginx+PHP5.6)环境" data-url="http://upeng.github.io/2016/08/28/mac-lnmp/"></div>
 	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"yumemor"};
+	var duoshuoQuery = {short_name:"upeng"};
 		(function() {
 			var ds = document.createElement('script');
 			ds.type = 'text/javascript';ds.async = true;
