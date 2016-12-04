@@ -248,7 +248,7 @@
             var handleGithub = function(){
                 var popularContainer = $(".popular-container");
 
-                var repos = "".split(",");
+                var repos = "upeng.github.io,codeIgniter-captcha,learn-vuejs,translation".split(",");
                 for(var i in repos){
                     var name = repos[i];
                     $.get("https://api.github.com/repos/upeng/"+name,handle);

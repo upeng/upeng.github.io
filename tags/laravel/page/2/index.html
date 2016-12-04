@@ -258,7 +258,7 @@ return view(&#39;blog.content&#39;, compact(&#39;name&#39;, &#39;time&#39;, &#39
             var handleGithub = function(){
                 var popularContainer = $(".popular-container");
 
-                var repos = "".split(",");
+                var repos = "upeng.github.io,codeIgniter-captcha,learn-vuejs,translation".split(",");
                 for(var i in repos){
                     var name = repos[i];
                     $.get("https://api.github.com/repos/upeng/"+name,handle);
