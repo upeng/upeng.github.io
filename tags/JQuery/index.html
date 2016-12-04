@@ -86,9 +86,15 @@
       </h3>
       <div class="repo-list-description">
         
-          <h3 id="html"><a href="#html" class="headerlink" title="html()"></a>html()</h3><p>类似于javascript的InnerHtml属性，可以用来读取或者设置某个元素中的HTML内容<br> 例如：Javascript代码<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="params">&lt;p&gt;</span><span class="params">&lt;strong&gt;</span>Hello world<span class="params">&lt;/strong&gt;</span><span class="params">&lt;/p&gt;</span>  </div><div class="line"> alert($(<span class="string">'p'</span>).html());   </div><div class="line">返回： <span class="params">&lt;strong&gt;</span>Hello world<span class="params">&lt;/strong&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="text"><a href="#text" class="headerlink" title="text()"></a>text()</h3><p> 类似于javascript的InnerText属性，可以用来读取或者设置某个元素的文本内容<br>  例如：  Javascript代码<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>   </div><div class="line">  alert($(<span class="string">'p'</span>).text());   </div><div class="line">返回：  Hello world</div></pre></td></tr></table></figure></p>
-<h3 id="val"><a href="#val" class="headerlink" title="val()"></a>val()</h3><p> 类似于javascript中的value属性，可以用来设置或者获取元素的值，无论元素是文本框，下拉列表还是单选框，如果元素时多选，则返回一个包含所有选择的值的数组。 </p>
+          <h3 id="html"><a href="#html" class="headerlink" title="html()"></a>html()</h3><p>类似于javascript的InnerHtml属性，可以用来读取或者设置某个元素中的HTML内容<br> 例如：Javascript代码  </p>
+<pre><code>    &lt;p&gt;&lt;strong&gt;Hello world&lt;/strong&gt;&lt;/p&gt;  
+     alert($(&#39;p&#39;).html());   
+    返回： &lt;strong&gt;Hello world&lt;/strong&gt;
+</code></pre><h3 id="text"><a href="#text" class="headerlink" title="text()"></a>text()</h3><p> 类似于javascript的InnerText属性，可以用来读取或者设置某个元素的文本内容<br>  例如：  Javascript代码 </p>
+<pre><code>    &lt;p&gt;&lt;strong&gt;Hello world&lt;/strong&gt;&lt;/p&gt;   
+      alert($(&#39;p&#39;).text());   
+    返回：  Hello world
+</code></pre><h3 id="val"><a href="#val" class="headerlink" title="val()"></a>val()</h3><p> 类似于javascript中的value属性，可以用来设置或者获取元素的值，无论元素是文本框，下拉列表还是单选框，如果元素时多选，则返回一个包含所有选择的值的数组。 </p>
 
         
       </div>

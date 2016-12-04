@@ -73,11 +73,20 @@
 <li>比如之前每次查代码行数都要 <code>:set nu</code>，如果写在.vimrc就不用每次都<code>:set nu</code>了。</li>
 <li>比如写完一行代码enter换行后，又从头再来，必须手动tab缩进。。。</li>
 </ol>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="built_in">number</span> <span class="comment"># 显示行号</span></div><div class="line"><span class="keyword">set</span> autoindent <span class="comment"># 自动缩进</span></div></pre></td></tr></table></figure>
-<a id="more"></a>
+<pre><code>set number # 显示行号
+set autoindent # 自动缩进
+</code></pre><a id="more"></a>
 <h3 id="vim模式"><a href="#vim模式" class="headerlink" title="vim模式"></a>vim模式</h3><p>我们知道vim的模式【insert模式、普通模式、visual模式】中<strong>insert模式</strong>和<strong>visual模式</strong>是不能直接互跳的，必须先返回到<strong>普通模式</strong>！普通模式下<code>:</code>进入命令模式<br>快速进入insert模式：普通模式下输入 i/o/a，esc返回到普通模式<br>快速进入visual模式：普通模式下输入 v，再次v返回到普通模式</p>
-<h3 id="普通模式下快速跳转"><a href="#普通模式下快速跳转" class="headerlink" title="普通模式下快速跳转"></a>普通模式下快速跳转</h3><p>不要只会箭头上下左右了！这个能提高效率<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gg(<span class="number">1</span>G)  <span class="comment"># 文件顶部 </span></div><div class="line">G 	<span class="comment"># 文件尾部</span></div><div class="line">control + [	<span class="comment"># 向上片段移动</span></div><div class="line">control + ] <span class="comment"># 向下片段移动 </span></div><div class="line"><span class="keyword">j </span><span class="comment"># 下一行</span></div><div class="line">k <span class="comment"># 上一行</span></div><div class="line">w <span class="comment"># 下一个单词</span></div><div class="line"><span class="keyword">b </span><span class="comment"># 上一个单词</span></div></pre></td></tr></table></figure></p>
-<h3 id="复制粘贴一块代码"><a href="#复制粘贴一块代码" class="headerlink" title="复制粘贴一块代码"></a>复制粘贴一块代码</h3><ol>
+<h3 id="普通模式下快速跳转"><a href="#普通模式下快速跳转" class="headerlink" title="普通模式下快速跳转"></a>普通模式下快速跳转</h3><p>不要只会箭头上下左右了！这个能提高效率</p>
+<pre><code>gg(1G)  # 文件顶部 
+G     # 文件尾部
+control + [    # 向上片段移动
+control + ] # 向下片段移动 
+j # 下一行
+k # 上一行
+w # 下一个单词
+b # 上一个单词
+</code></pre><h3 id="复制粘贴一块代码"><a href="#复制粘贴一块代码" class="headerlink" title="复制粘贴一块代码"></a>复制粘贴一块代码</h3><ol>
 <li>按Esc切换到正常模式；</li>
 <li>把光标移到你需要复制的代码行首；</li>
 <li>按V选择整行，可移动光标选择多行；</li>

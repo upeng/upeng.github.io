@@ -66,7 +66,83 @@
             <article class="article-content markdown-body">
                 <h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p><code>场景</code>:有多个类需要读取数据库，而数据库连接类只需要一个对象就够了。其他的类只需调用这个类的连接对象即可<br><code>问题</code>：如何获取两个严格相等（全等）的对象（===）<br><code>答案</code>：只有当两个对象是同一个对象的时候才是全等的！</p>
 <a id="more"></a>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1、用同一个类new两个对象</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span>&#123;&#125;</div><div class="line">$s1 = <span class="keyword">new</span> Single();</div><div class="line">$s2 = <span class="keyword">new</span> Single();</div><div class="line"><span class="keyword">echo</span> $s1 === $s2 ? <span class="string">'是同一个对象'</span> : <span class="string">'不是同一个对象'</span>;   <span class="comment">//不是同一个对象，尽管他们内部方法变量完全相同</span></div><div class="line"></div><div class="line"><span class="comment">//2、不是同一个对象，主要是因为new了两次，所以下面要封锁new操作</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$s1 = <span class="keyword">new</span> Single();  </div><div class="line"></div><div class="line"><span class="comment">//3、封锁了外部的new操作，同时需要在内部进行new操作</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getIns</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">self</span>();</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">$s1 = <span class="keyword">new</span> Single();</div><div class="line">$s2 = <span class="keyword">new</span> Single();</div><div class="line"><span class="keyword">echo</span> $s1 === $s2 ? <span class="string">'是同一个对象'</span> : <span class="string">'不是同一个对象'</span>;</div><div class="line"><span class="comment">//不是同一个对象！因为内部new了两次！</span></div><div class="line"></div><div class="line"><span class="comment">//4、getIns先判断实例</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $ins = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getIns</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">self</span>::$ins === <span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">self</span>::$ins = <span class="keyword">new</span> <span class="keyword">self</span>();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span>::$ins;</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">$s1 = <span class="keyword">new</span> Single();</div><div class="line">$s2 = <span class="keyword">new</span> Single();</div><div class="line"><span class="keyword">echo</span> $s1 === $s2 ? <span class="string">'是同一个对象'</span> : <span class="string">'不是同一个对象'</span>;<span class="comment">//是同一个对象</span></div><div class="line"></div><div class="line"> &gt; 注:**方法前加<span class="keyword">final</span>，则方法不能被覆盖**，否则当有类继承它的时候会覆盖construct,又不是同一个对象了，**类前加<span class="keyword">final</span>，则类不能被继承**</div><div class="line"></div><div class="line"><span class="comment">//5、禁止覆盖方法和克隆对象</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $ins = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getIns</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">self</span>::$ins === <span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">self</span>::$ins = <span class="keyword">new</span> <span class="keyword">self</span>();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span>::$ins;</div><div class="line">    &#125; </div><div class="line">    <span class="comment">//禁止覆盖方法</span></div><div class="line">    <span class="keyword">final</span> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="comment">//防止克隆</span></div><div class="line">    <span class="keyword">final</span> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__clone</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dbSingle</span> <span class="keyword">extends</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line">$s1 = <span class="keyword">new</span> dbSingle();</div><div class="line">$s2 = <span class="keyword">new</span> dbSingle();</div><div class="line"></div><div class="line">$s1 = Single::getIns();</div><div class="line">$s2 = <span class="keyword">clone</span> $s1;</div></pre></td></tr></table></figure>
+<pre><code>//1、用同一个类new两个对象
+class Single{}
+$s1 = new Single();
+$s2 = new Single();
+echo $s1 === $s2 ? &#39;是同一个对象&#39; : &#39;不是同一个对象&#39;;   //不是同一个对象，尽管他们内部方法变量完全相同
+
+//2、不是同一个对象，主要是因为new了两次，所以下面要封锁new操作
+class Single
+{
+    protected function __construct(){}
+}
+
+$s1 = new Single();  
+
+//3、封锁了外部的new操作，同时需要在内部进行new操作
+
+class Single
+{
+    public static function getIns()
+    {
+        return new self();
+    } 
+    protected function __construct(){}
+}
+$s1 = new Single();
+$s2 = new Single();
+echo $s1 === $s2 ? &#39;是同一个对象&#39; : &#39;不是同一个对象&#39;;
+//不是同一个对象！因为内部new了两次！
+
+//4、getIns先判断实例
+class Single
+{
+    protected static $ins = null;
+    public static function getIns()
+    {
+        if (self::$ins === null)
+        {
+            self::$ins = new self();
+        }
+        return self::$ins;
+    } 
+    protected function __construct(){}
+}
+$s1 = new Single();
+$s2 = new Single();
+echo $s1 === $s2 ? &#39;是同一个对象&#39; : &#39;不是同一个对象&#39;;//是同一个对象
+
+ &gt; 注:**方法前加final，则方法不能被覆盖**，否则当有类继承它的时候会覆盖construct,又不是同一个对象了，**类前加final，则类不能被继承**
+
+//5、禁止覆盖方法和克隆对象
+class Single
+{
+    protected static $ins = null;
+    public static function getIns()
+    {
+        if (self::$ins === null)
+        {
+            self::$ins = new self();
+        }
+        return self::$ins;
+    } 
+    //禁止覆盖方法
+    final protected function __construct(){}
+    //防止克隆
+    final protected function __clone(){}
+}
+
+class dbSingle extends Single
+{
+
+}
+$s1 = new dbSingle();
+$s2 = new dbSingle();
+
+$s1 = Single::getIns();
+$s2 = clone $s1;
+</code></pre>
             </article>
             
                 <div class="share">

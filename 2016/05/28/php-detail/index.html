@@ -64,27 +64,85 @@
         <!-- -->
         <div class="column three-fourths">
             <article class="article-content markdown-body">
-                <p>5个值得深思的 PHP 面试问题<br>文章所罗列的问题虽然看似简单，但是每个背后都涵盖了一个或几个大家容易忽视的基础知识点，希望能够帮助到你的面试和平时工作。<br><a id="more"></a><br><strong>Q1</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$str1</span> = <span class="string">'hello world'</span>;</div><div class="line"><span class="variable">$str2</span> = <span class="string">'he'</span>;</div><div class="line"><span class="keyword">if</span> (strpos(<span class="variable">$str1</span>, <span class="variable">$str2</span>))</div><div class="line">&#123;</div><div class="line">    <span class="built_in">echo</span> <span class="string">"/"</span><span class="string">" . <span class="variable">$str1</span> . "</span>/<span class="string">" contains /"</span><span class="string">" . <span class="variable">$str2</span> . "</span>/<span class="string">""</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">"/"</span><span class="string">" . <span class="variable">$str1</span> . "</span>/<span class="string">" does not contain /"</span><span class="string">" . <span class="variable">$str2</span> . "</span>/<span class="string">""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>正确运行的输出结果:<br><!-- more --><br><code>&quot;hello world&quot; does not contain &quot;he&quot;</code><br>strpos是返回字符串str2在str1的位置，没有找到则返回false；php是弱类型语言；然而实际上这次返回了0而在if语句中0也被当作false,所以我们需要对false做类型判断，正确的代码如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$str1</span> = <span class="string">'hello world'</span>;</div><div class="line"><span class="variable">$str2</span> = <span class="string">'he'</span>;</div><div class="line"><span class="keyword">if</span> (strpos(<span class="variable">$str1</span>, <span class="variable">$str2</span>) !== <span class="literal">false</span>)</div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">"/"</span><span class="string">" . <span class="variable">$str1</span> . "</span>/<span class="string">" contains /"</span><span class="string">" . <span class="variable">$str2</span> . "</span>/<span class="string">""</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">"/"</span><span class="string">" . <span class="variable">$str1</span> . "</span>/<span class="string">" does not contain /"</span><span class="string">" . <span class="variable">$str2</span> . "</span>/<span class="string">""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>需要注意的是我们使用了!==，在php 和 JS中= !相对== 更为严格需要要求数据类型一致。</p>
+                <p>5个值得深思的 PHP 面试问题<br>文章所罗列的问题虽然看似简单，但是每个背后都涵盖了一个或几个大家容易忽视的基础知识点，希望能够帮助到你的面试和平时工作。<br><a id="more"></a><br><strong>Q1</strong></p>
+<pre><code>$str1 = &#39;hello world&#39;;
+$str2 = &#39;he&#39;;
+if (strpos($str1, $str2))
+{
+    echo &quot;/&quot;&quot; . $str1 . &quot;/&quot; contains /&quot;&quot; . $str2 . &quot;/&quot;&quot;;
+}
+else
+{
+    echo &quot;/&quot;&quot; . $str1 . &quot;/&quot; does not contain /&quot;&quot; . $str2 . &quot;/&quot;&quot;;
+}
+</code></pre><p>正确运行的输出结果:<br><!-- more --><br><code>&quot;hello world&quot; does not contain &quot;he&quot;</code><br>strpos是返回字符串str2在str1的位置，没有找到则返回false；php是弱类型语言；然而实际上这次返回了0而在if语句中0也被当作false,所以我们需要对false做类型判断，正确的代码如下:</p>
+<pre><code>$str1 = &#39;hello world&#39;;
+$str2 = &#39;he&#39;;
+if (strpos($str1, $str2) !== false)
+{
+    echo &quot;/&quot;&quot; . $str1 . &quot;/&quot; contains /&quot;&quot; . $str2 . &quot;/&quot;&quot;;
+}
+else
+{
+    echo &quot;/&quot;&quot; . $str1 . &quot;/&quot; does not contain /&quot;&quot; . $str2 . &quot;/&quot;&quot;;
+}
+</code></pre><p>需要注意的是我们使用了!==，在php 和 JS中= !相对== 更为严格需要要求数据类型一致。</p>
 <p><strong>Q2</strong><br>下面的输出结果会是怎样？</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$x</span> = 5;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;br /&gt;"</span>;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>+++<span class="variable">$x</span>++;</div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;br /&gt;"</span>;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;br /&gt;"</span>;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>---<span class="variable">$x</span>--;</div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;br /&gt;"</span>;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>;</div></pre></td></tr></table></figure>
-<p>实际运行结果是</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">5</span></div><div class="line"><span class="number">11</span></div><div class="line"><span class="number">7</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">5</span></div></pre></td></tr></table></figure>
-<p>关于 $x++ 和 $x–这个问题其实非常容易遇见，我们只需记住$x++使用最近的值，然后才自增。<br>运算符的优先级，++ 是明显高于 +，因此先执行++ 再执行 + 。关于运算符的优先级，有的时候我们真的可以通过括号来让我们的程序更让人直观的了解，毕竟代码不光是用于执行的，有的时候或许团队的可读性也是提高效率的一种。<br><strong>Q3</strong><br>关于变量的引用；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$a</span> = <span class="string">'1'</span>;</div><div class="line"><span class="variable">$b</span> = &amp;<span class="variable">$a</span>;</div><div class="line"><span class="variable">$b</span> = <span class="string">"2<span class="variable">$b</span>"</span>;</div></pre></td></tr></table></figure></p>
-<p>请问 $a 和 $b的值各位多少<br>部分第一时间会想到 $a=’1’  $b=’21’,仔细一看 $b=&amp;$a,这里$b是变量$a的引用而不是直接 赋值。</p>
+<pre><code>$x = 5;
+echo $x;
+echo &quot;&lt;br /&gt;&quot;;
+echo $x+++$x++;
+echo &quot;&lt;br /&gt;&quot;;
+echo $x;
+echo &quot;&lt;br /&gt;&quot;;
+echo $x---$x--;
+echo &quot;&lt;br /&gt;&quot;;
+echo $x;
+</code></pre><p>实际运行结果是</p>
+<pre><code>5
+11
+7
+1
+5
+</code></pre><p>关于 $x++ 和 $x–这个问题其实非常容易遇见，我们只需记住$x++使用最近的值，然后才自增。<br>运算符的优先级，++ 是明显高于 +，因此先执行++ 再执行 + 。关于运算符的优先级，有的时候我们真的可以通过括号来让我们的程序更让人直观的了解，毕竟代码不光是用于执行的，有的时候或许团队的可读性也是提高效率的一种。<br><strong>Q3</strong><br>关于变量的引用；</p>
+<pre><code>$a = &#39;1&#39;;
+$b = &amp;$a;
+$b = &quot;2$b&quot;;
+</code></pre><p>请问 $a 和 $b的值各位多少<br>部分第一时间会想到 $a=’1’  $b=’21’,仔细一看 $b=&amp;$a,这里$b是变量$a的引用而不是直接 赋值。</p>
 <p><strong>Q4</strong><br>下面是true还是false</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var_dump(<span class="number">0123</span> == <span class="number">123</span>)；</div><div class="line">var_dump('<span class="number">0123</span>' == <span class="number">123</span>);</div><div class="line">var_dump('<span class="number">0123</span>' == <span class="number">123</span>);</div></pre></td></tr></table></figure>
-<p>var_dump(0123 == 123);// false,PHP会默认把0123当作8进制来处理，实际转化为10进制就是83，显然这不是相等的。<br>var_dump(’0123′ == 123);// true这里php会非常有趣的将’0123′转换成一个数字而且默认去掉了前面的0也就是123==123<br>var_dump(’0123′ === 123);// false很显然上面的问题已经说过了数字和字符串类型不一致。</p>
+<pre><code>var_dump(0123 == 123)；
+var_dump(&#39;0123&#39; == 123);
+var_dump(&#39;0123&#39; == 123);
+</code></pre><p>var_dump(0123 == 123);// false,PHP会默认把0123当作8进制来处理，实际转化为10进制就是83，显然这不是相等的。<br>var_dump(’0123′ == 123);// true这里php会非常有趣的将’0123′转换成一个数字而且默认去掉了前面的0也就是123==123<br>var_dump(’0123′ === 123);// false很显然上面的问题已经说过了数字和字符串类型不一致。</p>
 <p><strong>Q5</strong><br>下面的代码有什么问题吗？输出会是什么，怎样修复它</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$referenceTable = <span class="keyword">array</span>();</div><div class="line">referenceTable[<span class="string">'val1'</span>] = <span class="keyword">array</span>(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line">referenceTable[<span class="string">'val2'</span>] = <span class="number">3</span>;</div><div class="line">referenceTable[<span class="string">'val3'</span>] = <span class="keyword">array</span>(<span class="number">4</span>, <span class="number">5</span>);</div><div class="line"></div><div class="line">$testArray = <span class="keyword">array</span>();</div><div class="line"></div><div class="line">$testArray = array_merge($testArray, $referenceTable[<span class="string">'val1'</span>]);</div><div class="line">var_dump($testArray);</div><div class="line">$testArray = array_merge($testArray, $referenceTable[<span class="string">'val2'</span>]);</div><div class="line">var_dump($testArray);</div><div class="line">$testArray = array_merge($testArray, $referenceTable[<span class="string">'val3'</span>]);</div><div class="line">var_dump($testArray);</div></pre></td></tr></table></figure>
-<p>实际输出如下：<br><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">array</span>(<span class="number">2</span>) &#123;[<span class="number">0</span>] =&gt; <span class="keyword">int</span>(<span class="number">1</span>) [<span class="number">1</span>] =&gt; <span class="keyword">int</span>(<span class="number">2</span>)&#125;</div><div class="line"><span class="keyword">NULL</span></div><div class="line"><span class="keyword">NULL</span></div></pre></td></tr></table></figure></p>
-<p>运行的时候你或许还能看到下面的警告</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">warning: array_merge() : <span class="type">Argument</span> #<span class="number">2</span> <span class="keyword">is</span> <span class="keyword">not</span> an <span class="keyword">array</span></div><div class="line">warning: array_merge() : <span class="type">Argument</span> #<span class="number">1</span> <span class="keyword">is</span> <span class="keyword">not</span> an <span class="keyword">array</span></div></pre></td></tr></table></figure>
-<p>array_merge需要传入的参数都是数组，如果不是，则会返回null。 你可以这样修改</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$testArray = array_merge($testArray, (<span class="keyword">array</span>)$referenceTable[<span class="string">'val1'</span>]);</div><div class="line">var_dump($testArray);</div><div class="line">$testArray = array_merge($testArray, (<span class="keyword">array</span>)$referenceTable[<span class="string">'val2'</span>]);</div><div class="line">var_dump($testArray);</div><div class="line">$testArray = array_merge($testArray, (<span class="keyword">array</span>)$referenceTable[<span class="string">'val3'</span>]);</div><div class="line">var_dump($testArray);</div></pre></td></tr></table></figure>
+<pre><code>$referenceTable = array();
+referenceTable[&#39;val1&#39;] = array(1, 2);
+referenceTable[&#39;val2&#39;] = 3;
+referenceTable[&#39;val3&#39;] = array(4, 5);
 
+$testArray = array();
+
+$testArray = array_merge($testArray, $referenceTable[&#39;val1&#39;]);
+var_dump($testArray);
+$testArray = array_merge($testArray, $referenceTable[&#39;val2&#39;]);
+var_dump($testArray);
+$testArray = array_merge($testArray, $referenceTable[&#39;val3&#39;]);
+var_dump($testArray);
+</code></pre><p>实际输出如下：</p>
+<pre><code>array(2) {[0] =&gt; int(1) [1] =&gt; int(2)}
+NULL
+NULL
+</code></pre><p>运行的时候你或许还能看到下面的警告</p>
+<pre><code>warning: array_merge() : Argument #2 is not an array
+warning: array_merge() : Argument #1 is not an array
+</code></pre><p>array_merge需要传入的参数都是数组，如果不是，则会返回null。 你可以这样修改</p>
+<pre><code>$testArray = array_merge($testArray, (array)$referenceTable[&#39;val1&#39;]);
+var_dump($testArray);
+$testArray = array_merge($testArray, (array)$referenceTable[&#39;val2&#39;]);
+var_dump($testArray);
+$testArray = array_merge($testArray, (array)$referenceTable[&#39;val3&#39;]);
+var_dump($testArray);
+</code></pre>
             </article>
             
                 <div class="share">

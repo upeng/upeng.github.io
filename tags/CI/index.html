@@ -106,7 +106,7 @@ class  Blog_model  extends  CI_Model {    //class BlogModel extends  CI_Model也
 }
 
 载入model以及使用model
-$this-&gt;load-&gt;model(&apos;Blog_model&apos;);    //model类名  $this-&gt;load-&gt;model(&apos;BlogModel&apos;); 
+$this-&gt;load-&gt;model(&#39;Blog_model&#39;);    //model类名  $this-&gt;load-&gt;model(&#39;BlogModel&#39;); 
 $this-&gt;Blog_model-&gt;function();         //载入之后可直接通过类名访问其方法$this-&gt;BlogModel-&gt;function();
 
 模型的文件名没有要求，但是建议全部小写,且注意文件名和类名同一个单词 
@@ -138,7 +138,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
    class BlogModel  extends  CI_Controller{
        function __construct(){
             parent::__construct();
-            $this-&gt;load-&gt;model(&apos;UserModel&apos;); 
+            $this-&gt;load-&gt;model(&#39;UserModel&#39;); 
         }
     }
   【3】view，文件名userblog.php 或user/blog.php  载入方法$this-&gt;load-&gt;view(&quot;userblog&quot;);或

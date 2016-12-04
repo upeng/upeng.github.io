@@ -75,36 +75,129 @@
 <p>调研了解trait机制，为什么TestController use了这个trait，TestController 就可以使用ValidatesRequests的validate方法</p>
 </blockquote>
 <h3 id="最原始的表单验证（Controller中）"><a href="#最原始的表单验证（Controller中）" class="headerlink" title="最原始的表单验证（Controller中）"></a>最原始的表单验证（Controller中）</h3><p>validate方法会验证接受HTTP传入的请求与验证规则，如果验证通过，我们的代码才会继续向下运行。如果验证失败会抛出异常错误返回给用户。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">store</span><span class="params">(Request $request)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">//验证用户请求</span></div><div class="line">	<span class="keyword">$this</span>-&gt;validate($request,[</div><div class="line">		<span class="string">'name'</span> =&gt; <span class="string">'required'</span>,</div><div class="line">		<span class="string">'content'</span> =&gt; <span class="string">'required|min:5'</span>,</div><div class="line">	]);</div><div class="line"></div><div class="line">	<span class="comment">//通过验证，保存至数据库</span></div><div class="line">	Task::create($request);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>说明</strong>：我们将验证规则传递到<code>validate</code>方法中，如果验证失败，则自动生成一个对应的响应。并将验证的错误提醒闪存至<code>session</code>，也就是<code>$errors</code>。当验证失败时，用户将被重定向到我们的控制器 <code>create</code>方法，让我们在视图中显示错误的消息：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">if</span> (<span class="keyword">count</span>(<span class="variable">$errors</span>) &gt; 0)</div><div class="line">	&lt;div <span class="keyword">class</span>=<span class="string">"alert alert-danger"</span>&gt;</div><div class="line">		&lt;ul&gt;</div><div class="line">			@<span class="keyword">foreach</span> (<span class="variable">$errors</span>-&gt;all() <span class="keyword">as</span> <span class="variable">$error</span>)</div><div class="line">			&lt;<span class="keyword">li</span>&gt;&#123;&#123;<span class="variable">$error&#125;</span>&#125;&lt;/<span class="keyword">li</span>&gt;</div><div class="line">		&lt;/ul&gt;</div><div class="line">	&lt;/div&gt;</div><div class="line">@endif</div></pre></td></tr></table></figure></p>
-<p><strong>补充</strong>：正常情况下我们想要把错误显示在对应的字段旁边，而不是一起显示在一个列表中；我们打印<code>session</code>中的<code>$errors-&gt;all()</code>是数字索引数组;</p>
+<pre><code>public function store(Request $request)
+{
+    //验证用户请求
+    $this-&gt;validate($request,[
+        &#39;name&#39; =&gt; &#39;required&#39;,
+        &#39;content&#39; =&gt; &#39;required|min:5&#39;,
+    ]);
+
+    //通过验证，保存至数据库
+    Task::create($request);
+}
+</code></pre><p><strong>说明</strong>：我们将验证规则传递到<code>validate</code>方法中，如果验证失败，则自动生成一个对应的响应。并将验证的错误提醒闪存至<code>session</code>，也就是<code>$errors</code>。当验证失败时，用户将被重定向到我们的控制器 <code>create</code>方法，让我们在视图中显示错误的消息：</p>
+<pre><code>@if (count($errors) &gt; 0)
+    &lt;div class=&quot;alert alert-danger&quot;&gt;
+        &lt;ul&gt;
+            @foreach ($errors-&gt;all() as $error)
+            &lt;li&gt;{{$error}}&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+@endif
+</code></pre><p><strong>补充</strong>：正常情况下我们想要把错误显示在对应的字段旁边，而不是一起显示在一个列表中；我们打印<code>session</code>中的<code>$errors-&gt;all()</code>是数字索引数组;</p>
 <blockquote>
 <p>要查看特定字段的第一个错误消息【比较常见的场景】</p>
 </blockquote>
-<p><strong>方法如下：</strong><br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@if</span> ($errors-&gt;has(<span class="string">'name'</span>))</div><div class="line">$errors-&gt;first(<span class="string">'name'</span>);</div><div class="line"><span class="variable">@endif</span></div><div class="line"></div><div class="line"><span class="variable">@if</span> ($error-&gt;has(<span class="string">'content'</span>))</div><div class="line">$error-&gt;first(<span class="string">'content'</span>);</div><div class="line"><span class="variable">@endif</span></div></pre></td></tr></table></figure></p>
-<blockquote>
+<p><strong>方法如下：</strong></p>
+<pre><code>@if ($errors-&gt;has(&#39;name&#39;))
+$errors-&gt;first(&#39;name&#39;);
+@endif
+
+@if ($error-&gt;has(&#39;content&#39;))
+$error-&gt;first(&#39;content&#39;);
+@endif
+</code></pre><blockquote>
 <p>我们想要得到一个字段对应的所有error</p>
 </blockquote>
-<p><strong>方法如下</strong>：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">foreach</span> ($error-&gt;get(<span class="string">'content'</span>) <span class="keyword">as</span> $message)</div><div class="line">&#123;</div><div class="line">	<span class="comment">//</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="表单请求验证，自定义请求类"><a href="#表单请求验证，自定义请求类" class="headerlink" title="表单请求验证，自定义请求类"></a>表单请求验证，自定义请求类</h3><blockquote>
+<p><strong>方法如下</strong>：</p>
+<pre><code>foreach ($error-&gt;get(&#39;content&#39;) as $message)
+{
+    //
+}
+</code></pre><h3 id="表单请求验证，自定义请求类"><a href="#表单请求验证，自定义请求类" class="headerlink" title="表单请求验证，自定义请求类"></a>表单请求验证，自定义请求类</h3><blockquote>
 <p>php artisan make request TaskFormReuest;</p>
 </blockquote>
-<p>这时会在<code>Http/Requests</code>目录生成<code>TaskFormReuest.php</code>,修改<code>rules</code>方法，<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//权限判断</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">authorize</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//验证规则</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">rules</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> [</div><div class="line">        <span class="string">'name'</span> =&gt; <span class="string">'required|min:5'</span>,</div><div class="line">    ];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//也可以自定义message方法</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">messages</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> [</div><div class="line">        <span class="string">'title.required'</span> =&gt; <span class="string">'标题是必填的'</span>,</div><div class="line">        <span class="string">'body.required'</span>  =&gt; <span class="string">'消息是必填的'</span>,</div><div class="line">    ];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//messages还可以这样动态设置</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">messages</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> [</div><div class="line">		<span class="string">'required'</span> =&gt; <span class="string">':attribute 是必填字段'</span>,</div><div class="line">		<span class="string">'min'</span>	=&gt; <span class="string">':attribute 长度不小于 :min'</span>,</div><div class="line">	];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="手动创建验证程序"><a href="#手动创建验证程序" class="headerlink" title="手动创建验证程序"></a>手动创建验证程序</h3><p>不使用validatesRequests的validate方法<br>我们可以use Validator类，手动创建一个validator实例，并通过Validator::make()生成一个新的validator</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> <span class="title">Validator</span>;</div><div class="line">...</div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">store</span><span class="params">(Request $request)</span></span></div><div class="line">&#123;</div><div class="line">	$validator = Validtor::make($request-&gt;all(),[</div><div class="line">		<span class="string">'name'</span> =&gt; <span class="string">'requeire'</span>,</div><div class="line">		<span class="string">'content'</span> =&gt; <span class="string">'require|min:6'</span>,</div><div class="line">	]);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> ($validator-&gt;fails())</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> redirect()-&gt;action(<span class="string">'TaskController@index'</span>)</div><div class="line">		-&gt;withErrors($validator)</div><div class="line">		        -&gt;withInput();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>注</strong>：<code>Validator::make($param1, $param2)</code>，其中<code>$param1</code>是验证的数据，<code>$params</code>是规则</p>
-<h2 id="model操作"><a href="#model操作" class="headerlink" title="model操作"></a>model操作</h2><p>增：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> Task::create($request);</div><div class="line"><span class="number">2.</span> </div><div class="line">$task = <span class="keyword">new</span> Task();</div><div class="line">$task-&gt;name = $request-&gt;name;</div><div class="line">$task-&gt;created_at = Carbon::now();</div><div class="line">$task-&gt;save();</div></pre></td></tr></table></figure></p>
-<p>删：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.<span class="symbol">Task:</span><span class="symbol">:destroy</span>(<span class="variable">$id</span>);</div><div class="line"><span class="number">2</span>.<span class="symbol">Task:</span><span class="symbol">:findOrFail</span>(<span class="variable">$id</span>)-&gt;delete();</div></pre></td></tr></table></figure></p>
-<p>改:<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">Task:</span><span class="symbol">:update</span>(<span class="variable">$request</span>, <span class="variable">$id</span>);</div></pre></td></tr></table></figure></p>
-<p>查：<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>Task::all();</div><div class="line"><span class="number">2.</span>Task::where<span class="function"><span class="params">()</span>-&gt;</span>get();</div><div class="line"><span class="number">3.</span>Task::orderBy<span class="function"><span class="params">(<span class="string">'created_at'</span>, <span class="string">'desc'</span>)</span>-&gt;</span>get();</div></pre></td></tr></table></figure></p>
-<h2 id="factory工厂模型使用"><a href="#factory工厂模型使用" class="headerlink" title="factory工厂模型使用"></a>factory工厂模型使用</h2><ul>
+<p>这时会在<code>Http/Requests</code>目录生成<code>TaskFormReuest.php</code>,修改<code>rules</code>方法，</p>
+<pre><code>//权限判断
+public function authorize()
+{
+    return true;
+}
+
+//验证规则
+public function rules()
+{
+    return [
+        &#39;name&#39; =&gt; &#39;required|min:5&#39;,
+    ];
+}
+
+//也可以自定义message方法
+public function messages()
+{
+    return [
+        &#39;title.required&#39; =&gt; &#39;标题是必填的&#39;,
+        &#39;body.required&#39;  =&gt; &#39;消息是必填的&#39;,
+    ];
+}
+
+//messages还可以这样动态设置
+public function messages()
+{
+    return [
+        &#39;required&#39; =&gt; &#39;:attribute 是必填字段&#39;,
+        &#39;min&#39;    =&gt; &#39;:attribute 长度不小于 :min&#39;,
+    ];
+}
+</code></pre><h3 id="手动创建验证程序"><a href="#手动创建验证程序" class="headerlink" title="手动创建验证程序"></a>手动创建验证程序</h3><p>不使用validatesRequests的validate方法<br>我们可以use Validator类，手动创建一个validator实例，并通过Validator::make()生成一个新的validator</p>
+<pre><code>use Validator;
+...
+public function store(Request $request)
+{
+    $validator = Validtor::make($request-&gt;all(),[
+        &#39;name&#39; =&gt; &#39;requeire&#39;,
+        &#39;content&#39; =&gt; &#39;require|min:6&#39;,
+    ]);
+
+    if ($validator-&gt;fails())
+    {
+        return redirect()-&gt;action(&#39;TaskController@index&#39;)
+        -&gt;withErrors($validator)
+                -&gt;withInput();
+    }
+}
+</code></pre><p><strong>注</strong>：<code>Validator::make($param1, $param2)</code>，其中<code>$param1</code>是验证的数据，<code>$params</code>是规则</p>
+<h2 id="model操作"><a href="#model操作" class="headerlink" title="model操作"></a>model操作</h2><p>增：</p>
+<pre><code>1. Task::create($request);
+2. 
+$task = new Task();
+$task-&gt;name = $request-&gt;name;
+$task-&gt;created_at = Carbon::now();
+$task-&gt;save();
+</code></pre><p>删：</p>
+<pre><code>1.Task::destroy($id);
+2.Task::findOrFail($id)-&gt;delete();
+</code></pre><p>改:</p>
+<pre><code>Task::update($request, $id);
+</code></pre><p>查：</p>
+<pre><code>1.Task::all();
+2.Task::where()-&gt;get();
+3.Task::orderBy(&#39;created_at&#39;, &#39;desc&#39;)-&gt;get();
+</code></pre><h2 id="factory工厂模型使用"><a href="#factory工厂模型使用" class="headerlink" title="factory工厂模型使用"></a>factory工厂模型使用</h2><ul>
 <li><code>Task Model</code>中设置  <code>protected $fillable = [&#39;name&#39;, &#39;created_at&#39;]</code>;</li>
 <li><p><code>datebase/factories/ModelFactory.php</code>新增</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$factory-&gt;define(App\Task::class, <span class="function"><span class="keyword">function</span> <span class="params">(Faker\Generator $faker)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> [</div><div class="line">        <span class="string">'name'</span> =&gt; $faker-&gt;sentence,</div><div class="line">        <span class="string">'created_at'</span> =&gt; Carbon\Carbon::now(),</div><div class="line">    ];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
+<pre><code>$factory-&gt;define(App\Task::class, function (Faker\Generator $faker) {
+  return [
+      &#39;name&#39; =&gt; $faker-&gt;sentence,
+      &#39;created_at&#39; =&gt; Carbon\Carbon::now(),
+  ];
+});
+</code></pre></li>
 <li><p><code>php artisan tinker</code></p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">namespace App<span class="comment">;</span></div><div class="line">factory(<span class="name">App</span>\Task:<span class="symbol">:class</span>,<span class="number">5</span>)-&gt;create()<span class="comment">;</span></div></pre></td></tr></table></figure>
-</li>
+<pre><code>namespace App;
+factory(App\Task::class,5)-&gt;create();
+</code></pre></li>
 </ul>
 
             </article>

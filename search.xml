@@ -9,8 +9,24 @@
       <content type="html"><![CDATA[<blockquote>
 <p>经常使用到的命令行</p>
 </blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//查看php文件是否有语法错误</div><div class="line">php -ln filename.php</div><div class="line"></div><div class="line">//执行php文件</div><div class="line">php filename.php</div><div class="line">php -f filename.php</div><div class="line"></div><div class="line"><span class="comment">&lt;!-- more --&gt;</span></div><div class="line">//搜索php.ini关键词信息</div><div class="line">php -i | grep keyword</div><div class="line"></div><div class="line">查询php.ini位置信息</div><div class="line">php --ini</div><div class="line">//查看php扩展模块</div><div class="line">php -m</div><div class="line">//查看php版本</div><div class="line">php -v</div></pre></td></tr></table></figure>
-<p>/<strong>待补充</strong>/</p>
+<pre><code>//查看php文件是否有语法错误
+php -ln filename.php
+
+//执行php文件
+php filename.php
+php -f filename.php
+
+&lt;!-- more --&gt;
+//搜索php.ini关键词信息
+php -i | grep keyword
+
+查询php.ini位置信息
+php --ini
+//查看php扩展模块
+php -m
+//查看php版本
+php -v
+</code></pre><p>/<strong>待补充</strong>/</p>
 <blockquote>
 <p>上述<code>查询php.ini</code>和<code>检测语法错误</code>很好用，源于查看session配置和运行脚本没有任何输出。<br>先学会命令行，再用IDE吧，啥？VIM~</p>
 </blockquote>
@@ -23,19 +39,49 @@
       <content type="html"><![CDATA[<blockquote>
 <p>问题来源：</p>
 </blockquote>
-<p>写了一个<code>Model_User</code>，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在<code>__construct()</code>中，然后去调用<code>Model_User</code>的静态方法<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model_User::fu<span class="symbol">nc1</span><span class="comment">()</span>;</div></pre></td></tr></table></figure></p>
-<p><code>报错：</code><br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Creating <span class="keyword">default</span> <span class="keyword">object</span> <span class="keyword">from</span> empty <span class="keyword">value</span>。。。</div><div class="line">Using $<span class="keyword">this</span> <span class="keyword">when</span> not <span class="keyword">in</span> <span class="keyword">object</span> context <span class="keyword">in</span>。。。。</div></pre></td></tr></table></figure></p>
-<p>因为我们直接使用类调用静态方法的方式，是根本不会走到构造方法的，而构造方法只有在new实例的时候才会调用。同时因为<code>$this</code>本身就是一个instance（实例）而我们根本就没有new 对象，所以。。。<br><a id="more"></a><br><strong>注意</strong></p>
+<p>写了一个<code>Model_User</code>，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在<code>__construct()</code>中，然后去调用<code>Model_User</code>的静态方法</p>
+<pre><code>Model_User::func1();
+</code></pre><p><code>报错：</code></p>
+<pre><code>Creating default object from empty value。。。
+Using $this when not in object context in。。。。
+</code></pre><p>因为我们直接使用类调用静态方法的方式，是根本不会走到构造方法的，而构造方法只有在new实例的时候才会调用。同时因为<code>$this</code>本身就是一个instance（实例）而我们根本就没有new 对象，所以。。。<br><a id="more"></a><br><strong>注意</strong></p>
 <ol>
 <li>如果使用类调用静态方法的形式，那么要注意<code>__construct</code>里面的操作就over了，因为<code>__construct</code>不会调用；</li>
-<li>不能在静态方法中使用<code>$this</code>去调用普通成员变量和成员函数，因为你没有实例化对象，而$this就是一个instance;就算这样也是不可行的<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"><span class="meta-keyword">$obj</span> = new Model_User</span></div><div class="line"><span class="meta"><span class="meta-keyword">$obj</span>-&gt;func1();</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
+<li>不能在静态方法中使用<code>$this</code>去调用普通成员变量和成员函数，因为你没有实例化对象，而$this就是一个instance;就算这样也是不可行的<pre><code>$obj = new Model_User
+$obj-&gt;func1();
+</code></pre><blockquote>
 <p>正常情况下，静态方法中是不能调用非静态成员变量或非静态方法的！</p>
 </blockquote>
-<p>静态成员变量和静态方法存储在堆中(一个公共的池子)。<br>所有实例化的对象instance都可以使用和操作它。<br>举例子：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> $a = <span class="number">1</span>;</div><div class="line">	<span class="keyword">public</span> $b = <span class="number">1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">(<span class="number">2</span>)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">self</span>::$a = $num; </div><div class="line">		<span class="keyword">$this</span>-&gt;b = $num;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">array</span>(<span class="keyword">self</span>::$a, <span class="keyword">$this</span>-&gt;b);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$apple1 = <span class="keyword">new</span> Apple();</div><div class="line">$apple1-&gt;set(<span class="number">2</span>);</div><div class="line">$res1 = $apple1-&gt;get();</div><div class="line"></div><div class="line">$apple2 = <span class="keyword">new</span> Apple();</div><div class="line">$res2 = $apple2-&gt;get();</div><div class="line"></div><div class="line">print_r($res1);  <span class="comment">//array(2,2)</span></div><div class="line">print_r($res2);  <span class="comment">//array(2,1)</span></div></pre></td></tr></table></figure></p>
-<p>很明显，静态成员变量和普通成员变量的区别；在实际应用场景中，需要合理使用</p>
+</li>
+</ol>
+<p>静态成员变量和静态方法存储在堆中(一个公共的池子)。<br>所有实例化的对象instance都可以使用和操作它。<br>举例子：</p>
+<pre><code>class Apple
+{
+    public static $a = 1;
+    public $b = 1;
+
+    public function set(2)
+    {
+        self::$a = $num; 
+        $this-&gt;b = $num;
+    }
+
+    public function get()
+    {
+        return array(self::$a, $this-&gt;b);
+    }
+}
+
+$apple1 = new Apple();
+$apple1-&gt;set(2);
+$res1 = $apple1-&gt;get();
+
+$apple2 = new Apple();
+$res2 = $apple2-&gt;get();
+
+print_r($res1);  //array(2,2)
+print_r($res2);  //array(2,1)
+</code></pre><p>很明显，静态成员变量和普通成员变量的区别；在实际应用场景中，需要合理使用</p>
 ]]></content>
     </entry>
     
@@ -55,26 +101,91 @@
 <li>怎样写一个laravel扩展，发布到packagist，提供composer方法</li>
 <li>git命令熟悉</li>
 </ol>
-<h3 id="写laravel扩展"><a href="#写laravel扩展" class="headerlink" title="写laravel扩展"></a>写laravel扩展</h3><h4 id="本地编写"><a href="#本地编写" class="headerlink" title="本地编写"></a>本地编写</h4><p>本地编写package，完成后，在laravel根目录下的composer.json中添加一行<br><code>&quot;Upstriving\\Curd\\&quot;: &quot;package/upstriving/curd/src&quot;</code><br><a id="more"></a><br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="string">"autoload"</span>: &#123;</div><div class="line">       <span class="string">"classmap"</span>: [</div><div class="line">           <span class="string">"database"</span></div><div class="line">       ],</div><div class="line">       <span class="string">"psr-4"</span>: &#123;</div><div class="line">           <span class="string">"App\\"</span>: <span class="string">"app/"</span>,</div><div class="line">           <span class="string">"Upstriving\\Curd\\"</span>: <span class="string">"package/upstriving/curd/src"</span></div><div class="line">       &#125;</div><div class="line">   &#125;,</div></pre></td></tr></table></figure></p>
-<p>添加之后<code>composer dump-autoload</code>将之加到路由中<br><code>php artisan tinker</code>测试</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; app('sqladmin')</div><div class="line">=&gt; Upstriving\Curd\SQLAdmin &#123;#<span class="number">629</span>&#125;</div><div class="line">&gt;&gt;&gt; app('sqladmin')-&gt;makeSelect('user','id,name',['id'=&gt;<span class="number">2</span>]);</div><div class="line">=&gt; [</div><div class="line">     <span class="string">"sql"</span> =&gt; <span class="string">"select id,name from user where id=?"</span>,</div><div class="line">     <span class="string">"data"</span> =&gt; [</div><div class="line">       <span class="number">2</span>,</div><div class="line">     ],</div><div class="line">   ]</div><div class="line">&gt;&gt;&gt; app('sqladmin')-&gt;makeDelete('user',['name'=&gt;'upfriend'])</div><div class="line">=&gt; [</div><div class="line">     <span class="string">"sql"</span> =&gt; <span class="string">"delete from user where `name`=?"</span>,</div><div class="line">     <span class="string">"data"</span> =&gt; [</div><div class="line">       <span class="string">"upfriend"</span>,</div><div class="line">     ],</div><div class="line">   ]</div></pre></td></tr></table></figure>
-<h4 id="生成composer-json"><a href="#生成composer-json" class="headerlink" title="生成composer.json"></a>生成composer.json</h4><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">composer init</div><div class="line">This command will guide you through creating your composer.json config.</div><div class="line"></div><div class="line">Package name (&lt;vendor&gt;/&lt;name&gt;) [yupeng6/curd]: upstriving/curd</div><div class="line">Description []: assemble sql statements quickly</div><div class="line">Author [upeng &lt;<span class="number">825415473</span>@qq.com&gt;, n <span class="keyword">to</span> skip]:</div><div class="line">Minimum Stability []: dev</div><div class="line">Package Type (e.g. library, project, metapackage, composer-plugin) []:</div><div class="line">License []: MIT</div><div class="line"></div><div class="line">Define your dependencies.</div><div class="line"></div><div class="line">Would you like <span class="keyword">to</span> define your dependencies (<span class="built_in">require</span>) interactively [<span class="literal">yes</span>]? <span class="literal">no</span></div><div class="line">Would you like <span class="keyword">to</span> define your dev dependencies (<span class="built_in">require</span>-dev) interactively [<span class="literal">yes</span>]? <span class="literal">no</span></div><div class="line"></div><div class="line">&#123;</div><div class="line">    <span class="string">"name"</span>: <span class="string">"upstriving/curd"</span>,</div><div class="line">    <span class="string">"description"</span>: <span class="string">"assemble sql statements quickly"</span>,</div><div class="line">    <span class="string">"license"</span>: <span class="string">"MIT"</span>,</div><div class="line">    <span class="string">"authors"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"name"</span>: <span class="string">"upeng"</span>,</div><div class="line">            <span class="string">"email"</span>: <span class="string">"825415473@qq.com"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="string">"minimum-stability"</span>: <span class="string">"dev"</span>,</div><div class="line">    <span class="string">"require"</span>: &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Do you confirm generation [<span class="literal">yes</span>]? <span class="literal">yes</span></div></pre></td></tr></table></figure>
-<h4 id="生成composer-json-1"><a href="#生成composer-json-1" class="headerlink" title="生成composer.json"></a>生成composer.json</h4><blockquote>
-<p>添加autoload<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"autoload"</span>: &#123;</div><div class="line">    <span class="string">"psr-4"</span>: &#123;</div><div class="line">         <span class="string">"Upstriving\\Curd\\"</span>: <span class="string">"src/"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-</blockquote>
+<h3 id="写laravel扩展"><a href="#写laravel扩展" class="headerlink" title="写laravel扩展"></a>写laravel扩展</h3><h4 id="本地编写"><a href="#本地编写" class="headerlink" title="本地编写"></a>本地编写</h4><p>本地编写package，完成后，在laravel根目录下的composer.json中添加一行<br><code>&quot;Upstriving\\Curd\\&quot;: &quot;package/upstriving/curd/src&quot;</code><br><a id="more"></a></p>
+<pre><code> &quot;autoload&quot;: {
+        &quot;classmap&quot;: [
+            &quot;database&quot;
+        ],
+        &quot;psr-4&quot;: {
+            &quot;App\\&quot;: &quot;app/&quot;,
+            &quot;Upstriving\\Curd\\&quot;: &quot;package/upstriving/curd/src&quot;
+        }
+    },
+</code></pre><p>添加之后<code>composer dump-autoload</code>将之加到路由中<br><code>php artisan tinker</code>测试</p>
+<pre><code>&gt;&gt;&gt; app(&#39;sqladmin&#39;)
+=&gt; Upstriving\Curd\SQLAdmin {#629}
+&gt;&gt;&gt; app(&#39;sqladmin&#39;)-&gt;makeSelect(&#39;user&#39;,&#39;id,name&#39;,[&#39;id&#39;=&gt;2]);
+=&gt; [
+     &quot;sql&quot; =&gt; &quot;select id,name from user where id=?&quot;,
+     &quot;data&quot; =&gt; [
+       2,
+     ],
+   ]
+&gt;&gt;&gt; app(&#39;sqladmin&#39;)-&gt;makeDelete(&#39;user&#39;,[&#39;name&#39;=&gt;&#39;upfriend&#39;])
+=&gt; [
+     &quot;sql&quot; =&gt; &quot;delete from user where `name`=?&quot;,
+     &quot;data&quot; =&gt; [
+       &quot;upfriend&quot;,
+     ],
+   ]
+</code></pre><h4 id="生成composer-json"><a href="#生成composer-json" class="headerlink" title="生成composer.json"></a>生成composer.json</h4><pre><code>composer init
+This command will guide you through creating your composer.json config.
+
+Package name (&lt;vendor&gt;/&lt;name&gt;) [yupeng6/curd]: upstriving/curd
+Description []: assemble sql statements quickly
+Author [upeng &lt;825415473@qq.com&gt;, n to skip]:
+Minimum Stability []: dev
+Package Type (e.g. library, project, metapackage, composer-plugin) []:
+License []: MIT
+
+Define your dependencies.
+
+Would you like to define your dependencies (require) interactively [yes]? no
+Would you like to define your dev dependencies (require-dev) interactively [yes]? no
+
+{
+    &quot;name&quot;: &quot;upstriving/curd&quot;,
+    &quot;description&quot;: &quot;assemble sql statements quickly&quot;,
+    &quot;license&quot;: &quot;MIT&quot;,
+    &quot;authors&quot;: [
+        {
+            &quot;name&quot;: &quot;upeng&quot;,
+            &quot;email&quot;: &quot;825415473@qq.com&quot;
+        }
+    ],
+    &quot;minimum-stability&quot;: &quot;dev&quot;,
+    &quot;require&quot;: {}
+}
+
+Do you confirm generation [yes]? yes
+</code></pre><h4 id="生成composer-json-1"><a href="#生成composer-json-1" class="headerlink" title="生成composer.json"></a>生成composer.json</h4><blockquote>
+<p>添加autoload</p>
+<pre><code>&quot;autoload&quot;: {
+    &quot;psr-4&quot;: {
+         &quot;Upstriving\\Curd\\&quot;: &quot;src/&quot;
+    }
+}
+</code></pre></blockquote>
 <h4 id="推送到github"><a href="#推送到github" class="headerlink" title="推送到github"></a>推送到github</h4><blockquote>
 <p>当前扩展目录下执行</p>
 </blockquote>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git init</div><div class="line">git add .</div><div class="line">git commit -m <span class="symbol">'add</span> <span class="keyword">new</span> <span class="keyword">package</span>'</div></pre></td></tr></table></figure>
-<p>github手动创建一个<code>repository(laravel-sqladmin)</code><br>在本地目录下，复制两行命令并执行，将本地代码推送到github<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github<span class="selector-class">.com</span>:upeng/laravel-sqladmin<span class="selector-class">.git</span></div><div class="line">git push -u origin master</div></pre></td></tr></table></figure></p>
-<p>新增readme.md</p>
+<pre><code>git init
+git add .
+git commit -m &#39;add new package&#39;
+</code></pre><p>github手动创建一个<code>repository(laravel-sqladmin)</code><br>在本地目录下，复制两行命令并执行，将本地代码推送到github</p>
+<pre><code>git remote add origin git@github.com:upeng/laravel-sqladmin.git
+git push -u origin master
+</code></pre><p>新增readme.md</p>
 <h4 id="通过github的package服务发布到packagist中"><a href="#通过github的package服务发布到packagist中" class="headerlink" title="通过github的package服务发布到packagist中"></a>通过github的package服务发布到packagist中</h4><p>供其他开发者通过composer使用<br>登录<code>https://packagist.org/</code>,<br><img src="http://ww2.sinaimg.cn/mw1024/006iFiRLjw1f8o4ehp6l9j31c30kejve.jpg" alt="此处输入图片的描述"><br>拿到token值，回到<code>github/larvavel-sqladmin/settings/integrations &amp; service</code><br>执行<code>add service/packagist</code><br><img src="http://ww2.sinaimg.cn/mw1024/006iFiRLjw1f8o4eibz58j31j50u9gsy.jpg" alt="此处输入图片的描述"><br>输入用户名user和token(从packagist中获取)<br>成功之后如下<br><img src="http://ww3.sinaimg.cn/mw1024/006iFiRLjw1f8o4eizjdvj31k70ra7bl.jpg" alt="此处输入图片的描述"></p>
 <p>再次回到packagist中，submit刚才那个repository地址<br><img src="http://ww3.sinaimg.cn/mw1024/006iFiRLjw1f8o4ejjp7zj30wk0d8jsx.jpg" alt="此处输入图片的描述"><br><img src="http://ww2.sinaimg.cn/mw1024/006iFiRLjw1f8o4ek6aagj30wp0epmzr.jpg" alt="此处输入图片的描述"><br><img src="http://ww1.sinaimg.cn/mw1024/006iFiRLjw1f8o4ektd7qj318o0hg77p.jpg" alt="此处输入图片的描述"></p>
 <p>提示这个package is not auto_updated，需要到github中设置一下<br>github/larvavel-sqladmin/settings/integrations &amp; service/packagist<br>点击test service，<br><img src="http://ww3.sinaimg.cn/mw1024/006iFiRLjw1f8o4elc6eej31600q6wiv.jpg" alt="此处输入图片的描述"></p>
 <p>如果显示<br><code>Okay, the test payload is on its way.</code><br>说明自动更新没有问题，再次回到packagist发现刚刚的提示已经不见了<br><img src="http://ww3.sinaimg.cn/mw1024/006iFiRLjw1f8o4em26svj30n10d5myx.jpg" alt="此处输入图片的描述"></p>
 <h4 id="修改或新增文件，观察是否实时更新到packagist"><a href="#修改或新增文件，观察是否实时更新到packagist" class="headerlink" title="修改或新增文件，观察是否实时更新到packagist"></a>修改或新增文件，观察是否实时更新到packagist</h4><blockquote>
-<p>新增readme.file<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m <span class="string">''</span></div><div class="line">git <span class="keyword">push</span></div></pre></td></tr></table></figure></p>
-<p>增加版本号</p>
+<p>新增readme.file</p>
+<pre><code>git add .
+git commit -m &#39;&#39;
+git push
+</code></pre><p>增加版本号</p>
 </blockquote>
 <p><code>git tag 1.0 -a</code><br>输入: release version 1.0<br><code>git push --tags</code><br>发现github上多了一个版本号,packagist版本也随之更新<br><img src="http://ww3.sinaimg.cn/mw1024/006iFiRLjw1f8o4emqsblj312x0nv446.jpg" alt="此处输入图片的描述"></p>
 ]]></content>
@@ -93,8 +204,15 @@
 <li>master需要grant slave账号使得slave有权读取master的binlog</li>
 <li>slave使用账号连接master</li>
 </ol>
-<h2 id="主从配置过程"><a href="#主从配置过程" class="headerlink" title="主从配置过程"></a>主从配置过程</h2><h3 id="编辑master的配置文件my-cnf"><a href="#编辑master的配置文件my-cnf" class="headerlink" title="编辑master的配置文件my.cnf"></a>编辑master的配置文件my.cnf</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1.配置server-id</span></div><div class="line"><span class="attr">server-id</span>=<span class="number">101</span></div><div class="line"></div><div class="line"><span class="comment">#2.开启二进制日志</span></div><div class="line"><span class="attr">log-bin</span>=mysql-bin</div><div class="line"></div><div class="line"><span class="comment">#3.指定二进制日志格式</span></div><div class="line"><span class="attr">binlog-format</span>=mixed</div></pre></td></tr></table></figure>
-<blockquote>
+<h2 id="主从配置过程"><a href="#主从配置过程" class="headerlink" title="主从配置过程"></a>主从配置过程</h2><h3 id="编辑master的配置文件my-cnf"><a href="#编辑master的配置文件my-cnf" class="headerlink" title="编辑master的配置文件my.cnf"></a>编辑master的配置文件my.cnf</h3><pre><code>#1.配置server-id
+server-id=101
+
+#2.开启二进制日志
+log-bin=mysql-bin
+
+#3.指定二进制日志格式
+binlog-format=mixed
+</code></pre><blockquote>
 <p>二进制日志格式binlog-format</p>
 </blockquote>
 <ol>
@@ -106,19 +224,38 @@
 <p>到底使用哪种format，根据实际情况判断</p>
 </blockquote>
 <p><strong>比如：</strong><br>磁盘变化少，语句长，使用row<br><code>update user set age = age + 1 where id = 2;</code><br>磁盘变化多，语句短，使用statement<br><code>update slary = slary + 1000;</code> (10w条数据)</p>
-<h3 id="编辑slave的配置文件my-cnf"><a href="#编辑slave的配置文件my-cnf" class="headerlink" title="编辑slave的配置文件my.cnf"></a>编辑slave的配置文件my.cnf</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#1.配置server-id</span></div><div class="line"><span class="attr">server-id</span>=<span class="number">102</span></div><div class="line"></div><div class="line"><span class="comment">#2.开启二进制日志(备份)</span></div><div class="line"><span class="attr">log-bin</span>=mysql-bin</div><div class="line"></div><div class="line"><span class="comment">#3.创建relay日志</span></div><div class="line"><span class="attr">relay-log</span>=mysql-relay</div></pre></td></tr></table></figure>
-<blockquote>
+<h3 id="编辑slave的配置文件my-cnf"><a href="#编辑slave的配置文件my-cnf" class="headerlink" title="编辑slave的配置文件my.cnf"></a>编辑slave的配置文件my.cnf</h3><pre><code>#1.配置server-id
+server-id=102
+
+#2.开启二进制日志(备份)
+log-bin=mysql-bin
+
+#3.创建relay日志
+relay-log=mysql-relay
+</code></pre><blockquote>
 <p>配置完成后重启两个机器的mysql服务器<br><code>service mysqld restart</code></p>
 </blockquote>
-<h2 id="启动主从建立关系"><a href="#启动主从建立关系" class="headerlink" title="启动主从建立关系"></a>启动主从建立关系</h2><h3 id="master的操作"><a href="#master的操作" class="headerlink" title="master的操作"></a>master的操作</h3><p>查看主服务器的状态<br><code>show master status</code><br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#授权账号密码</span></div><div class="line">grant replication clinet,replication slave <span class="literal">on</span> *.* <span class="keyword">to</span> test@<span class="string">'192.168.1.%'</span> identified <span class="keyword">by</span> <span class="string">'123qwe'</span>;</div><div class="line"></div><div class="line">flush privileges;</div></pre></td></tr></table></figure></p>
-<h3 id="slave的操作"><a href="#slave的操作" class="headerlink" title="slave的操作"></a>slave的操作</h3><p>建立连接<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">change</span> <span class="keyword">master</span> <span class="keyword">to</span></div><div class="line">master_host=<span class="string">'192.168.1.101'</span></div><div class="line">master_user=<span class="string">'test'</span></div><div class="line">master_password=<span class="string">'123qwe'</span></div><div class="line">master_log_file=<span class="string">'mysql-bin.000001'</span></div><div class="line">master_log_pass=<span class="number">348</span></div></pre></td></tr></table></figure></p>
-<p>查看连接状态<br><code>show slave status</code></p>
+<h2 id="启动主从建立关系"><a href="#启动主从建立关系" class="headerlink" title="启动主从建立关系"></a>启动主从建立关系</h2><h3 id="master的操作"><a href="#master的操作" class="headerlink" title="master的操作"></a>master的操作</h3><p>查看主服务器的状态<br><code>show master status</code></p>
+<pre><code>#授权账号密码
+grant replication clinet,replication slave on *.* to test@&#39;192.168.1.%&#39; identified by &#39;123qwe&#39;;
+
+flush privileges;
+</code></pre><h3 id="slave的操作"><a href="#slave的操作" class="headerlink" title="slave的操作"></a>slave的操作</h3><p>建立连接</p>
+<pre><code>change master to
+master_host=&#39;192.168.1.101&#39;
+master_user=&#39;test&#39;
+master_password=&#39;123qwe&#39;
+master_log_file=&#39;mysql-bin.000001&#39;
+master_log_pass=348
+</code></pre><p>查看连接状态<br><code>show slave status</code></p>
 <p>启动从服务器同步进程并查看状态<br><code>start slave</code></p>
 <blockquote>
 <p>如果报错Last_IO_Error: error connect to master ‘test@192.168.1.101:3306’ ……<br>使用Telnet 192.168.1.101 3306排查连接master是否成功<br>有可能是防火墙开了，关闭防火墙：<code>services iptables stop</code></p>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">stop</span> <span class="keyword">slave</span>;</div><div class="line"><span class="keyword">start</span> <span class="keyword">slave</span>;</div><div class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span>;</div></pre></td></tr></table></figure>
-<h3 id="验证测试"><a href="#验证测试" class="headerlink" title="验证测试"></a>验证测试</h3><p>在mater中创建数据库和表，并做各种增删改操作，到从库观察验证</p>
+<pre><code>stop slave;
+start slave;
+show slave status;
+</code></pre><h3 id="验证测试"><a href="#验证测试" class="headerlink" title="验证测试"></a>验证测试</h3><p>在mater中创建数据库和表，并做各种增删改操作，到从库观察验证</p>
 <h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mysql经常报错如下：</strong><br><code>can&#39;t connect to local mysql server through socket &#39;/tmp/mysqld.sock&#39;</code><br>通过<code>/tmp/mysqld.sock</code>下的socket文件连接不成功，比如我们默认安装的mysql通过配置文件可以发现mysql.sock在<code>/var/lib/mysql/mysql.sock</code>下。也就是说/tmp/下没有mysqld.sock文件</p>
 <p><strong>有两种解决方法：</strong></p>
 <ol>
@@ -141,11 +278,20 @@
 <li>比如之前每次查代码行数都要 <code>:set nu</code>，如果写在.vimrc就不用每次都<code>:set nu</code>了。</li>
 <li>比如写完一行代码enter换行后，又从头再来，必须手动tab缩进。。。</li>
 </ol>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="built_in">number</span> <span class="comment"># 显示行号</span></div><div class="line"><span class="keyword">set</span> autoindent <span class="comment"># 自动缩进</span></div></pre></td></tr></table></figure>
-<a id="more"></a>
+<pre><code>set number # 显示行号
+set autoindent # 自动缩进
+</code></pre><a id="more"></a>
 <h3 id="vim模式"><a href="#vim模式" class="headerlink" title="vim模式"></a>vim模式</h3><p>我们知道vim的模式【insert模式、普通模式、visual模式】中<strong>insert模式</strong>和<strong>visual模式</strong>是不能直接互跳的，必须先返回到<strong>普通模式</strong>！普通模式下<code>:</code>进入命令模式<br>快速进入insert模式：普通模式下输入 i/o/a，esc返回到普通模式<br>快速进入visual模式：普通模式下输入 v，再次v返回到普通模式</p>
-<h3 id="普通模式下快速跳转"><a href="#普通模式下快速跳转" class="headerlink" title="普通模式下快速跳转"></a>普通模式下快速跳转</h3><p>不要只会箭头上下左右了！这个能提高效率<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gg(<span class="number">1</span>G)  <span class="comment"># 文件顶部 </span></div><div class="line">G 	<span class="comment"># 文件尾部</span></div><div class="line">control + [	<span class="comment"># 向上片段移动</span></div><div class="line">control + ] <span class="comment"># 向下片段移动 </span></div><div class="line"><span class="keyword">j </span><span class="comment"># 下一行</span></div><div class="line">k <span class="comment"># 上一行</span></div><div class="line">w <span class="comment"># 下一个单词</span></div><div class="line"><span class="keyword">b </span><span class="comment"># 上一个单词</span></div></pre></td></tr></table></figure></p>
-<h3 id="复制粘贴一块代码"><a href="#复制粘贴一块代码" class="headerlink" title="复制粘贴一块代码"></a>复制粘贴一块代码</h3><ol>
+<h3 id="普通模式下快速跳转"><a href="#普通模式下快速跳转" class="headerlink" title="普通模式下快速跳转"></a>普通模式下快速跳转</h3><p>不要只会箭头上下左右了！这个能提高效率</p>
+<pre><code>gg(1G)  # 文件顶部 
+G     # 文件尾部
+control + [    # 向上片段移动
+control + ] # 向下片段移动 
+j # 下一行
+k # 上一行
+w # 下一个单词
+b # 上一个单词
+</code></pre><h3 id="复制粘贴一块代码"><a href="#复制粘贴一块代码" class="headerlink" title="复制粘贴一块代码"></a>复制粘贴一块代码</h3><ol>
 <li>按Esc切换到正常模式；</li>
 <li>把光标移到你需要复制的代码行首；</li>
 <li>按V选择整行，可移动光标选择多行；</li>
@@ -195,8 +341,9 @@
 <blockquote>
 <p>确保系统已经安装xcode，然后使用一行命令安装依赖管理工具Homebrew</p>
 </blockquote>
-<p>安装完xcode之后可以使用<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>FORMULA</div></pre></td></tr></table></figure></p>
-<p>来安装所需要的依赖了.更详细的信息参考Homebrew的[官方Cookbook][1]</p>
+<p>安装完xcode之后可以使用</p>
+<pre><code>brew install FORMULA
+</code></pre><p>来安装所需要的依赖了.更详细的信息参考Homebrew的[官方Cookbook][1]</p>
 <p>因此使用Homebrew常见的流程是：<br><a id="more"></a></p>
 <ol>
 <li>增加一个程序源（新增一个水龙头） brew tap homebrew/php</li>
@@ -204,61 +351,155 @@
 <li>安装程序包（按照配方酿酒） brew install git</li>
 <li>查看配置 brew config 可以看到程序包默认安装在/usr/local/Cellar下 （酒桶放在地窖内）</li>
 </ol>
-<h2 id="安装PHP5-6（FPM方式）"><a href="#安装PHP5-6（FPM方式）" class="headerlink" title="安装PHP5.6（FPM方式）"></a>安装PHP5.6（FPM方式）</h2><p>首先加入Homebrew官方的几个软件源<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span>tap homebrew/dupes</div><div class="line"><span class="keyword">brew </span>tap homebrew/versions</div><div class="line"><span class="keyword">brew </span>tap homebrew/php</div></pre></td></tr></table></figure></p>
-<p>PHP如果采用默认配置安装，会编译mod_php模块并只运行在Apache环境下，为了使用Nginx，这里需要编译php-fpm并且禁用apache，主要通过参数<code>--without-fpm --without-apache</code>来实现。完整的安装指令为<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">brew install php56 \</div><div class="line">-<span class="ruby">-without-snmp \</span></div><div class="line">-<span class="ruby">-without-apache \</span></div><div class="line">-<span class="ruby">-with-debug \</span></div><div class="line">-<span class="ruby">-with-fpm \</span></div><div class="line">-<span class="ruby">-with-intl \</span></div><div class="line">-<span class="ruby">-with-homebrew-curl \</span></div><div class="line">-<span class="ruby">-with-homebrew-libxslt \</span></div><div class="line">-<span class="ruby">-with-homebrew-openssl \</span></div><div class="line">-<span class="ruby">-with-imap \</span></div><div class="line">-<span class="ruby">-with-mysql \</span></div><div class="line">-<span class="ruby">-with-tidy</span></div></pre></td></tr></table></figure></p>
-<p>由于OSX已经自带了PHP5.5环境，因此需要修改系统路径，优先运行brew安装的版本，在<code>~/.bashrc</code>里加入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="string">"/usr/local/bin:/usr/local/sbin:<span class="variable">$PATH</span>"</span></div></pre></td></tr></table></figure></p>
-<blockquote>
+<h2 id="安装PHP5-6（FPM方式）"><a href="#安装PHP5-6（FPM方式）" class="headerlink" title="安装PHP5.6（FPM方式）"></a>安装PHP5.6（FPM方式）</h2><p>首先加入Homebrew官方的几个软件源</p>
+<pre><code>brew tap homebrew/dupes
+brew tap homebrew/versions
+brew tap homebrew/php
+</code></pre><p>PHP如果采用默认配置安装，会编译mod_php模块并只运行在Apache环境下，为了使用Nginx，这里需要编译php-fpm并且禁用apache，主要通过参数<code>--without-fpm --without-apache</code>来实现。完整的安装指令为</p>
+<pre><code>brew install php56 \
+--without-snmp \
+--without-apache \
+--with-debug \
+--with-fpm \
+--with-intl \
+--with-homebrew-curl \
+--with-homebrew-libxslt \
+--with-homebrew-openssl \
+--with-imap \
+--with-mysql \
+--with-tidy
+</code></pre><p>由于OSX已经自带了PHP5.5环境，因此需要修改系统路径，优先运行brew安装的版本，在<code>~/.bashrc</code>里加入：</p>
+<pre><code>export PATH=&quot;/usr/local/bin:/usr/local/sbin:$PATH&quot;
+</code></pre><blockquote>
 <p>这时运行 php -v查看版本是否是5.6<br>运行php -m 查看PHP安装都扩展列表</p>
 </blockquote>
-<p>如果要安装新的php扩展，可以直接安装而不用每次重新编译php，所有的扩展可以通过<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span>search php56</div></pre></td></tr></table></figure></p>
-<p>看到，下面是我自己所需要的扩展，可以支持Phalcon框架：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install php56-gearman php56-msgpack php56-memcache php56-memcached php56-mongo  php56-phalcon php56-redis php56-xdebug</div></pre></td></tr></table></figure></p>
-<h3 id="PHP-FPM的加载与启动"><a href="#PHP-FPM的加载与启动" class="headerlink" title="PHP-FPM的加载与启动"></a>PHP-FPM的加载与启动</h3><p>php-fpm.conf  php.ini<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>php<span class="regexp">/5.6</span></div></pre></td></tr></table></figure></p>
-<p>php-fpm进程<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="keyword">local</span>/sbin</div></pre></td></tr></table></figure></p>
-<p><strong>安装完毕后可以通过以下指令启动和停止php-fpm</strong><br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./php-fpm -D    <span class="comment">//进入sbin目录</span></div><div class="line"></div><div class="line">killall php-fpm</div></pre></td></tr></table></figure></p>
-<p>同时可以将php-fpm加入开机启动<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ln -sfv /usr/local/opt/php56/*.plist ~/<span class="keyword">Library</span>/LaunchAgents</div><div class="line"></div><div class="line">launchctl load ~/<span class="keyword">Library</span>/LaunchAgents/homebrew.mxcl.php56.plist</div></pre></td></tr></table></figure></p>
-<h3 id="查看php-fpm进程"><a href="#查看php-fpm进程" class="headerlink" title="查看php-fpm进程"></a>查看php-fpm进程</h3><p>查看9000端口<br><code>lsof -i:9000</code><br>或者<br><code>ps -ef | grep php-fpm</code></p>
-<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>nginx</div></pre></td></tr></table></figure>
-<p>安装完毕后可以通过<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nginx</div><div class="line">nginx <span class="_">-s</span> quit</div></pre></td></tr></table></figure></p>
-<p>启动和关闭，同时也支持重载配置文件等操作<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -s reload|<span class="type">reopen</span>|<span class="type">stop</span>|<span class="type">quit</span></div></pre></td></tr></table></figure></p>
-<p>nginx安装后默认监听8080端口，可以访问<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 查看状态。如果要想监听80端口需要root权限，运行</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo chown <span class="string">root:</span>wheel <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>nginx<span class="regexp">/1.6.2/</span>bin/nginx</div><div class="line">sudo chmod u+s <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>nginx<span class="regexp">/1.6.2/</span>bin/nginx</div></pre></td></tr></table></figure>
-<blockquote>
+<p>如果要安装新的php扩展，可以直接安装而不用每次重新编译php，所有的扩展可以通过</p>
+<pre><code>brew search php56
+</code></pre><p>看到，下面是我自己所需要的扩展，可以支持Phalcon框架：</p>
+<pre><code>brew install php56-gearman php56-msgpack php56-memcache php56-memcached php56-mongo  php56-phalcon php56-redis php56-xdebug
+</code></pre><h3 id="PHP-FPM的加载与启动"><a href="#PHP-FPM的加载与启动" class="headerlink" title="PHP-FPM的加载与启动"></a>PHP-FPM的加载与启动</h3><p>php-fpm.conf  php.ini</p>
+<pre><code>/usr/local/etc/php/5.6
+</code></pre><p>php-fpm进程</p>
+<pre><code>/usr/local/sbin
+</code></pre><p><strong>安装完毕后可以通过以下指令启动和停止php-fpm</strong></p>
+<pre><code>./php-fpm -D    //进入sbin目录
+
+killall php-fpm
+</code></pre><p>同时可以将php-fpm加入开机启动</p>
+<pre><code>ln -sfv /usr/local/opt/php56/*.plist ~/Library/LaunchAgents
+
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.php56.plist
+</code></pre><h3 id="查看php-fpm进程"><a href="#查看php-fpm进程" class="headerlink" title="查看php-fpm进程"></a>查看php-fpm进程</h3><p>查看9000端口<br><code>lsof -i:9000</code><br>或者<br><code>ps -ef | grep php-fpm</code></p>
+<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><pre><code>brew install nginx
+</code></pre><p>安装完毕后可以通过</p>
+<pre><code>nginx
+nginx -s quit
+</code></pre><p>启动和关闭，同时也支持重载配置文件等操作</p>
+<pre><code>nginx -s reload|reopen|stop|quit
+</code></pre><p>nginx安装后默认监听8080端口，可以访问<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 查看状态。如果要想监听80端口需要root权限，运行</p>
+<pre><code>sudo chown root:wheel /usr/local/Cellar/nginx/1.6.2/bin/nginx
+sudo chmod u+s /usr/local/Cellar/nginx/1.6.2/bin/nginx
+</code></pre><blockquote>
 <p>我是直接在nginx配置中改成80端口，然后重启生效<br>并使用root权限启动</p>
 </blockquote>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">sudo nginx</span></div></pre></td></tr></table></figure>
-<p>开机启动<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ln -sfv /usr/local/opt/nginx/*.plist ~/<span class="keyword">Library</span>/LaunchAgents</div><div class="line"></div><div class="line">launchctl load ~/<span class="keyword">Library</span>/LaunchAgents/homebrew.mxcl.nginx.plist</div></pre></td></tr></table></figure></p>
-<h2 id="Nginx-PHP-FPM配置"><a href="#Nginx-PHP-FPM配置" class="headerlink" title="Nginx + PHP-FPM配置"></a>Nginx + PHP-FPM配置</h2><p>好文：<a href="http://www.nginx.cn/nginx-how-to" target="_blank" rel="external">http://www.nginx.cn/nginx-how-to</a></p>
+<pre><code>sudo nginx
+</code></pre><p>开机启动</p>
+<pre><code>ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents
+
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist
+</code></pre><h2 id="Nginx-PHP-FPM配置"><a href="#Nginx-PHP-FPM配置" class="headerlink" title="Nginx + PHP-FPM配置"></a>Nginx + PHP-FPM配置</h2><p>好文：<a href="http://www.nginx.cn/nginx-how-to" target="_blank" rel="external">http://www.nginx.cn/nginx-how-to</a></p>
 <p>Nginx一般都会运行多个域名（虚拟主机）</p>
 <blockquote>
 <p>按Ubuntu的文件夹结构来存放Nginx的配置文件</p>
 </blockquote>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/<span class="keyword">var</span>/logs/nginx</div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/sites-available</div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/sites-enabled</div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/<span class="keyword">conf</span>.<span class="built_in">d</span></div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/ssl</div></pre></td></tr></table></figure>
-<blockquote>
+<pre><code>mkdir -p /usr/local/var/logs/nginx
+mkdir -p /usr/local/etc/nginx/sites-available
+mkdir -p /usr/local/etc/nginx/sites-enabled
+mkdir -p /usr/local/etc/nginx/conf.d
+mkdir -p /usr/local/etc/nginx/ssl
+</code></pre><blockquote>
 <p>联想到work中，vhost和fpm.d目录，新增域名与目录时，只需要增加两个配置文件；前提时php-fpm.conf和nginx.conf主配置文件中都有</p>
 </blockquote>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">include</span> vhost/<span class="regexp">*.conf</span></div><div class="line">include fpm.d/<span class="regexp">*.conf</span></div></pre></td></tr></table></figure>
-<p><strong>上述都conf.d等同于fpm.d，sites-enabled等同于vhost</strong></p>
-<h3 id="编辑Nginx全局配置"><a href="#编辑Nginx全局配置" class="headerlink" title="编辑Nginx全局配置"></a>编辑Nginx全局配置</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/nginx.conf</span></div></pre></td></tr></table></figure>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">worker_processes</span>  <span class="number">1</span>;</div><div class="line"><span class="attribute">error_log</span>   /usr/local/var/logs/nginx/error.log <span class="literal">debug</span>;</div><div class="line"><span class="attribute">pid</span>        /usr/local/var/run/nginx.pid;</div><div class="line"></div><div class="line"><span class="section">events</span> &#123;</div><div class="line">    <span class="attribute">worker_connections</span>  <span class="number">256</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="section">http</span> &#123;</div><div class="line">    <span class="attribute">include</span>       mime.types;</div><div class="line">    <span class="attribute">default_type</span>  application/octet-stream;</div><div class="line"></div><div class="line">    <span class="attribute">log_format</span> main <span class="string">'<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] '</span></div><div class="line">        <span class="string">'"<span class="variable">$request</span>" <span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> '</span></div><div class="line">        <span class="string">'"<span class="variable">$http_referer</span>" "<span class="variable">$http_user_agent</span>" '</span></div><div class="line">        <span class="string">'"<span class="variable">$http_x_forwarded_for</span>" <span class="variable">$host</span> <span class="variable">$request_time</span> <span class="variable">$upstream_response_time</span> <span class="variable">$scheme</span> '</span></div><div class="line">        <span class="string">'<span class="variable">$cookie_evalogin</span>'</span>;</div><div class="line"></div><div class="line">    <span class="attribute">access_log</span>  /usr/local/var/logs/access.log  main;</div><div class="line"></div><div class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</div><div class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</div><div class="line">    <span class="attribute">port_in_redirect</span> <span class="literal">off</span>;</div><div class="line"></div><div class="line">    <span class="attribute">include</span> /usr/local/etc/nginx/sites-enabled/*;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样一来首先可以把一些可复用配置独立出来放在<code>/usr/local/etc/nginx/conf.d</code>下，比如fastcgi的设置就可以独立出来<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/conf.d/</span>php-fpm</div></pre></td></tr></table></figure></p>
-<p>内容为<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> <span class="regexp">~ \.php$</span> &#123;</div><div class="line">    <span class="attribute">try_files</span>                   <span class="variable">$uri</span> = <span class="number">404</span>;</div><div class="line">    <span class="attribute">fastcgi_pass</span>                <span class="number">127.0.0.1:9000</span>;</div><div class="line">    <span class="attribute">fastcgi_index</span>               index.php;</div><div class="line">    <span class="attribute">fastcgi_intercept_errors</span>    <span class="literal">on</span>;</div><div class="line">    <span class="attribute">include</span> /usr/local/etc/nginx/fastcgi.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后<code>/usr/local/etc/nginx/sites-enabled</code>目录下可以一个文件对应一个域名的配置，比如web服务器目录是<code>/opt/htdocs</code><br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/sites-enabled/</span><span class="keyword">default</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="section">server</span> &#123;</div><div class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</div><div class="line">    <span class="attribute">server_name</span>  localhost;</div><div class="line">    <span class="attribute">root</span>         /opt/htdocs/;</div><div class="line"></div><div class="line">    <span class="attribute">location</span> / &#123;</div><div class="line">        <span class="attribute">index</span>  index.html index.htm index.php;</div><div class="line">        <span class="attribute">include</span>     /usr/local/etc/nginx/conf.d/php-fpm;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>此时启动了php-fpm并且启动了Nginx后，就可以通过<a href="http://localhost来运行php程序了" target="_blank" rel="external">http://localhost来运行php程序了</a></p>
-<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>mysql</div></pre></td></tr></table></figure>
-<p>可以通过<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql<span class="selector-class">.server</span> start</div><div class="line">mysql<span class="selector-class">.server</span> stop</div></pre></td></tr></table></figure></p>
-<p>来启动／停止，启动后默认应为空密码，可以通过mysqladmin设置一个密码<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">mysqladmin</span> -uroot password <span class="string">"mypassword"</span></div></pre></td></tr></table></figure></p>
-<p>但是在操作的时候出现了空密码无法登入的情况，最终只能通过mysqld_safe来设置<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo mysqld_safe --skip-grant-tables</div><div class="line">mysql -u root</div><div class="line">mysql&gt; UPDATE mysql.user <span class="keyword">SET</span> Password=PASSWORD(<span class="string">'mypassword'</span>) WHERE <span class="comment">User=</span><span class="comment">'root'</span>;</div><div class="line">mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure></p>
-<p><strong>依旧报错</strong></p>
+<pre><code>include vhost/*.conf
+include fpm.d/*.conf
+</code></pre><p><strong>上述都conf.d等同于fpm.d，sites-enabled等同于vhost</strong></p>
+<h3 id="编辑Nginx全局配置"><a href="#编辑Nginx全局配置" class="headerlink" title="编辑Nginx全局配置"></a>编辑Nginx全局配置</h3><pre><code>vim /usr/local/etc/nginx/nginx.conf
+</code></pre><pre><code>worker_processes  1;
+error_log   /usr/local/var/logs/nginx/error.log debug;
+pid        /usr/local/var/run/nginx.pid;
+
+events {
+    worker_connections  256;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    log_format main &#39;$remote_addr - $remote_user [$time_local] &#39;
+        &#39;&quot;$request&quot; $status $body_bytes_sent &#39;
+        &#39;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &#39;
+        &#39;&quot;$http_x_forwarded_for&quot; $host $request_time $upstream_response_time $scheme &#39;
+        &#39;$cookie_evalogin&#39;;
+
+    access_log  /usr/local/var/logs/access.log  main;
+
+    sendfile        on;
+    keepalive_timeout  65;
+    port_in_redirect off;
+
+    include /usr/local/etc/nginx/sites-enabled/*;
+}
+</code></pre><p>这样一来首先可以把一些可复用配置独立出来放在<code>/usr/local/etc/nginx/conf.d</code>下，比如fastcgi的设置就可以独立出来</p>
+<pre><code>vim /usr/local/etc/nginx/conf.d/php-fpm
+</code></pre><p>内容为</p>
+<pre><code>location ~ \.php$ {
+    try_files                   $uri = 404;
+    fastcgi_pass                127.0.0.1:9000;
+    fastcgi_index               index.php;
+    fastcgi_intercept_errors    on;
+    include /usr/local/etc/nginx/fastcgi.conf;
+}
+</code></pre><p>然后<code>/usr/local/etc/nginx/sites-enabled</code>目录下可以一个文件对应一个域名的配置，比如web服务器目录是<code>/opt/htdocs</code></p>
+<pre><code>vim /usr/local/etc/nginx/sites-enabled/default
+</code></pre><pre><code>server {
+    listen       80;
+    server_name  localhost;
+    root         /opt/htdocs/;
+
+    location / {
+        index  index.html index.htm index.php;
+        include     /usr/local/etc/nginx/conf.d/php-fpm;
+    }
+}
+</code></pre><p>此时启动了php-fpm并且启动了Nginx后，就可以通过<a href="http://localhost来运行php程序了" target="_blank" rel="external">http://localhost来运行php程序了</a></p>
+<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><pre><code>brew install mysql
+</code></pre><p>可以通过</p>
+<pre><code>mysql.server start
+mysql.server stop
+</code></pre><p>来启动／停止，启动后默认应为空密码，可以通过mysqladmin设置一个密码</p>
+<pre><code>mysqladmin -uroot password &quot;mypassword&quot;
+</code></pre><p>但是在操作的时候出现了空密码无法登入的情况，最终只能通过mysqld_safe来设置</p>
+<pre><code>sudo mysqld_safe --skip-grant-tables
+mysql -u root
+mysql&gt; UPDATE mysql.user SET Password=PASSWORD(&#39;mypassword&#39;) WHERE User=&#39;root&#39;;
+mysql&gt; FLUSH PRIVILEGES;
+</code></pre><p><strong>依旧报错</strong></p>
 <blockquote>
 <p><strong>坑1</strong>：一直出现mysql.sock错误，<code>mysql -uroot -p</code>;<br><strong>填坑1</strong>：<code>mysql -h 127.0.0.1 -u root -p</code>  why?</p>
-<p><strong>坑2</strong>：设置密码报错：<code>Password</code>字段不存在<br><strong>填坑2</strong>：mysql5.7已将<code>Password</code>字段去掉，改成<code>authentication_string</code>；所以正确都姿势如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> mysql.user <span class="keyword">set</span> authentication_string=<span class="keyword">password</span>(<span class="string">'123qwe'</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">'root</span></div></pre></td></tr></table></figure></p>
-<p>老版本mysql没变</p>
+<p><strong>坑2</strong>：设置密码报错：<code>Password</code>字段不存在<br><strong>填坑2</strong>：mysql5.7已将<code>Password</code>字段去掉，改成<code>authentication_string</code>；所以正确都姿势如下：</p>
+<pre><code>update mysql.user set authentication_string=password(&#39;123qwe&#39;) where user=&#39;root
+</code></pre><p>老版本mysql没变</p>
 </blockquote>
-<p>最后将MySQL加入开机启动<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/my</span>sql<span class="regexp">/5.6.22/</span>homebrew.mxcl.mysql.plist ~<span class="regexp">/Library/</span>LaunchAgents<span class="regexp">/</span></div></pre></td></tr></table></figure></p>
-<h2 id="查看服务列表"><a href="#查看服务列表" class="headerlink" title="查看服务列表"></a>查看服务列表</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew services <span class="built_in">list</span></div></pre></td></tr></table></figure>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Name  Status  User    Plist</div><div class="line">mysql started root    /Library/LaunchDaemons/homebrew<span class="selector-class">.mxcl</span><span class="selector-class">.mysql</span><span class="selector-class">.plist</span></div><div class="line">nginx started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew<span class="selector-class">.mxcl</span><span class="selector-class">.nginx</span><span class="selector-class">.plist</span></div><div class="line">php56 started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew<span class="selector-class">.mxcl</span><span class="selector-class">.php56</span><span class="selector-class">.plist</span></div></pre></td></tr></table></figure>
-<p>安装redis和memcache过程省略，详见下面博文，本文也是参考此<br><a href="http://avnpc.com/pages/install-lnmp-on-osx" target="_blank" rel="external">http://avnpc.com/pages/install-lnmp-on-osx</a></p>
+<p>最后将MySQL加入开机启动</p>
+<pre><code>cp /usr/local/Cellar/mysql/5.6.22/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/
+</code></pre><h2 id="查看服务列表"><a href="#查看服务列表" class="headerlink" title="查看服务列表"></a>查看服务列表</h2><pre><code>brew services list
+</code></pre><pre><code>Name  Status  User    Plist
+mysql started root    /Library/LaunchDaemons/homebrew.mxcl.mysql.plist
+nginx started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew.mxcl.nginx.plist
+php56 started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew.mxcl.php56.plist
+</code></pre><p>安装redis和memcache过程省略，详见下面博文，本文也是参考此<br><a href="http://avnpc.com/pages/install-lnmp-on-osx" target="_blank" rel="external">http://avnpc.com/pages/install-lnmp-on-osx</a></p>
 ]]></content>
     </entry>
     
@@ -304,36 +545,129 @@
 <p>调研了解trait机制，为什么TestController use了这个trait，TestController 就可以使用ValidatesRequests的validate方法</p>
 </blockquote>
 <h3 id="最原始的表单验证（Controller中）"><a href="#最原始的表单验证（Controller中）" class="headerlink" title="最原始的表单验证（Controller中）"></a>最原始的表单验证（Controller中）</h3><p>validate方法会验证接受HTTP传入的请求与验证规则，如果验证通过，我们的代码才会继续向下运行。如果验证失败会抛出异常错误返回给用户。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">store</span><span class="params">(Request $request)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">//验证用户请求</span></div><div class="line">	<span class="keyword">$this</span>-&gt;validate($request,[</div><div class="line">		<span class="string">'name'</span> =&gt; <span class="string">'required'</span>,</div><div class="line">		<span class="string">'content'</span> =&gt; <span class="string">'required|min:5'</span>,</div><div class="line">	]);</div><div class="line"></div><div class="line">	<span class="comment">//通过验证，保存至数据库</span></div><div class="line">	Task::create($request);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>说明</strong>：我们将验证规则传递到<code>validate</code>方法中，如果验证失败，则自动生成一个对应的响应。并将验证的错误提醒闪存至<code>session</code>，也就是<code>$errors</code>。当验证失败时，用户将被重定向到我们的控制器 <code>create</code>方法，让我们在视图中显示错误的消息：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">if</span> (<span class="keyword">count</span>(<span class="variable">$errors</span>) &gt; 0)</div><div class="line">	&lt;div <span class="keyword">class</span>=<span class="string">"alert alert-danger"</span>&gt;</div><div class="line">		&lt;ul&gt;</div><div class="line">			@<span class="keyword">foreach</span> (<span class="variable">$errors</span>-&gt;all() <span class="keyword">as</span> <span class="variable">$error</span>)</div><div class="line">			&lt;<span class="keyword">li</span>&gt;&#123;&#123;<span class="variable">$error&#125;</span>&#125;&lt;/<span class="keyword">li</span>&gt;</div><div class="line">		&lt;/ul&gt;</div><div class="line">	&lt;/div&gt;</div><div class="line">@endif</div></pre></td></tr></table></figure></p>
-<p><strong>补充</strong>：正常情况下我们想要把错误显示在对应的字段旁边，而不是一起显示在一个列表中；我们打印<code>session</code>中的<code>$errors-&gt;all()</code>是数字索引数组;</p>
+<pre><code>public function store(Request $request)
+{
+    //验证用户请求
+    $this-&gt;validate($request,[
+        &#39;name&#39; =&gt; &#39;required&#39;,
+        &#39;content&#39; =&gt; &#39;required|min:5&#39;,
+    ]);
+
+    //通过验证，保存至数据库
+    Task::create($request);
+}
+</code></pre><p><strong>说明</strong>：我们将验证规则传递到<code>validate</code>方法中，如果验证失败，则自动生成一个对应的响应。并将验证的错误提醒闪存至<code>session</code>，也就是<code>$errors</code>。当验证失败时，用户将被重定向到我们的控制器 <code>create</code>方法，让我们在视图中显示错误的消息：</p>
+<pre><code>@if (count($errors) &gt; 0)
+    &lt;div class=&quot;alert alert-danger&quot;&gt;
+        &lt;ul&gt;
+            @foreach ($errors-&gt;all() as $error)
+            &lt;li&gt;{{$error}}&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+@endif
+</code></pre><p><strong>补充</strong>：正常情况下我们想要把错误显示在对应的字段旁边，而不是一起显示在一个列表中；我们打印<code>session</code>中的<code>$errors-&gt;all()</code>是数字索引数组;</p>
 <blockquote>
 <p>要查看特定字段的第一个错误消息【比较常见的场景】</p>
 </blockquote>
-<p><strong>方法如下：</strong><br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="variable">@if</span> ($errors-&gt;has(<span class="string">'name'</span>))</div><div class="line">$errors-&gt;first(<span class="string">'name'</span>);</div><div class="line"><span class="variable">@endif</span></div><div class="line"></div><div class="line"><span class="variable">@if</span> ($error-&gt;has(<span class="string">'content'</span>))</div><div class="line">$error-&gt;first(<span class="string">'content'</span>);</div><div class="line"><span class="variable">@endif</span></div></pre></td></tr></table></figure></p>
-<blockquote>
+<p><strong>方法如下：</strong></p>
+<pre><code>@if ($errors-&gt;has(&#39;name&#39;))
+$errors-&gt;first(&#39;name&#39;);
+@endif
+
+@if ($error-&gt;has(&#39;content&#39;))
+$error-&gt;first(&#39;content&#39;);
+@endif
+</code></pre><blockquote>
 <p>我们想要得到一个字段对应的所有error</p>
 </blockquote>
-<p><strong>方法如下</strong>：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">foreach</span> ($error-&gt;get(<span class="string">'content'</span>) <span class="keyword">as</span> $message)</div><div class="line">&#123;</div><div class="line">	<span class="comment">//</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="表单请求验证，自定义请求类"><a href="#表单请求验证，自定义请求类" class="headerlink" title="表单请求验证，自定义请求类"></a>表单请求验证，自定义请求类</h3><blockquote>
+<p><strong>方法如下</strong>：</p>
+<pre><code>foreach ($error-&gt;get(&#39;content&#39;) as $message)
+{
+    //
+}
+</code></pre><h3 id="表单请求验证，自定义请求类"><a href="#表单请求验证，自定义请求类" class="headerlink" title="表单请求验证，自定义请求类"></a>表单请求验证，自定义请求类</h3><blockquote>
 <p>php artisan make request TaskFormReuest;</p>
 </blockquote>
-<p>这时会在<code>Http/Requests</code>目录生成<code>TaskFormReuest.php</code>,修改<code>rules</code>方法，<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//权限判断</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">authorize</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//验证规则</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">rules</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> [</div><div class="line">        <span class="string">'name'</span> =&gt; <span class="string">'required|min:5'</span>,</div><div class="line">    ];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//也可以自定义message方法</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">messages</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> [</div><div class="line">        <span class="string">'title.required'</span> =&gt; <span class="string">'标题是必填的'</span>,</div><div class="line">        <span class="string">'body.required'</span>  =&gt; <span class="string">'消息是必填的'</span>,</div><div class="line">    ];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//messages还可以这样动态设置</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">messages</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> [</div><div class="line">		<span class="string">'required'</span> =&gt; <span class="string">':attribute 是必填字段'</span>,</div><div class="line">		<span class="string">'min'</span>	=&gt; <span class="string">':attribute 长度不小于 :min'</span>,</div><div class="line">	];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="手动创建验证程序"><a href="#手动创建验证程序" class="headerlink" title="手动创建验证程序"></a>手动创建验证程序</h3><p>不使用validatesRequests的validate方法<br>我们可以use Validator类，手动创建一个validator实例，并通过Validator::make()生成一个新的validator</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> <span class="title">Validator</span>;</div><div class="line">...</div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">store</span><span class="params">(Request $request)</span></span></div><div class="line">&#123;</div><div class="line">	$validator = Validtor::make($request-&gt;all(),[</div><div class="line">		<span class="string">'name'</span> =&gt; <span class="string">'requeire'</span>,</div><div class="line">		<span class="string">'content'</span> =&gt; <span class="string">'require|min:6'</span>,</div><div class="line">	]);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> ($validator-&gt;fails())</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> redirect()-&gt;action(<span class="string">'TaskController@index'</span>)</div><div class="line">		-&gt;withErrors($validator)</div><div class="line">		        -&gt;withInput();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>注</strong>：<code>Validator::make($param1, $param2)</code>，其中<code>$param1</code>是验证的数据，<code>$params</code>是规则</p>
-<h2 id="model操作"><a href="#model操作" class="headerlink" title="model操作"></a>model操作</h2><p>增：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> Task::create($request);</div><div class="line"><span class="number">2.</span> </div><div class="line">$task = <span class="keyword">new</span> Task();</div><div class="line">$task-&gt;name = $request-&gt;name;</div><div class="line">$task-&gt;created_at = Carbon::now();</div><div class="line">$task-&gt;save();</div></pre></td></tr></table></figure></p>
-<p>删：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>.<span class="symbol">Task:</span><span class="symbol">:destroy</span>(<span class="variable">$id</span>);</div><div class="line"><span class="number">2</span>.<span class="symbol">Task:</span><span class="symbol">:findOrFail</span>(<span class="variable">$id</span>)-&gt;delete();</div></pre></td></tr></table></figure></p>
-<p>改:<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">Task:</span><span class="symbol">:update</span>(<span class="variable">$request</span>, <span class="variable">$id</span>);</div></pre></td></tr></table></figure></p>
-<p>查：<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>Task::all();</div><div class="line"><span class="number">2.</span>Task::where<span class="function"><span class="params">()</span>-&gt;</span>get();</div><div class="line"><span class="number">3.</span>Task::orderBy<span class="function"><span class="params">(<span class="string">'created_at'</span>, <span class="string">'desc'</span>)</span>-&gt;</span>get();</div></pre></td></tr></table></figure></p>
-<h2 id="factory工厂模型使用"><a href="#factory工厂模型使用" class="headerlink" title="factory工厂模型使用"></a>factory工厂模型使用</h2><ul>
+<p>这时会在<code>Http/Requests</code>目录生成<code>TaskFormReuest.php</code>,修改<code>rules</code>方法，</p>
+<pre><code>//权限判断
+public function authorize()
+{
+    return true;
+}
+
+//验证规则
+public function rules()
+{
+    return [
+        &#39;name&#39; =&gt; &#39;required|min:5&#39;,
+    ];
+}
+
+//也可以自定义message方法
+public function messages()
+{
+    return [
+        &#39;title.required&#39; =&gt; &#39;标题是必填的&#39;,
+        &#39;body.required&#39;  =&gt; &#39;消息是必填的&#39;,
+    ];
+}
+
+//messages还可以这样动态设置
+public function messages()
+{
+    return [
+        &#39;required&#39; =&gt; &#39;:attribute 是必填字段&#39;,
+        &#39;min&#39;    =&gt; &#39;:attribute 长度不小于 :min&#39;,
+    ];
+}
+</code></pre><h3 id="手动创建验证程序"><a href="#手动创建验证程序" class="headerlink" title="手动创建验证程序"></a>手动创建验证程序</h3><p>不使用validatesRequests的validate方法<br>我们可以use Validator类，手动创建一个validator实例，并通过Validator::make()生成一个新的validator</p>
+<pre><code>use Validator;
+...
+public function store(Request $request)
+{
+    $validator = Validtor::make($request-&gt;all(),[
+        &#39;name&#39; =&gt; &#39;requeire&#39;,
+        &#39;content&#39; =&gt; &#39;require|min:6&#39;,
+    ]);
+
+    if ($validator-&gt;fails())
+    {
+        return redirect()-&gt;action(&#39;TaskController@index&#39;)
+        -&gt;withErrors($validator)
+                -&gt;withInput();
+    }
+}
+</code></pre><p><strong>注</strong>：<code>Validator::make($param1, $param2)</code>，其中<code>$param1</code>是验证的数据，<code>$params</code>是规则</p>
+<h2 id="model操作"><a href="#model操作" class="headerlink" title="model操作"></a>model操作</h2><p>增：</p>
+<pre><code>1. Task::create($request);
+2. 
+$task = new Task();
+$task-&gt;name = $request-&gt;name;
+$task-&gt;created_at = Carbon::now();
+$task-&gt;save();
+</code></pre><p>删：</p>
+<pre><code>1.Task::destroy($id);
+2.Task::findOrFail($id)-&gt;delete();
+</code></pre><p>改:</p>
+<pre><code>Task::update($request, $id);
+</code></pre><p>查：</p>
+<pre><code>1.Task::all();
+2.Task::where()-&gt;get();
+3.Task::orderBy(&#39;created_at&#39;, &#39;desc&#39;)-&gt;get();
+</code></pre><h2 id="factory工厂模型使用"><a href="#factory工厂模型使用" class="headerlink" title="factory工厂模型使用"></a>factory工厂模型使用</h2><ul>
 <li><code>Task Model</code>中设置  <code>protected $fillable = [&#39;name&#39;, &#39;created_at&#39;]</code>;</li>
 <li><p><code>datebase/factories/ModelFactory.php</code>新增</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$factory-&gt;define(App\Task::class, <span class="function"><span class="keyword">function</span> <span class="params">(Faker\Generator $faker)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> [</div><div class="line">        <span class="string">'name'</span> =&gt; $faker-&gt;sentence,</div><div class="line">        <span class="string">'created_at'</span> =&gt; Carbon\Carbon::now(),</div><div class="line">    ];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
+<pre><code>$factory-&gt;define(App\Task::class, function (Faker\Generator $faker) {
+  return [
+      &#39;name&#39; =&gt; $faker-&gt;sentence,
+      &#39;created_at&#39; =&gt; Carbon\Carbon::now(),
+  ];
+});
+</code></pre></li>
 <li><p><code>php artisan tinker</code></p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">namespace App<span class="comment">;</span></div><div class="line">factory(<span class="name">App</span>\Task:<span class="symbol">:class</span>,<span class="number">5</span>)-&gt;create()<span class="comment">;</span></div></pre></td></tr></table></figure>
-</li>
+<pre><code>namespace App;
+factory(App\Task::class,5)-&gt;create();
+</code></pre></li>
 </ul>
 ]]></content>
     </entry>
@@ -349,15 +683,21 @@
 <p>当然vuejs作为js衍生出的框架，它除了具有js的特性外，还有自己的特色呢，所以vuejs可以使用vue-resource来与后端交互。</p>
 </blockquote>
 <p>下面使用ajax(基于jquery)、vuejs、php实现简单的数据的增删改查。</p>
-<figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> <span class="built_in">url</span> = <span class="string">'http://localhost:8080/vuejs/api/book.php'</span>;</div><div class="line">getJson(<span class="built_in">url</span>, pushDom);</div></pre></td></tr></table></figure>
-<p>分析getJson函数【已经封装】</p>
+<pre><code>var url = &#39;http://localhost:8080/vuejs/api/book.php&#39;;
+getJson(url, pushDom);
+</code></pre><p>分析getJson函数【已经封装】</p>
 <ol>
 <li>初始化信息列表</li>
 <li>两个参数：<br>（1）第一个是获取列表的接口地址url；<br>（2）第二个是回调函数名</li>
-<li>流程分析：<br>在getJson中通过ajax调取接口url获取数据data，然后将data作为参数调用pushDom函数，pushDom是展示、或者使用vue操作DOM的功能函数。那么怎么使用jquey、ajax配合vue进行后端数据库增删改查。<br>首先需要对vue的增删改查机制了如指掌才行；methods事件触发，我们可以在methods中定义add、delete、modify完成数据的绑定，异步刷新显示；同时将获取的数据传递给封装好的ajax函数中，与后端交互【正确的流程应该与后台交互成功才会自动更新DOM，这里不细论】；例如<br><strong>添加数据</strong>：<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">methods:&#123;</div><div class="line">    addBook:function()&#123;</div><div class="line">        <span class="keyword">this</span>.book.id=parseInt(postData(<span class="keyword">this</span>.book));</div><div class="line">        <span class="keyword">this</span>.books.push(<span class="keyword">this</span>.book);</div><div class="line">        <span class="keyword">this</span>.book=<span class="string">''</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>流程分析：<br>在getJson中通过ajax调取接口url获取数据data，然后将data作为参数调用pushDom函数，pushDom是展示、或者使用vue操作DOM的功能函数。那么怎么使用jquey、ajax配合vue进行后端数据库增删改查。<br>首先需要对vue的增删改查机制了如指掌才行；methods事件触发，我们可以在methods中定义add、delete、modify完成数据的绑定，异步刷新显示；同时将获取的数据传递给封装好的ajax函数中，与后端交互【正确的流程应该与后台交互成功才会自动更新DOM，这里不细论】；例如<br><strong>添加数据</strong>：<pre><code>methods:{
+ addBook:function(){
+     this.book.id=parseInt(postData(this.book));
+     this.books.push(this.book);
+     this.book=&#39;&#39;;
+ }
+}
+</code></pre>我们从前端拿到的数据<code>this.book</code>，然后调用<code>postData(this.book)</code>;<code>postData</code>就是一个与后端交互的封装了ajax的函数<br>期间遇到了一点小意外，总是获取不到ajax的返回值，关于如何获取ajax返回值和为何获取不到ajax中的值问题，<code>postData</code>函数中写的很清楚<br><code>async: false</code>, 默认是<code>true</code></li>
 </ol>
-<p>我们从前端拿到的数据<code>this.book</code>，然后调用<code>postData(this.book)</code>;<code>postData</code>就是一个与后端交互的封装了ajax的函数<br>期间遇到了一点小意外，总是获取不到ajax的返回值，关于如何获取ajax返回值和为何获取不到ajax中的值问题，<code>postData</code>函数中写的很清楚<br><code>async: false</code>, 默认是<code>true</code></p>
 <p>代码见：<a href="https://github.com/upeng/learn-vuejs" target="_blank" rel="external">github</a><br>demo页：<img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/vuedemo.png" alt="demo"></p>
 ]]></content>
     </entry>
@@ -379,8 +719,13 @@
 <h3 id="启动虚拟机"><a href="#启动虚拟机" class="headerlink" title="启动虚拟机"></a>启动虚拟机</h3><p>vargant up<br>vagrant up之前需要将Vagrant文件的第25行注释去掉，这样才能在windows中访问我们在linux中创建的程序；在trusty版本的Ubuntu中，有个目录 <code>/vagrant</code>与本地windows中Vagrant同级，因此可以本地编辑，linux中运行，就像磁盘映射。</p>
 <h3 id="登录虚拟机"><a href="#登录虚拟机" class="headerlink" title="登录虚拟机"></a>登录虚拟机</h3><p>vagrant ssh<br>使用vagrant ssh进入Ubuntu系统；进入后需要更新升级Ubuntu的一些包和工具，同事需要安装我们的LAMP。<br>升级包命令： <code>sudo apt-get update</code><br>安装php apache: <code>sudo apt-get install apache2 php5 libapache2-mod-php5</code><br>安装mysql: <code>sudo apt-get install mysql-server mysql-client php5-mysql</code></p>
 <h3 id="配置apache2"><a href="#配置apache2" class="headerlink" title="配置apache2"></a>配置apache2</h3><p>安装完成后访问：<code>http://localhost:8080</code> , 默认指向 <code>/var/www/html</code> ,修改配置文件如下：<br>配置文件路径  <code>/etc/apache2/sites-available/000-default.conf</code></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attribute"><span class="nomarkup">DocumentRoot</span></span> /vagrant</div><div class="line"><span class="section">&lt;Directory /vagrant&gt;</span></div><div class="line">                <span class="attribute"><span class="nomarkup">Options</span></span> -Indexes +followSymLinks +MultiViews</div><div class="line">                <span class="attribute">AllowOverride</span> <span class="literal">all</span></div><div class="line">                <span class="attribute">Require</span> <span class="literal">all</span> granted</div><div class="line"><span class="section">&lt;/Directory&gt;</span></div></pre></td></tr></table></figure>
-<p>修改完成后重启apache <code>service apache2 restart</code></p>
+<pre><code>DocumentRoot /vagrant
+&lt;Directory /vagrant&gt;
+                Options -Indexes +followSymLinks +MultiViews
+                AllowOverride all
+                Require all granted
+&lt;/Directory&gt;
+</code></pre><p>修改完成后重启apache <code>service apache2 restart</code></p>
 <p>参考：<br><a href="http://rrylee.github.io/2015/11/26/quick-start-linux-php/" target="_blank" rel="external">http://rrylee.github.io/2015/11/26/quick-start-linux-php/</a><br><a href="http://rmingwang.com/vagrant-commands-and-config.html" target="_blank" rel="external">http://rmingwang.com/vagrant-commands-and-config.html</a></p>
 ]]></content>
     </entry>
@@ -409,8 +754,27 @@
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>因为MCQ是基于memcached开发，所以可以使用memcached的命令对它进行各种操作；客户端比如php可以像操作memcacheq那样操作MCQ</p>
 <h3 id="启动MCQ"><a href="#启动MCQ" class="headerlink" title="启动MCQ"></a>启动MCQ</h3><p><code>/usr/local/memcacheq/bin/memcacheq -d -r 1024 -l 127.0.0.1 -p 22201 -u root</code></p>
 <p><strong>参数说明</strong><br><code>-d</code> 以守护进程方式运行<br><code>-r</code> 最大化核心文件限制<br><code>-l</code> 监听网卡<br><code>-p</code> TCP监听端口<br><code>-u</code> 以（root）身份运行</p>
-<h3 id="最常用的mcq命令：set和get"><a href="#最常用的mcq命令：set和get" class="headerlink" title="最常用的mcq命令：set和get"></a>最常用的mcq命令：set和get</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">telnet <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">22201</span> ....</div><div class="line"></div><div class="line">set testqueue <span class="number">0</span> <span class="number">0</span> <span class="number">3</span>    <span class="comment">//队列添加一条消息</span></div><div class="line">xxx</div><div class="line">STORED</div><div class="line"></div><div class="line">set testqueue <span class="number">0</span> <span class="number">0</span> <span class="number">5</span></div><div class="line">xxxxx</div><div class="line">STORED</div><div class="line"></div><div class="line">stats queue</div><div class="line">STAT testqueue <span class="number">2</span>/<span class="number">0</span></div><div class="line"></div><div class="line">get testqueue</div><div class="line">VALUE testqueue <span class="number">0</span> <span class="number">3</span></div><div class="line">xxx</div><div class="line">END</div><div class="line"></div><div class="line">stats queue</div><div class="line">STAT testqueue <span class="number">2</span>/<span class="number">1</span></div></pre></td></tr></table></figure>
-<p><strong>注意</strong>：mcq没有expire time这个标记，是因为mcq支持数据持久化（Berkeley DB）。另外mcq存储长度length有限制（蓝v踩到的坑），之前同步前台用户认证申请材料至后台，因为材料增多，导致参数长度增加，超过了mcq的消息长度的限制：limit ? 后面分析查明</p>
+<h3 id="最常用的mcq命令：set和get"><a href="#最常用的mcq命令：set和get" class="headerlink" title="最常用的mcq命令：set和get"></a>最常用的mcq命令：set和get</h3><pre><code>telnet 127.0.0.1 22201 ....
+
+set testqueue 0 0 3    //队列添加一条消息
+xxx
+STORED
+
+set testqueue 0 0 5
+xxxxx
+STORED
+
+stats queue
+STAT testqueue 2/0
+
+get testqueue
+VALUE testqueue 0 3
+xxx
+END
+
+stats queue
+STAT testqueue 2/1
+</code></pre><p><strong>注意</strong>：mcq没有expire time这个标记，是因为mcq支持数据持久化（Berkeley DB）。另外mcq存储长度length有限制（蓝v踩到的坑），之前同步前台用户认证申请材料至后台，因为材料增多，导致参数长度增加，超过了mcq的消息长度的限制：limit ? 后面分析查明</p>
 <blockquote>
 <p>MCQ和Redis的比较</p>
 </blockquote>
@@ -446,16 +810,67 @@
 <h2 id="安装zephir"><a href="#安装zephir" class="headerlink" title="安装zephir"></a>安装zephir</h2><ol>
 <li>需要先安装相关的依赖</li>
 <li>使用git的方式获取源代码进行安装</li>
-<li>通过运行zephir命令验证安装是否成功<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ git clone <span class="string">https:</span><span class="comment">//github.com/phalcon/zephir</span></div><div class="line">$ cd zephir</div><div class="line">$ ./install-json</div><div class="line">$ zephir help</div><div class="line"> _____              __    _</div><div class="line"><span class="regexp">/__  /</span>  ___  ____  <span class="regexp">/ /</span>_  (_)____</div><div class="line">  <span class="regexp">/ /</span>  <span class="regexp">/ _ \/</span> __ \<span class="regexp">/ __ \/</span> <span class="regexp">/ ___/</span></div><div class="line"> <span class="regexp">/ /</span>__<span class="regexp">/  __/</span> <span class="regexp">/_/</span> <span class="regexp">/ /</span> <span class="regexp">/ /</span> <span class="regexp">/ /</span></div><div class="line"><span class="regexp">/____/\_</span>__<span class="regexp">/ .___/</span>_<span class="regexp">/ /</span>_<span class="regexp">/_/</span>_/</div><div class="line">         <span class="regexp">/_/</span></div><div class="line">Zephir version <span class="number">0.7</span><span class="number">.1</span>b</div></pre></td></tr></table></figure>
-</li>
+<li>通过运行zephir命令验证安装是否成功<pre><code>$ git clone https://github.com/phalcon/zephir
+$ cd zephir
+$ ./install-json
+$ zephir help
+_____              __    _
+/__  /  ___  ____  / /_  (_)____
+/ /  / _ \/ __ \/ __ \/ / ___/
+/ /__/  __/ /_/ / / / / / /
+/____/\___/ .___/_/ /_/_/_/
+      /_/
+Zephir version 0.7.1b
+</code></pre></li>
 </ol>
-<h2 id="初始化扩展"><a href="#初始化扩展" class="headerlink" title="初始化扩展"></a>初始化扩展</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zephir init upfriend(<span class="name">upfriend</span>扩展名)</div><div class="line">upfriend/</div><div class="line">   ext/</div><div class="line">   upfriend/</div></pre></td></tr></table></figure>
-<h2 id="编写扩展"><a href="#编写扩展" class="headerlink" title="编写扩展"></a>编写扩展</h2><p>在<code>upfriend/upfriend</code>目录中创建<code>filter.zep</code>文件</p>
-<figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">Upfriend</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Filter</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**     </span></div><div class="line">    * Filters a string returning its alpha characters</div><div class="line">    * <span class="doctag">@param</span> string str     </div><div class="line">    */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">alpha</span><span class="params">(string str)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">char</span> ch; string filtered = <span class="string">""</span>;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> ch in str &#123;</div><div class="line">            <span class="keyword">if</span> (ch &gt;= <span class="string">'a'</span> &amp;&amp; ch &lt;= <span class="string">'z'</span>) || (ch &gt;= <span class="string">'A'</span> &amp;&amp; ch &lt;= <span class="string">'Z'</span>)</div><div class="line">            &#123;</div><div class="line">              <span class="keyword">let</span> filtered .= ch;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> filtered;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">hello</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"hello zephir"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="编译扩展"><a href="#编译扩展" class="headerlink" title="编译扩展"></a>编译扩展</h2><p><code>upfriend</code>根目录运行<code>zephir bulid</code>编译扩展<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> zephir build     </div><div class="line"><span class="function"><span class="title">Preparing</span></span> <span class="keyword">for</span> PHP compilation...</div><div class="line"><span class="function"><span class="title">Preparing</span></span> configuration <span class="keyword">file</span>...</div><div class="line"><span class="function"><span class="title">Compiling</span></span>...</div><div class="line"><span class="function"><span class="title">Installing</span></span>...</div><div class="line">Extension installed!</div><div class="line">Add extension=utils.so to your php.ini</div><div class="line">Don<span class="string">'t forget to restart your web serverp</span></div></pre></td></tr></table></figure></p>
-<h2 id="使用扩展"><a href="#使用扩展" class="headerlink" title="使用扩展"></a>使用扩展</h2><p>编译成功，修改php.ini配置文件，添加一行<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">extension=upfirend<span class="selector-class">.so</span> <span class="comment">//upfriend.so与php.ini位于同一目录</span></div><div class="line">php -m  <span class="comment">//查看扩展是否安装成功</span></div></pre></td></tr></table></figure></p>
-<p>在php中使用这个类（扩展）的方法<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line">    $filter = <span class="keyword">new</span> Upfriend\Filter();</div><div class="line">    <span class="keyword">echo</span> $filter-&gt;alpha(<span class="string">"01he#l.lo?/1"</span>); <span class="comment">// prints hello</span></div><div class="line">    Upfriend::hello() <span class="comment">// prints hello zephir</span></div></pre></td></tr></table></figure></p>
-]]></content>
+<h2 id="初始化扩展"><a href="#初始化扩展" class="headerlink" title="初始化扩展"></a>初始化扩展</h2><pre><code>zephir init upfriend(upfriend扩展名)
+upfriend/
+   ext/
+   upfriend/
+</code></pre><h2 id="编写扩展"><a href="#编写扩展" class="headerlink" title="编写扩展"></a>编写扩展</h2><p>在<code>upfriend/upfriend</code>目录中创建<code>filter.zep</code>文件</p>
+<pre><code>namespace Upfriend;
+class Filter
+{
+    /**     
+    * Filters a string returning its alpha characters
+    * @param string str     
+    */
+    public function alpha(string str)
+    {
+        char ch; string filtered = &quot;&quot;;
+
+        for ch in str {
+            if (ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;) || (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;)
+            {
+              let filtered .= ch;
+            }
+        }
+
+        return filtered;
+    }
+    public static function hello()
+    {
+        echo &quot;hello zephir&quot;;
+    }
+}
+</code></pre><h2 id="编译扩展"><a href="#编译扩展" class="headerlink" title="编译扩展"></a>编译扩展</h2><p><code>upfriend</code>根目录运行<code>zephir bulid</code>编译扩展</p>
+<pre><code>$ zephir build     
+Preparing for PHP compilation...
+Preparing configuration file...
+Compiling...
+Installing...
+Extension installed!
+Add extension=utils.so to your php.ini
+Don&#39;t forget to restart your web serverp
+</code></pre><h2 id="使用扩展"><a href="#使用扩展" class="headerlink" title="使用扩展"></a>使用扩展</h2><p>编译成功，修改php.ini配置文件，添加一行</p>
+<pre><code>extension=upfirend.so //upfriend.so与php.ini位于同一目录
+php -m  //查看扩展是否安装成功
+</code></pre><p>在php中使用这个类（扩展）的方法</p>
+<pre><code>&lt;?php
+    $filter = new Upfriend\Filter();
+    echo $filter-&gt;alpha(&quot;01he#l.lo?/1&quot;); // prints hello
+    Upfriend::hello() // prints hello zephir
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -549,14 +964,53 @@
 <li>找回密码（这都帮忙做好了^_^）</li>
 </ul>
 <h3 id="数据库表准备"><a href="#数据库表准备" class="headerlink" title="数据库表准备"></a>数据库表准备</h3><p>注册其实是入库的过程，也就是说，你需要有一个表专门用以存储注册用户的信息，laravel的<code>migration</code>已经自动创建了<code>users</code>和<code>password_resets</code>建表语句，只需<code>php artisan migrate</code>即可创建2张表到数据库；况且Model层已经创建了<code>User.php</code><br><!-- more --></p>
-<h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 认证路由...</span></div><div class="line"><span class="string">Route:</span>:get(<span class="string">'auth/login'</span>, <span class="string">'Auth\AuthController@getLogin'</span>);</div><div class="line"><span class="string">Route:</span>:post(<span class="string">'auth/login'</span>, <span class="string">'Auth\AuthController@postLogin'</span>);</div><div class="line"><span class="string">Route:</span>:get(<span class="string">'auth/logout'</span>, <span class="string">'Auth\AuthController@getLogout'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 注册路由...</span></div><div class="line"><span class="string">Route:</span>:get(<span class="string">'auth/register'</span>, <span class="string">'Auth\AuthController@getRegister'</span>);</div><div class="line"><span class="string">Route:</span>:post(<span class="string">'auth/register'</span>, <span class="string">'Auth\AuthController@postRegister'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 发送密码重置链接路由</span></div><div class="line"><span class="string">Route:</span>:get(<span class="string">'password/email'</span>, <span class="string">'Auth\PasswordController@getEmail'</span>);</div><div class="line"><span class="string">Route:</span>:post(<span class="string">'password/email'</span>, <span class="string">'Auth\PasswordController@postEmail'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 密码重置路由</span></div><div class="line"><span class="string">Route:</span>:get(<span class="string">'password/reset/&#123;token&#125;'</span>, <span class="string">'Auth\PasswordController@getReset'</span>);</div><div class="line"><span class="string">Route:</span>:post(<span class="string">'password/reset'</span>, <span class="string">'Auth\PasswordController@postReset'</span>);</div><div class="line"></div><div class="line"><span class="comment">//成功认证后网站首页</span></div><div class="line"><span class="string">Route:</span>:get(<span class="string">'/'</span>, <span class="string">'UserController@index'</span>);</div></pre></td></tr></table></figure>
-<p>你会发现<code>AuthController</code>没有<code>getLogin、postLogin</code>这些方法，这里需要说明一下<a href="http://php.net/manual/zh/language.oop5.traits.php" target="_blank" rel="external">trait</a>官方手册讲述的已经很清楚，顺便学习一下overtrue的这篇文章<a href="http://overtrue.me/articles/2016/04/about-php-trait.html" target="_blank" rel="external">我所理解的 PHP Trait</a>，所以如果想知道auth怎么操作数据库，又是如何加载视图，做何种跳转，深入trait层去看代码就好。</p>
+<h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><pre><code>// 认证路由...
+Route::get(&#39;auth/login&#39;, &#39;Auth\AuthController@getLogin&#39;);
+Route::post(&#39;auth/login&#39;, &#39;Auth\AuthController@postLogin&#39;);
+Route::get(&#39;auth/logout&#39;, &#39;Auth\AuthController@getLogout&#39;);
+
+// 注册路由...
+Route::get(&#39;auth/register&#39;, &#39;Auth\AuthController@getRegister&#39;);
+Route::post(&#39;auth/register&#39;, &#39;Auth\AuthController@postRegister&#39;);
+
+// 发送密码重置链接路由
+Route::get(&#39;password/email&#39;, &#39;Auth\PasswordController@getEmail&#39;);
+Route::post(&#39;password/email&#39;, &#39;Auth\PasswordController@postEmail&#39;);
+
+// 密码重置路由
+Route::get(&#39;password/reset/{token}&#39;, &#39;Auth\PasswordController@getReset&#39;);
+Route::post(&#39;password/reset&#39;, &#39;Auth\PasswordController@postReset&#39;);
+
+//成功认证后网站首页
+Route::get(&#39;/&#39;, &#39;UserController@index&#39;);
+</code></pre><p>你会发现<code>AuthController</code>没有<code>getLogin、postLogin</code>这些方法，这里需要说明一下<a href="http://php.net/manual/zh/language.oop5.traits.php" target="_blank" rel="external">trait</a>官方手册讲述的已经很清楚，顺便学习一下overtrue的这篇文章<a href="http://overtrue.me/articles/2016/04/about-php-trait.html" target="_blank" rel="external">我所理解的 PHP Trait</a>，所以如果想知道auth怎么操作数据库，又是如何加载视图，做何种跳转，深入trait层去看代码就好。</p>
 <h3 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h3><p>laravel已经创建好了auth控制器，位于<code>Controllers/Auth/</code>下，而且中间件也都默认创建，基本的准备工作已经做足，只需你创建view，做一些简单的设置就可以使用了</p>
 <h4 id="部分属性设置"><a href="#部分属性设置" class="headerlink" title="部分属性设置"></a>部分属性设置</h4><p>注册登录和密码重置的路由入口都在<code>Controllers/Auth/</code>下的<code>AuthController.php</code>和<code>PasswordController.php</code>,他们都是用了<code>trait</code><br>如果你在控制器中没有定义一些path，<code>trait</code>底层都会使用自己定义的默认值，如果你喜欢这个默认值，你就按照他来写你的<code>route.php</code>吧，这里我们可以自己定义，覆盖<code>trait</code>中的这部分属性；如果不知道属性名称，进入<code>trait</code>查看</p>
 <blockquote>
-<p>eg:<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//in AuthController.php</span></div><div class="line"><span class="keyword">protected</span> $redirectPath = <span class="string">'/'</span>;  <span class="comment">//登录或注册成功进入首页，默认是/home</span></div><div class="line"><span class="keyword">protected</span> $redirectAfterLogout = <span class="string">'/auth/login'</span>; <span class="comment">//退出登录后跳转到登录页</span></div><div class="line"></div><div class="line"><span class="comment">//in PasswordController.php</span></div><div class="line"><span class="keyword">protected</span> $redirectPath = <span class="string">'/'</span>;  <span class="comment">//密码重置成功后跳转</span></div><div class="line"><span class="keyword">protected</span> $subject = <span class="string">'点击此处重置密码：'</span>;  <span class="comment">//邮件内容</span></div></pre></td></tr></table></figure></p>
+<p>eg:<br>```<br>//in AuthController.php<br>protected $redirectPath = ‘/‘;  //登录或注册成功进入首页，默认是/home<br>protected $redirectAfterLogout = ‘/auth/login’; //退出登录后跳转到登录页</p>
 </blockquote>
-<h4 id="发挥认证作用"><a href="#发挥认证作用" class="headerlink" title="发挥认证作用"></a>发挥认证作用</h4><p>比如在登录成功后跳转的路由’/‘，我们在<code>UserController</code>中怎么确定用户是否登录，如果没有登录怎么让用户成功登录后callback到其输入的地址；<strong>auth中间件开始发挥其作用了</strong>，所谓中间件，从字面上理解就是在用户访问该页面前，先去执行中间件内容。其实在Auth中也使用了中间件guest;在UserController中加入下面这个构造函数，即可让用户先登录再访问。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Requests</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Controller</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;middleware(<span class="string">'auth'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Display a listing of the resource.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> \Illuminate\Http\Response</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">(Request $request)</span></span></div><div class="line">    &#123;</div><div class="line">        $user = $request-&gt;user();</div><div class="line">        <span class="keyword">echo</span> $user[<span class="string">'name'</span>] . <span class="string">'登录成功！'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>//in PasswordController.php<br>protected $redirectPath = ‘/‘;  //密码重置成功后跳转<br>protected $subject = ‘点击此处重置密码：’;  //邮件内容</p>
+<pre><code>
+
+
+#### 发挥认证作用
+比如在登录成功后跳转的路由&#39;/&#39;，我们在`UserController`中怎么确定用户是否登录，如果没有登录怎么让用户成功登录后callback到其输入的地址；**auth中间件开始发挥其作用了**，所谓中间件，从字面上理解就是在用户访问该页面前，先去执行中间件内容。其实在Auth中也使用了中间件guest;在UserController中加入下面这个构造函数，即可让用户先登录再访问。
+</code></pre><p>&lt;?php</p>
+<p>namespace App\Http\Controllers;</p>
+<p>use Illuminate\Http\Request;</p>
+<p>use App\Http\Requests;<br>use App\Http\Controllers\Controller;</p>
+<p>class UserController extends Controller<br>{<br>    public function __construct()<br>    {<br>        $this-&gt;middleware(‘auth’);<br>    }<br>    /**</p>
+<pre><code> * Display a listing of the resource.
+ *
+ * @return \Illuminate\Http\Response
+ */
+public function index(Request $request)
+{
+    $user = $request-&gt;user();
+    echo $user[&#39;name&#39;] . &#39;登录成功！&#39;;
+}
+</code></pre><p>}</p>
+<p>```</p>
 <h3 id="发散"><a href="#发散" class="headerlink" title="发散"></a>发散</h3><h4 id="关于模板"><a href="#关于模板" class="headerlink" title="关于模板"></a>关于模板</h4><p>使用Form表单类，加上bootstrap打造属于自己的登录注册界面，模板文件名源于trait中定义的view，当然我们可以重写getLogin等方法，因为它们有的简单到只有一个<code>return veiw(*.blade.php)</code><br>主要创建以下模板：<a href="https://github.com/upeng/learn-laravel" target="_blank" rel="external">详细页面</a></p>
 <ul>
 <li>register.blade.php</li>
@@ -571,27 +1025,85 @@
     <entry>
       <title><![CDATA[几个值得深思的 PHP 面试问题]]></title>
       <url>http://upeng.github.io/2016/05/28/php-detail/</url>
-      <content type="html"><![CDATA[<p>5个值得深思的 PHP 面试问题<br>文章所罗列的问题虽然看似简单，但是每个背后都涵盖了一个或几个大家容易忽视的基础知识点，希望能够帮助到你的面试和平时工作。<br><a id="more"></a><br><strong>Q1</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$str1</span> = <span class="string">'hello world'</span>;</div><div class="line"><span class="variable">$str2</span> = <span class="string">'he'</span>;</div><div class="line"><span class="keyword">if</span> (strpos(<span class="variable">$str1</span>, <span class="variable">$str2</span>))</div><div class="line">&#123;</div><div class="line">    <span class="built_in">echo</span> <span class="string">"/"</span><span class="string">" . <span class="variable">$str1</span> . "</span>/<span class="string">" contains /"</span><span class="string">" . <span class="variable">$str2</span> . "</span>/<span class="string">""</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">"/"</span><span class="string">" . <span class="variable">$str1</span> . "</span>/<span class="string">" does not contain /"</span><span class="string">" . <span class="variable">$str2</span> . "</span>/<span class="string">""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>正确运行的输出结果:<br><!-- more --><br><code>&quot;hello world&quot; does not contain &quot;he&quot;</code><br>strpos是返回字符串str2在str1的位置，没有找到则返回false；php是弱类型语言；然而实际上这次返回了0而在if语句中0也被当作false,所以我们需要对false做类型判断，正确的代码如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$str1</span> = <span class="string">'hello world'</span>;</div><div class="line"><span class="variable">$str2</span> = <span class="string">'he'</span>;</div><div class="line"><span class="keyword">if</span> (strpos(<span class="variable">$str1</span>, <span class="variable">$str2</span>) !== <span class="literal">false</span>)</div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">"/"</span><span class="string">" . <span class="variable">$str1</span> . "</span>/<span class="string">" contains /"</span><span class="string">" . <span class="variable">$str2</span> . "</span>/<span class="string">""</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">echo</span> <span class="string">"/"</span><span class="string">" . <span class="variable">$str1</span> . "</span>/<span class="string">" does not contain /"</span><span class="string">" . <span class="variable">$str2</span> . "</span>/<span class="string">""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>需要注意的是我们使用了!==，在php 和 JS中= !相对== 更为严格需要要求数据类型一致。</p>
+      <content type="html"><![CDATA[<p>5个值得深思的 PHP 面试问题<br>文章所罗列的问题虽然看似简单，但是每个背后都涵盖了一个或几个大家容易忽视的基础知识点，希望能够帮助到你的面试和平时工作。<br><a id="more"></a><br><strong>Q1</strong></p>
+<pre><code>$str1 = &#39;hello world&#39;;
+$str2 = &#39;he&#39;;
+if (strpos($str1, $str2))
+{
+    echo &quot;/&quot;&quot; . $str1 . &quot;/&quot; contains /&quot;&quot; . $str2 . &quot;/&quot;&quot;;
+}
+else
+{
+    echo &quot;/&quot;&quot; . $str1 . &quot;/&quot; does not contain /&quot;&quot; . $str2 . &quot;/&quot;&quot;;
+}
+</code></pre><p>正确运行的输出结果:<br><!-- more --><br><code>&quot;hello world&quot; does not contain &quot;he&quot;</code><br>strpos是返回字符串str2在str1的位置，没有找到则返回false；php是弱类型语言；然而实际上这次返回了0而在if语句中0也被当作false,所以我们需要对false做类型判断，正确的代码如下:</p>
+<pre><code>$str1 = &#39;hello world&#39;;
+$str2 = &#39;he&#39;;
+if (strpos($str1, $str2) !== false)
+{
+    echo &quot;/&quot;&quot; . $str1 . &quot;/&quot; contains /&quot;&quot; . $str2 . &quot;/&quot;&quot;;
+}
+else
+{
+    echo &quot;/&quot;&quot; . $str1 . &quot;/&quot; does not contain /&quot;&quot; . $str2 . &quot;/&quot;&quot;;
+}
+</code></pre><p>需要注意的是我们使用了!==，在php 和 JS中= !相对== 更为严格需要要求数据类型一致。</p>
 <p><strong>Q2</strong><br>下面的输出结果会是怎样？</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$x</span> = 5;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;br /&gt;"</span>;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>+++<span class="variable">$x</span>++;</div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;br /&gt;"</span>;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>;</div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;br /&gt;"</span>;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>---<span class="variable">$x</span>--;</div><div class="line"><span class="built_in">echo</span> <span class="string">"&lt;br /&gt;"</span>;</div><div class="line"><span class="built_in">echo</span> <span class="variable">$x</span>;</div></pre></td></tr></table></figure>
-<p>实际运行结果是</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">5</span></div><div class="line"><span class="number">11</span></div><div class="line"><span class="number">7</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">5</span></div></pre></td></tr></table></figure>
-<p>关于 $x++ 和 $x–这个问题其实非常容易遇见，我们只需记住$x++使用最近的值，然后才自增。<br>运算符的优先级，++ 是明显高于 +，因此先执行++ 再执行 + 。关于运算符的优先级，有的时候我们真的可以通过括号来让我们的程序更让人直观的了解，毕竟代码不光是用于执行的，有的时候或许团队的可读性也是提高效率的一种。<br><strong>Q3</strong><br>关于变量的引用；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$a</span> = <span class="string">'1'</span>;</div><div class="line"><span class="variable">$b</span> = &amp;<span class="variable">$a</span>;</div><div class="line"><span class="variable">$b</span> = <span class="string">"2<span class="variable">$b</span>"</span>;</div></pre></td></tr></table></figure></p>
-<p>请问 $a 和 $b的值各位多少<br>部分第一时间会想到 $a=’1’  $b=’21’,仔细一看 $b=&amp;$a,这里$b是变量$a的引用而不是直接 赋值。</p>
+<pre><code>$x = 5;
+echo $x;
+echo &quot;&lt;br /&gt;&quot;;
+echo $x+++$x++;
+echo &quot;&lt;br /&gt;&quot;;
+echo $x;
+echo &quot;&lt;br /&gt;&quot;;
+echo $x---$x--;
+echo &quot;&lt;br /&gt;&quot;;
+echo $x;
+</code></pre><p>实际运行结果是</p>
+<pre><code>5
+11
+7
+1
+5
+</code></pre><p>关于 $x++ 和 $x–这个问题其实非常容易遇见，我们只需记住$x++使用最近的值，然后才自增。<br>运算符的优先级，++ 是明显高于 +，因此先执行++ 再执行 + 。关于运算符的优先级，有的时候我们真的可以通过括号来让我们的程序更让人直观的了解，毕竟代码不光是用于执行的，有的时候或许团队的可读性也是提高效率的一种。<br><strong>Q3</strong><br>关于变量的引用；</p>
+<pre><code>$a = &#39;1&#39;;
+$b = &amp;$a;
+$b = &quot;2$b&quot;;
+</code></pre><p>请问 $a 和 $b的值各位多少<br>部分第一时间会想到 $a=’1’  $b=’21’,仔细一看 $b=&amp;$a,这里$b是变量$a的引用而不是直接 赋值。</p>
 <p><strong>Q4</strong><br>下面是true还是false</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var_dump(<span class="number">0123</span> == <span class="number">123</span>)；</div><div class="line">var_dump('<span class="number">0123</span>' == <span class="number">123</span>);</div><div class="line">var_dump('<span class="number">0123</span>' == <span class="number">123</span>);</div></pre></td></tr></table></figure>
-<p>var_dump(0123 == 123);// false,PHP会默认把0123当作8进制来处理，实际转化为10进制就是83，显然这不是相等的。<br>var_dump(’0123′ == 123);// true这里php会非常有趣的将’0123′转换成一个数字而且默认去掉了前面的0也就是123==123<br>var_dump(’0123′ === 123);// false很显然上面的问题已经说过了数字和字符串类型不一致。</p>
+<pre><code>var_dump(0123 == 123)；
+var_dump(&#39;0123&#39; == 123);
+var_dump(&#39;0123&#39; == 123);
+</code></pre><p>var_dump(0123 == 123);// false,PHP会默认把0123当作8进制来处理，实际转化为10进制就是83，显然这不是相等的。<br>var_dump(’0123′ == 123);// true这里php会非常有趣的将’0123′转换成一个数字而且默认去掉了前面的0也就是123==123<br>var_dump(’0123′ === 123);// false很显然上面的问题已经说过了数字和字符串类型不一致。</p>
 <p><strong>Q5</strong><br>下面的代码有什么问题吗？输出会是什么，怎样修复它</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$referenceTable = <span class="keyword">array</span>();</div><div class="line">referenceTable[<span class="string">'val1'</span>] = <span class="keyword">array</span>(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line">referenceTable[<span class="string">'val2'</span>] = <span class="number">3</span>;</div><div class="line">referenceTable[<span class="string">'val3'</span>] = <span class="keyword">array</span>(<span class="number">4</span>, <span class="number">5</span>);</div><div class="line"></div><div class="line">$testArray = <span class="keyword">array</span>();</div><div class="line"></div><div class="line">$testArray = array_merge($testArray, $referenceTable[<span class="string">'val1'</span>]);</div><div class="line">var_dump($testArray);</div><div class="line">$testArray = array_merge($testArray, $referenceTable[<span class="string">'val2'</span>]);</div><div class="line">var_dump($testArray);</div><div class="line">$testArray = array_merge($testArray, $referenceTable[<span class="string">'val3'</span>]);</div><div class="line">var_dump($testArray);</div></pre></td></tr></table></figure>
-<p>实际输出如下：<br><figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">array</span>(<span class="number">2</span>) &#123;[<span class="number">0</span>] =&gt; <span class="keyword">int</span>(<span class="number">1</span>) [<span class="number">1</span>] =&gt; <span class="keyword">int</span>(<span class="number">2</span>)&#125;</div><div class="line"><span class="keyword">NULL</span></div><div class="line"><span class="keyword">NULL</span></div></pre></td></tr></table></figure></p>
-<p>运行的时候你或许还能看到下面的警告</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">warning: array_merge() : <span class="type">Argument</span> #<span class="number">2</span> <span class="keyword">is</span> <span class="keyword">not</span> an <span class="keyword">array</span></div><div class="line">warning: array_merge() : <span class="type">Argument</span> #<span class="number">1</span> <span class="keyword">is</span> <span class="keyword">not</span> an <span class="keyword">array</span></div></pre></td></tr></table></figure>
-<p>array_merge需要传入的参数都是数组，如果不是，则会返回null。 你可以这样修改</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$testArray = array_merge($testArray, (<span class="keyword">array</span>)$referenceTable[<span class="string">'val1'</span>]);</div><div class="line">var_dump($testArray);</div><div class="line">$testArray = array_merge($testArray, (<span class="keyword">array</span>)$referenceTable[<span class="string">'val2'</span>]);</div><div class="line">var_dump($testArray);</div><div class="line">$testArray = array_merge($testArray, (<span class="keyword">array</span>)$referenceTable[<span class="string">'val3'</span>]);</div><div class="line">var_dump($testArray);</div></pre></td></tr></table></figure>
-]]></content>
+<pre><code>$referenceTable = array();
+referenceTable[&#39;val1&#39;] = array(1, 2);
+referenceTable[&#39;val2&#39;] = 3;
+referenceTable[&#39;val3&#39;] = array(4, 5);
+
+$testArray = array();
+
+$testArray = array_merge($testArray, $referenceTable[&#39;val1&#39;]);
+var_dump($testArray);
+$testArray = array_merge($testArray, $referenceTable[&#39;val2&#39;]);
+var_dump($testArray);
+$testArray = array_merge($testArray, $referenceTable[&#39;val3&#39;]);
+var_dump($testArray);
+</code></pre><p>实际输出如下：</p>
+<pre><code>array(2) {[0] =&gt; int(1) [1] =&gt; int(2)}
+NULL
+NULL
+</code></pre><p>运行的时候你或许还能看到下面的警告</p>
+<pre><code>warning: array_merge() : Argument #2 is not an array
+warning: array_merge() : Argument #1 is not an array
+</code></pre><p>array_merge需要传入的参数都是数组，如果不是，则会返回null。 你可以这样修改</p>
+<pre><code>$testArray = array_merge($testArray, (array)$referenceTable[&#39;val1&#39;]);
+var_dump($testArray);
+$testArray = array_merge($testArray, (array)$referenceTable[&#39;val2&#39;]);
+var_dump($testArray);
+$testArray = array_merge($testArray, (array)$referenceTable[&#39;val3&#39;]);
+var_dump($testArray);
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -601,26 +1113,33 @@
 <li>migrations下生成<code>2015_12_13_104637_create_articles_table.php</code>文件<br><code>php artisan make:migration create_articles_table --create=articles</code></li>
 <li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code></li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Schema::create(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">    $table-&gt;increments(<span class="string">'id'</span>);</div><div class="line">    $table-&gt;string(<span class="string">'title'</span>);</div><div class="line">    $table-&gt;text(<span class="string">'content'</span>);</div><div class="line">    $table-&gt;timestamp(<span class="string">'published_at'</span>);</div><div class="line">    $table-&gt;timestamps();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<ul>
+<pre><code>Schema::create(&#39;articles&#39;, function (Blueprint $table) {
+    $table-&gt;increments(&#39;id&#39;);
+    $table-&gt;string(&#39;title&#39;);
+    $table-&gt;text(&#39;content&#39;);
+    $table-&gt;timestamp(&#39;published_at&#39;);
+    $table-&gt;timestamps();
+});
+</code></pre><ul>
 <li>保存文件，执行下面命令，数据库中生成articls表<br><code>php artisan migrate</code></li>
 </ul>
-<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//回退操作</span></div><div class="line">php artisan <span class="string">migrate:</span>rollback</div></pre></td></tr></table></figure>
-<a id="more"></a>
+<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><pre><code>//回退操作
+php artisan migrate:rollback
+</code></pre><a id="more"></a>
 <h3 id="增加表字段"><a href="#增加表字段" class="headerlink" title="增加表字段"></a>增加表字段</h3><ol>
 <li><p>如果将table drop后在create中添加字段,会删除表中已有数据。</p>
 </li>
-<li><p>在migrations下新建文件<code>add_intro_into_articles</code></p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:migration add_intro_into_articles --<span class="keyword">table</span>=articles</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改add_intro_into_articles</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    Schema::table(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">        $table-&gt;string(<span class="string">'intro'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    Schema::table(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">        $table-&gt;dropColumn(<span class="string">'intro'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li><p>在migrations下新建文件<code>add_intro_into_articles</code><br>```<br>php artisan make:migration add_intro_into_articles –table=articles</p>
 </li>
 </ol>
-<ul>
-<li>注意关键字的不同，导致生成的文件中匿名函数书写的不同<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--create=tablename</span></div><div class="line">Schema::create(<span class="string">'articles'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;&#125;);</div><div class="line"></div><div class="line"><span class="comment">--table=tablename</span></div><div class="line">Schema::<span class="built_in">table</span>(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;&#125;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
+<pre><code>
+3. 修改add_intro_into_articles
+</code></pre><p>public function up()<br>{<br>    Schema::table(‘articles’, function (Blueprint $table) {<br>        $table-&gt;string(‘intro’);<br>    });<br>}</p>
+<p>public function down()<br>{<br>    Schema::table(‘articles’, function (Blueprint $table) {<br>        $table-&gt;dropColumn(‘intro’);<br>    });<br>}</p>
+<pre><code>
+* 注意关键字的不同，导致生成的文件中匿名函数书写的不同
+</code></pre><p>–create=tablename<br>Schema::create(‘articles’,function(){});</p>
+<p>–table=tablename<br>Schema::table(‘articles’, function(){});<br>```</p>
 ]]></content>
     </entry>
     
@@ -628,16 +1147,75 @@
       <title><![CDATA[laravel的blade视图模板引擎]]></title>
       <url>http://upeng.github.io/2016/04/29/laravel-blade/</url>
       <content type="html"><![CDATA[<h3 id="blade模板引擎使用"><a href="#blade模板引擎使用" class="headerlink" title="blade模板引擎使用"></a>blade模板引擎使用</h3><p>很多时候，我们的view模板有很多重复的地方，比如head、footer部分，当然可以定义一些共用的部分，置于common文件夹下，然后使用include将其引入进来。而blade有一套自己的策略</p>
-<p>比如定义一个<code>common.blade.php</code>文件，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Laravel<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css?family=Lato:100"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line">            <span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;<span class="attribute">height</span>: <span class="number">100%</span>;&#125;</div><div class="line">            <span class="selector-tag">body</span> &#123;<span class="attribute">margin</span>: <span class="number">0</span>;<span class="attribute">width</span>: <span class="number">100%</span>;<span class="attribute">display</span>: table;<span class="attribute">font-weight</span>: <span class="number">100</span>;<span class="attribute">font-family</span>: <span class="string">'Lato'</span>;&#125;</div><div class="line">            <span class="selector-class">.container</span> &#123;<span class="attribute">text-align</span>: center;<span class="attribute">display</span>: table-cell;<span class="attribute">vertical-align</span>: middle;</div><div class="line">            &#125;</div><div class="line">            <span class="selector-class">.content</span> &#123;<span class="attribute">text-align</span>: center;<span class="attribute">display</span>: inline-block;&#125;</div><div class="line">            <span class="selector-class">.title</span> &#123;<span class="attribute">font-size</span>: <span class="number">96px</span>;&#125;</div><div class="line">            <span class="selector-class">.footer</span>&#123;<span class="attribute">color</span>: green;<span class="attribute">font-size</span>: <span class="number">100px</span>;&#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">            @yield('content')</div><div class="line">            @yield('footer')</div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<a id="more"></a>
+<p>比如定义一个<code>common.blade.php</code>文件，如下：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Laravel&lt;/title&gt;
+        &lt;link href=&quot;https://fonts.googleapis.com/css?family=Lato:100&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+        &lt;style&gt;
+            html, body {height: 100%;}
+            body {margin: 0;width: 100%;display: table;font-weight: 100;font-family: &#39;Lato&#39;;}
+            .container {text-align: center;display: table-cell;vertical-align: middle;
+            }
+            .content {text-align: center;display: inline-block;}
+            .title {font-size: 96px;}
+            .footer{color: green;font-size: 100px;}
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt; 
+        &lt;div class=&quot;container&quot;&gt;
+            @yield(&#39;content&#39;)
+            @yield(&#39;footer&#39;)
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><a id="more"></a>
 <ul>
 <li>其中，<code>@yield(&#39;content&#39;)</code>和 <code>@yield(&#39;footer&#39;)</code>是根据不同模板的需求进行动态设置与填充的</li>
 <li><code>welcome.blade.php</code>和<code>contact.blade.php</code>模板与<code>common.blade.php</code>样式相近，只是内容不同，或者后者内容更多。他们均可以继承<code>common.blade.php</code>的所有内容，需要content则可以自定义显示，需要footer可以自定义显示footer</li>
 <li>示例如下</li>
 </ul>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"># welcome.blade.php</div><div class="line"><span class="meta">@extends(<span class="meta-string">'common'</span>)</span>      <span class="comment">//继承common.blade.php</span></div><div class="line"><span class="meta">@section(<span class="meta-string">'content'</span>)</span>     <span class="comment">//开始</span></div><div class="line">    &lt;div <span class="class"><span class="keyword">class</span>="<span class="title">content</span>"&gt;</span></div><div class="line">        &lt;div <span class="class"><span class="keyword">class</span>="<span class="title">title</span>"&gt;<span class="title">Laravel</span> 5 -<span class="title">welcome</span>&lt;<span class="type">/div</span>&gt;</span></div><div class="line">    &lt;/div&gt;</div><div class="line"><span class="meta">@stop</span>                   <span class="comment">//结束</span></div><div class="line"></div><div class="line"></div><div class="line"># contact.blade.php</div><div class="line"><span class="meta">@extends(<span class="meta-string">'app'</span>)</span></div><div class="line"><span class="meta">@section(<span class="meta-string">'content'</span>)</span> </div><div class="line">    &lt;div <span class="class"><span class="keyword">class</span>="<span class="title">content</span>"&gt;</span></div><div class="line">        &lt;div <span class="class"><span class="keyword">class</span>="<span class="title">title</span>"&gt;<span class="title">contact</span> 825415473<span class="meta">@qq</span>.<span class="title">com</span>&lt;<span class="type">/div</span>&gt;</span></div><div class="line">    &lt;/div&gt;</div><div class="line"><span class="meta">@stop</span></div><div class="line"><span class="meta">@section(<span class="meta-string">'footer'</span>)</span></div><div class="line">    &lt;div <span class="class"><span class="keyword">class</span>="<span class="title">footer</span>"&gt;</span></div><div class="line">        Laravel <span class="number">5</span></div><div class="line">    &lt;/div&gt;</div><div class="line"><span class="meta">@stop</span></div></pre></td></tr></table></figure>
-<h3 id="blade中的条件判断和循环操作"><a href="#blade中的条件判断和循环操作" class="headerlink" title="blade中的条件判断和循环操作"></a>blade中的条件判断和循环操作</h3><figure class="highlight autoit"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 条件判断和循环操作，通用方法是在&lt;?php **** ?&gt;</span></div><div class="line"><span class="meta"># blade有自己的语法</span></div><div class="line"><span class="symbol">@extends</span>(<span class="string">'app'</span>)</div><div class="line"><span class="symbol">@section</span>(<span class="string">'content'</span>)</div><div class="line"></div><div class="line"><span class="symbol">@if</span>($condiction == <span class="string">'bool'</span>)</div><div class="line">    &lt;h1&gt;&#123;!!$name!!&#125;&lt;/h1&gt;</div><div class="line"><span class="symbol">@else</span></div><div class="line">    &lt;h1&gt;&#123;&#123;$time&#125;&#125;&lt;/h1&gt;</div><div class="line"><span class="symbol">@endif</span></div><div class="line"></div><div class="line">&lt;h2&gt;</div><div class="line">    <span class="symbol">@foreach</span>($arr as $key =&gt; $value)</div><div class="line">        &#123;&#123;$value&#125;&#125;</div><div class="line">    <span class="symbol">@endforeach</span></div><div class="line">&lt;/h2&gt;</div><div class="line"></div><div class="line"><span class="symbol">@stop</span></div></pre></td></tr></table></figure>
-]]></content>
+<pre><code># welcome.blade.php
+@extends(&#39;common&#39;)      //继承common.blade.php
+@section(&#39;content&#39;)     //开始
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;div class=&quot;title&quot;&gt;Laravel 5 -welcome&lt;/div&gt;
+    &lt;/div&gt;
+@stop                   //结束
+
+
+# contact.blade.php
+@extends(&#39;app&#39;)
+@section(&#39;content&#39;) 
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;div class=&quot;title&quot;&gt;contact 825415473@qq.com&lt;/div&gt;
+    &lt;/div&gt;
+@stop
+@section(&#39;footer&#39;)
+    &lt;div class=&quot;footer&quot;&gt;
+        Laravel 5
+    &lt;/div&gt;
+@stop
+</code></pre><h3 id="blade中的条件判断和循环操作"><a href="#blade中的条件判断和循环操作" class="headerlink" title="blade中的条件判断和循环操作"></a>blade中的条件判断和循环操作</h3><pre><code># 条件判断和循环操作，通用方法是在&lt;?php **** ?&gt;
+# blade有自己的语法
+@extends(&#39;app&#39;)
+@section(&#39;content&#39;)
+
+@if($condiction == &#39;bool&#39;)
+    &lt;h1&gt;{!!$name!!}&lt;/h1&gt;
+@else
+    &lt;h1&gt;{{$time}}&lt;/h1&gt;
+@endif
+
+&lt;h2&gt;
+    @foreach($arr as $key =&gt; $value)
+        {{$value}}
+    @endforeach
+&lt;/h2&gt;
+
+@stop
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -649,28 +1227,42 @@
 <li>离散度大的列放到联合索引的前面</li>
 </ol>
 <blockquote>
-<p>理解离散度<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> payment <span class="keyword">where</span> staff_id = <span class="number">2</span> <span class="keyword">AND</span> customer_id = <span class="number">584</span>;</div></pre></td></tr></table></figure></p>
-<p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
+<p>理解离散度</p>
+<pre><code>SELECT * FROM payment where staff_id = 2 AND customer_id = 584;
+</code></pre><p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
 </blockquote>
 <p><strong>备注</strong>：比较staff_id和customer_id两者的离散度，那个离散度高，那个列就放置到联合索引的前面<br><a id="more"></a></p>
 <blockquote>
 <p>计算离散度：</p>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> staff_id), <span class="keyword">count</span>(<span class="keyword">distinct</span> customer_id) <span class="keyword">FROM</span> payment;</div></pre></td></tr></table></figure>
-<h2 id="索引优化SQL的方法"><a href="#索引优化SQL的方法" class="headerlink" title="索引优化SQL的方法"></a>索引优化SQL的方法</h2><h3 id="索引的维护及优化—重复及冗余索引"><a href="#索引的维护及优化—重复及冗余索引" class="headerlink" title="索引的维护及优化—重复及冗余索引"></a>索引的维护及优化—重复及冗余索引</h3><blockquote>
+<pre><code>SELECT count(distinct staff_id), count(distinct customer_id) FROM payment;
+</code></pre><h2 id="索引优化SQL的方法"><a href="#索引优化SQL的方法" class="headerlink" title="索引优化SQL的方法"></a>索引优化SQL的方法</h2><h3 id="索引的维护及优化—重复及冗余索引"><a href="#索引的维护及优化—重复及冗余索引" class="headerlink" title="索引的维护及优化—重复及冗余索引"></a>索引的维护及优化—重复及冗余索引</h3><blockquote>
 <p>重复索引</p>
 </blockquote>
-<p>重复索引是指相同的列以相同的顺序建立同类型的索引，如下表中primary key 和ID列上的索引就是重复索引<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span>(</div><div class="line">    <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> primary <span class="keyword">key</span>,</div><div class="line">    <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span>,</div><div class="line">    titile <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> nullm,</div><div class="line">    <span class="keyword">unique</span>(<span class="keyword">id</span>)</div><div class="line">)<span class="keyword">engine</span>=<span class="keyword">innodb</span>;</div></pre></td></tr></table></figure></p>
-<blockquote>
+<p>重复索引是指相同的列以相同的顺序建立同类型的索引，如下表中primary key 和ID列上的索引就是重复索引</p>
+<pre><code>create table test(
+    id int not null primary key,
+    name varchar(10) not null,
+    titile varchar(50) not nullm,
+    unique(id)
+)engine=innodb;
+</code></pre><blockquote>
 <p>冗余索引</p>
 </blockquote>
-<p>冗余索引是指多个索引的前缀列相同，或是在联合索引中包含了主键的索引，下面这个例子中key(name, id)就是一个冗余索引<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span>(</div><div class="line">    <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> primary <span class="keyword">key</span>,</div><div class="line">    <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span>,</div><div class="line">    titile <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> nullm,</div><div class="line">    <span class="keyword">key</span>(<span class="keyword">name</span>, <span class="keyword">id</span>)</div><div class="line">)<span class="keyword">engine</span>=<span class="keyword">innodb</span>;</div></pre></td></tr></table></figure></p>
-<blockquote>
+<p>冗余索引是指多个索引的前缀列相同，或是在联合索引中包含了主键的索引，下面这个例子中key(name, id)就是一个冗余索引</p>
+<pre><code>create table test(
+    id int not null primary key,
+    name varchar(10) not null,
+    titile varchar(50) not nullm,
+    key(name, id)
+)engine=innodb;
+</code></pre><blockquote>
 <p>工具检查重复及冗余索引</p>
 </blockquote>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pt-duplicate-<span class="type">key</span>-checker -uroot  -p <span class="number">123</span> -h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></div></pre></td></tr></table></figure>
-<h3 id="索引的维护及优化—删除不用索引"><a href="#索引的维护及优化—删除不用索引" class="headerlink" title="索引的维护及优化—删除不用索引"></a>索引的维护及优化—删除不用索引</h3><p> 目前mysql中还没有记录索引的使用情况，但是在perconMySQL和MariaDB中可以通过INDEX_STATISTICS表来查看哪些索引未使用，但是在MySQL中目前只能通过慢查询日志配合pt-index-usage工具来进行索引使用情况的分析<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">pt</span>-<span class="built_in">index</span>-usage -uroot -p123 mysql-slow.<span class="built_in">log</span></div></pre></td></tr></table></figure></p>
-]]></content>
+<pre><code>pt-duplicate-key-checker -uroot  -p 123 -h 127.0.0.1
+</code></pre><h3 id="索引的维护及优化—删除不用索引"><a href="#索引的维护及优化—删除不用索引" class="headerlink" title="索引的维护及优化—删除不用索引"></a>索引的维护及优化—删除不用索引</h3><p> 目前mysql中还没有记录索引的使用情况，但是在perconMySQL和MariaDB中可以通过INDEX_STATISTICS表来查看哪些索引未使用，但是在MySQL中目前只能通过慢查询日志配合pt-index-usage工具来进行索引使用情况的分析</p>
+<pre><code>pt-index-usage -uroot -p123 mysql-slow.log
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -679,45 +1271,92 @@
       <content type="html"><![CDATA[<h3 id="访问流程"><a href="#访问流程" class="headerlink" title="访问流程"></a>访问流程</h3><blockquote>
 <p>路由文件routes.php</p>
 </blockquote>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*默认是以匿名函数的方式进行路由,/是当前域名下加载视图文件welcome.blade.php */</span></div><div class="line"></div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'welcome'</span>);</div><div class="line">&#125;);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'about'</span>);</div><div class="line">&#125;);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/blog'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'blog.content'</span>);  <span class="comment">//其中的“.”可以用“/”代替</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//如果使用非匿名函数的方式</span></div><div class="line"></div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/'</span>, <span class="string">'UserController@index'</span>);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/about'</span>, <span class="string">'UserController@about'</span>);</div><div class="line">Route::<span class="keyword">get</span>(<span class="string">'/blog'</span>, <span class="string">'UserController@blog'</span>);</div></pre></td></tr></table></figure>
-<h3 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h3><blockquote>
+<pre><code>/*默认是以匿名函数的方式进行路由,/是当前域名下加载视图文件welcome.blade.php */
+
+Route::get(&#39;/&#39;, function () {
+    return view(&#39;welcome&#39;);
+});
+Route::get(&#39;/about&#39;, function () {
+    return view(&#39;about&#39;);
+});
+Route::get(&#39;/blog&#39;, function () {
+    return view(&#39;blog.content&#39;);  //其中的“.”可以用“/”代替
+});
+
+//如果使用非匿名函数的方式
+
+Route::get(&#39;/&#39;, &#39;UserController@index&#39;);
+Route::get(&#39;/about&#39;, &#39;UserController@about&#39;);
+Route::get(&#39;/blog&#39;, &#39;UserController@blog&#39;);
+</code></pre><h3 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h3><blockquote>
 <ol>
 <li>可以手动创建Controller，也可以使用命令行创建控制器<code>php artisan</code>工具</li>
 <li>参数 –plain使用则不会生成一些默认的方法如index，create等</li>
 </ol>
 </blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:controller</span> <span class="selector-tag">UserController</span></div><div class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:controller</span> <span class="selector-tag">TestController</span> <span class="selector-tag">--plain</span></div></pre></td></tr></table></figure>
-<h3 id="视图的加载"><a href="#视图的加载" class="headerlink" title="视图的加载"></a>视图的加载</h3><blockquote>
+<pre><code>php artisan make:controller UserController
+php artisan make:controller TestController --plain
+</code></pre><h3 id="视图的加载"><a href="#视图的加载" class="headerlink" title="视图的加载"></a>视图的加载</h3><blockquote>
 <p>加载视图的方法</p>
 </blockquote>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'welcome'</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'blog/title'</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">return</span> <span class="title">view</span><span class="params">(<span class="string">'blog.content'</span>)</span></span>;</div></pre></td></tr></table></figure>
-<blockquote>
+<pre><code>return view(&#39;welcome&#39;);
+return view(&#39;blog/title&#39;);
+return view(&#39;blog.content&#39;);
+</code></pre><blockquote>
 <p>怎么向blade视图传递变量</p>
 </blockquote>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$name = <span class="string">'&lt;p style="color:red"&gt;upfriend&lt;/p&gt;'</span>;</div><div class="line">$time = date(<span class="string">'Y-m-d'</span>, time());</div><div class="line">$arr = <span class="keyword">array</span>(<span class="string">'first'</span> =&gt; <span class="string">'jerry'</span>, <span class="string">'last'</span> =&gt; <span class="string">'bool'</span>);</div><div class="line"></div><div class="line"><span class="comment">//传递变量-通用方式传递给$data数组</span></div><div class="line">$data[<span class="string">'name'</span>] = $name;</div><div class="line">$data[<span class="string">'time'</span>] = $time; </div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>, $data);</div><div class="line"></div><div class="line"><span class="comment">//Laravel链式操作方式 </span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>)-&gt;(<span class="string">'name'</span> =&gt; $name);  <span class="comment">//传递一个变量</span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>)-&gt;with(<span class="keyword">array</span>(<span class="string">'name'</span> =&gt; $name, <span class="string">'time'</span> =&gt; $time));  <span class="comment">//传递数组变量</span></div><div class="line"></div><div class="line"><span class="comment">//compact方法</span></div><div class="line"><span class="keyword">return</span> view(<span class="string">'blog.content'</span>, compact(<span class="string">'name'</span>, <span class="string">'time'</span>, <span class="string">'arr'</span>));  <span class="comment">//去掉$的变量名</span></div></pre></td></tr></table></figure>
-<blockquote>
+<pre><code>$name = &#39;&lt;p style=&quot;color:red&quot;&gt;upfriend&lt;/p&gt;&#39;;
+$time = date(&#39;Y-m-d&#39;, time());
+$arr = array(&#39;first&#39; =&gt; &#39;jerry&#39;, &#39;last&#39; =&gt; &#39;bool&#39;);
+
+//传递变量-通用方式传递给$data数组
+$data[&#39;name&#39;] = $name;
+$data[&#39;time&#39;] = $time; 
+return view(&#39;blog.content&#39;, $data);
+
+//Laravel链式操作方式 
+return view(&#39;blog.content&#39;)-&gt;(&#39;name&#39; =&gt; $name);  //传递一个变量
+return view(&#39;blog.content&#39;)-&gt;with(array(&#39;name&#39; =&gt; $name, &#39;time&#39; =&gt; $time));  //传递数组变量
+
+//compact方法
+return view(&#39;blog.content&#39;, compact(&#39;name&#39;, &#39;time&#39;, &#39;arr&#39;));  //去掉$的变量名
+</code></pre><blockquote>
 <p>如何正确输出变量的值</p>
 </blockquote>
-<figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="xml">//原生PHP输出数据方式，默认会对变量中的字符会进行转义（xss?）</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="php"><span class="meta">&lt;?</span>=name<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>   </div><div class="line"></div><div class="line">//Laravel的blade模板引擎渲染方式，两个大括号<span class="template-variable">&#123;&#123;&#125;</span><span class="xml">&#125;表示转义后输出</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="template-variable">&#123;&#123;name&#125;</span><span class="xml">&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  //浏览器输出<span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red"</span>&gt;</span>upfriend<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="template-variable">&#123;!!name!!&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>  //会见变量作为html,输出红色字体的upfriend</span></div></pre></td></tr></table></figure>
-]]></content>
+<pre><code>//原生PHP输出数据方式，默认会对变量中的字符会进行转义（xss?）
+&lt;h1&gt;&lt;?=name?&gt;&lt;/h1&gt;   
+
+//Laravel的blade模板引擎渲染方式，两个大括号{{}}表示转义后输出
+&lt;h1&gt;{{name}}&lt;/h1&gt;  //浏览器输出&lt;p style=&quot;color:red&quot;&gt;upfriend&lt;/p&gt;
+
+&lt;h1&gt;{!!name!!}&lt;/h1&gt;  //会见变量作为html,输出红色字体的upfriend
+</code></pre>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[mysql之sql优化-慢查询日志开启和查看（1）]]></title>
       <url>http://upeng.github.io/2016/04/24/mysqlperformance01/</url>
       <content type="html"><![CDATA[<p>如何发现有问题的SQL？使用慢查询日志【slow_query_log】对有效率问题的sql进行监控</p>
-<h3 id="查看慢查询日志开启状态"><a href="#查看慢查询日志开启状态" class="headerlink" title="查看慢查询日志开启状态"></a>查看慢查询日志开启状态</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variable</span>  s <span class="keyword">like</span> <span class="string">'slow_query_log'</span></div></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png" alt=""></p>
-<h3 id="记录未使用索引的查询"><a href="#记录未使用索引的查询" class="headerlink" title="记录未使用索引的查询"></a>记录未使用索引的查询</h3><p>未使用索引的查询默认是关闭的，如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'log_queries_not_using_indexes'</span>;</div></pre></td></tr></table></figure></p>
-<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/2655ccd1-69ab-4c54-b7bf-50b01b2b45e5.png" alt=""><br>需要打开未使用索引的查询，即未使用索引的查询会记录在案<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">global</span> log_queries_not_using_indexes=<span class="keyword">on</span></div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<h3 id="慢查询时间设置"><a href="#慢查询时间设置" class="headerlink" title="慢查询时间设置"></a>慢查询时间设置</h3><p> 查询时间超过多长时间的查询记录会记录到日志中； 默认为慢查询的时间10秒，即 超过10s的查询会记录到慢查询日志中<br><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/d99d63ee-d0e2-4bfb-8230-984d884b1528.png" alt=""><br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> global <span class="comment">long_query_time=0</span>;</div></pre></td></tr></table></figure></p>
-<p>a litter bug i think：在本窗口查询时发现慢查询时间还是10；但是重新打开一个窗口查询结果才是0<br>这样设置的目的是：不管什么查询，都会记录到慢查询日志中</p>
-<h3 id="打开慢查询日志"><a href="#打开慢查询日志" class="headerlink" title="打开慢查询日志"></a>打开慢查询日志</h3><p>设置完上述两项后，我们再打开慢查询日志<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log=<span class="keyword">on</span>;</div></pre></td></tr></table></figure></p>
-<p>输入两个查询语句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> actor <span class="keyword">limit</span> <span class="number">10</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> actor <span class="keyword">where</span> first_name <span class="keyword">like</span> <span class="string">'%A%'</span>;</div></pre></td></tr></table></figure></p>
-<h3 id="打开日志文件"><a href="#打开日志文件" class="headerlink" title="打开日志文件"></a>打开日志文件</h3><p>日志文件位置，查看变量slow_query_log_file的值<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'slow_query_log_file'</span>;</div></pre></td></tr></table></figure></p>
-<p>当然，我们也可以手动设置慢查询日志的存放路径及文件名<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log_file = ****</div></pre></td></tr></table></figure></p>
-<h3 id="慢查询日志所包含的内容"><a href="#慢查询日志所包含的内容" class="headerlink" title="慢查询日志所包含的内容"></a>慢查询日志所包含的内容</h3><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/e3f793a8-8b50-464c-b52b-5ffbc78ab187.png" alt=""> </p>
+<h3 id="查看慢查询日志开启状态"><a href="#查看慢查询日志开启状态" class="headerlink" title="查看慢查询日志开启状态"></a>查看慢查询日志开启状态</h3><pre><code>show variable  s like &#39;slow_query_log&#39;
+</code></pre><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png" alt=""></p>
+<h3 id="记录未使用索引的查询"><a href="#记录未使用索引的查询" class="headerlink" title="记录未使用索引的查询"></a>记录未使用索引的查询</h3><p>未使用索引的查询默认是关闭的，如下</p>
+<pre><code>show variables like &#39;log_queries_not_using_indexes&#39;;
+</code></pre><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/2655ccd1-69ab-4c54-b7bf-50b01b2b45e5.png" alt=""><br>需要打开未使用索引的查询，即未使用索引的查询会记录在案</p>
+<pre><code>set global log_queries_not_using_indexes=on
+</code></pre><a id="more"></a>
+<h3 id="慢查询时间设置"><a href="#慢查询时间设置" class="headerlink" title="慢查询时间设置"></a>慢查询时间设置</h3><p> 查询时间超过多长时间的查询记录会记录到日志中； 默认为慢查询的时间10秒，即 超过10s的查询会记录到慢查询日志中<br><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/d99d63ee-d0e2-4bfb-8230-984d884b1528.png" alt=""> </p>
+<pre><code>set global long_query_time=0;
+</code></pre><p>a litter bug i think：在本窗口查询时发现慢查询时间还是10；但是重新打开一个窗口查询结果才是0<br>这样设置的目的是：不管什么查询，都会记录到慢查询日志中</p>
+<h3 id="打开慢查询日志"><a href="#打开慢查询日志" class="headerlink" title="打开慢查询日志"></a>打开慢查询日志</h3><p>设置完上述两项后，我们再打开慢查询日志</p>
+<pre><code>set global slow_query_log=on;
+</code></pre><p>输入两个查询语句</p>
+<pre><code>select * from actor limit 10;
+select * from actor where first_name like &#39;%A%&#39;;
+</code></pre><h3 id="打开日志文件"><a href="#打开日志文件" class="headerlink" title="打开日志文件"></a>打开日志文件</h3><p>日志文件位置，查看变量slow_query_log_file的值</p>
+<pre><code>show variables like &#39;slow_query_log_file&#39;;
+</code></pre><p>当然，我们也可以手动设置慢查询日志的存放路径及文件名</p>
+<pre><code>set global slow_query_log_file = ****
+</code></pre><h3 id="慢查询日志所包含的内容"><a href="#慢查询日志所包含的内容" class="headerlink" title="慢查询日志所包含的内容"></a>慢查询日志所包含的内容</h3><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/e3f793a8-8b50-464c-b52b-5ffbc78ab187.png" alt=""> </p>
 <ol>
 <li>执行sql的主机信息<br><code># User@Host: root[root] @ localhost [127.0.0.1]</code></li>
 <li>sql的执行信息<br><code># Query_time: 0.001008  Lock_time: 0.000000 Rows_sent: 104  Rows_examined: 200</code></li>
@@ -731,8 +1370,17 @@
     <entry>
       <title><![CDATA[tmux linux下的终端复用工具]]></title>
       <url>http://upeng.github.io/2016/04/23/tmux%E5%B7%A5%E5%85%B7/</url>
-      <content type="html"><![CDATA[<h2 id="tmux常用命令"><a href="#tmux常用命令" class="headerlink" title="tmux常用命令"></a>tmux常用命令</h2><p><code>tmux</code>打开tmux服务，列出几个最常用的命令<br>①：ctrl+B ②：字符<br>如：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ctrl+B % 纵向切屏，将屏幕切成左右两半</div><div class="line"></div><div class="line">ctrl+B <span class="comment">" 单个双引号，水平切割屏幕上下两半</span></div><div class="line"></div><div class="line">ctrl+B <span class="keyword">x</span> 确定关掉当前面板（回话）吗？ <span class="string">'y'</span> -&gt;删除当前会话</div><div class="line"></div><div class="line">ctrl+B t 显示当前时间</div><div class="line"></div><div class="line">ctrl+B ↑ ↓ → ← 会话之间跳转</div></pre></td></tr></table></figure></p>
-<p>更多命令参考<br><a href="http://kumu-linux.github.io/blog/2013/08/06/tmux/" target="_blank" rel="external">http://kumu-linux.github.io/blog/2013/08/06/tmux/</a></p>
+      <content type="html"><![CDATA[<h2 id="tmux常用命令"><a href="#tmux常用命令" class="headerlink" title="tmux常用命令"></a>tmux常用命令</h2><p><code>tmux</code>打开tmux服务，列出几个最常用的命令<br>①：ctrl+B ②：字符<br>如：</p>
+<pre><code>ctrl+B % 纵向切屏，将屏幕切成左右两半
+
+ctrl+B &quot; 单个双引号，水平切割屏幕上下两半
+
+ctrl+B x 确定关掉当前面板（回话）吗？ &#39;y&#39; -&gt;删除当前会话
+
+ctrl+B t 显示当前时间
+
+ctrl+B ↑ ↓ → ← 会话之间跳转
+</code></pre><p>更多命令参考<br><a href="http://kumu-linux.github.io/blog/2013/08/06/tmux/" target="_blank" rel="external">http://kumu-linux.github.io/blog/2013/08/06/tmux/</a></p>
 ]]></content>
     </entry>
     
@@ -740,9 +1388,15 @@
       <title><![CDATA[mysql添加用户管理员及授权]]></title>
       <url>http://upeng.github.io/2016/04/10/mysql-grant/</url>
       <content type="html"><![CDATA[<h2 id="mysql添加用户管理员及授权"><a href="#mysql添加用户管理员及授权" class="headerlink" title="mysql添加用户管理员及授权"></a>mysql添加用户管理员及授权</h2><p>比如添加test用户，grant 高级 DBA 管理 MySQL 中所有数据库的权限</p>
-<h3 id="step1-创建用户"><a href="#step1-创建用户" class="headerlink" title="step1 创建用户"></a>step1 创建用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"%"</span>,<span class="string">"test"</span>,<span class="keyword">password</span>(<span class="string">"123qwe"</span>));</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"localhost"</span>,<span class="string">"test"</span>,<span class="keyword">password</span>(<span class="string">"123qwe"</span>));</div><div class="line">注：%和localhost的区别</div><div class="line">此处的"localhost"，是指该用户只能在本地登录，不能在另外一台机器上远程登录。如果想远程登录的话，将"localhost"改为"%"，表示在任何一台电脑上都可以登录。也可以指定某台机器可以远程登录。</div></pre></td></tr></table></figure>
-<h3 id="step2-为用户授权"><a href="#step2-为用户授权" class="headerlink" title="step2 为用户授权"></a>step2 为用户授权</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">授权格式：<span class="keyword">grant</span> 权限 <span class="keyword">on</span> 数据库.* <span class="keyword">to</span> 用户名@登录主机 <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">"密码"</span>;　</div><div class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> testDB.testTable <span class="keyword">to</span> <span class="keyword">test</span>@localhost <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'1234'</span>;</div><div class="line"><span class="keyword">grant</span> all <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="keyword">test</span>@<span class="string">'%'</span>;  //全部数据库表的权限</div></pre></td></tr></table></figure>
-<h3 id="step3-刷新系统权限表"><a href="#step3-刷新系统权限表" class="headerlink" title="step3 刷新系统权限表"></a>step3 刷新系统权限表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>; //刷新系统权限表</div></pre></td></tr></table></figure>]]></content>
+<h3 id="step1-创建用户"><a href="#step1-创建用户" class="headerlink" title="step1 创建用户"></a>step1 创建用户</h3><pre><code>insert into mysql.user(Host,User,Password) values(&quot;%&quot;,&quot;test&quot;,password(&quot;123qwe&quot;));
+insert into mysql.user(Host,User,Password) values(&quot;localhost&quot;,&quot;test&quot;,password(&quot;123qwe&quot;));
+注：%和localhost的区别
+此处的&quot;localhost&quot;，是指该用户只能在本地登录，不能在另外一台机器上远程登录。如果想远程登录的话，将&quot;localhost&quot;改为&quot;%&quot;，表示在任何一台电脑上都可以登录。也可以指定某台机器可以远程登录。
+</code></pre><h3 id="step2-为用户授权"><a href="#step2-为用户授权" class="headerlink" title="step2 为用户授权"></a>step2 为用户授权</h3><pre><code>授权格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by &quot;密码&quot;;　
+grant all privileges on testDB.testTable to test@localhost identified by &#39;1234&#39;;
+grant all on *.* to test@&#39;%&#39;;  //全部数据库表的权限
+</code></pre><h3 id="step3-刷新系统权限表"><a href="#step3-刷新系统权限表" class="headerlink" title="step3 刷新系统权限表"></a>step3 刷新系统权限表</h3><pre><code>flush privileges; //刷新系统权限表
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -817,20 +1471,211 @@
       <url>http://upeng.github.io/2015/10/14/php-design-single/</url>
       <content type="html"><![CDATA[<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p><code>场景</code>:有多个类需要读取数据库，而数据库连接类只需要一个对象就够了。其他的类只需调用这个类的连接对象即可<br><code>问题</code>：如何获取两个严格相等（全等）的对象（===）<br><code>答案</code>：只有当两个对象是同一个对象的时候才是全等的！</p>
 <a id="more"></a>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1、用同一个类new两个对象</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span>&#123;&#125;</div><div class="line">$s1 = <span class="keyword">new</span> Single();</div><div class="line">$s2 = <span class="keyword">new</span> Single();</div><div class="line"><span class="keyword">echo</span> $s1 === $s2 ? <span class="string">'是同一个对象'</span> : <span class="string">'不是同一个对象'</span>;   <span class="comment">//不是同一个对象，尽管他们内部方法变量完全相同</span></div><div class="line"></div><div class="line"><span class="comment">//2、不是同一个对象，主要是因为new了两次，所以下面要封锁new操作</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$s1 = <span class="keyword">new</span> Single();  </div><div class="line"></div><div class="line"><span class="comment">//3、封锁了外部的new操作，同时需要在内部进行new操作</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getIns</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">self</span>();</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">$s1 = <span class="keyword">new</span> Single();</div><div class="line">$s2 = <span class="keyword">new</span> Single();</div><div class="line"><span class="keyword">echo</span> $s1 === $s2 ? <span class="string">'是同一个对象'</span> : <span class="string">'不是同一个对象'</span>;</div><div class="line"><span class="comment">//不是同一个对象！因为内部new了两次！</span></div><div class="line"></div><div class="line"><span class="comment">//4、getIns先判断实例</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $ins = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getIns</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">self</span>::$ins === <span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">self</span>::$ins = <span class="keyword">new</span> <span class="keyword">self</span>();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span>::$ins;</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">$s1 = <span class="keyword">new</span> Single();</div><div class="line">$s2 = <span class="keyword">new</span> Single();</div><div class="line"><span class="keyword">echo</span> $s1 === $s2 ? <span class="string">'是同一个对象'</span> : <span class="string">'不是同一个对象'</span>;<span class="comment">//是同一个对象</span></div><div class="line"></div><div class="line"> &gt; 注:**方法前加<span class="keyword">final</span>，则方法不能被覆盖**，否则当有类继承它的时候会覆盖construct,又不是同一个对象了，**类前加<span class="keyword">final</span>，则类不能被继承**</div><div class="line"></div><div class="line"><span class="comment">//5、禁止覆盖方法和克隆对象</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $ins = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getIns</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">self</span>::$ins === <span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">self</span>::$ins = <span class="keyword">new</span> <span class="keyword">self</span>();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span>::$ins;</div><div class="line">    &#125; </div><div class="line">    <span class="comment">//禁止覆盖方法</span></div><div class="line">    <span class="keyword">final</span> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="comment">//防止克隆</span></div><div class="line">    <span class="keyword">final</span> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">__clone</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">dbSingle</span> <span class="keyword">extends</span> <span class="title">Single</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line">$s1 = <span class="keyword">new</span> dbSingle();</div><div class="line">$s2 = <span class="keyword">new</span> dbSingle();</div><div class="line"></div><div class="line">$s1 = Single::getIns();</div><div class="line">$s2 = <span class="keyword">clone</span> $s1;</div></pre></td></tr></table></figure>]]></content>
+<pre><code>//1、用同一个类new两个对象
+class Single{}
+$s1 = new Single();
+$s2 = new Single();
+echo $s1 === $s2 ? &#39;是同一个对象&#39; : &#39;不是同一个对象&#39;;   //不是同一个对象，尽管他们内部方法变量完全相同
+
+//2、不是同一个对象，主要是因为new了两次，所以下面要封锁new操作
+class Single
+{
+    protected function __construct(){}
+}
+
+$s1 = new Single();  
+
+//3、封锁了外部的new操作，同时需要在内部进行new操作
+
+class Single
+{
+    public static function getIns()
+    {
+        return new self();
+    } 
+    protected function __construct(){}
+}
+$s1 = new Single();
+$s2 = new Single();
+echo $s1 === $s2 ? &#39;是同一个对象&#39; : &#39;不是同一个对象&#39;;
+//不是同一个对象！因为内部new了两次！
+
+//4、getIns先判断实例
+class Single
+{
+    protected static $ins = null;
+    public static function getIns()
+    {
+        if (self::$ins === null)
+        {
+            self::$ins = new self();
+        }
+        return self::$ins;
+    } 
+    protected function __construct(){}
+}
+$s1 = new Single();
+$s2 = new Single();
+echo $s1 === $s2 ? &#39;是同一个对象&#39; : &#39;不是同一个对象&#39;;//是同一个对象
+
+ &gt; 注:**方法前加final，则方法不能被覆盖**，否则当有类继承它的时候会覆盖construct,又不是同一个对象了，**类前加final，则类不能被继承**
+
+//5、禁止覆盖方法和克隆对象
+class Single
+{
+    protected static $ins = null;
+    public static function getIns()
+    {
+        if (self::$ins === null)
+        {
+            self::$ins = new self();
+        }
+        return self::$ins;
+    } 
+    //禁止覆盖方法
+    final protected function __construct(){}
+    //防止克隆
+    final protected function __clone(){}
+}
+
+class dbSingle extends Single
+{
+
+}
+$s1 = new dbSingle();
+$s2 = new dbSingle();
+
+$s1 = Single::getIns();
+$s2 = clone $s1;
+</code></pre>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[PHP设计模式-工厂模式]]></title>
       <url>http://upeng.github.io/2015/10/12/php-design-model/</url>
-      <content type="html"><![CDATA[<h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><p>直接上代码，直观了解工厂模式！<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line"><span class="comment">//接口，是客户端和服务端共同遵守的开发规范</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">db</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span>&#123;&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//服务端</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dbmysql</span> <span class="keyword">implements</span> <span class="title">db</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'connected the mysql'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dbsqlite</span> <span class="keyword">implements</span> <span class="title">db</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'connected the sqlite'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//客户端 </span></div><div class="line">$mysql = <span class="keyword">new</span> Dbmysql();</div><div class="line">$mysql-&gt;conn();</div><div class="line"></div><div class="line">$sqlite = <span class="keyword">new</span> Dbsqlite();</div><div class="line">$sqlite-&gt;conn();</div><div class="line"></div><div class="line"><span class="comment">//如果服务端不想让客户端知道自己内部类的实现细节，统一一个固定的入口，这样就是我们所说的</span></div><div class="line"><span class="comment">//使用方知道的越少越好！将上述两个类封装起来</span></div><div class="line"></div><div class="line"><span class="comment">//服务端，开发接口Dbconnect::type(@param)</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dbconnect</span> </span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">type</span><span class="params">($type)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> ($type == <span class="string">'mysql'</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Dbmysql();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ($type == <span class="string">'sqlite'</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Dbsqlite();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"Error type is not exist"</span>, <span class="number">1</span>);</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//客户端</span></div><div class="line">$mysql = Dbconnect::type(<span class="string">'mysql'</span>);</div><div class="line">$mysql-&gt;conn();</div><div class="line"></div><div class="line">$sqlite = Dbconnect::type(<span class="string">'sqlite'</span>);</div><div class="line">$sqlite-&gt;conn();</div></pre></td></tr></table></figure></p>
-<p>在我们使用围脖的接口时，和这个有点类似，一个业务需求给你一个方法如showbatch(),friendship(),show()；当然他们是某个类的静态方法，我们不需要知道它是如何具体实现的，只要知道，当我们传递合适的参数，使用这个接口，就可以获得自己想要的数据即可</p>
+      <content type="html"><![CDATA[<h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><p>直接上代码，直观了解工厂模式！</p>
+<pre><code>&lt;?php
+//接口，是客户端和服务端共同遵守的开发规范
+interface db
+{
+    public function conn(){};
+}
+
+//服务端
+class Dbmysql implements db
+{
+    public function conn()
+    {
+        echo &#39;connected the mysql&#39;;
+    }
+}
+
+class Dbsqlite implements db
+{
+    public function conn()
+    {
+        echo &#39;connected the sqlite&#39;;
+    }
+}
+
+//客户端 
+$mysql = new Dbmysql();
+$mysql-&gt;conn();
+
+$sqlite = new Dbsqlite();
+$sqlite-&gt;conn();
+
+//如果服务端不想让客户端知道自己内部类的实现细节，统一一个固定的入口，这样就是我们所说的
+//使用方知道的越少越好！将上述两个类封装起来
+
+//服务端，开发接口Dbconnect::type(@param)
+
+class Dbconnect 
+{
+    public static function type($type)
+    {
+        if ($type == &#39;mysql&#39;)
+        {
+            return new Dbmysql();
+        }
+        else if ($type == &#39;sqlite&#39;)
+        {
+            return new Dbsqlite();
+        }
+        else
+        {
+            throw new Exception(&quot;Error type is not exist&quot;, 1);
+
+        }
+    }
+}
+
+//客户端
+$mysql = Dbconnect::type(&#39;mysql&#39;);
+$mysql-&gt;conn();
+
+$sqlite = Dbconnect::type(&#39;sqlite&#39;);
+$sqlite-&gt;conn();
+</code></pre><p>在我们使用围脖的接口时，和这个有点类似，一个业务需求给你一个方法如showbatch(),friendship(),show()；当然他们是某个类的静态方法，我们不需要知道它是如何具体实现的，只要知道，当我们传递合适的参数，使用这个接口，就可以获得自己想要的数据即可</p>
 <p><code>Q:现在如果需要连接oracle、PDO、SqlServer，怎么办？当然php可以直接修改服务端的代码，增加else if，但是对于java,c++而言，如果修改代码，还需要再次编译，这是非常耗时的!</code></p>
 <blockquote>
 <p><strong>在面向对象设计（OOD）设计法则中，重要的开闭原则：对于修改是封闭，对于扩展是开放的</strong></p>
 </blockquote>
-<h2 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h2><p><strong>注意开闭原则</strong><br>//<strong>服务端</strong><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Factory</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span><span class="params">()</span></span>&#123;&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">mysqlFactory</span> <span class="keyword">implements</span> <span class="title">Factory</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Dbmysql();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">sqliteFactory</span> <span class="keyword">implements</span> <span class="title">Factory</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Dbsqlite();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//**客户端**</span></div><div class="line"><span class="comment">//由于开放了两个接口，一个是创建数据库，一个是连接数据库</span></div><div class="line"></div><div class="line">$fact = <span class="keyword">new</span> mysqlFactory();</div><div class="line">$db = $fact-&gt;createDb();</div><div class="line">$db-&gt;conn();</div><div class="line"></div><div class="line">$fact = <span class="keyword">new</span> sqliteFactory();</div><div class="line">$db-&gt;$fact-&gt;createDb();</div><div class="line">$db-&gt;conn(); </div><div class="line"></div><div class="line"><span class="comment">//现在如果新增了oracle数据库连接，就可以扩展oracle，不需要修改代码，扩展如下：</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dboracle</span> <span class="keyword">implements</span> <span class="title">db</span>()</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        echo <span class="string">'connected oracle database'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">oracleFactory</span> <span class="keyword">implements</span> <span class="title">Factory</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Dboracle();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">$fact = <span class="keyword">new</span> oracleFactory();</div><div class="line">$db = $fact-&gt;createDb();</div><div class="line">$db-&gt;conn();</div></pre></td></tr></table></figure></p>
-]]></content>
+<h2 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h2><p><strong>注意开闭原则</strong><br>//<strong>服务端</strong></p>
+<pre><code>interface Factory
+{
+    public function createDb(){};
+}
+
+class mysqlFactory implements Factory
+{
+    public function createDb()
+    {
+        return new Dbmysql();
+    }
+}
+
+class sqliteFactory implements Factory
+{
+    public function createDb()
+    {
+        return new Dbsqlite();
+    }
+}
+
+//**客户端**
+//由于开放了两个接口，一个是创建数据库，一个是连接数据库
+
+$fact = new mysqlFactory();
+$db = $fact-&gt;createDb();
+$db-&gt;conn();
+
+$fact = new sqliteFactory();
+$db-&gt;$fact-&gt;createDb();
+$db-&gt;conn(); 
+
+//现在如果新增了oracle数据库连接，就可以扩展oracle，不需要修改代码，扩展如下：
+
+class Dboracle implements db()
+{
+    public function conn()
+    {
+        echo &#39;connected oracle database&#39;;
+    }
+}
+class oracleFactory implements Factory
+{
+    public function createDb()
+    {
+        return new Dboracle();
+    }
+}
+
+
+$fact = new oracleFactory();
+$db = $fact-&gt;createDb();
+$db-&gt;conn();
+</code></pre>]]></content>
     </entry>
     
     <entry>
@@ -856,7 +1701,7 @@ class  Blog_model  extends  CI_Model {    //class BlogModel extends  CI_Model也
 }
 
 载入model以及使用model
-$this-&gt;load-&gt;model(&apos;Blog_model&apos;);    //model类名  $this-&gt;load-&gt;model(&apos;BlogModel&apos;); 
+$this-&gt;load-&gt;model(&#39;Blog_model&#39;);    //model类名  $this-&gt;load-&gt;model(&#39;BlogModel&#39;); 
 $this-&gt;Blog_model-&gt;function();         //载入之后可直接通过类名访问其方法$this-&gt;BlogModel-&gt;function();
 
 模型的文件名没有要求，但是建议全部小写,且注意文件名和类名同一个单词 
@@ -888,7 +1733,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
    class BlogModel  extends  CI_Controller{
        function __construct(){
             parent::__construct();
-            $this-&gt;load-&gt;model(&apos;UserModel&apos;); 
+            $this-&gt;load-&gt;model(&#39;UserModel&#39;); 
         }
     }
   【3】view，文件名userblog.php 或user/blog.php  载入方法$this-&gt;load-&gt;view(&quot;userblog&quot;);或
@@ -925,9 +1770,15 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
     <entry>
       <title><![CDATA[jquery中html()、text()、val()与js中的对应属性]]></title>
       <url>http://upeng.github.io/2015/07/15/html-js/</url>
-      <content type="html"><![CDATA[<h3 id="html"><a href="#html" class="headerlink" title="html()"></a>html()</h3><p>类似于javascript的InnerHtml属性，可以用来读取或者设置某个元素中的HTML内容<br> 例如：Javascript代码<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="params">&lt;p&gt;</span><span class="params">&lt;strong&gt;</span>Hello world<span class="params">&lt;/strong&gt;</span><span class="params">&lt;/p&gt;</span>  </div><div class="line"> alert($(<span class="string">'p'</span>).html());   </div><div class="line">返回： <span class="params">&lt;strong&gt;</span>Hello world<span class="params">&lt;/strong&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="text"><a href="#text" class="headerlink" title="text()"></a>text()</h3><p> 类似于javascript的InnerText属性，可以用来读取或者设置某个元素的文本内容<br>  例如：  Javascript代码<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;<span class="xml"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>   </div><div class="line">  alert($(<span class="string">'p'</span>).text());   </div><div class="line">返回：  Hello world</div></pre></td></tr></table></figure></p>
-<h3 id="val"><a href="#val" class="headerlink" title="val()"></a>val()</h3><p> 类似于javascript中的value属性，可以用来设置或者获取元素的值，无论元素是文本框，下拉列表还是单选框，如果元素时多选，则返回一个包含所有选择的值的数组。 </p>
+      <content type="html"><![CDATA[<h3 id="html"><a href="#html" class="headerlink" title="html()"></a>html()</h3><p>类似于javascript的InnerHtml属性，可以用来读取或者设置某个元素中的HTML内容<br> 例如：Javascript代码  </p>
+<pre><code>    &lt;p&gt;&lt;strong&gt;Hello world&lt;/strong&gt;&lt;/p&gt;  
+     alert($(&#39;p&#39;).html());   
+    返回： &lt;strong&gt;Hello world&lt;/strong&gt;
+</code></pre><h3 id="text"><a href="#text" class="headerlink" title="text()"></a>text()</h3><p> 类似于javascript的InnerText属性，可以用来读取或者设置某个元素的文本内容<br>  例如：  Javascript代码 </p>
+<pre><code>    &lt;p&gt;&lt;strong&gt;Hello world&lt;/strong&gt;&lt;/p&gt;   
+      alert($(&#39;p&#39;).text());   
+    返回：  Hello world
+</code></pre><h3 id="val"><a href="#val" class="headerlink" title="val()"></a>val()</h3><p> 类似于javascript中的value属性，可以用来设置或者获取元素的值，无论元素是文本框，下拉列表还是单选框，如果元素时多选，则返回一个包含所有选择的值的数组。 </p>
 ]]></content>
     </entry>
     

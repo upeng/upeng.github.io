@@ -89,9 +89,12 @@
           <blockquote>
 <p>问题来源：</p>
 </blockquote>
-<p>写了一个<code>Model_User</code>，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在<code>__construct()</code>中，然后去调用<code>Model_User</code>的静态方法<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model_User::fu<span class="symbol">nc1</span><span class="comment">()</span>;</div></pre></td></tr></table></figure></p>
-<p><code>报错：</code><br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Creating <span class="keyword">default</span> <span class="keyword">object</span> <span class="keyword">from</span> empty <span class="keyword">value</span>。。。</div><div class="line">Using $<span class="keyword">this</span> <span class="keyword">when</span> not <span class="keyword">in</span> <span class="keyword">object</span> context <span class="keyword">in</span>。。。。</div></pre></td></tr></table></figure></p>
-<p>因为我们直接使用类调用静态方法的方式，是根本不会走到构造方法的，而构造方法只有在new实例的时候才会调用。同时因为<code>$this</code>本身就是一个instance（实例）而我们根本就没有new 对象，所以。。。<br>
+<p>写了一个<code>Model_User</code>，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在<code>__construct()</code>中，然后去调用<code>Model_User</code>的静态方法</p>
+<pre><code>Model_User::func1();
+</code></pre><p><code>报错：</code></p>
+<pre><code>Creating default object from empty value。。。
+Using $this when not in object context in。。。。
+</code></pre><p>因为我们直接使用类调用静态方法的方式，是根本不会走到构造方法的，而构造方法只有在new实例的时候才会调用。同时因为<code>$this</code>本身就是一个instance（实例）而我们根本就没有new 对象，所以。。。<br>
         
       </div>
       <p class="repo-list-meta">

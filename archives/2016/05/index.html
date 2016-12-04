@@ -204,11 +204,19 @@
 <li>migrations下生成<code>2015_12_13_104637_create_articles_table.php</code>文件<br><code>php artisan make:migration create_articles_table --create=articles</code></li>
 <li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code></li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Schema::create(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">    $table-&gt;increments(<span class="string">'id'</span>);</div><div class="line">    $table-&gt;string(<span class="string">'title'</span>);</div><div class="line">    $table-&gt;text(<span class="string">'content'</span>);</div><div class="line">    $table-&gt;timestamp(<span class="string">'published_at'</span>);</div><div class="line">    $table-&gt;timestamps();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<ul>
+<pre><code>Schema::create(&#39;articles&#39;, function (Blueprint $table) {
+    $table-&gt;increments(&#39;id&#39;);
+    $table-&gt;string(&#39;title&#39;);
+    $table-&gt;text(&#39;content&#39;);
+    $table-&gt;timestamp(&#39;published_at&#39;);
+    $table-&gt;timestamps();
+});
+</code></pre><ul>
 <li>保存文件，执行下面命令，数据库中生成articls表<br><code>php artisan migrate</code></li>
 </ul>
-<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//回退操作</span></div><div class="line">php artisan <span class="string">migrate:</span>rollback</div></pre></td></tr></table></figure>
+<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><pre><code>//回退操作
+php artisan migrate:rollback
+</code></pre>
         
       </div>
       <p class="repo-list-meta">

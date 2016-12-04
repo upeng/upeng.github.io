@@ -70,28 +70,42 @@
 <li>离散度大的列放到联合索引的前面</li>
 </ol>
 <blockquote>
-<p>理解离散度<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> payment <span class="keyword">where</span> staff_id = <span class="number">2</span> <span class="keyword">AND</span> customer_id = <span class="number">584</span>;</div></pre></td></tr></table></figure></p>
-<p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
+<p>理解离散度</p>
+<pre><code>SELECT * FROM payment where staff_id = 2 AND customer_id = 584;
+</code></pre><p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
 </blockquote>
 <p><strong>备注</strong>：比较staff_id和customer_id两者的离散度，那个离散度高，那个列就放置到联合索引的前面<br><a id="more"></a></p>
 <blockquote>
 <p>计算离散度：</p>
 </blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> staff_id), <span class="keyword">count</span>(<span class="keyword">distinct</span> customer_id) <span class="keyword">FROM</span> payment;</div></pre></td></tr></table></figure>
-<h2 id="索引优化SQL的方法"><a href="#索引优化SQL的方法" class="headerlink" title="索引优化SQL的方法"></a>索引优化SQL的方法</h2><h3 id="索引的维护及优化—重复及冗余索引"><a href="#索引的维护及优化—重复及冗余索引" class="headerlink" title="索引的维护及优化—重复及冗余索引"></a>索引的维护及优化—重复及冗余索引</h3><blockquote>
+<pre><code>SELECT count(distinct staff_id), count(distinct customer_id) FROM payment;
+</code></pre><h2 id="索引优化SQL的方法"><a href="#索引优化SQL的方法" class="headerlink" title="索引优化SQL的方法"></a>索引优化SQL的方法</h2><h3 id="索引的维护及优化—重复及冗余索引"><a href="#索引的维护及优化—重复及冗余索引" class="headerlink" title="索引的维护及优化—重复及冗余索引"></a>索引的维护及优化—重复及冗余索引</h3><blockquote>
 <p>重复索引</p>
 </blockquote>
-<p>重复索引是指相同的列以相同的顺序建立同类型的索引，如下表中primary key 和ID列上的索引就是重复索引<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span>(</div><div class="line">    <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> primary <span class="keyword">key</span>,</div><div class="line">    <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span>,</div><div class="line">    titile <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> nullm,</div><div class="line">    <span class="keyword">unique</span>(<span class="keyword">id</span>)</div><div class="line">)<span class="keyword">engine</span>=<span class="keyword">innodb</span>;</div></pre></td></tr></table></figure></p>
-<blockquote>
+<p>重复索引是指相同的列以相同的顺序建立同类型的索引，如下表中primary key 和ID列上的索引就是重复索引</p>
+<pre><code>create table test(
+    id int not null primary key,
+    name varchar(10) not null,
+    titile varchar(50) not nullm,
+    unique(id)
+)engine=innodb;
+</code></pre><blockquote>
 <p>冗余索引</p>
 </blockquote>
-<p>冗余索引是指多个索引的前缀列相同，或是在联合索引中包含了主键的索引，下面这个例子中key(name, id)就是一个冗余索引<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">test</span>(</div><div class="line">    <span class="keyword">id</span> <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> primary <span class="keyword">key</span>,</div><div class="line">    <span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span>,</div><div class="line">    titile <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> nullm,</div><div class="line">    <span class="keyword">key</span>(<span class="keyword">name</span>, <span class="keyword">id</span>)</div><div class="line">)<span class="keyword">engine</span>=<span class="keyword">innodb</span>;</div></pre></td></tr></table></figure></p>
-<blockquote>
+<p>冗余索引是指多个索引的前缀列相同，或是在联合索引中包含了主键的索引，下面这个例子中key(name, id)就是一个冗余索引</p>
+<pre><code>create table test(
+    id int not null primary key,
+    name varchar(10) not null,
+    titile varchar(50) not nullm,
+    key(name, id)
+)engine=innodb;
+</code></pre><blockquote>
 <p>工具检查重复及冗余索引</p>
 </blockquote>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pt-duplicate-<span class="type">key</span>-checker -uroot  -p <span class="number">123</span> -h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></div></pre></td></tr></table></figure>
-<h3 id="索引的维护及优化—删除不用索引"><a href="#索引的维护及优化—删除不用索引" class="headerlink" title="索引的维护及优化—删除不用索引"></a>索引的维护及优化—删除不用索引</h3><p> 目前mysql中还没有记录索引的使用情况，但是在perconMySQL和MariaDB中可以通过INDEX_STATISTICS表来查看哪些索引未使用，但是在MySQL中目前只能通过慢查询日志配合pt-index-usage工具来进行索引使用情况的分析<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">pt</span>-<span class="built_in">index</span>-usage -uroot -p123 mysql-slow.<span class="built_in">log</span></div></pre></td></tr></table></figure></p>
-
+<pre><code>pt-duplicate-key-checker -uroot  -p 123 -h 127.0.0.1
+</code></pre><h3 id="索引的维护及优化—删除不用索引"><a href="#索引的维护及优化—删除不用索引" class="headerlink" title="索引的维护及优化—删除不用索引"></a>索引的维护及优化—删除不用索引</h3><p> 目前mysql中还没有记录索引的使用情况，但是在perconMySQL和MariaDB中可以通过INDEX_STATISTICS表来查看哪些索引未使用，但是在MySQL中目前只能通过慢查询日志配合pt-index-usage工具来进行索引使用情况的分析</p>
+<pre><code>pt-index-usage -uroot -p123 mysql-slow.log
+</code></pre>
             </article>
             
                 <div class="share">

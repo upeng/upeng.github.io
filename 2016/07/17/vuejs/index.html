@@ -72,15 +72,21 @@
 <p>当然vuejs作为js衍生出的框架，它除了具有js的特性外，还有自己的特色呢，所以vuejs可以使用vue-resource来与后端交互。</p>
 </blockquote>
 <p>下面使用ajax(基于jquery)、vuejs、php实现简单的数据的增删改查。</p>
-<figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> <span class="built_in">url</span> = <span class="string">'http://localhost:8080/vuejs/api/book.php'</span>;</div><div class="line">getJson(<span class="built_in">url</span>, pushDom);</div></pre></td></tr></table></figure>
-<p>分析getJson函数【已经封装】</p>
+<pre><code>var url = &#39;http://localhost:8080/vuejs/api/book.php&#39;;
+getJson(url, pushDom);
+</code></pre><p>分析getJson函数【已经封装】</p>
 <ol>
 <li>初始化信息列表</li>
 <li>两个参数：<br>（1）第一个是获取列表的接口地址url；<br>（2）第二个是回调函数名</li>
-<li>流程分析：<br>在getJson中通过ajax调取接口url获取数据data，然后将data作为参数调用pushDom函数，pushDom是展示、或者使用vue操作DOM的功能函数。那么怎么使用jquey、ajax配合vue进行后端数据库增删改查。<br>首先需要对vue的增删改查机制了如指掌才行；methods事件触发，我们可以在methods中定义add、delete、modify完成数据的绑定，异步刷新显示；同时将获取的数据传递给封装好的ajax函数中，与后端交互【正确的流程应该与后台交互成功才会自动更新DOM，这里不细论】；例如<br><strong>添加数据</strong>：<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">methods:&#123;</div><div class="line">    addBook:function()&#123;</div><div class="line">        <span class="keyword">this</span>.book.id=parseInt(postData(<span class="keyword">this</span>.book));</div><div class="line">        <span class="keyword">this</span>.books.push(<span class="keyword">this</span>.book);</div><div class="line">        <span class="keyword">this</span>.book=<span class="string">''</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>流程分析：<br>在getJson中通过ajax调取接口url获取数据data，然后将data作为参数调用pushDom函数，pushDom是展示、或者使用vue操作DOM的功能函数。那么怎么使用jquey、ajax配合vue进行后端数据库增删改查。<br>首先需要对vue的增删改查机制了如指掌才行；methods事件触发，我们可以在methods中定义add、delete、modify完成数据的绑定，异步刷新显示；同时将获取的数据传递给封装好的ajax函数中，与后端交互【正确的流程应该与后台交互成功才会自动更新DOM，这里不细论】；例如<br><strong>添加数据</strong>：<pre><code>methods:{
+ addBook:function(){
+     this.book.id=parseInt(postData(this.book));
+     this.books.push(this.book);
+     this.book=&#39;&#39;;
+ }
+}
+</code></pre>我们从前端拿到的数据<code>this.book</code>，然后调用<code>postData(this.book)</code>;<code>postData</code>就是一个与后端交互的封装了ajax的函数<br>期间遇到了一点小意外，总是获取不到ajax的返回值，关于如何获取ajax返回值和为何获取不到ajax中的值问题，<code>postData</code>函数中写的很清楚<br><code>async: false</code>, 默认是<code>true</code></li>
 </ol>
-<p>我们从前端拿到的数据<code>this.book</code>，然后调用<code>postData(this.book)</code>;<code>postData</code>就是一个与后端交互的封装了ajax的函数<br>期间遇到了一点小意外，总是获取不到ajax的返回值，关于如何获取ajax返回值和为何获取不到ajax中的值问题，<code>postData</code>函数中写的很清楚<br><code>async: false</code>, 默认是<code>true</code></p>
 <p>代码见：<a href="https://github.com/upeng/learn-vuejs" target="_blank" rel="external">github</a><br>demo页：<img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/vuedemo.png" alt="demo"></p>
 
             </article>

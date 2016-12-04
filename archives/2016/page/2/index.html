@@ -355,11 +355,19 @@
 <li>migrations下生成<code>2015_12_13_104637_create_articles_table.php</code>文件<br><code>php artisan make:migration create_articles_table --create=articles</code></li>
 <li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code></li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Schema::create(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">    $table-&gt;increments(<span class="string">'id'</span>);</div><div class="line">    $table-&gt;string(<span class="string">'title'</span>);</div><div class="line">    $table-&gt;text(<span class="string">'content'</span>);</div><div class="line">    $table-&gt;timestamp(<span class="string">'published_at'</span>);</div><div class="line">    $table-&gt;timestamps();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<ul>
+<pre><code>Schema::create(&#39;articles&#39;, function (Blueprint $table) {
+    $table-&gt;increments(&#39;id&#39;);
+    $table-&gt;string(&#39;title&#39;);
+    $table-&gt;text(&#39;content&#39;);
+    $table-&gt;timestamp(&#39;published_at&#39;);
+    $table-&gt;timestamps();
+});
+</code></pre><ul>
 <li>保存文件，执行下面命令，数据库中生成articls表<br><code>php artisan migrate</code></li>
 </ul>
-<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//回退操作</span></div><div class="line">php artisan <span class="string">migrate:</span>rollback</div></pre></td></tr></table></figure>
+<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><pre><code>//回退操作
+php artisan migrate:rollback
+</code></pre>
         
       </div>
       <p class="repo-list-meta">
@@ -397,7 +405,30 @@
       <div class="repo-list-description">
         
           <h3 id="blade模板引擎使用"><a href="#blade模板引擎使用" class="headerlink" title="blade模板引擎使用"></a>blade模板引擎使用</h3><p>很多时候，我们的view模板有很多重复的地方，比如head、footer部分，当然可以定义一些共用的部分，置于common文件夹下，然后使用include将其引入进来。而blade有一套自己的策略</p>
-<p>比如定义一个<code>common.blade.php</code>文件，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Laravel<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css?family=Lato:100"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></div><div class="line">            <span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;<span class="attribute">height</span>: <span class="number">100%</span>;&#125;</div><div class="line">            <span class="selector-tag">body</span> &#123;<span class="attribute">margin</span>: <span class="number">0</span>;<span class="attribute">width</span>: <span class="number">100%</span>;<span class="attribute">display</span>: table;<span class="attribute">font-weight</span>: <span class="number">100</span>;<span class="attribute">font-family</span>: <span class="string">'Lato'</span>;&#125;</div><div class="line">            <span class="selector-class">.container</span> &#123;<span class="attribute">text-align</span>: center;<span class="attribute">display</span>: table-cell;<span class="attribute">vertical-align</span>: middle;</div><div class="line">            &#125;</div><div class="line">            <span class="selector-class">.content</span> &#123;<span class="attribute">text-align</span>: center;<span class="attribute">display</span>: inline-block;&#125;</div><div class="line">            <span class="selector-class">.title</span> &#123;<span class="attribute">font-size</span>: <span class="number">96px</span>;&#125;</div><div class="line">            <span class="selector-class">.footer</span>&#123;<span class="attribute">color</span>: green;<span class="attribute">font-size</span>: <span class="number">100px</span>;&#125;</div><div class="line">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">            @yield('content')</div><div class="line">            @yield('footer')</div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>比如定义一个<code>common.blade.php</code>文件，如下：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Laravel&lt;/title&gt;
+        &lt;link href=&quot;https://fonts.googleapis.com/css?family=Lato:100&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+        &lt;style&gt;
+            html, body {height: 100%;}
+            body {margin: 0;width: 100%;display: table;font-weight: 100;font-family: &#39;Lato&#39;;}
+            .container {text-align: center;display: table-cell;vertical-align: middle;
+            }
+            .content {text-align: center;display: inline-block;}
+            .title {font-size: 96px;}
+            .footer{color: green;font-size: 100px;}
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt; 
+        &lt;div class=&quot;container&quot;&gt;
+            @yield(&#39;content&#39;)
+            @yield(&#39;footer&#39;)
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
         
       </div>
       <p class="repo-list-meta">
@@ -440,8 +471,9 @@
 <li>离散度大的列放到联合索引的前面</li>
 </ol>
 <blockquote>
-<p>理解离散度<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> payment <span class="keyword">where</span> staff_id = <span class="number">2</span> <span class="keyword">AND</span> customer_id = <span class="number">584</span>;</div></pre></td></tr></table></figure></p>
-<p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
+<p>理解离散度</p>
+<pre><code>SELECT * FROM payment where staff_id = 2 AND customer_id = 584;
+</code></pre><p>是index(staff_id, customer_id)好还是index(customer_id, staff_id)好？</p>
 </blockquote>
 <p><strong>备注</strong>：比较staff_id和customer_id两者的离散度，那个离散度高，那个列就放置到联合索引的前面<br>
         

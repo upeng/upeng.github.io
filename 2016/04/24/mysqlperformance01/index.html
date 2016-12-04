@@ -65,18 +65,26 @@
         <div class="column three-fourths">
             <article class="article-content markdown-body">
                 <p>如何发现有问题的SQL？使用慢查询日志【slow_query_log】对有效率问题的sql进行监控</p>
-<h3 id="查看慢查询日志开启状态"><a href="#查看慢查询日志开启状态" class="headerlink" title="查看慢查询日志开启状态"></a>查看慢查询日志开启状态</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variable</span>  s <span class="keyword">like</span> <span class="string">'slow_query_log'</span></div></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png" alt=""></p>
-<h3 id="记录未使用索引的查询"><a href="#记录未使用索引的查询" class="headerlink" title="记录未使用索引的查询"></a>记录未使用索引的查询</h3><p>未使用索引的查询默认是关闭的，如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'log_queries_not_using_indexes'</span>;</div></pre></td></tr></table></figure></p>
-<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/2655ccd1-69ab-4c54-b7bf-50b01b2b45e5.png" alt=""><br>需要打开未使用索引的查询，即未使用索引的查询会记录在案<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">global</span> log_queries_not_using_indexes=<span class="keyword">on</span></div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<h3 id="慢查询时间设置"><a href="#慢查询时间设置" class="headerlink" title="慢查询时间设置"></a>慢查询时间设置</h3><p> 查询时间超过多长时间的查询记录会记录到日志中； 默认为慢查询的时间10秒，即 超过10s的查询会记录到慢查询日志中<br><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/d99d63ee-d0e2-4bfb-8230-984d884b1528.png" alt=""><br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> global <span class="comment">long_query_time=0</span>;</div></pre></td></tr></table></figure></p>
-<p>a litter bug i think：在本窗口查询时发现慢查询时间还是10；但是重新打开一个窗口查询结果才是0<br>这样设置的目的是：不管什么查询，都会记录到慢查询日志中</p>
-<h3 id="打开慢查询日志"><a href="#打开慢查询日志" class="headerlink" title="打开慢查询日志"></a>打开慢查询日志</h3><p>设置完上述两项后，我们再打开慢查询日志<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log=<span class="keyword">on</span>;</div></pre></td></tr></table></figure></p>
-<p>输入两个查询语句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> actor <span class="keyword">limit</span> <span class="number">10</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> actor <span class="keyword">where</span> first_name <span class="keyword">like</span> <span class="string">'%A%'</span>;</div></pre></td></tr></table></figure></p>
-<h3 id="打开日志文件"><a href="#打开日志文件" class="headerlink" title="打开日志文件"></a>打开日志文件</h3><p>日志文件位置，查看变量slow_query_log_file的值<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'slow_query_log_file'</span>;</div></pre></td></tr></table></figure></p>
-<p>当然，我们也可以手动设置慢查询日志的存放路径及文件名<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log_file = ****</div></pre></td></tr></table></figure></p>
-<h3 id="慢查询日志所包含的内容"><a href="#慢查询日志所包含的内容" class="headerlink" title="慢查询日志所包含的内容"></a>慢查询日志所包含的内容</h3><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/e3f793a8-8b50-464c-b52b-5ffbc78ab187.png" alt=""> </p>
+<h3 id="查看慢查询日志开启状态"><a href="#查看慢查询日志开启状态" class="headerlink" title="查看慢查询日志开启状态"></a>查看慢查询日志开启状态</h3><pre><code>show variable  s like &#39;slow_query_log&#39;
+</code></pre><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png" alt=""></p>
+<h3 id="记录未使用索引的查询"><a href="#记录未使用索引的查询" class="headerlink" title="记录未使用索引的查询"></a>记录未使用索引的查询</h3><p>未使用索引的查询默认是关闭的，如下</p>
+<pre><code>show variables like &#39;log_queries_not_using_indexes&#39;;
+</code></pre><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/2655ccd1-69ab-4c54-b7bf-50b01b2b45e5.png" alt=""><br>需要打开未使用索引的查询，即未使用索引的查询会记录在案</p>
+<pre><code>set global log_queries_not_using_indexes=on
+</code></pre><a id="more"></a>
+<h3 id="慢查询时间设置"><a href="#慢查询时间设置" class="headerlink" title="慢查询时间设置"></a>慢查询时间设置</h3><p> 查询时间超过多长时间的查询记录会记录到日志中； 默认为慢查询的时间10秒，即 超过10s的查询会记录到慢查询日志中<br><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/d99d63ee-d0e2-4bfb-8230-984d884b1528.png" alt=""> </p>
+<pre><code>set global long_query_time=0;
+</code></pre><p>a litter bug i think：在本窗口查询时发现慢查询时间还是10；但是重新打开一个窗口查询结果才是0<br>这样设置的目的是：不管什么查询，都会记录到慢查询日志中</p>
+<h3 id="打开慢查询日志"><a href="#打开慢查询日志" class="headerlink" title="打开慢查询日志"></a>打开慢查询日志</h3><p>设置完上述两项后，我们再打开慢查询日志</p>
+<pre><code>set global slow_query_log=on;
+</code></pre><p>输入两个查询语句</p>
+<pre><code>select * from actor limit 10;
+select * from actor where first_name like &#39;%A%&#39;;
+</code></pre><h3 id="打开日志文件"><a href="#打开日志文件" class="headerlink" title="打开日志文件"></a>打开日志文件</h3><p>日志文件位置，查看变量slow_query_log_file的值</p>
+<pre><code>show variables like &#39;slow_query_log_file&#39;;
+</code></pre><p>当然，我们也可以手动设置慢查询日志的存放路径及文件名</p>
+<pre><code>set global slow_query_log_file = ****
+</code></pre><h3 id="慢查询日志所包含的内容"><a href="#慢查询日志所包含的内容" class="headerlink" title="慢查询日志所包含的内容"></a>慢查询日志所包含的内容</h3><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/e3f793a8-8b50-464c-b52b-5ffbc78ab187.png" alt=""> </p>
 <ol>
 <li>执行sql的主机信息<br><code># User@Host: root[root] @ localhost [127.0.0.1]</code></li>
 <li>sql的执行信息<br><code># Query_time: 0.001008  Lock_time: 0.000000 Rows_sent: 104  Rows_examined: 200</code></li>

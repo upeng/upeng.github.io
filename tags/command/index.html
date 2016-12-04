@@ -89,8 +89,24 @@
           <blockquote>
 <p>经常使用到的命令行</p>
 </blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//查看php文件是否有语法错误</div><div class="line">php -ln filename.php</div><div class="line"></div><div class="line">//执行php文件</div><div class="line">php filename.php</div><div class="line">php -f filename.php</div><div class="line"></div><div class="line"><span class="comment">&lt;!-- more --&gt;</span></div><div class="line">//搜索php.ini关键词信息</div><div class="line">php -i | grep keyword</div><div class="line"></div><div class="line">查询php.ini位置信息</div><div class="line">php --ini</div><div class="line">//查看php扩展模块</div><div class="line">php -m</div><div class="line">//查看php版本</div><div class="line">php -v</div></pre></td></tr></table></figure>
-<p>/<strong>待补充</strong>/</p>
+<pre><code>//查看php文件是否有语法错误
+php -ln filename.php
+
+//执行php文件
+php filename.php
+php -f filename.php
+
+&lt;!-- more --&gt;
+//搜索php.ini关键词信息
+php -i | grep keyword
+
+查询php.ini位置信息
+php --ini
+//查看php扩展模块
+php -m
+//查看php版本
+php -v
+</code></pre><p>/<strong>待补充</strong>/</p>
 <blockquote>
 <p>上述<code>查询php.ini</code>和<code>检测语法错误</code>很好用，源于查看session配置和运行脚本没有任何输出。<br>先学会命令行，再用IDE吧，啥？VIM~</p>
 </blockquote>

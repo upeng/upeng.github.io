@@ -68,26 +68,33 @@
 <li>migrations下生成<code>2015_12_13_104637_create_articles_table.php</code>文件<br><code>php artisan make:migration create_articles_table --create=articles</code></li>
 <li>修改生成的文件<code>2015_12_13_104637_create_articles_table.php</code></li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Schema::create(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">    $table-&gt;increments(<span class="string">'id'</span>);</div><div class="line">    $table-&gt;string(<span class="string">'title'</span>);</div><div class="line">    $table-&gt;text(<span class="string">'content'</span>);</div><div class="line">    $table-&gt;timestamp(<span class="string">'published_at'</span>);</div><div class="line">    $table-&gt;timestamps();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<ul>
+<pre><code>Schema::create(&#39;articles&#39;, function (Blueprint $table) {
+    $table-&gt;increments(&#39;id&#39;);
+    $table-&gt;string(&#39;title&#39;);
+    $table-&gt;text(&#39;content&#39;);
+    $table-&gt;timestamp(&#39;published_at&#39;);
+    $table-&gt;timestamps();
+});
+</code></pre><ul>
 <li>保存文件，执行下面命令，数据库中生成articls表<br><code>php artisan migrate</code></li>
 </ul>
-<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//回退操作</span></div><div class="line">php artisan <span class="string">migrate:</span>rollback</div></pre></td></tr></table></figure>
-<a id="more"></a>
+<h3 id="删除刚才创建的table"><a href="#删除刚才创建的table" class="headerlink" title="删除刚才创建的table"></a>删除刚才创建的table</h3><pre><code>//回退操作
+php artisan migrate:rollback
+</code></pre><a id="more"></a>
 <h3 id="增加表字段"><a href="#增加表字段" class="headerlink" title="增加表字段"></a>增加表字段</h3><ol>
 <li><p>如果将table drop后在create中添加字段,会删除表中已有数据。</p>
 </li>
-<li><p>在migrations下新建文件<code>add_intro_into_articles</code></p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:migration add_intro_into_articles --<span class="keyword">table</span>=articles</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改add_intro_into_articles</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    Schema::table(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">        $table-&gt;string(<span class="string">'intro'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    Schema::table(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">        $table-&gt;dropColumn(<span class="string">'intro'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li><p>在migrations下新建文件<code>add_intro_into_articles</code><br>```<br>php artisan make:migration add_intro_into_articles –table=articles</p>
 </li>
 </ol>
-<ul>
-<li>注意关键字的不同，导致生成的文件中匿名函数书写的不同<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--create=tablename</span></div><div class="line">Schema::create(<span class="string">'articles'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;&#125;);</div><div class="line"></div><div class="line"><span class="comment">--table=tablename</span></div><div class="line">Schema::<span class="built_in">table</span>(<span class="string">'articles'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;&#125;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
+<pre><code>
+3. 修改add_intro_into_articles
+</code></pre><p>public function up()<br>{<br>    Schema::table(‘articles’, function (Blueprint $table) {<br>        $table-&gt;string(‘intro’);<br>    });<br>}</p>
+<p>public function down()<br>{<br>    Schema::table(‘articles’, function (Blueprint $table) {<br>        $table-&gt;dropColumn(‘intro’);<br>    });<br>}</p>
+<pre><code>
+* 注意关键字的不同，导致生成的文件中匿名函数书写的不同
+</code></pre><p>–create=tablename<br>Schema::create(‘articles’,function(){});</p>
+<p>–table=tablename<br>Schema::table(‘articles’, function(){});<br>```</p>
 
             </article>
             

@@ -68,8 +68,9 @@
 <blockquote>
 <p>确保系统已经安装xcode，然后使用一行命令安装依赖管理工具Homebrew</p>
 </blockquote>
-<p>安装完xcode之后可以使用<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>FORMULA</div></pre></td></tr></table></figure></p>
-<p>来安装所需要的依赖了.更详细的信息参考Homebrew的[官方Cookbook][1]</p>
+<p>安装完xcode之后可以使用</p>
+<pre><code>brew install FORMULA
+</code></pre><p>来安装所需要的依赖了.更详细的信息参考Homebrew的[官方Cookbook][1]</p>
 <p>因此使用Homebrew常见的流程是：<br><a id="more"></a></p>
 <ol>
 <li>增加一个程序源（新增一个水龙头） brew tap homebrew/php</li>
@@ -77,61 +78,155 @@
 <li>安装程序包（按照配方酿酒） brew install git</li>
 <li>查看配置 brew config 可以看到程序包默认安装在/usr/local/Cellar下 （酒桶放在地窖内）</li>
 </ol>
-<h2 id="安装PHP5-6（FPM方式）"><a href="#安装PHP5-6（FPM方式）" class="headerlink" title="安装PHP5.6（FPM方式）"></a>安装PHP5.6（FPM方式）</h2><p>首先加入Homebrew官方的几个软件源<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span>tap homebrew/dupes</div><div class="line"><span class="keyword">brew </span>tap homebrew/versions</div><div class="line"><span class="keyword">brew </span>tap homebrew/php</div></pre></td></tr></table></figure></p>
-<p>PHP如果采用默认配置安装，会编译mod_php模块并只运行在Apache环境下，为了使用Nginx，这里需要编译php-fpm并且禁用apache，主要通过参数<code>--without-fpm --without-apache</code>来实现。完整的安装指令为<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">brew install php56 \</div><div class="line">-<span class="ruby">-without-snmp \</span></div><div class="line">-<span class="ruby">-without-apache \</span></div><div class="line">-<span class="ruby">-with-debug \</span></div><div class="line">-<span class="ruby">-with-fpm \</span></div><div class="line">-<span class="ruby">-with-intl \</span></div><div class="line">-<span class="ruby">-with-homebrew-curl \</span></div><div class="line">-<span class="ruby">-with-homebrew-libxslt \</span></div><div class="line">-<span class="ruby">-with-homebrew-openssl \</span></div><div class="line">-<span class="ruby">-with-imap \</span></div><div class="line">-<span class="ruby">-with-mysql \</span></div><div class="line">-<span class="ruby">-with-tidy</span></div></pre></td></tr></table></figure></p>
-<p>由于OSX已经自带了PHP5.5环境，因此需要修改系统路径，优先运行brew安装的版本，在<code>~/.bashrc</code>里加入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=<span class="string">"/usr/local/bin:/usr/local/sbin:<span class="variable">$PATH</span>"</span></div></pre></td></tr></table></figure></p>
-<blockquote>
+<h2 id="安装PHP5-6（FPM方式）"><a href="#安装PHP5-6（FPM方式）" class="headerlink" title="安装PHP5.6（FPM方式）"></a>安装PHP5.6（FPM方式）</h2><p>首先加入Homebrew官方的几个软件源</p>
+<pre><code>brew tap homebrew/dupes
+brew tap homebrew/versions
+brew tap homebrew/php
+</code></pre><p>PHP如果采用默认配置安装，会编译mod_php模块并只运行在Apache环境下，为了使用Nginx，这里需要编译php-fpm并且禁用apache，主要通过参数<code>--without-fpm --without-apache</code>来实现。完整的安装指令为</p>
+<pre><code>brew install php56 \
+--without-snmp \
+--without-apache \
+--with-debug \
+--with-fpm \
+--with-intl \
+--with-homebrew-curl \
+--with-homebrew-libxslt \
+--with-homebrew-openssl \
+--with-imap \
+--with-mysql \
+--with-tidy
+</code></pre><p>由于OSX已经自带了PHP5.5环境，因此需要修改系统路径，优先运行brew安装的版本，在<code>~/.bashrc</code>里加入：</p>
+<pre><code>export PATH=&quot;/usr/local/bin:/usr/local/sbin:$PATH&quot;
+</code></pre><blockquote>
 <p>这时运行 php -v查看版本是否是5.6<br>运行php -m 查看PHP安装都扩展列表</p>
 </blockquote>
-<p>如果要安装新的php扩展，可以直接安装而不用每次重新编译php，所有的扩展可以通过<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span>search php56</div></pre></td></tr></table></figure></p>
-<p>看到，下面是我自己所需要的扩展，可以支持Phalcon框架：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install php56-gearman php56-msgpack php56-memcache php56-memcached php56-mongo  php56-phalcon php56-redis php56-xdebug</div></pre></td></tr></table></figure></p>
-<h3 id="PHP-FPM的加载与启动"><a href="#PHP-FPM的加载与启动" class="headerlink" title="PHP-FPM的加载与启动"></a>PHP-FPM的加载与启动</h3><p>php-fpm.conf  php.ini<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>php<span class="regexp">/5.6</span></div></pre></td></tr></table></figure></p>
-<p>php-fpm进程<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="keyword">local</span>/sbin</div></pre></td></tr></table></figure></p>
-<p><strong>安装完毕后可以通过以下指令启动和停止php-fpm</strong><br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./php-fpm -D    <span class="comment">//进入sbin目录</span></div><div class="line"></div><div class="line">killall php-fpm</div></pre></td></tr></table></figure></p>
-<p>同时可以将php-fpm加入开机启动<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ln -sfv /usr/local/opt/php56/*.plist ~/<span class="keyword">Library</span>/LaunchAgents</div><div class="line"></div><div class="line">launchctl load ~/<span class="keyword">Library</span>/LaunchAgents/homebrew.mxcl.php56.plist</div></pre></td></tr></table></figure></p>
-<h3 id="查看php-fpm进程"><a href="#查看php-fpm进程" class="headerlink" title="查看php-fpm进程"></a>查看php-fpm进程</h3><p>查看9000端口<br><code>lsof -i:9000</code><br>或者<br><code>ps -ef | grep php-fpm</code></p>
-<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>nginx</div></pre></td></tr></table></figure>
-<p>安装完毕后可以通过<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nginx</div><div class="line">nginx <span class="_">-s</span> quit</div></pre></td></tr></table></figure></p>
-<p>启动和关闭，同时也支持重载配置文件等操作<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -s reload|<span class="type">reopen</span>|<span class="type">stop</span>|<span class="type">quit</span></div></pre></td></tr></table></figure></p>
-<p>nginx安装后默认监听8080端口，可以访问<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 查看状态。如果要想监听80端口需要root权限，运行</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo chown <span class="string">root:</span>wheel <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>nginx<span class="regexp">/1.6.2/</span>bin/nginx</div><div class="line">sudo chmod u+s <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>nginx<span class="regexp">/1.6.2/</span>bin/nginx</div></pre></td></tr></table></figure>
-<blockquote>
+<p>如果要安装新的php扩展，可以直接安装而不用每次重新编译php，所有的扩展可以通过</p>
+<pre><code>brew search php56
+</code></pre><p>看到，下面是我自己所需要的扩展，可以支持Phalcon框架：</p>
+<pre><code>brew install php56-gearman php56-msgpack php56-memcache php56-memcached php56-mongo  php56-phalcon php56-redis php56-xdebug
+</code></pre><h3 id="PHP-FPM的加载与启动"><a href="#PHP-FPM的加载与启动" class="headerlink" title="PHP-FPM的加载与启动"></a>PHP-FPM的加载与启动</h3><p>php-fpm.conf  php.ini</p>
+<pre><code>/usr/local/etc/php/5.6
+</code></pre><p>php-fpm进程</p>
+<pre><code>/usr/local/sbin
+</code></pre><p><strong>安装完毕后可以通过以下指令启动和停止php-fpm</strong></p>
+<pre><code>./php-fpm -D    //进入sbin目录
+
+killall php-fpm
+</code></pre><p>同时可以将php-fpm加入开机启动</p>
+<pre><code>ln -sfv /usr/local/opt/php56/*.plist ~/Library/LaunchAgents
+
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.php56.plist
+</code></pre><h3 id="查看php-fpm进程"><a href="#查看php-fpm进程" class="headerlink" title="查看php-fpm进程"></a>查看php-fpm进程</h3><p>查看9000端口<br><code>lsof -i:9000</code><br>或者<br><code>ps -ef | grep php-fpm</code></p>
+<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><pre><code>brew install nginx
+</code></pre><p>安装完毕后可以通过</p>
+<pre><code>nginx
+nginx -s quit
+</code></pre><p>启动和关闭，同时也支持重载配置文件等操作</p>
+<pre><code>nginx -s reload|reopen|stop|quit
+</code></pre><p>nginx安装后默认监听8080端口，可以访问<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 查看状态。如果要想监听80端口需要root权限，运行</p>
+<pre><code>sudo chown root:wheel /usr/local/Cellar/nginx/1.6.2/bin/nginx
+sudo chmod u+s /usr/local/Cellar/nginx/1.6.2/bin/nginx
+</code></pre><blockquote>
 <p>我是直接在nginx配置中改成80端口，然后重启生效<br>并使用root权限启动</p>
 </blockquote>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">sudo nginx</span></div></pre></td></tr></table></figure>
-<p>开机启动<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ln -sfv /usr/local/opt/nginx/*.plist ~/<span class="keyword">Library</span>/LaunchAgents</div><div class="line"></div><div class="line">launchctl load ~/<span class="keyword">Library</span>/LaunchAgents/homebrew.mxcl.nginx.plist</div></pre></td></tr></table></figure></p>
-<h2 id="Nginx-PHP-FPM配置"><a href="#Nginx-PHP-FPM配置" class="headerlink" title="Nginx + PHP-FPM配置"></a>Nginx + PHP-FPM配置</h2><p>好文：<a href="http://www.nginx.cn/nginx-how-to" target="_blank" rel="external">http://www.nginx.cn/nginx-how-to</a></p>
+<pre><code>sudo nginx
+</code></pre><p>开机启动</p>
+<pre><code>ln -sfv /usr/local/opt/nginx/*.plist ~/Library/LaunchAgents
+
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist
+</code></pre><h2 id="Nginx-PHP-FPM配置"><a href="#Nginx-PHP-FPM配置" class="headerlink" title="Nginx + PHP-FPM配置"></a>Nginx + PHP-FPM配置</h2><p>好文：<a href="http://www.nginx.cn/nginx-how-to" target="_blank" rel="external">http://www.nginx.cn/nginx-how-to</a></p>
 <p>Nginx一般都会运行多个域名（虚拟主机）</p>
 <blockquote>
 <p>按Ubuntu的文件夹结构来存放Nginx的配置文件</p>
 </blockquote>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/<span class="keyword">var</span>/logs/nginx</div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/sites-available</div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/sites-enabled</div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/<span class="keyword">conf</span>.<span class="built_in">d</span></div><div class="line"><span class="keyword">mkdir</span> -p /usr/<span class="keyword">local</span>/etc/nginx/ssl</div></pre></td></tr></table></figure>
-<blockquote>
+<pre><code>mkdir -p /usr/local/var/logs/nginx
+mkdir -p /usr/local/etc/nginx/sites-available
+mkdir -p /usr/local/etc/nginx/sites-enabled
+mkdir -p /usr/local/etc/nginx/conf.d
+mkdir -p /usr/local/etc/nginx/ssl
+</code></pre><blockquote>
 <p>联想到work中，vhost和fpm.d目录，新增域名与目录时，只需要增加两个配置文件；前提时php-fpm.conf和nginx.conf主配置文件中都有</p>
 </blockquote>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">include</span> vhost/<span class="regexp">*.conf</span></div><div class="line">include fpm.d/<span class="regexp">*.conf</span></div></pre></td></tr></table></figure>
-<p><strong>上述都conf.d等同于fpm.d，sites-enabled等同于vhost</strong></p>
-<h3 id="编辑Nginx全局配置"><a href="#编辑Nginx全局配置" class="headerlink" title="编辑Nginx全局配置"></a>编辑Nginx全局配置</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/nginx.conf</span></div></pre></td></tr></table></figure>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">worker_processes</span>  <span class="number">1</span>;</div><div class="line"><span class="attribute">error_log</span>   /usr/local/var/logs/nginx/error.log <span class="literal">debug</span>;</div><div class="line"><span class="attribute">pid</span>        /usr/local/var/run/nginx.pid;</div><div class="line"></div><div class="line"><span class="section">events</span> &#123;</div><div class="line">    <span class="attribute">worker_connections</span>  <span class="number">256</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="section">http</span> &#123;</div><div class="line">    <span class="attribute">include</span>       mime.types;</div><div class="line">    <span class="attribute">default_type</span>  application/octet-stream;</div><div class="line"></div><div class="line">    <span class="attribute">log_format</span> main <span class="string">'<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] '</span></div><div class="line">        <span class="string">'"<span class="variable">$request</span>" <span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> '</span></div><div class="line">        <span class="string">'"<span class="variable">$http_referer</span>" "<span class="variable">$http_user_agent</span>" '</span></div><div class="line">        <span class="string">'"<span class="variable">$http_x_forwarded_for</span>" <span class="variable">$host</span> <span class="variable">$request_time</span> <span class="variable">$upstream_response_time</span> <span class="variable">$scheme</span> '</span></div><div class="line">        <span class="string">'<span class="variable">$cookie_evalogin</span>'</span>;</div><div class="line"></div><div class="line">    <span class="attribute">access_log</span>  /usr/local/var/logs/access.log  main;</div><div class="line"></div><div class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</div><div class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</div><div class="line">    <span class="attribute">port_in_redirect</span> <span class="literal">off</span>;</div><div class="line"></div><div class="line">    <span class="attribute">include</span> /usr/local/etc/nginx/sites-enabled/*;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样一来首先可以把一些可复用配置独立出来放在<code>/usr/local/etc/nginx/conf.d</code>下，比如fastcgi的设置就可以独立出来<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/conf.d/</span>php-fpm</div></pre></td></tr></table></figure></p>
-<p>内容为<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">location</span> <span class="regexp">~ \.php$</span> &#123;</div><div class="line">    <span class="attribute">try_files</span>                   <span class="variable">$uri</span> = <span class="number">404</span>;</div><div class="line">    <span class="attribute">fastcgi_pass</span>                <span class="number">127.0.0.1:9000</span>;</div><div class="line">    <span class="attribute">fastcgi_index</span>               index.php;</div><div class="line">    <span class="attribute">fastcgi_intercept_errors</span>    <span class="literal">on</span>;</div><div class="line">    <span class="attribute">include</span> /usr/local/etc/nginx/fastcgi.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后<code>/usr/local/etc/nginx/sites-enabled</code>目录下可以一个文件对应一个域名的配置，比如web服务器目录是<code>/opt/htdocs</code><br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>nginx<span class="regexp">/sites-enabled/</span><span class="keyword">default</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="section">server</span> &#123;</div><div class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</div><div class="line">    <span class="attribute">server_name</span>  localhost;</div><div class="line">    <span class="attribute">root</span>         /opt/htdocs/;</div><div class="line"></div><div class="line">    <span class="attribute">location</span> / &#123;</div><div class="line">        <span class="attribute">index</span>  index.html index.htm index.php;</div><div class="line">        <span class="attribute">include</span>     /usr/local/etc/nginx/conf.d/php-fpm;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>此时启动了php-fpm并且启动了Nginx后，就可以通过<a href="http://localhost来运行php程序了" target="_blank" rel="external">http://localhost来运行php程序了</a></p>
-<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>mysql</div></pre></td></tr></table></figure>
-<p>可以通过<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql<span class="selector-class">.server</span> start</div><div class="line">mysql<span class="selector-class">.server</span> stop</div></pre></td></tr></table></figure></p>
-<p>来启动／停止，启动后默认应为空密码，可以通过mysqladmin设置一个密码<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">mysqladmin</span> -uroot password <span class="string">"mypassword"</span></div></pre></td></tr></table></figure></p>
-<p>但是在操作的时候出现了空密码无法登入的情况，最终只能通过mysqld_safe来设置<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo mysqld_safe --skip-grant-tables</div><div class="line">mysql -u root</div><div class="line">mysql&gt; UPDATE mysql.user <span class="keyword">SET</span> Password=PASSWORD(<span class="string">'mypassword'</span>) WHERE <span class="comment">User=</span><span class="comment">'root'</span>;</div><div class="line">mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure></p>
-<p><strong>依旧报错</strong></p>
+<pre><code>include vhost/*.conf
+include fpm.d/*.conf
+</code></pre><p><strong>上述都conf.d等同于fpm.d，sites-enabled等同于vhost</strong></p>
+<h3 id="编辑Nginx全局配置"><a href="#编辑Nginx全局配置" class="headerlink" title="编辑Nginx全局配置"></a>编辑Nginx全局配置</h3><pre><code>vim /usr/local/etc/nginx/nginx.conf
+</code></pre><pre><code>worker_processes  1;
+error_log   /usr/local/var/logs/nginx/error.log debug;
+pid        /usr/local/var/run/nginx.pid;
+
+events {
+    worker_connections  256;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    log_format main &#39;$remote_addr - $remote_user [$time_local] &#39;
+        &#39;&quot;$request&quot; $status $body_bytes_sent &#39;
+        &#39;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &#39;
+        &#39;&quot;$http_x_forwarded_for&quot; $host $request_time $upstream_response_time $scheme &#39;
+        &#39;$cookie_evalogin&#39;;
+
+    access_log  /usr/local/var/logs/access.log  main;
+
+    sendfile        on;
+    keepalive_timeout  65;
+    port_in_redirect off;
+
+    include /usr/local/etc/nginx/sites-enabled/*;
+}
+</code></pre><p>这样一来首先可以把一些可复用配置独立出来放在<code>/usr/local/etc/nginx/conf.d</code>下，比如fastcgi的设置就可以独立出来</p>
+<pre><code>vim /usr/local/etc/nginx/conf.d/php-fpm
+</code></pre><p>内容为</p>
+<pre><code>location ~ \.php$ {
+    try_files                   $uri = 404;
+    fastcgi_pass                127.0.0.1:9000;
+    fastcgi_index               index.php;
+    fastcgi_intercept_errors    on;
+    include /usr/local/etc/nginx/fastcgi.conf;
+}
+</code></pre><p>然后<code>/usr/local/etc/nginx/sites-enabled</code>目录下可以一个文件对应一个域名的配置，比如web服务器目录是<code>/opt/htdocs</code></p>
+<pre><code>vim /usr/local/etc/nginx/sites-enabled/default
+</code></pre><pre><code>server {
+    listen       80;
+    server_name  localhost;
+    root         /opt/htdocs/;
+
+    location / {
+        index  index.html index.htm index.php;
+        include     /usr/local/etc/nginx/conf.d/php-fpm;
+    }
+}
+</code></pre><p>此时启动了php-fpm并且启动了Nginx后，就可以通过<a href="http://localhost来运行php程序了" target="_blank" rel="external">http://localhost来运行php程序了</a></p>
+<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><pre><code>brew install mysql
+</code></pre><p>可以通过</p>
+<pre><code>mysql.server start
+mysql.server stop
+</code></pre><p>来启动／停止，启动后默认应为空密码，可以通过mysqladmin设置一个密码</p>
+<pre><code>mysqladmin -uroot password &quot;mypassword&quot;
+</code></pre><p>但是在操作的时候出现了空密码无法登入的情况，最终只能通过mysqld_safe来设置</p>
+<pre><code>sudo mysqld_safe --skip-grant-tables
+mysql -u root
+mysql&gt; UPDATE mysql.user SET Password=PASSWORD(&#39;mypassword&#39;) WHERE User=&#39;root&#39;;
+mysql&gt; FLUSH PRIVILEGES;
+</code></pre><p><strong>依旧报错</strong></p>
 <blockquote>
 <p><strong>坑1</strong>：一直出现mysql.sock错误，<code>mysql -uroot -p</code>;<br><strong>填坑1</strong>：<code>mysql -h 127.0.0.1 -u root -p</code>  why?</p>
-<p><strong>坑2</strong>：设置密码报错：<code>Password</code>字段不存在<br><strong>填坑2</strong>：mysql5.7已将<code>Password</code>字段去掉，改成<code>authentication_string</code>；所以正确都姿势如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> mysql.user <span class="keyword">set</span> authentication_string=<span class="keyword">password</span>(<span class="string">'123qwe'</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">'root</span></div></pre></td></tr></table></figure></p>
-<p>老版本mysql没变</p>
+<p><strong>坑2</strong>：设置密码报错：<code>Password</code>字段不存在<br><strong>填坑2</strong>：mysql5.7已将<code>Password</code>字段去掉，改成<code>authentication_string</code>；所以正确都姿势如下：</p>
+<pre><code>update mysql.user set authentication_string=password(&#39;123qwe&#39;) where user=&#39;root
+</code></pre><p>老版本mysql没变</p>
 </blockquote>
-<p>最后将MySQL加入开机启动<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/my</span>sql<span class="regexp">/5.6.22/</span>homebrew.mxcl.mysql.plist ~<span class="regexp">/Library/</span>LaunchAgents<span class="regexp">/</span></div></pre></td></tr></table></figure></p>
-<h2 id="查看服务列表"><a href="#查看服务列表" class="headerlink" title="查看服务列表"></a>查看服务列表</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew services <span class="built_in">list</span></div></pre></td></tr></table></figure>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Name  Status  User    Plist</div><div class="line">mysql started root    /Library/LaunchDaemons/homebrew<span class="selector-class">.mxcl</span><span class="selector-class">.mysql</span><span class="selector-class">.plist</span></div><div class="line">nginx started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew<span class="selector-class">.mxcl</span><span class="selector-class">.nginx</span><span class="selector-class">.plist</span></div><div class="line">php56 started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew<span class="selector-class">.mxcl</span><span class="selector-class">.php56</span><span class="selector-class">.plist</span></div></pre></td></tr></table></figure>
-<p>安装redis和memcache过程省略，详见下面博文，本文也是参考此<br><a href="http://avnpc.com/pages/install-lnmp-on-osx" target="_blank" rel="external">http://avnpc.com/pages/install-lnmp-on-osx</a></p>
+<p>最后将MySQL加入开机启动</p>
+<pre><code>cp /usr/local/Cellar/mysql/5.6.22/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/
+</code></pre><h2 id="查看服务列表"><a href="#查看服务列表" class="headerlink" title="查看服务列表"></a>查看服务列表</h2><pre><code>brew services list
+</code></pre><pre><code>Name  Status  User    Plist
+mysql started root    /Library/LaunchDaemons/homebrew.mxcl.mysql.plist
+nginx started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew.mxcl.nginx.plist
+php56 started yupeng6 /Users/yupeng6/Library/LaunchAgents/homebrew.mxcl.php56.plist
+</code></pre><p>安装redis和memcache过程省略，详见下面博文，本文也是参考此<br><a href="http://avnpc.com/pages/install-lnmp-on-osx" target="_blank" rel="external">http://avnpc.com/pages/install-lnmp-on-osx</a></p>
 
             </article>
             

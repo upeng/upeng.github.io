@@ -72,16 +72,67 @@
 <h2 id="安装zephir"><a href="#安装zephir" class="headerlink" title="安装zephir"></a>安装zephir</h2><ol>
 <li>需要先安装相关的依赖</li>
 <li>使用git的方式获取源代码进行安装</li>
-<li>通过运行zephir命令验证安装是否成功<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ git clone <span class="string">https:</span><span class="comment">//github.com/phalcon/zephir</span></div><div class="line">$ cd zephir</div><div class="line">$ ./install-json</div><div class="line">$ zephir help</div><div class="line"> _____              __    _</div><div class="line"><span class="regexp">/__  /</span>  ___  ____  <span class="regexp">/ /</span>_  (_)____</div><div class="line">  <span class="regexp">/ /</span>  <span class="regexp">/ _ \/</span> __ \<span class="regexp">/ __ \/</span> <span class="regexp">/ ___/</span></div><div class="line"> <span class="regexp">/ /</span>__<span class="regexp">/  __/</span> <span class="regexp">/_/</span> <span class="regexp">/ /</span> <span class="regexp">/ /</span> <span class="regexp">/ /</span></div><div class="line"><span class="regexp">/____/\_</span>__<span class="regexp">/ .___/</span>_<span class="regexp">/ /</span>_<span class="regexp">/_/</span>_/</div><div class="line">         <span class="regexp">/_/</span></div><div class="line">Zephir version <span class="number">0.7</span><span class="number">.1</span>b</div></pre></td></tr></table></figure>
-</li>
+<li>通过运行zephir命令验证安装是否成功<pre><code>$ git clone https://github.com/phalcon/zephir
+$ cd zephir
+$ ./install-json
+$ zephir help
+_____              __    _
+/__  /  ___  ____  / /_  (_)____
+/ /  / _ \/ __ \/ __ \/ / ___/
+/ /__/  __/ /_/ / / / / / /
+/____/\___/ .___/_/ /_/_/_/
+      /_/
+Zephir version 0.7.1b
+</code></pre></li>
 </ol>
-<h2 id="初始化扩展"><a href="#初始化扩展" class="headerlink" title="初始化扩展"></a>初始化扩展</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zephir init upfriend(<span class="name">upfriend</span>扩展名)</div><div class="line">upfriend/</div><div class="line">   ext/</div><div class="line">   upfriend/</div></pre></td></tr></table></figure>
-<h2 id="编写扩展"><a href="#编写扩展" class="headerlink" title="编写扩展"></a>编写扩展</h2><p>在<code>upfriend/upfriend</code>目录中创建<code>filter.zep</code>文件</p>
-<figure class="highlight zephir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">Upfriend</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Filter</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**     </span></div><div class="line">    * Filters a string returning its alpha characters</div><div class="line">    * <span class="doctag">@param</span> string str     </div><div class="line">    */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">alpha</span><span class="params">(string str)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">char</span> ch; string filtered = <span class="string">""</span>;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> ch in str &#123;</div><div class="line">            <span class="keyword">if</span> (ch &gt;= <span class="string">'a'</span> &amp;&amp; ch &lt;= <span class="string">'z'</span>) || (ch &gt;= <span class="string">'A'</span> &amp;&amp; ch &lt;= <span class="string">'Z'</span>)</div><div class="line">            &#123;</div><div class="line">              <span class="keyword">let</span> filtered .= ch;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> filtered;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">hello</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"hello zephir"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="编译扩展"><a href="#编译扩展" class="headerlink" title="编译扩展"></a>编译扩展</h2><p><code>upfriend</code>根目录运行<code>zephir bulid</code>编译扩展<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">$</span> zephir build     </div><div class="line"><span class="function"><span class="title">Preparing</span></span> <span class="keyword">for</span> PHP compilation...</div><div class="line"><span class="function"><span class="title">Preparing</span></span> configuration <span class="keyword">file</span>...</div><div class="line"><span class="function"><span class="title">Compiling</span></span>...</div><div class="line"><span class="function"><span class="title">Installing</span></span>...</div><div class="line">Extension installed!</div><div class="line">Add extension=utils.so to your php.ini</div><div class="line">Don<span class="string">'t forget to restart your web serverp</span></div></pre></td></tr></table></figure></p>
-<h2 id="使用扩展"><a href="#使用扩展" class="headerlink" title="使用扩展"></a>使用扩展</h2><p>编译成功，修改php.ini配置文件，添加一行<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">extension=upfirend<span class="selector-class">.so</span> <span class="comment">//upfriend.so与php.ini位于同一目录</span></div><div class="line">php -m  <span class="comment">//查看扩展是否安装成功</span></div></pre></td></tr></table></figure></p>
-<p>在php中使用这个类（扩展）的方法<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line">    $filter = <span class="keyword">new</span> Upfriend\Filter();</div><div class="line">    <span class="keyword">echo</span> $filter-&gt;alpha(<span class="string">"01he#l.lo?/1"</span>); <span class="comment">// prints hello</span></div><div class="line">    Upfriend::hello() <span class="comment">// prints hello zephir</span></div></pre></td></tr></table></figure></p>
+<h2 id="初始化扩展"><a href="#初始化扩展" class="headerlink" title="初始化扩展"></a>初始化扩展</h2><pre><code>zephir init upfriend(upfriend扩展名)
+upfriend/
+   ext/
+   upfriend/
+</code></pre><h2 id="编写扩展"><a href="#编写扩展" class="headerlink" title="编写扩展"></a>编写扩展</h2><p>在<code>upfriend/upfriend</code>目录中创建<code>filter.zep</code>文件</p>
+<pre><code>namespace Upfriend;
+class Filter
+{
+    /**     
+    * Filters a string returning its alpha characters
+    * @param string str     
+    */
+    public function alpha(string str)
+    {
+        char ch; string filtered = &quot;&quot;;
 
+        for ch in str {
+            if (ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;) || (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;)
+            {
+              let filtered .= ch;
+            }
+        }
+
+        return filtered;
+    }
+    public static function hello()
+    {
+        echo &quot;hello zephir&quot;;
+    }
+}
+</code></pre><h2 id="编译扩展"><a href="#编译扩展" class="headerlink" title="编译扩展"></a>编译扩展</h2><p><code>upfriend</code>根目录运行<code>zephir bulid</code>编译扩展</p>
+<pre><code>$ zephir build     
+Preparing for PHP compilation...
+Preparing configuration file...
+Compiling...
+Installing...
+Extension installed!
+Add extension=utils.so to your php.ini
+Don&#39;t forget to restart your web serverp
+</code></pre><h2 id="使用扩展"><a href="#使用扩展" class="headerlink" title="使用扩展"></a>使用扩展</h2><p>编译成功，修改php.ini配置文件，添加一行</p>
+<pre><code>extension=upfirend.so //upfriend.so与php.ini位于同一目录
+php -m  //查看扩展是否安装成功
+</code></pre><p>在php中使用这个类（扩展）的方法</p>
+<pre><code>&lt;?php
+    $filter = new Upfriend\Filter();
+    echo $filter-&gt;alpha(&quot;01he#l.lo?/1&quot;); // prints hello
+    Upfriend::hello() // prints hello zephir
+</code></pre>
             </article>
             
                 <div class="share">

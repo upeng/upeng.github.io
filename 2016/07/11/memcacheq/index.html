@@ -85,8 +85,27 @@
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>因为MCQ是基于memcached开发，所以可以使用memcached的命令对它进行各种操作；客户端比如php可以像操作memcacheq那样操作MCQ</p>
 <h3 id="启动MCQ"><a href="#启动MCQ" class="headerlink" title="启动MCQ"></a>启动MCQ</h3><p><code>/usr/local/memcacheq/bin/memcacheq -d -r 1024 -l 127.0.0.1 -p 22201 -u root</code></p>
 <p><strong>参数说明</strong><br><code>-d</code> 以守护进程方式运行<br><code>-r</code> 最大化核心文件限制<br><code>-l</code> 监听网卡<br><code>-p</code> TCP监听端口<br><code>-u</code> 以（root）身份运行</p>
-<h3 id="最常用的mcq命令：set和get"><a href="#最常用的mcq命令：set和get" class="headerlink" title="最常用的mcq命令：set和get"></a>最常用的mcq命令：set和get</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">telnet <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">22201</span> ....</div><div class="line"></div><div class="line">set testqueue <span class="number">0</span> <span class="number">0</span> <span class="number">3</span>    <span class="comment">//队列添加一条消息</span></div><div class="line">xxx</div><div class="line">STORED</div><div class="line"></div><div class="line">set testqueue <span class="number">0</span> <span class="number">0</span> <span class="number">5</span></div><div class="line">xxxxx</div><div class="line">STORED</div><div class="line"></div><div class="line">stats queue</div><div class="line">STAT testqueue <span class="number">2</span>/<span class="number">0</span></div><div class="line"></div><div class="line">get testqueue</div><div class="line">VALUE testqueue <span class="number">0</span> <span class="number">3</span></div><div class="line">xxx</div><div class="line">END</div><div class="line"></div><div class="line">stats queue</div><div class="line">STAT testqueue <span class="number">2</span>/<span class="number">1</span></div></pre></td></tr></table></figure>
-<p><strong>注意</strong>：mcq没有expire time这个标记，是因为mcq支持数据持久化（Berkeley DB）。另外mcq存储长度length有限制（蓝v踩到的坑），之前同步前台用户认证申请材料至后台，因为材料增多，导致参数长度增加，超过了mcq的消息长度的限制：limit ? 后面分析查明</p>
+<h3 id="最常用的mcq命令：set和get"><a href="#最常用的mcq命令：set和get" class="headerlink" title="最常用的mcq命令：set和get"></a>最常用的mcq命令：set和get</h3><pre><code>telnet 127.0.0.1 22201 ....
+
+set testqueue 0 0 3    //队列添加一条消息
+xxx
+STORED
+
+set testqueue 0 0 5
+xxxxx
+STORED
+
+stats queue
+STAT testqueue 2/0
+
+get testqueue
+VALUE testqueue 0 3
+xxx
+END
+
+stats queue
+STAT testqueue 2/1
+</code></pre><p><strong>注意</strong>：mcq没有expire time这个标记，是因为mcq支持数据持久化（Berkeley DB）。另外mcq存储长度length有限制（蓝v踩到的坑），之前同步前台用户认证申请材料至后台，因为材料增多，导致参数长度增加，超过了mcq的消息长度的限制：limit ? 后面分析查明</p>
 <blockquote>
 <p>MCQ和Redis的比较</p>
 </blockquote>
