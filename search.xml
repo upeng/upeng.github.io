@@ -38,12 +38,12 @@
       <content type="html"><![CDATA[<blockquote>
 <p>问题来源：</p>
 </blockquote>
-<p>写了一个<code>Model_User</code>，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在<code>__construct()</code>中，然后去调用<code>Model_User</code>的静态方法</p>
+<p>写了一个<code>Model_User</code>，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在<code>__construct()</code>中，然后去调用<code>Model_User</code>的静态方法<br><a id="more"></a></p>
 <pre><code>Model_User::func1();
 </code></pre><p><code>报错：</code></p>
 <pre><code>Creating default object from empty value。。。
 Using $this when not in object context in。。。。
-</code></pre><p>因为我们直接使用类调用静态方法的方式，是根本不会走到构造方法的，而构造方法只有在new实例的时候才会调用。同时因为<code>$this</code>本身就是一个instance（实例）而我们根本就没有new 对象，所以。。。<br><a id="more"></a><br><strong>注意</strong></p>
+</code></pre><p>因为我们直接使用类调用静态方法的方式，是根本不会走到构造方法的，而构造方法只有在new实例的时候才会调用。同时因为<code>$this</code>本身就是一个instance（实例）而我们根本就没有new 对象，所以。。。<br><strong>注意</strong></p>
 <ol>
 <li>如果使用类调用静态方法的形式，那么要注意<code>__construct</code>里面的操作就over了，因为<code>__construct</code>不会调用；</li>
 <li>不能在静态方法中使用<code>$this</code>去调用普通成员变量和成员函数，因为你没有实例化对象，而$this就是一个instance;就算这样也是不可行的<pre><code>$obj = new Model_User
@@ -95,12 +95,13 @@ print_r($res2);  //array(2,1)
 <li>packagist: 用于发布github上的扩展程序或者项目</li>
 <li>composer: 用于使用代码的工具</li>
 </ul>
+<a id="more"></a>
 <p><code>github-&gt;packagist-&gt;composer</code></p>
 <ol>
 <li>怎样写一个laravel扩展，发布到packagist，提供composer方法</li>
 <li>git命令熟悉</li>
 </ol>
-<h3 id="写laravel扩展"><a href="#写laravel扩展" class="headerlink" title="写laravel扩展"></a>写laravel扩展</h3><h4 id="本地编写"><a href="#本地编写" class="headerlink" title="本地编写"></a>本地编写</h4><p>本地编写package，完成后，在laravel根目录下的composer.json中添加一行<br><code>&quot;Upstriving\\Curd\\&quot;: &quot;package/upstriving/curd/src&quot;</code><br><a id="more"></a></p>
+<h3 id="写laravel扩展"><a href="#写laravel扩展" class="headerlink" title="写laravel扩展"></a>写laravel扩展</h3><h4 id="本地编写"><a href="#本地编写" class="headerlink" title="本地编写"></a>本地编写</h4><p>本地编写package，完成后，在laravel根目录下的composer.json中添加一行<br><code>&quot;Upstriving\\Curd\\&quot;: &quot;package/upstriving/curd/src&quot;</code></p>
 <pre><code> &quot;autoload&quot;: {
         &quot;classmap&quot;: [
             &quot;database&quot;

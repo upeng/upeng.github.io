@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="icon" href="/favicon.ico">
+  <title>upeng</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox-1.3.4.css">
+  <!--在这里倒入jquery 方便处理部分页面的jquery-->
+  <script src="https://cdn.staticfile.org/jquery/1.7/jquery.min.js" type="text/javascript" ></script>
+</head>
+<body class="home">
+	<header class="site-header navfixed-false">
+  <div class="container">
+      <h1><a href="/" title="upeng"><span class="octicon octicon-mark-github"></span> upeng</a></h1>
+      <nav class="site-header-nav" role="navigation">
+        
+              
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="首页">首页</a>
+        
+              
+              <a href="/categories/"  class=" site-header-nav-item hvr-underline-from-center" title="分类">分类</a>
+        
+              
+              <a href="/tools/"  class=" site-header-nav-item hvr-underline-from-center" title="Tools">Tools</a>
+        
+              
+              <a href="/message/"  class=" site-header-nav-item hvr-underline-from-center" title="留言板">留言板</a>
+        
+      </nav>
+  </div>
+</header>
+
+	<section class="banner-false">
+    <div class="collection-head">
+        <div class="container">
+            <div class="collection-title">
+                <h1 class="collection-header" id="site-description">
+                    Learning Diary
+                </h1>
+                <div class="collection-info">
+                    
+                    
+                        <span class="meta-info">
+                            
+                                <span class="octicon octicon-location">
+                                   
+                                        Beijing, China
+                                    
+                                </span>
+                                
+                            
+                        </span>
+                    
+                        <span class="meta-info">
+                            
+                                <span class="octicon octicon-mark-github">
+                                   
+                                </span>
+                                
+                                    <a href="http://github.com/upeng" target="_blank">upeng</a>
+                                
+                            
+                        </span>
+                    
+                        <span class="meta-info">
+                            
+                                <span class="octicon octicon-organization">
+                                   
+                                        weibo
+                                    
+                                </span>
+                                
+                            
+                        </span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+	   <section class="container">
+    <div class="columns">
+        <div class="column two-thirds">
+            
+                  <article id="post-linux-awk" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2016/01/31/linux-awk/">Linux常用命令-awk</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <p>详细的awk使用总结翻阅为知笔记</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>awk中 !a[$0]++ 与 !a[$1…]++<br>功能：</p>
+<blockquote>
+<p>去重</p>
+<ol>
+<li>a[$0]是未定义的，即undef</li>
+<li>!优先级高于++</li>
+</ol>
+</blockquote>
+<p>1.!a[$0]++<br>!a[$0]++可以去除一行中重复的记录，以记录作为数组（可以将a理解为数组）索引；基于上面两点说明，这个不难理解。例子如下<br><img src="http://upfriend-blog.stor.sinaapp.com/1.jpg" alt="请输入图片描述"></p>
+<p>从上面例子可以看出，重复的记录被删除掉，只保留重复记录中第一次出现的记录</p>
+<p>2.!a[$1]++ 或者 !a[$2]++等等<br>!a[$1]++可以根据记录中某个域删除这个域相同的记录，也可以根据这个域相同，执行另外一些相应的操作。例子如下;<br><img src="http://upfriend-blog.stor.sinaapp.com/2.jpg" alt="请输入图片描述"></p>
+<p>从上面例子可以看出，第二个域相同的多条记录被删除，只保留重复记录中第一次出现的记录</p>
+<h3 id="查看文件夹下的文件个数-当前目录的文件和子文件夹的文件数"><a href="#查看文件夹下的文件个数-当前目录的文件和子文件夹的文件数" class="headerlink" title="查看文件夹下的文件个数(当前目录的文件和子文件夹的文件数)"></a>查看文件夹下的文件个数(当前目录的文件和子文件夹的文件数)</h3><p> <code>find ./ -type f | wc -l</code></p>
+<h2 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h2><p>功能：</p>
+<blockquote>
+<p>统计指定文本文件的行数、字数、字符数</p>
+</blockquote>
+<p>用法：</p>
+<ol>
+<li>wc file</li>
+<li>wc -l file</li>
+<li>wc -w file</li>
+<li>wc -c file</li>
+</ol>
+<p>文章部分来源：<a href="http://blog.163.com/njut_wangjian/blog/static/16579642520141027103125556/" target="_blank" rel="external">http://blog.163.com/njut_wangjian/blog/static/16579642520141027103125556/</a></p>
+
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2016-01-31T14:42:00.000Z" itemprop="datePublished">2016-01-31</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/Linux/' title=''>Linux</a>
+          </span>
+        
+      
+        <!--
+          
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/awk/">awk</a></li></ul>
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
+                  <article id="post-linux命令" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2016/01/30/linux命令/">linux常用命令（总是forget）</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <h2 id="linux操作历史查询"><a href="#linux操作历史查询" class="headerlink" title="linux操作历史查询"></a>linux操作历史查询</h2><ul>
+<li>我们知道上下键可以选择出输入的history历史;</li>
+<li>如果输入命令很多，只记得命令的部分字符，可以使用<code>ctrl+R</code>，然后模糊匹配，输入部分字符串，就可以定位命令</li>
+</ul>
+<h2 id="linux-删除已输入的命令-常用"><a href="#linux-删除已输入的命令-常用" class="headerlink" title="linux 删除已输入的命令(常用)"></a>linux 删除已输入的命令(常用)</h2><p><code>ctr + w</code> 往回删除一个单词，光标放在最末尾<br><code>ctl + u</code> 删除光标以前的字符<br><code>ctl + k</code> 删除光标以后的字符<br><code>ctl + a</code> 移动光标至的字符头<br><code>ctl + e</code> 移动光标至的字符尾<br><code>ctl + l</code> 清屏</p>
+
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2016-01-30T13:36:00.000Z" itemprop="datePublished">2016-01-30</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/Linux/' title=''>Linux</a>
+          </span>
+        
+      
+        <!--
+          
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
+                  <article id="post-linux-bash" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2015/10/28/linux-bash/">常用的bash命令快捷建</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <p><code>ctrl</code>键组合<br><code>ctrl+a</code>:光标移到行首。<br><code>ctrl+b</code>:光标左移一个字母<br><code>ctrl+c</code>:杀死当前进程。<br><code>ctrl+d</code>:退出当前 Shell。<br><code>ctrl+e</code>:光标移到行尾。<br><code>ctrl+h</code>:删除光标前一个字符，同 backspace 键相同。<br><code>ctrl+k</code>:清除光标后至行尾的内容。<br><code>ctrl+l</code>:清屏，相当于clear。<br><code>ctrl+r</code>:搜索之前打过的命令。会有一个提示，根据你输入的关键字进行搜索bash的history<br><code>ctrl+u</code>: 清除光标前至行首间的所有内容。<br><code>ctrl+w</code>: 移除光标前的一个单词<br><code>ctrl+t</code>: 交换光标位置前的两个字符<br><code>ctrl+y</code>: 粘贴或者恢复上次的删除<br><code>ctrl+d</code>: 删除光标所在字母;注意和backspace以及ctrl+h的区别，这2个是删除光标前的字符<br><code>ctrl+f</code>: 光标右移<br><code>ctrl+z</code> : 把当前进程转到后台运行，使用’ fg ‘命令恢复。比如top -d1 然后ctrl+z ，到后台，然后fg,重新恢复<br>esc组合<br><code>esc+d</code>: 删除光标后的一个词<br><code>esc+f</code>: 往右跳一个词<br><code>esc+b</code>: 往左跳一个词<br><code>esc+t</code>: 交换光标位置前的两个单词。</p>
+
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2015-10-28T09:56:00.000Z" itemprop="datePublished">2015-10-28</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/Linux/' title=''>Linux</a>
+          </span>
+        
+      
+        <!--
+          
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/">bash</a></li></ul>
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
+                  <article id="post-php-design-single" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2015/10/14/php-design-single/">PHP设计模式-单例模式</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p><code>场景</code>:有多个类需要读取数据库，而数据库连接类只需要一个对象就够了。其他的类只需调用这个类的连接对象即可<br><code>问题</code>：如何获取两个严格相等（全等）的对象（===）<br><code>答案</code>：只有当两个对象是同一个对象的时候才是全等的！</p>
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2015-10-14T14:21:00.000Z" itemprop="datePublished">2015-10-14</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/PHP编程/' title=''>PHP编程</a>
+          </span>
+        
+      
+        <!--
+          
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
+                  <article id="post-php-design-model" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2015/10/12/php-design-model/">PHP设计模式-工厂模式</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><p>直接上代码，直观了解工厂模式！</p>
+<pre><code>&lt;?php
+//接口，是客户端和服务端共同遵守的开发规范
+interface db
+{
+    public function conn(){};
+}
+
+//服务端
+class Dbmysql implements db
+{
+    public function conn()
+    {
+        echo &#39;connected the mysql&#39;;
+    }
+}
+
+class Dbsqlite implements db
+{
+    public function conn()
+    {
+        echo &#39;connected the sqlite&#39;;
+    }
+}
+
+//客户端 
+$mysql = new Dbmysql();
+$mysql-&gt;conn();
+
+$sqlite = new Dbsqlite();
+$sqlite-&gt;conn();
+
+//如果服务端不想让客户端知道自己内部类的实现细节，统一一个固定的入口，这样就是我们所说的
+//使用方知道的越少越好！将上述两个类封装起来
+
+//服务端，开发接口Dbconnect::type(@param)
+
+class Dbconnect 
+{
+    public static function type($type)
+    {
+        if ($type == &#39;mysql&#39;)
+        {
+            return new Dbmysql();
+        }
+        else if ($type == &#39;sqlite&#39;)
+        {
+            return new Dbsqlite();
+        }
+        else
+        {
+            throw new Exception(&quot;Error type is not exist&quot;, 1);
+
+        }
+    }
+}
+
+//客户端
+$mysql = Dbconnect::type(&#39;mysql&#39;);
+$mysql-&gt;conn();
+
+$sqlite = Dbconnect::type(&#39;sqlite&#39;);
+$sqlite-&gt;conn();
+</code></pre><p>在我们使用围脖的接口时，和这个有点类似，一个业务需求给你一个方法如showbatch(),friendship(),show()；当然他们是某个类的静态方法，我们不需要知道它是如何具体实现的，只要知道，当我们传递合适的参数，使用这个接口，就可以获得自己想要的数据即可</p>
+<p><code>Q:现在如果需要连接oracle、PDO、SqlServer，怎么办？当然php可以直接修改服务端的代码，增加else if，但是对于java,c++而言，如果修改代码，还需要再次编译，这是非常耗时的!</code></p>
+<blockquote>
+<p><strong>在面向对象设计（OOD）设计法则中，重要的开闭原则：对于修改是封闭，对于扩展是开放的</strong></p>
+</blockquote>
+<h2 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h2><p><strong>注意开闭原则</strong><br>//<strong>服务端</strong></p>
+<pre><code>interface Factory
+{
+    public function createDb(){};
+}
+
+class mysqlFactory implements Factory
+{
+    public function createDb()
+    {
+        return new Dbmysql();
+    }
+}
+
+class sqliteFactory implements Factory
+{
+    public function createDb()
+    {
+        return new Dbsqlite();
+    }
+}
+
+//**客户端**
+//由于开放了两个接口，一个是创建数据库，一个是连接数据库
+
+$fact = new mysqlFactory();
+$db = $fact-&gt;createDb();
+$db-&gt;conn();
+
+$fact = new sqliteFactory();
+$db-&gt;$fact-&gt;createDb();
+$db-&gt;conn(); 
+
+//现在如果新增了oracle数据库连接，就可以扩展oracle，不需要修改代码，扩展如下：
+
+class Dboracle implements db()
+{
+    public function conn()
+    {
+        echo &#39;connected oracle database&#39;;
+    }
+}
+class oracleFactory implements Factory
+{
+    public function createDb()
+    {
+        return new Dboracle();
+    }
+}
+
+
+$fact = new oracleFactory();
+$db = $fact-&gt;createDb();
+$db-&gt;conn();
+</code></pre>
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2015-10-12T14:12:00.000Z" itemprop="datePublished">2015-10-12</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/PHP编程/' title=''>PHP编程</a>
+          </span>
+        
+      
+        <!--
+          
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
+        </div>
+        <div class="column one-third">
+          <h3>Search</h3>
+
+
+<div id="site_search">
+	<form action="http://www.google.com/search?" data-site="http://upeng.github.io">
+    	<input type="text" id="search_box" name="q" placeholder="Search" style="width: 253px;">
+    	<button type="button" class="btn btn-default" id="site_search_do"><span class="octicon octicon-search"></span></button>
+    </form>
+</div>
+
+<ul id="search_results"></ul>
+<h3>Popular Repositories</h3>
+
+    
+    <div class="popular-container"></div>
+    
+    <script type="text/template" id="popular-list-template">
+        <a href="{%=clone_url%}" class="card text-center" target="_blank">
+            <div class="thumbnail">
+                <div class="card-image geopattern" data-pattern-id="{%=name%}">
+                    <div class="card-image-cell">
+                        <h3 class="card-title">
+                            {%=name%}
+                        </h3>
+                    </div>
+                </div>
+                <div class="caption">
+                    <div class="card-description">
+                        <p class="card-text">
+                            {%=description%}
+                        </p>
+                    </div>
+                    <div class="card-text">
+                        <span class="meta-info tooltipped tooltipped-n" aria-label="{%=stargazers_count%} stars">
+                            <span class="octicon octicon-star"></span> {%=stargazers_count%}
+                        </span>
+                        <span class="meta-info tooltipped tooltipped-n" aria-label="{%=forks_count%} forks">
+                            <span class="octicon octicon-git-branch"></span> {%=forks_count%}
+                        </span>
+                        <span class="meta-info tooltipped tooltipped-n" aria-label="最后更新时间：{%=updated_at%}">
+                            <span class="octicon octicon-clock"></span>
+                            <time datetime="{%=updated_at%}">{%=updated_at%}</time>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </script>
+
+    <script src="/js/baiduTemplate.js"></script>
+    <script type="text/javascript">
+        var popular_repos = function(){
+
+            var baiduTpl = new Object();
+
+            var handleTpl = function(){
+                baiduTpl.popular_list = baidu.template("popular-list-template");
+            };
+
+            var handleGithub = function(){
+                var popularContainer = $(".popular-container");
+
+                var repos = "".split(",");
+                for(var i in repos){
+                    var name = repos[i];
+                    $.get("https://api.github.com/repos/upeng/"+name,handle);
+                }
+
+                function handle(result){
+                    result.updated_at = result.updated_at.split("T")[0];
+                    if(result){
+                        var html = baiduTpl.popular_list(result);
+                        popularContainer.append(html);
+                        $(".geopattern").each(function(){           
+                            $(this).geopattern($(this).data('pattern-id'));
+                        });
+                    }
+                }
+            };
+
+            return {
+                init:function(){
+                    handleTpl();
+                    handleGithub();
+                }
+            }
+        }; 
+        $(popular_repos().init);
+    </script>
+
+        </div>
+    </div>
+
+    
+      <div class="pagination text-align">
+          <div class="btn-group">
+              <a class="extend prev" rel="prev" href="/page/5/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">&raquo;</a>
+          </div>
+      </div>
+    
+</section>
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+                © 2016
+                <span title="yumemor">yumemor</span>
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+            </li>
+        </ul>
+
+        <a href="https://github.com/yumemor/hexo-theme-primer" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+        </a>
+
+        <ul class="site-footer-links mobile-hidden">
+            
+                  
+                  <li>
+                    <a href="/"  title="首页">首页</a>
+                  </li>
+            
+                  
+                  <li>
+                    <a href="/categories/"  title="分类">分类</a>
+                  </li>
+            
+                  
+                  <li>
+                    <a href="/tools/"  title="Tools">Tools</a>
+                  </li>
+            
+                  
+                  <li>
+                    <a href="/message/"  title="留言板">留言板</a>
+                  </li>
+            
+            <li>
+                <a href="/atom.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+
+		<script src="/js/geopattern.js"></script>
+
+		
+
+		<script src="/js/highlight.pack.js"></script>
+		<script src="/lib/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+		<script src="/js/index.js"></script>
+
+		 <script src="/js/popular_repo.js"></script> 
+
+	</body>
+</html>
