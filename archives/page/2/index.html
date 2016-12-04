@@ -322,7 +322,7 @@ set autoindent # 自动缩进
 </div>
 
 <ul id="search_results"></ul>
-<h3>Popular Repositories</h3>
+<h3>Repositories</h3>
 
     
     <div class="popular-container"></div>
@@ -373,7 +373,7 @@ set autoindent # 自动缩进
             var handleGithub = function(){
                 var popularContainer = $(".popular-container");
 
-                var repos = "upeng.github.io,codeIgniter-captcha,learn-vuejs,translation".split(",");
+                var repos = "upeng.github.io,codeIgniter-captcha,learn-vuejs".split(",");
                 for(var i in repos){
                     var name = repos[i];
                     $.get("https://api.github.com/repos/upeng/"+name,handle);
