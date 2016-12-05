@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[打造自己的终端和命令行item2和zsh]]></title>
+      <title><![CDATA[Mac下的终端和命令行item2和zsh]]></title>
       <url>http://upeng.github.io/2016/12/04/zsh-and-item2/</url>
       <content type="html"><![CDATA[<p>关于zsh和item2的关系可以理解为，zsh就是linux下bash shell的升级版；iterm2是termainal的升级版，可以自定义terminal主题配色；<code>cmd + ,</code>呼出配置。可以新增配置，并将之设置默认，（默认配置前有个⭐）<br><a id="more"></a></p>
 <h3 id="zsh的高效命令（常用）"><a href="#zsh的高效命令（常用）" class="headerlink" title="zsh的高效命令（常用）"></a>zsh的高效命令（常用）</h3><ol>
