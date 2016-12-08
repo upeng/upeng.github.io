@@ -76,8 +76,8 @@
                 <p>在编程中，可能经常会听到幂等这个词，第一次是年初红包技术复盘时听到了这个词，这次是因为写脚本时被质疑，是否支持幂等。这里总结一下，也算是个记录吧。其实在编程中，很多时候都需要支持幂等，有的程序自然存在幂等，有的需要我们控制。比如与支付相关的场景，比如我们常见的HTTP方法。<br><a id="more"></a></p>
 <h3 id="幂等性概念"><a href="#幂等性概念" class="headerlink" title="幂等性概念"></a>幂等性概念</h3><p><strong> idempotence</strong>：在编程中，一个程序幂等操作的<strong>特点</strong>是其<strong>任意多次执行</strong>所产生的影响均与<strong>一次执行</strong>的影响<strong>相同</strong></p>
 <h3 id="幂等案例"><a href="#幂等案例" class="headerlink" title="幂等案例"></a>幂等案例</h3><p>比如你写了一个script，实现的功能是：发送短信sms和私信message通知用户，而且要求每个用户每天只发送一次。如果不进行幂等控制，会有什么问题呢？</p>
-<h4 id="存在问题："><a href="#存在问题：" class="headerlink" title="存在问题："></a>存在问题：</h4><p>sms和message发送完成后，你通过log发现，有部分用户发送失败，这时你又不能再跑一遍脚本，因为这会导致之发送成功的用户再次收到消息，显然这是不符合业务逻辑的，而且如果还是有发送失败的，那就再跑一遍？</p>
-<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
+<h5 id="存在问题："><a href="#存在问题：" class="headerlink" title="存在问题："></a>存在问题：</h5><p>sms和message发送完成后，你通过log发现，有部分用户发送失败，这时你又不能再跑一遍脚本，因为这会导致之发送成功的用户再次收到消息，显然这是不符合业务逻辑的，而且如果还是有发送失败的，那就再跑一遍？</p>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><ol>
 <li><p>通过日志，筛选出发送失败的用户，重新补发，如果还是有失败的，继续补发。。。，而且！你还需单独准备一个脚本用于补发</p>
 </li>
 <li><p>控制脚本，实现幂等！一个脚本足以，无论发送多少次，都不会出现重复发送的情况</p>
@@ -85,7 +85,7 @@
 </ol>
 <p>很显然，第二种才是比较专业的解决方案，那么如何实现幂等呢，方法不止一个，此处我们使用缓存。具体如下：</p>
 <p>给用户发信息时，检查缓存中是否有用户发送记录，有则跳过不发送，无则发送，发送成功时设置用户缓存。</p>
-<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><pre><code>foreach ($uids as $uid)
+<h5 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h5><pre><code>foreach ($uids as $uid)
 {
     $cache = array();
     $cache = getCache($uid);
@@ -109,8 +109,8 @@
     }
 
 }
-</code></pre><h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>这样一来，程序就具有简单的幂等性，脚本跑n次和跑一次影响是一致的，而且还可以弥补发送失败的情况，大不了多跑几次，因为不会出现重发的情况。<code>以后写脚本的时候，要考虑一下，是否支持幂等！</code></p>
-<h4 id="问题发散："><a href="#问题发散：" class="headerlink" title="问题发散："></a>问题发散：</h4><p>消息发送成功，缓存设置失败怎么办？如果对程序要求非常严格，必须有更好的解决方案才行！比如金融电商业务。</p>
+</code></pre><h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><p>这样一来，程序就具有简单的幂等性，脚本跑n次和跑一次影响是一致的，而且还可以弥补发送失败的情况，大不了多跑几次，因为不会出现重发的情况。<code>以后写脚本的时候，要考虑一下，是否支持幂等！</code></p>
+<h5 id="问题发散："><a href="#问题发散：" class="headerlink" title="问题发散："></a>问题发散：</h5><p>消息发送成功，缓存设置失败怎么办？如果对程序要求非常严格，必须有更好的解决方案才行！比如金融电商业务。</p>
 <h3 id="继续学习"><a href="#继续学习" class="headerlink" title="继续学习"></a>继续学习</h3><p><a href="http://note.youdao.com/" target="_blank" rel="external">http://www.i3geek.com/archives/841</a> </p>
 
             </article>
@@ -153,7 +153,7 @@
 <div id="post-directory-module">
 	<section class="post-directory">
 		<p><strong class="toc-title">文章目录</strong></p>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#幂等性概念"><span class="toc-text">幂等性概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#幂等案例"><span class="toc-text">幂等案例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#存在问题："><span class="toc-text">存在问题：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪代码"><span class="toc-text">伪代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#总结："><span class="toc-text">总结：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题发散："><span class="toc-text">问题发散：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续学习"><span class="toc-text">继续学习</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#幂等性概念"><span class="toc-text">幂等性概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#幂等案例"><span class="toc-text">幂等案例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#存在问题："><span class="toc-text">存在问题：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#伪代码"><span class="toc-text">伪代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#总结："><span class="toc-text">总结：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#问题发散："><span class="toc-text">问题发散：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续学习"><span class="toc-text">继续学习</span></a></li></ol>
 	</section>
 </div>
             
