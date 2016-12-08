@@ -32,7 +32,7 @@
               <a href="http://shareup.sinaapp.com"  class=" site-header-nav-item hvr-underline-from-center" title="Share">Share</a>
         
               
-              <a href="/welcome/"  class=" site-header-nav-item hvr-underline-from-center" title="welcome">welcome</a>
+              <a href="/welcome/"  class=" selected  site-header-nav-item hvr-underline-from-center" title="welcome">welcome</a>
         
               
               <a href="/about/"  class=" site-header-nav-item hvr-underline-from-center" title="About">About</a>
@@ -42,23 +42,18 @@
 </header>
 
 	
-<section class="collection-head geopattern" data-pattern-id="使用zephir快速编写php扩展" >
+<section class="collection-head geopattern" data-pattern-id="welcome" >
     <div class="container">
         <div class="collection-title">
             <h1 class="collection-header">
-                使用zephir快速编写php扩展
+                welcome
             </h1>
             
                 <div class="collection-info">
                     <span class="meta-info">
                         <span class="octicon octicon-calendar"></span>
-                        <time datetime="2016-06-30T15:42:24.000Z" itemprop="datePublished">2016-06-30</time>
+                        <time datetime="2016-12-08T17:30:52.000Z" itemprop="datePublished">2016-12-09</time>
                     </span>
-                    
-                        <span class="meta-info">
-                            <span class="octicon octicon-file-directory"></span>
-                            <a href='/categories/PHP/' title=''>PHP</a>
-                        </span>
                     
                 </div>
             
@@ -70,80 +65,12 @@
         <!-- -->
         <div class="column three-fourths">
             <article class="article-content markdown-body">
-                <h2 id="zephir简介"><a href="#zephir简介" class="headerlink" title="zephir简介"></a>zephir简介</h2><p><a href="http://zephir-lang.com/" target="_blank" rel="external">zephir</a>开源，是<code>zend engine / php / intermediate</code>的缩写，其语法和php很相似，所以对于phper而言创建php扩展简单快捷。如果你不想使用C编写php扩展，可以考虑zephir，因为它很简单，学习成本低。<br><a id="more"></a></p>
-<h2 id="zephir特点"><a href="#zephir特点" class="headerlink" title="zephir特点"></a>zephir特点</h2><p><code>dynamic/static</code> 变量类型可以是动态/静态变量<br><code>pointers or direct memory management aren’t allowed</code>不允许指针和直接的内存管理<br><code>ahead of time</code> 编译模型AOT<br><code>task-local garbage collection</code> 内存模型 Task-Local垃圾回收</p>
-<blockquote>
-<p>下面就以一个简单扩展开发为例，总结使用zephir开发php来扩展的流程！</p>
-</blockquote>
-<h2 id="安装zephir"><a href="#安装zephir" class="headerlink" title="安装zephir"></a>安装zephir</h2><ol>
-<li>需要先安装相关的依赖</li>
-<li>使用git的方式获取源代码进行安装</li>
-<li>通过运行zephir命令验证安装是否成功<pre><code>$ git clone https://github.com/phalcon/zephir
-$ cd zephir
-$ ./install-json
-$ zephir help
-_____              __    _
-/__  /  ___  ____  / /_  (_)____
-/ /  / _ \/ __ \/ __ \/ / ___/
-/ /__/  __/ /_/ / / / / / /
-/____/\___/ .___/_/ /_/_/_/
-      /_/
-Zephir version 0.7.1b
-</code></pre></li>
-</ol>
-<h2 id="初始化扩展"><a href="#初始化扩展" class="headerlink" title="初始化扩展"></a>初始化扩展</h2><pre><code>zephir init upfriend(upfriend扩展名)
-upfriend/
-   ext/
-   upfriend/
-</code></pre><h2 id="编写扩展"><a href="#编写扩展" class="headerlink" title="编写扩展"></a>编写扩展</h2><p>在<code>upfriend/upfriend</code>目录中创建<code>filter.zep</code>文件</p>
-<pre><code>namespace Upfriend;
-class Filter
-{
-    /**     
-    * Filters a string returning its alpha characters
-    * @param string str     
-    */
-    public function alpha(string str)
-    {
-        char ch; string filtered = &quot;&quot;;
-
-        for ch in str {
-            if (ch &gt;= &#39;a&#39; &amp;&amp; ch &lt;= &#39;z&#39;) || (ch &gt;= &#39;A&#39; &amp;&amp; ch &lt;= &#39;Z&#39;)
-            {
-              let filtered .= ch;
-            }
-        }
-
-        return filtered;
-    }
-    public static function hello()
-    {
-        echo &quot;hello zephir&quot;;
-    }
-}
-</code></pre><h2 id="编译扩展"><a href="#编译扩展" class="headerlink" title="编译扩展"></a>编译扩展</h2><p><code>upfriend</code>根目录运行<code>zephir bulid</code>编译扩展</p>
-<pre><code>$ zephir build     
-Preparing for PHP compilation...
-Preparing configuration file...
-Compiling...
-Installing...
-Extension installed!
-Add extension=utils.so to your php.ini
-Don&#39;t forget to restart your web serverp
-</code></pre><h2 id="使用扩展"><a href="#使用扩展" class="headerlink" title="使用扩展"></a>使用扩展</h2><p>编译成功，修改php.ini配置文件，添加一行</p>
-<pre><code>extension=upfirend.so //upfriend.so与php.ini位于同一目录
-php -m  //查看扩展是否安装成功
-</code></pre><p>在php中使用这个类（扩展）的方法</p>
-<pre><code>&lt;?php
-    $filter = new Upfriend\Filter();
-    echo $filter-&gt;alpha(&quot;01he#l.lo?/1&quot;); // prints hello
-    Upfriend::hello() // prints hello zephir
-</code></pre>
+                
             </article>
             
                 <div class="share">
                     <!--开启分享-->
-<div class="share-component" data-disabled="google,twitter,facebook" data-description="zephir简介zephir开源，是zend engi..."></div>
+<div class="share-component" data-disabled="google,twitter,facebook" data-description=""></div>
 
 <script src="/js/share.min.js"></script>
 
@@ -152,7 +79,7 @@ php -m  //查看扩展是否安装成功
             
                 
 <div class="comments">
-	<div class="ds-thread" data-thread-key="zephir" data-title="使用zephir快速编写php扩展" data-url="http://upeng.github.io/2016/06/30/zephir/"></div>
+	<div class="ds-thread" data-thread-key="welcome" data-title="welcome" data-url="http://upeng.github.io/welcome/index.html"></div>
 	<script type="text/javascript">
 	var duoshuoQuery = {short_name:"upeng"};
 		(function() {
@@ -179,7 +106,7 @@ php -m  //查看扩展是否安装成功
 <div id="post-directory-module">
 	<section class="post-directory">
 		<p><strong class="toc-title">文章目录</strong></p>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#zephir简介"><span class="toc-text">zephir简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zephir特点"><span class="toc-text">zephir特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装zephir"><span class="toc-text">安装zephir</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化扩展"><span class="toc-text">初始化扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写扩展"><span class="toc-text">编写扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译扩展"><span class="toc-text">编译扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用扩展"><span class="toc-text">使用扩展</span></a></li></ol>
+		
 	</section>
 </div>
             
