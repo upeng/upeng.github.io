@@ -95,6 +95,45 @@
     <div class="columns">
         <div class="column two-thirds">
             
+                  <article id="post-mysql-master-slave" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2016/09/12/mysql-master-slave/">mysql主从复制原理理解与实践</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <p>只从最简单的mysql主从复制原理与实践着手，之前看到Yshiba老师讲解的挺细致透彻，顺便做下笔记并实践一下。</p>
+<h2 id="主从复制原理-replication"><a href="#主从复制原理-replication" class="headerlink" title="主从复制原理 replication"></a>主从复制原理 replication</h2><p>主服务器(master)的binlog,记录master的各种操作（insert、update、delete），master的磁盘只要发生变化就会记录到自己的binlog里面。</p>
+<p>从服务器（slave）如果能读取到master的binlog,那么就可以将master的所做操作跟着执行一遍。但是由于master的binlog中含有master的一些信息，所以需要对binlog进行分析加工，slave的relaylog就是干这种事的，实际上slave将使用relaylog终极日志上的sql操作，保证主从数据一致性。<br>
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2016-09-12T13:42:47.000Z" itemprop="datePublished">2016-09-12</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/MySQL/' title=''>MySQL</a>
+          </span>
+        
+      
+        <!--
+          
+            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/主从复制/">主从复制</a></li></ul>
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
                   <article id="post-vim" class="repo-list">
     <div class="repo-list-item" >
       <h3 class="repo-list-name" itemprop="name">
@@ -263,45 +302,6 @@ set autoindent # 自动缩进
         <!--
           
             <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-vuejs" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/07/17/vuejs/">vuejs与后台数据的交互实践</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <p>Vuejs是MVVM框架，数据和DOM视图双向绑定，数据驱动的 web 界面的库。</p>
-<p><strong>响应的数据绑定</strong>：数据与DOM保持同步非常简单，数据发生变化的时候，如果我们使用JQuery操作DOM的话自然是可行的，但是jQuery操作DOM代码复杂容易出错，就拿一个简单的例子，在列表中新增一行数据，使用JQuery可能会刷新整个DOM,并对页面refresh。但是vue实现数据与DOM的绑定后，只要数据发生变化，就自动改动DOM，所以我们的工作重点就是修改数据，不必与DOM更新搅在一起。</p>
-<p><strong>我的理解</strong>：Vuejs简化了操作DOM或者不再去手动操作DOM，一个简单的API就搞定了DOM的自动更新，让我们脱离了使用Js操作DOM的复杂流程。这也是Vue的迷人之处吧，其他的优点诸如：组件化、模块化、体积小等优点我就不再罗列了，本文重点也不在此。<br>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-07-17T07:58:17.000Z" itemprop="datePublished">2016-07-17</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/Web/' title=''>Web</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuejs/">vuejs</a></li></ul>
           
         -->
 
