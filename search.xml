@@ -4,6 +4,97 @@
   
     
     <entry>
+      <title><![CDATA[静态缓存实践]]></title>
+      <url>http://upeng.github.io/2016/12/12/static-cache/</url>
+      <content type="html"><![CDATA[<h4 id="静态缓存"><a href="#静态缓存" class="headerlink" title="静态缓存"></a>静态缓存</h4><p>什么是静态缓存？简单理解就是保存在磁盘上的静态文件，将生成的数据放入静态文件中，一般是存储不经常变动内容的页面数据。<br><a id="more"></a><br><strong>思路：</strong></p>
+<ul>
+<li>创建缓存文件</li>
+</ul>
+<p>命名方式比如：以<code>key</code>作为文件名。先指定一个文件夹比如<code>files</code>用于缓存文件的文件夹，然后根据<code>key</code>和<code>path</code>创建具体缓存文件</p>
+<ul>
+<li>封装在一个方法中，根据参数做不同的操作（当然也可以封装三个方法）</li>
+</ul>
+<p><code>cacheData($key, $value = &#39;&#39;, $path = &#39;&#39;)</code></p>
+<pre><code>//get cache
+$value === &#39;&#39;
+
+//delete cache
+$value !== &#39;&#39; &amp;&amp; is_null($value)
+
+//set cache
+$value !== &#39;&#39; &amp;&amp; !is_null($value)
+</code></pre><h4 id="用到的php文件处理函数"><a href="#用到的php文件处理函数" class="headerlink" title="用到的php文件处理函数"></a>用到的php文件处理函数</h4><pre><code>//获取缓存文件的文件（上级）目录
+$dir = dirname($filename); 
+
+//判断文件夹(目录)是否存在
+is_dir($dir); 
+
+//创建文件目录
+mkdir($dir, 0777);
+
+//判断文件是否存在
+is_file($filename);
+
+//删除文件
+unlink($filename);
+</code></pre><h4 id="封装静态缓存操作类"><a href="#封装静态缓存操作类" class="headerlink" title="封装静态缓存操作类"></a>封装静态缓存操作类</h4><pre><code>class Scache{
+    const EXT = &#39;.txt&#39;;
+    private $_dir;
+    public function __construct(){
+        $this-&gt;_dir = dirname() . &#39;/files/&#39;;
+    }
+
+    //一个函数，不同参数，产生【写缓存，读缓存，删缓存】
+    public function cacheMeta($key, $value = &#39;&#39;, $path = &#39;&#39;){
+        $filename = $this-&gt;_dir . $path . $key . self::EXT;
+        if ($value !== &#39;&#39;){
+            if (is_null($value)){
+                return @unlink($filename);
+            }
+
+            $dir = dirname($filename);
+            if (!is_dir($dir)){ //判断目录是否存在
+                mkdir($dir, 0777);
+            }
+
+            //写入成功返回字节数，失败返回false
+            return file_put_contents($filename, json_encode($value)); 
+        }
+
+        if(!is_file($filename)){
+            return false;
+        }
+        return file_get_contents($filename);
+    }
+
+}
+</code></pre><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><pre><code>include_once &#39;scache.php&#39;;
+
+$obj = new Scache;
+
+//设置缓存
+$key = &#39;learn_upeng_001&#39;;
+$value = array(
+    &#39;a&#39; =&gt; &#39;learn file cache function&#39;,
+    &#39;b&#39; =&gt; array(
+        &#39;c&#39; =&gt; &#39;for learn filename operation&#39;,
+        &#39;d&#39; =&gt; &#39;learn oop at the same time&#39;,
+    )
+);
+$obj-&gt;cacheMeta($key, $value);
+
+//读取缓存
+$obj-&gt;cacheMeta($key);
+
+//删除缓存
+$obj-&gt;cacheMeta($key, NULL);
+</code></pre><blockquote>
+<p>注：summary from imooc lesson</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[在编程中的幂等性idempotence]]></title>
       <url>http://upeng.github.io/2016/12/08/idempotence/</url>
       <content type="html"><![CDATA[<p>在编程中，可能经常会听到幂等这个词，第一次是年初红包技术复盘时听到了这个词，这次是因为写脚本时被质疑，是否支持幂等。这里总结一下，也算是个记录吧。其实在编程中，很多时候都需要支持幂等，有的程序自然存在幂等，有的需要我们控制。比如与支付相关的场景，比如我们常见的HTTP方法。<br><a id="more"></a></p>
