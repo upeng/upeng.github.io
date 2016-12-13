@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title><![CDATA[判断一个整数的二进制中有多少个1]]></title>
+      <url>http://upeng.github.io/2016/12/13/algorithm/</url>
+      <content type="html"><![CDATA[<p>无意间看到这个题目，最先想到是将整数转换成二进制，然后再统计这个二进制中有多少个1。对于php而言，这很容易实现，转成二进制可用<code>decbin()</code>这个函数，然后将二进制数按1位进行分割用str_split()，最后对分割后的数值进行foreach即可完成数据的统计，实际上这是最low的解决方案，网上大多数使用下面的算法进行求解，觉得很巧妙，于是就mark了！<br><a id="more"></a></p>
+<h3 id="算法说明"><a href="#算法说明" class="headerlink" title="算法说明"></a>算法说明</h3><p>设x的二进制位表示为<br>x=a<sub>(n-1)</sub> a<sub>(n-2)</sub>…a<sub>0</sub></p>
+<p>按从低位到高位的顺序，不失一般性，假设x的第i位为第一个为1的二进制位，即：a<sub>i</sub> = 1<br>此时有：<br> x  =  a<sub>(n-1)</sub> a<sub>(n-2)</sub> … a<sub>(i+1)</sub> 1 0 0 … 0       （式子1)<br>x-1= a<sub>(n-1)</sub>a<sub>(n-2)</sub> …a<sub>(i+1)</sub> 0 1 1  … 1  （式子2)<br>很明显，从式1和式2可以得出，在第一次 <code>x &amp; (x-1)</code> 后：<br>x  =  a<sub>(n-1)</sub> a<sub>(n-2)</sub> … a<sub>(i+1)</sub> 0 0 0 … 0</p>
+<p>之后重复同样操作，直到x的二进制位中没有1为止，从上面可以看出，每执行过一次 <code>x &amp; (x-1)</code> 后，都会将x的<strong>二进制位中为1的最低位的值变为0，并记数加1</strong>。目前而言，一个整数最大64bit，所有三种方法执行起来都可以认为是O(1)。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>&lt;?php
+$number = $argv[1];
+$counter = 0;
+while ($number)
+{
+    $counter += 1;
+    $number = $number &amp; ($number-1);
+
+}
+
+echo $counter . PHP_EOL;
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[静态缓存实践]]></title>
       <url>http://upeng.github.io/2016/12/12/static-cache/</url>
       <content type="html"><![CDATA[<h4 id="静态缓存"><a href="#静态缓存" class="headerlink" title="静态缓存"></a>静态缓存</h4><p>什么是静态缓存？简单理解就是保存在磁盘上的静态文件，将生成的数据放入静态文件中，一般是存储不经常变动内容的页面数据。<br><a id="more"></a><br><strong>思路：</strong></p>

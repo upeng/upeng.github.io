@@ -89,6 +89,46 @@
     <div class="columns">
         <div class="column two-thirds">
             
+                  <article id="post-linux命令" class="repo-list">
+    <div class="repo-list-item" >
+      <h3 class="repo-list-name" itemprop="name">
+        
+  
+      <a class="article-title" href="/2016/01/30/linux命令/">linux常用命令（总是forget）</a>
+  
+
+      </h3>
+      <div class="repo-list-description">
+        
+          <h2 id="linux操作历史查询"><a href="#linux操作历史查询" class="headerlink" title="linux操作历史查询"></a>linux操作历史查询</h2><ul>
+<li>我们知道上下键可以选择出输入的history历史;</li>
+<li>如果输入命令很多，只记得命令的部分字符，可以使用<code>ctrl+R</code>，然后模糊匹配，输入部分字符串，就可以定位命令</li>
+</ul>
+<h2 id="linux-删除已输入的命令-常用"><a href="#linux-删除已输入的命令-常用" class="headerlink" title="linux 删除已输入的命令(常用)"></a>linux 删除已输入的命令(常用)</h2><p><code>ctr + w</code> 往回删除一个单词，光标放在最末尾<br><code>ctl + u</code> 删除光标以前的字符<br><code>ctl + k</code> 删除光标以后的字符<br><code>ctl + a</code> 移动光标至的字符头<br><code>ctl + e</code> 移动光标至的字符尾<br><code>ctl + l</code> 清屏</p>
+
+        
+      </div>
+      <p class="repo-list-meta">
+        <span class="meta-info">
+          <span class="octicon octicon-calendar"></span>
+           <time datetime="2016-01-30T13:36:00.000Z" itemprop="datePublished">2016-01-30</time>
+        </span>
+
+        
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href='/categories/Linux/' title=''>Linux</a>
+          </span>
+        
+      
+        <!--
+          
+        -->
+
+      </p>
+    </div>
+  </article>
+            
                   <article id="post-linux-bash" class="repo-list">
     <div class="repo-list-item" >
       <h3 class="repo-list-name" itemprop="name">
@@ -417,63 +457,6 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
     </div>
   </article>
             
-                  <article id="post-mysql导入导出" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2015/08/03/mysql导入导出/">linux下导入、导出mysql数据库命令</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <h2 id="一、导出数据库用mysqldump命令（注意mysql的安装路径，即此命令的路径）："><a href="#一、导出数据库用mysqldump命令（注意mysql的安装路径，即此命令的路径）：" class="headerlink" title="一、导出数据库用mysqldump命令（注意mysql的安装路径，即此命令的路径）："></a>一、导出数据库用mysqldump命令（注意mysql的安装路径，即此命令的路径）：</h2><ul>
-<li><h3 id="导出数据和表结构："><a href="#导出数据和表结构：" class="headerlink" title="导出数据和表结构："></a>导出数据和表结构：</h3><p>mysqldump -u用户名 -p密码 数据库名 &gt; 数据库名.sql<br>eg /usr/local/mysql/bin/   mysqldump -uroot -p abc &gt; abc.sql<br>敲回车后会提示输入密码</p>
-</li>
-<li><h3 id="只导出表结构"><a href="#只导出表结构" class="headerlink" title="只导出表结构"></a>只导出表结构</h3><p>mysqldump -u用户名 -p密码 -d 数据库名 &gt; 数据库名.sql<br>eg /usr/local/mysql/bin/   mysqldump -uroot -p -d abc &gt; abc.sql</p>
-</li>
-</ul>
-<p>注：/usr/local/mysql/bin/  —&gt;  mysql的data目录</p>
-<h2 id="二、导入数据库"><a href="#二、导入数据库" class="headerlink" title="二、导入数据库"></a>二、导入数据库</h2><ol>
-<li><h3 id="首先建空数据库"><a href="#首先建空数据库" class="headerlink" title="首先建空数据库"></a>首先建空数据库</h3><p>mysql&gt;create database abc;</p>
-</li>
-<li><h3 id="导入数据库"><a href="#导入数据库" class="headerlink" title="导入数据库"></a>导入数据库</h3><p>方法一：<br>（1）选择数据库<br>mysql&gt;use abc;<br>（2）设置数据库编码<br>mysql&gt;set names utf8;<br>（3）导入数据（注意sql文件的路径）<br>mysql&gt;source /home/abc/abc.sql;<br>方法二：<br>mysql -u用户名 -p密码 数据库名 &lt; 数据库名.sql<br>eg mysql -uabc_f -p abc &lt; abc.sql</p>
-</li>
-</ol>
-<p>建议使用第二种方法导入。</p>
-<h3 id="三、关于导入导出数据库需注意的地方（总是忘记！）"><a href="#三、关于导入导出数据库需注意的地方（总是忘记！）" class="headerlink" title="三、关于导入导出数据库需注意的地方（总是忘记！）"></a>三、关于导入导出数据库需注意的地方（总是忘记！）</h3><ul>
-<li><p><code>而导入数据库和导出正好相反（废话），要先进入mysql，然后使用source命令</code></p>
-</li>
-<li><p><code>导出数据库是在linux命令行模式中，当前位于哪个目录就导出到哪里（途中可能需要输入user password）</code> </p>
-</li>
-</ul>
-
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2015-08-03T03:09:00.000Z" itemprop="datePublished">2015-08-03</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/MySQL/' title=''>MySQL</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
         </div>
         <div class="column one-third">
           <h3>Search</h3>
@@ -572,7 +555,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
     
       <div class="pagination text-align">
           <div class="btn-group">
-              <a class="extend prev" rel="prev" href="/archives/page/6/">&laquo;</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="page-number" href="/archives/page/6/">6</a><span class="page-number current">7</span>
+              <a class="extend prev" rel="prev" href="/archives/page/6/">&laquo;</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="page-number" href="/archives/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/archives/page/8/">8</a><a class="extend next" rel="next" href="/archives/page/8/">&raquo;</a>
           </div>
       </div>
     

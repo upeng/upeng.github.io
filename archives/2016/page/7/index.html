@@ -89,157 +89,29 @@
     <div class="columns">
         <div class="column two-thirds">
             
-                  <article id="post-static" class="repo-list">
+                  <article id="post-linux命令" class="repo-list">
     <div class="repo-list-item" >
       <h3 class="repo-list-name" itemprop="name">
         
   
-      <a class="article-title" href="/2016/10/12/static/">静态方法和静态成员变量</a>
+      <a class="article-title" href="/2016/01/30/linux命令/">linux常用命令（总是forget）</a>
   
 
       </h3>
       <div class="repo-list-description">
         
-          <blockquote>
-<p>问题来源：</p>
-</blockquote>
-<p>写了一个<code>Model_User</code>，创建了2个静态方法func1和func2，2个静态方法中都含有公共的连接数据库的逻辑，突然想到代码重用，然后创建了构造方法，将连接数据库的逻辑放在<code>__construct()</code>中，然后去调用<code>Model_User</code>的静态方法<br>
+          <h2 id="linux操作历史查询"><a href="#linux操作历史查询" class="headerlink" title="linux操作历史查询"></a>linux操作历史查询</h2><ul>
+<li>我们知道上下键可以选择出输入的history历史;</li>
+<li>如果输入命令很多，只记得命令的部分字符，可以使用<code>ctrl+R</code>，然后模糊匹配，输入部分字符串，就可以定位命令</li>
+</ul>
+<h2 id="linux-删除已输入的命令-常用"><a href="#linux-删除已输入的命令-常用" class="headerlink" title="linux 删除已输入的命令(常用)"></a>linux 删除已输入的命令(常用)</h2><p><code>ctr + w</code> 往回删除一个单词，光标放在最末尾<br><code>ctl + u</code> 删除光标以前的字符<br><code>ctl + k</code> 删除光标以后的字符<br><code>ctl + a</code> 移动光标至的字符头<br><code>ctl + e</code> 移动光标至的字符尾<br><code>ctl + l</code> 清屏</p>
+
         
       </div>
       <p class="repo-list-meta">
         <span class="meta-info">
           <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-10-12T12:34:26.000Z" itemprop="datePublished">2016-10-12</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP/' title=''>PHP</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/static/">static</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-publish-laravel-package" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/10/11/publish-laravel-package/">从编写到发布laravel扩展</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <h3 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h3><blockquote>
-<p>创建开源项目三工具github、packageist、composer</p>
-</blockquote>
-<pre><code> github: git仓库，是用于存放源代码的地方
- packagist: 用于发布github上的扩展程序或者项目
- composer: 用于使用代码的工具
-</code></pre>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-10-11T02:40:23.000Z" itemprop="datePublished">2016-10-11</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/PHP/' title=''>PHP</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/composer/">composer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pacakgist/">pacakgist</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-mysql-master-slave" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/09/12/mysql-master-slave/">mysql主从复制原理理解与实践</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <p>只从最简单的mysql主从复制原理与实践着手，之前看到Yshiba老师讲解的挺细致透彻，顺便做下笔记并实践一下。</p>
-<h2 id="主从复制原理-replication"><a href="#主从复制原理-replication" class="headerlink" title="主从复制原理 replication"></a>主从复制原理 replication</h2><p>主服务器(master)的binlog,记录master的各种操作（insert、update、delete），master的磁盘只要发生变化就会记录到自己的binlog里面。</p>
-<p>从服务器（slave）如果能读取到master的binlog,那么就可以将master的所做操作跟着执行一遍。但是由于master的binlog中含有master的一些信息，所以需要对binlog进行分析加工，slave的relaylog就是干这种事的，实际上slave将使用relaylog终极日志上的sql操作，保证主从数据一致性。<br>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-09-12T13:42:47.000Z" itemprop="datePublished">2016-09-12</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/MySQL/' title=''>MySQL</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/主从复制/">主从复制</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-vim" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/09/11/vim/">vim学习笔记</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <blockquote>
-<p>还是要经常折腾一下</p>
-</blockquote>
-<p>最近稍微折腾了一下vim，大家都知道linux环境下如果vim操作的足够熟练，完全可以替代各种文本编辑器，然而自己对vim的操作仍停留在最原始和基础的命令，只会简单的增删改查，比如删除d，进入编辑模式i，复制粘贴y&amp;p，代码上下翻阅左右箭头，看到这你估计都惊呆了，怎么这么low!也是由于近期经常需要到仿真机上修改代码，发现自己vim编辑效率超级低，这才想着好好过一遍vim指令，提高逼格！^_^</p>
-<h3 id="vim配置文件-vimrc"><a href="#vim配置文件-vimrc" class="headerlink" title="vim配置文件.vimrc"></a>vim配置文件.vimrc</h3><p>这个文件是vim的配置文件，在这里配置一下全局生效，更加丰富的配置后续逐步学习</p>
-<ol>
-<li>比如之前每次查代码行数都要 <code>:set nu</code>，如果写在.vimrc就不用每次都<code>:set nu</code>了。</li>
-<li>比如写完一行代码enter换行后，又从头再来，必须手动tab缩进。。。</li>
-</ol>
-<pre><code>set number # 显示行号
-set autoindent # 自动缩进
-</code></pre>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-09-11T01:27:33.000Z" itemprop="datePublished">2016-09-11</time>
+           <time datetime="2016-01-30T13:36:00.000Z" itemprop="datePublished">2016-01-30</time>
         </span>
 
         
@@ -250,52 +122,6 @@ set autoindent # 自动缩进
         
       
         <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
-          
-        -->
-
-      </p>
-    </div>
-  </article>
-            
-                  <article id="post-mac-lnmp" class="repo-list">
-    <div class="repo-list-item" >
-      <h3 class="repo-list-name" itemprop="name">
-        
-  
-      <a class="article-title" href="/2016/08/28/mac-lnmp/">Mac下安装LNMP(Nginx+PHP5.6)环境</a>
-  
-
-      </h3>
-      <div class="repo-list-description">
-        
-          <h2 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h2><p>从零开始安装Mac下LNMP环境的过程</p>
-<blockquote>
-<p>确保系统已经安装xcode，然后使用一行命令安装依赖管理工具Homebrew</p>
-</blockquote>
-<p>安装完xcode之后可以使用</p>
-<pre><code>brew install FORMULA
-</code></pre><p>来安装所需要的依赖了.更详细的信息参考Homebrew的[官方Cookbook][1]</p>
-<p>因此使用Homebrew常见的流程是：<br>
-        
-      </div>
-      <p class="repo-list-meta">
-        <span class="meta-info">
-          <span class="octicon octicon-calendar"></span>
-           <time datetime="2016-08-28T14:28:49.000Z" itemprop="datePublished">2016-08-28</time>
-        </span>
-
-        
-          <span class="meta-info">
-            <span class="octicon octicon-file-directory"></span>
-            <a href='/categories/乱炖/' title=''>乱炖</a>
-          </span>
-        
-      
-        <!--
-          
-            <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LNMP/">LNMP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
           
         -->
 
@@ -401,7 +227,7 @@ set autoindent # 自动缩进
     
       <div class="pagination text-align">
           <div class="btn-group">
-              <a class="extend prev" rel="prev" href="/archives/2016/">&laquo;</a><a class="page-number" href="/archives/2016/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2016/page/3/">3</a><a class="page-number" href="/archives/2016/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2016/page/7/">7</a><a class="extend next" rel="next" href="/archives/2016/page/3/">&raquo;</a>
+              <a class="extend prev" rel="prev" href="/archives/2016/page/6/">&laquo;</a><a class="page-number" href="/archives/2016/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2016/page/5/">5</a><a class="page-number" href="/archives/2016/page/6/">6</a><span class="page-number current">7</span>
           </div>
       </div>
     
