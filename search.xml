@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[判断一个整数的二进制中有多少个1]]></title>
+      <title><![CDATA[判断一个整数的二进制中1的个数]]></title>
       <url>http://upeng.github.io/2016/12/13/algorithm/</url>
       <content type="html"><![CDATA[<p>无意间看到这个题目，最先想到是将整数转换成二进制，然后再统计这个二进制中有多少个1。对于php而言，这很容易实现，转成二进制可用<code>decbin()</code>这个函数，然后将二进制数按1位进行分割用str_split()，最后对分割后的数值进行foreach即可完成数据的统计，实际上这是最low的解决方案，网上大多数使用下面的算法进行求解，觉得很巧妙，于是就mark了！<br><a id="more"></a></p>
 <h3 id="算法说明"><a href="#算法说明" class="headerlink" title="算法说明"></a>算法说明</h3><p>设x的二进制位表示为<br>x=a<sub>(n-1)</sub> a<sub>(n-2)</sub>…a<sub>0</sub></p>
