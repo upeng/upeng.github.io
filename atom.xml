@@ -3,11 +3,11 @@
   <title>Taylor&#39;s Learning Diary</title>
   
   
-  <link href="/blog/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
-  <link href="https://upeng.github.io/blog/"/>
+  <link href="https://upeng.github.io/"/>
   <updated>2022-11-07T04:47:34.704Z</updated>
-  <id>https://upeng.github.io/blog/</id>
+  <id>https://upeng.github.io/</id>
   
   <author>
     <name>Tayloryu</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>python日期格式转换总结</title>
-    <link href="https://upeng.github.io/blog/2022/11/07/python%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
-    <id>https://upeng.github.io/blog/2022/11/07/python日期格式转换/</id>
+    <link href="https://upeng.github.io/2022/11/07/python%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
+    <id>https://upeng.github.io/2022/11/07/python日期格式转换/</id>
     <published>2022-11-07T04:25:14.000Z</published>
     <updated>2022-11-07T04:47:34.704Z</updated>
     
@@ -35,17 +35,17 @@
     
     </summary>
     
-      <category term="Python" scheme="https://upeng.github.io/blog/categories/Python/"/>
+      <category term="Python" scheme="https://upeng.github.io/categories/Python/"/>
     
     
-      <category term="Python" scheme="https://upeng.github.io/blog/tags/Python/"/>
+      <category term="Python" scheme="https://upeng.github.io/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>Laravel Validator自定义参数验证规则</title>
-    <link href="https://upeng.github.io/blog/2017/10/18/laravel-validator/"/>
-    <id>https://upeng.github.io/blog/2017/10/18/laravel-validator/</id>
+    <link href="https://upeng.github.io/2017/10/18/laravel-validator/"/>
+    <id>https://upeng.github.io/2017/10/18/laravel-validator/</id>
     <published>2017-10-18T15:10:58.000Z</published>
     <updated>2022-11-07T03:13:42.749Z</updated>
     
@@ -67,19 +67,19 @@
     
     </summary>
     
-      <category term="PHP" scheme="https://upeng.github.io/blog/categories/PHP/"/>
+      <category term="PHP" scheme="https://upeng.github.io/categories/PHP/"/>
     
     
-      <category term="laravel" scheme="https://upeng.github.io/blog/tags/laravel/"/>
+      <category term="laravel" scheme="https://upeng.github.io/tags/laravel/"/>
     
-      <category term="validator" scheme="https://upeng.github.io/blog/tags/validator/"/>
+      <category term="validator" scheme="https://upeng.github.io/tags/validator/"/>
     
   </entry>
   
   <entry>
     <title>linux常用命令之sed</title>
-    <link href="https://upeng.github.io/blog/2017/09/28/linux-sed/"/>
-    <id>https://upeng.github.io/blog/2017/09/28/linux-sed/</id>
+    <link href="https://upeng.github.io/2017/09/28/linux-sed/"/>
+    <id>https://upeng.github.io/2017/09/28/linux-sed/</id>
     <published>2017-09-28T14:23:10.000Z</published>
     <updated>2022-11-07T03:13:42.751Z</updated>
     
@@ -95,19 +95,19 @@
     
     </summary>
     
-      <category term="Linux" scheme="https://upeng.github.io/blog/categories/Linux/"/>
+      <category term="Linux" scheme="https://upeng.github.io/categories/Linux/"/>
     
     
-      <category term="linux" scheme="https://upeng.github.io/blog/tags/linux/"/>
+      <category term="linux" scheme="https://upeng.github.io/tags/linux/"/>
     
-      <category term="sed" scheme="https://upeng.github.io/blog/tags/sed/"/>
+      <category term="sed" scheme="https://upeng.github.io/tags/sed/"/>
     
   </entry>
   
   <entry>
     <title>shell脚本由点到面学习总结</title>
-    <link href="https://upeng.github.io/blog/2017/09/27/shell-script-learning/"/>
-    <id>https://upeng.github.io/blog/2017/09/27/shell-script-learning/</id>
+    <link href="https://upeng.github.io/2017/09/27/shell-script-learning/"/>
+    <id>https://upeng.github.io/2017/09/27/shell-script-learning/</id>
     <published>2017-09-27T14:38:00.000Z</published>
     <updated>2022-11-07T03:13:42.759Z</updated>
     
@@ -120,19 +120,19 @@
     
     </summary>
     
-      <category term="Linux" scheme="https://upeng.github.io/blog/categories/Linux/"/>
+      <category term="Linux" scheme="https://upeng.github.io/categories/Linux/"/>
     
     
-      <category term="linux" scheme="https://upeng.github.io/blog/tags/linux/"/>
+      <category term="linux" scheme="https://upeng.github.io/tags/linux/"/>
     
-      <category term="shell" scheme="https://upeng.github.io/blog/tags/shell/"/>
+      <category term="shell" scheme="https://upeng.github.io/tags/shell/"/>
     
   </entry>
   
   <entry>
     <title>Eloquent ORM多个and和or条件查询</title>
-    <link href="https://upeng.github.io/blog/2017/09/14/laravel-eloquent-index/"/>
-    <id>https://upeng.github.io/blog/2017/09/14/laravel-eloquent-index/</id>
+    <link href="https://upeng.github.io/2017/09/14/laravel-eloquent-index/"/>
+    <id>https://upeng.github.io/2017/09/14/laravel-eloquent-index/</id>
     <published>2017-09-14T14:38:00.000Z</published>
     <updated>2022-11-07T03:13:42.748Z</updated>
     
@@ -145,19 +145,19 @@
     
     </summary>
     
-      <category term="PHP" scheme="https://upeng.github.io/blog/categories/PHP/"/>
+      <category term="PHP" scheme="https://upeng.github.io/categories/PHP/"/>
     
     
-      <category term="laravel" scheme="https://upeng.github.io/blog/tags/laravel/"/>
+      <category term="laravel" scheme="https://upeng.github.io/tags/laravel/"/>
     
-      <category term="eloquent" scheme="https://upeng.github.io/blog/tags/eloquent/"/>
+      <category term="eloquent" scheme="https://upeng.github.io/tags/eloquent/"/>
     
   </entry>
   
   <entry>
     <title>Linux常用压缩解压缩命令</title>
-    <link href="https://upeng.github.io/blog/2017/09/10/Linux%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4-index/"/>
-    <id>https://upeng.github.io/blog/2017/09/10/Linux压缩解压缩命令-index/</id>
+    <link href="https://upeng.github.io/2017/09/10/Linux%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4-index/"/>
+    <id>https://upeng.github.io/2017/09/10/Linux压缩解压缩命令-index/</id>
     <published>2017-09-10T13:00:00.000Z</published>
     <updated>2022-11-07T03:13:42.744Z</updated>
     
@@ -170,17 +170,17 @@
     
     </summary>
     
-      <category term="Linux" scheme="https://upeng.github.io/blog/categories/Linux/"/>
+      <category term="Linux" scheme="https://upeng.github.io/categories/Linux/"/>
     
     
-      <category term="linux" scheme="https://upeng.github.io/blog/tags/linux/"/>
+      <category term="linux" scheme="https://upeng.github.io/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>vuejs与后台数据的交互实践</title>
-    <link href="https://upeng.github.io/blog/2016/12/17/vuejs/"/>
-    <id>https://upeng.github.io/blog/2016/12/17/vuejs/</id>
+    <link href="https://upeng.github.io/2016/12/17/vuejs/"/>
+    <id>https://upeng.github.io/2016/12/17/vuejs/</id>
     <published>2016-12-17T07:58:17.000Z</published>
     <updated>2022-11-07T03:13:42.762Z</updated>
     
@@ -194,17 +194,17 @@
     
     </summary>
     
-      <category term="前端" scheme="https://upeng.github.io/blog/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://upeng.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="vuejs" scheme="https://upeng.github.io/blog/tags/vuejs/"/>
+      <category term="vuejs" scheme="https://upeng.github.io/tags/vuejs/"/>
     
   </entry>
   
   <entry>
     <title>判断一个整数的二进制中1的个数</title>
-    <link href="https://upeng.github.io/blog/2016/12/13/algorithm/"/>
-    <id>https://upeng.github.io/blog/2016/12/13/algorithm/</id>
+    <link href="https://upeng.github.io/2016/12/13/algorithm/"/>
+    <id>https://upeng.github.io/2016/12/13/algorithm/</id>
     <published>2016-12-13T15:02:26.000Z</published>
     <updated>2022-11-07T03:13:42.745Z</updated>
     
@@ -216,15 +216,15 @@
     
     </summary>
     
-      <category term="算法" scheme="https://upeng.github.io/blog/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://upeng.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
   </entry>
   
   <entry>
     <title>在编程中的幂等性idempotence</title>
-    <link href="https://upeng.github.io/blog/2016/12/08/idempotence/"/>
-    <id>https://upeng.github.io/blog/2016/12/08/idempotence/</id>
+    <link href="https://upeng.github.io/2016/12/08/idempotence/"/>
+    <id>https://upeng.github.io/2016/12/08/idempotence/</id>
     <published>2016-12-08T14:46:55.000Z</published>
     <updated>2022-11-07T03:13:42.746Z</updated>
     
@@ -236,17 +236,17 @@
     
     </summary>
     
-      <category term="Thinking" scheme="https://upeng.github.io/blog/categories/Thinking/"/>
+      <category term="Thinking" scheme="https://upeng.github.io/categories/Thinking/"/>
     
     
-      <category term="idempotence" scheme="https://upeng.github.io/blog/tags/idempotence/"/>
+      <category term="idempotence" scheme="https://upeng.github.io/tags/idempotence/"/>
     
   </entry>
   
   <entry>
     <title>mysql主从复制原理理解与实践</title>
-    <link href="https://upeng.github.io/blog/2016/12/05/mysql-master-slave/"/>
-    <id>https://upeng.github.io/blog/2016/12/05/mysql-master-slave/</id>
+    <link href="https://upeng.github.io/2016/12/05/mysql-master-slave/"/>
+    <id>https://upeng.github.io/2016/12/05/mysql-master-slave/</id>
     <published>2016-12-05T14:40:03.000Z</published>
     <updated>2022-11-07T03:13:42.754Z</updated>
     
@@ -260,17 +260,17 @@
     
     </summary>
     
-      <category term="MySQL" scheme="https://upeng.github.io/blog/categories/MySQL/"/>
+      <category term="MySQL" scheme="https://upeng.github.io/categories/MySQL/"/>
     
     
-      <category term="mysql" scheme="https://upeng.github.io/blog/tags/mysql/"/>
+      <category term="mysql" scheme="https://upeng.github.io/tags/mysql/"/>
     
   </entry>
   
   <entry>
     <title>Mac下的终端和命令行item2和zsh</title>
-    <link href="https://upeng.github.io/blog/2016/12/04/zsh-and-item2/"/>
-    <id>https://upeng.github.io/blog/2016/12/04/zsh-and-item2/</id>
+    <link href="https://upeng.github.io/2016/12/04/zsh-and-item2/"/>
+    <id>https://upeng.github.io/2016/12/04/zsh-and-item2/</id>
     <published>2016-12-04T15:19:50.000Z</published>
     <updated>2022-11-07T03:13:42.762Z</updated>
     
@@ -282,21 +282,21 @@
     
     </summary>
     
-      <category term="其他" scheme="https://upeng.github.io/blog/categories/%E5%85%B6%E4%BB%96/"/>
+      <category term="其他" scheme="https://upeng.github.io/categories/%E5%85%B6%E4%BB%96/"/>
     
     
-      <category term="item" scheme="https://upeng.github.io/blog/tags/item/"/>
+      <category term="item" scheme="https://upeng.github.io/tags/item/"/>
     
-      <category term="zsh" scheme="https://upeng.github.io/blog/tags/zsh/"/>
+      <category term="zsh" scheme="https://upeng.github.io/tags/zsh/"/>
     
-      <category term="mac" scheme="https://upeng.github.io/blog/tags/mac/"/>
+      <category term="mac" scheme="https://upeng.github.io/tags/mac/"/>
     
   </entry>
   
   <entry>
     <title>经常使用到的几个命令行linux&amp;php</title>
-    <link href="https://upeng.github.io/blog/2016/11/13/linux-php-command/"/>
-    <id>https://upeng.github.io/blog/2016/11/13/linux-php-command/</id>
+    <link href="https://upeng.github.io/2016/11/13/linux-php-command/"/>
+    <id>https://upeng.github.io/2016/11/13/linux-php-command/</id>
     <published>2016-11-13T15:24:35.000Z</published>
     <updated>2022-11-07T03:13:42.751Z</updated>
     
@@ -310,21 +310,21 @@
     
     </summary>
     
-      <category term="PHP" scheme="https://upeng.github.io/blog/categories/PHP/"/>
+      <category term="PHP" scheme="https://upeng.github.io/categories/PHP/"/>
     
     
-      <category term="linux" scheme="https://upeng.github.io/blog/tags/linux/"/>
+      <category term="linux" scheme="https://upeng.github.io/tags/linux/"/>
     
-      <category term="nc" scheme="https://upeng.github.io/blog/tags/nc/"/>
+      <category term="nc" scheme="https://upeng.github.io/tags/nc/"/>
     
-      <category term="php" scheme="https://upeng.github.io/blog/tags/php/"/>
+      <category term="php" scheme="https://upeng.github.io/tags/php/"/>
     
   </entry>
   
   <entry>
     <title>静态方法和静态成员变量</title>
-    <link href="https://upeng.github.io/blog/2016/10/12/static/"/>
-    <id>https://upeng.github.io/blog/2016/10/12/static/</id>
+    <link href="https://upeng.github.io/2016/10/12/static/"/>
+    <id>https://upeng.github.io/2016/10/12/static/</id>
     <published>2016-10-12T15:29:13.000Z</published>
     <updated>2022-11-07T03:13:42.759Z</updated>
     
@@ -339,17 +339,17 @@
     
     </summary>
     
-      <category term="PHP" scheme="https://upeng.github.io/blog/categories/PHP/"/>
+      <category term="PHP" scheme="https://upeng.github.io/categories/PHP/"/>
     
     
-      <category term="static" scheme="https://upeng.github.io/blog/tags/static/"/>
+      <category term="static" scheme="https://upeng.github.io/tags/static/"/>
     
   </entry>
   
   <entry>
     <title>从编写到发布laravel扩展</title>
-    <link href="https://upeng.github.io/blog/2016/10/11/publish-laravel-package/"/>
-    <id>https://upeng.github.io/blog/2016/10/11/publish-laravel-package/</id>
+    <link href="https://upeng.github.io/2016/10/11/publish-laravel-package/"/>
+    <id>https://upeng.github.io/2016/10/11/publish-laravel-package/</id>
     <published>2016-10-11T15:08:11.000Z</published>
     <updated>2022-11-07T03:13:42.758Z</updated>
     
@@ -364,21 +364,21 @@
     
     </summary>
     
-      <category term="PHP" scheme="https://upeng.github.io/blog/categories/PHP/"/>
+      <category term="PHP" scheme="https://upeng.github.io/categories/PHP/"/>
     
     
-      <category term="laravel" scheme="https://upeng.github.io/blog/tags/laravel/"/>
+      <category term="laravel" scheme="https://upeng.github.io/tags/laravel/"/>
     
-      <category term="composer" scheme="https://upeng.github.io/blog/tags/composer/"/>
+      <category term="composer" scheme="https://upeng.github.io/tags/composer/"/>
     
-      <category term="packageist" scheme="https://upeng.github.io/blog/tags/packageist/"/>
+      <category term="packageist" scheme="https://upeng.github.io/tags/packageist/"/>
     
   </entry>
   
   <entry>
     <title>vim学习笔记</title>
-    <link href="https://upeng.github.io/blog/2016/09/11/vim/"/>
-    <id>https://upeng.github.io/blog/2016/09/11/vim/</id>
+    <link href="https://upeng.github.io/2016/09/11/vim/"/>
+    <id>https://upeng.github.io/2016/09/11/vim/</id>
     <published>2016-09-11T15:05:25.000Z</published>
     <updated>2022-11-07T03:13:42.761Z</updated>
     
@@ -399,19 +399,19 @@
     
     </summary>
     
-      <category term="Linux" scheme="https://upeng.github.io/blog/categories/Linux/"/>
+      <category term="Linux" scheme="https://upeng.github.io/categories/Linux/"/>
     
     
-      <category term="linux" scheme="https://upeng.github.io/blog/tags/linux/"/>
+      <category term="linux" scheme="https://upeng.github.io/tags/linux/"/>
     
-      <category term="vim" scheme="https://upeng.github.io/blog/tags/vim/"/>
+      <category term="vim" scheme="https://upeng.github.io/tags/vim/"/>
     
   </entry>
   
   <entry>
     <title>Mac下安装LNMP(Nginx+PHP5.6)环境</title>
-    <link href="https://upeng.github.io/blog/2016/08/28/mac-lnmp/"/>
-    <id>https://upeng.github.io/blog/2016/08/28/mac-lnmp/</id>
+    <link href="https://upeng.github.io/2016/08/28/mac-lnmp/"/>
+    <id>https://upeng.github.io/2016/08/28/mac-lnmp/</id>
     <published>2016-08-28T14:28:49.000Z</published>
     <updated>2022-11-07T03:13:42.752Z</updated>
     
@@ -435,17 +435,17 @@
     
     </summary>
     
-      <category term="其他" scheme="https://upeng.github.io/blog/categories/%E5%85%B6%E4%BB%96/"/>
+      <category term="其他" scheme="https://upeng.github.io/categories/%E5%85%B6%E4%BB%96/"/>
     
     
-      <category term="Mac" scheme="https://upeng.github.io/blog/tags/Mac/"/>
+      <category term="Mac" scheme="https://upeng.github.io/tags/Mac/"/>
     
   </entry>
   
   <entry>
     <title>首次折腾Mac</title>
-    <link href="https://upeng.github.io/blog/2016/08/28/mac-primary/"/>
-    <id>https://upeng.github.io/blog/2016/08/28/mac-primary/</id>
+    <link href="https://upeng.github.io/2016/08/28/mac-primary/"/>
+    <id>https://upeng.github.io/2016/08/28/mac-primary/</id>
     <published>2016-08-28T02:09:29.000Z</published>
     <updated>2022-11-07T03:13:42.753Z</updated>
     
@@ -465,17 +465,17 @@
     
     </summary>
     
-      <category term="其他" scheme="https://upeng.github.io/blog/categories/%E5%85%B6%E4%BB%96/"/>
+      <category term="其他" scheme="https://upeng.github.io/categories/%E5%85%B6%E4%BB%96/"/>
     
     
-      <category term="Mac" scheme="https://upeng.github.io/blog/tags/Mac/"/>
+      <category term="Mac" scheme="https://upeng.github.io/tags/Mac/"/>
     
   </entry>
   
   <entry>
     <title>laravel基础任务学习清单</title>
-    <link href="https://upeng.github.io/blog/2016/08/15/laravel-basic/"/>
-    <id>https://upeng.github.io/blog/2016/08/15/laravel-basic/</id>
+    <link href="https://upeng.github.io/2016/08/15/laravel-basic/"/>
+    <id>https://upeng.github.io/2016/08/15/laravel-basic/</id>
     <published>2016-08-15T14:24:32.000Z</published>
     <updated>2022-11-07T03:13:42.747Z</updated>
     
@@ -488,17 +488,17 @@
     
     </summary>
     
-      <category term="PHP" scheme="https://upeng.github.io/blog/categories/PHP/"/>
+      <category term="PHP" scheme="https://upeng.github.io/categories/PHP/"/>
     
     
-      <category term="laravel" scheme="https://upeng.github.io/blog/tags/laravel/"/>
+      <category term="laravel" scheme="https://upeng.github.io/tags/laravel/"/>
     
   </entry>
   
   <entry>
     <title>vagrant-快速搭建linux开发环境</title>
-    <link href="https://upeng.github.io/blog/2016/07/13/vagrant/"/>
-    <id>https://upeng.github.io/blog/2016/07/13/vagrant/</id>
+    <link href="https://upeng.github.io/2016/07/13/vagrant/"/>
+    <id>https://upeng.github.io/2016/07/13/vagrant/</id>
     <published>2016-07-13T15:32:54.000Z</published>
     <updated>2022-11-07T03:13:42.761Z</updated>
     
@@ -515,17 +515,17 @@
     
     </summary>
     
-      <category term="其他" scheme="https://upeng.github.io/blog/categories/%E5%85%B6%E4%BB%96/"/>
+      <category term="其他" scheme="https://upeng.github.io/categories/%E5%85%B6%E4%BB%96/"/>
     
     
-      <category term="vagrant" scheme="https://upeng.github.io/blog/tags/vagrant/"/>
+      <category term="vagrant" scheme="https://upeng.github.io/tags/vagrant/"/>
     
   </entry>
   
   <entry>
     <title>MCQ学习笔记</title>
-    <link href="https://upeng.github.io/blog/2016/07/11/memcacheq/"/>
-    <id>https://upeng.github.io/blog/2016/07/11/memcacheq/</id>
+    <link href="https://upeng.github.io/2016/07/11/memcacheq/"/>
+    <id>https://upeng.github.io/2016/07/11/memcacheq/</id>
     <published>2016-07-11T15:29:55.000Z</published>
     <updated>2022-11-07T03:13:42.753Z</updated>
     
@@ -540,10 +540,10 @@
     
     </summary>
     
-      <category term="其他" scheme="https://upeng.github.io/blog/categories/%E5%85%B6%E4%BB%96/"/>
+      <category term="其他" scheme="https://upeng.github.io/categories/%E5%85%B6%E4%BB%96/"/>
     
     
-      <category term="memcacheq" scheme="https://upeng.github.io/blog/tags/memcacheq/"/>
+      <category term="memcacheq" scheme="https://upeng.github.io/tags/memcacheq/"/>
     
   </entry>
   
