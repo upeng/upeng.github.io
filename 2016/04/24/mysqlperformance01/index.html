@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta name="google-site-verification" content="k9iQUbEI9rWq3xYeh63ATztKdkthC4dNRHV_25maJ3Q">
+  <title>mysql之sql优化-慢查询日志开启和查看（1） | Taylor&#39;s Learning Diary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="如何发现有问题的SQL？使用慢查询日志【slow_query_log】对有效率问题的sql进行监控 查看慢查询日志开启状态1show variable  s like &apos;slow_query_log&apos;  记录未使用索引的查询未使用索引的查询默认是关闭的，如下1show variables like &apos;log_queries_not_using_indexes&apos;; 需要打开未使用索引的查询，即未使用">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql之sql优化-慢查询日志开启和查看（1）">
+<meta property="og:url" content="https://upeng.github.io/blog/2016/04/24/mysqlperformance01/index.html">
+<meta property="og:site_name" content="Taylor&#39;s Learning Diary">
+<meta property="og:description" content="如何发现有问题的SQL？使用慢查询日志【slow_query_log】对有效率问题的sql进行监控 查看慢查询日志开启状态1show variable  s like &apos;slow_query_log&apos;  记录未使用索引的查询未使用索引的查询默认是关闭的，如下1show variables like &apos;log_queries_not_using_indexes&apos;; 需要打开未使用索引的查询，即未使用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/2655ccd1-69ab-4c54-b7bf-50b01b2b45e5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/d99d63ee-d0e2-4bfb-8230-984d884b1528.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/e3f793a8-8b50-464c-b52b-5ffbc78ab187.png">
+<meta property="og:updated_time" content="2022-11-07T03:13:42.755Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql之sql优化-慢查询日志开启和查看（1）">
+<meta name="twitter:description" content="如何发现有问题的SQL？使用慢查询日志【slow_query_log】对有效率问题的sql进行监控 查看慢查询日志开启状态1show variable  s like &apos;slow_query_log&apos;  记录未使用索引的查询未使用索引的查询默认是关闭的，如下1show variables like &apos;log_queries_not_using_indexes&apos;; 需要打开未使用索引的查询，即未使用">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Taylor&#39;s Learning Diary" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Taylor&#39;s Learning Diary</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://upeng.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mysqlperformance01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/04/24/mysqlperformance01/" class="article-date">
+  <time datetime="2016-04-23T19:25:05.000Z" itemprop="datePublished">2016-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysql之sql优化-慢查询日志开启和查看（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如何发现有问题的SQL？使用慢查询日志【slow_query_log】对有效率问题的sql进行监控</p>
+<h3 id="查看慢查询日志开启状态"><a href="#查看慢查询日志开启状态" class="headerlink" title="查看慢查询日志开启状态"></a>查看慢查询日志开启状态</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variable</span>  s <span class="keyword">like</span> <span class="string">'slow_query_log'</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png" alt></p>
+<h3 id="记录未使用索引的查询"><a href="#记录未使用索引的查询" class="headerlink" title="记录未使用索引的查询"></a>记录未使用索引的查询</h3><p>未使用索引的查询默认是关闭的，如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'log_queries_not_using_indexes'</span>;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/2655ccd1-69ab-4c54-b7bf-50b01b2b45e5.png" alt><br>需要打开未使用索引的查询，即未使用索引的查询会记录在案<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> log_queries_not_using_indexes=<span class="keyword">on</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h3 id="慢查询时间设置"><a href="#慢查询时间设置" class="headerlink" title="慢查询时间设置"></a>慢查询时间设置</h3><p> 查询时间超过多长时间的查询记录会记录到日志中； 默认为慢查询的时间10秒，即 超过10s的查询会记录到慢查询日志中<br><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/d99d63ee-d0e2-4bfb-8230-984d884b1528.png" alt><br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">set</span> global <span class="attribute">long_query_time</span>=0;</span><br></pre></td></tr></table></figure></p>
+<p>a litter bug i think：在本窗口查询时发现慢查询时间还是10；但是重新打开一个窗口查询结果才是0<br>这样设置的目的是：不管什么查询，都会记录到慢查询日志中</p>
+<h3 id="打开慢查询日志"><a href="#打开慢查询日志" class="headerlink" title="打开慢查询日志"></a>打开慢查询日志</h3><p>设置完上述两项后，我们再打开慢查询日志<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log=<span class="keyword">on</span>;</span><br></pre></td></tr></table></figure></p>
+<p>输入两个查询语句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> actor <span class="keyword">limit</span> <span class="number">10</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> actor <span class="keyword">where</span> first_name <span class="keyword">like</span> <span class="string">'%A%'</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="打开日志文件"><a href="#打开日志文件" class="headerlink" title="打开日志文件"></a>打开日志文件</h3><p>日志文件位置，查看变量slow_query_log_file的值<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'slow_query_log_file'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>当然，我们也可以手动设置慢查询日志的存放路径及文件名<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log_file = ****</span><br></pre></td></tr></table></figure></p>
+<h3 id="慢查询日志所包含的内容"><a href="#慢查询日志所包含的内容" class="headerlink" title="慢查询日志所包含的内容"></a>慢查询日志所包含的内容</h3><p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/e3f793a8-8b50-464c-b52b-5ffbc78ab187.png" alt> </p>
+<ol>
+<li>执行sql的主机信息<br><code># User@Host: root[root] @ localhost [127.0.0.1]</code></li>
+<li>sql的执行信息<br><code># Query_time: 0.001008  Lock_time: 0.000000 Rows_sent: 104  Rows_examined: 200</code></li>
+<li>sql执行时刻<br><code>SET timestamp=1461435221;</code></li>
+<li>sql内容<br><code>select * from actor where first_name like &#39;%A%&#39;;</code></li>
+</ol>
+<h3 id="慢查询日志的分析工具"><a href="#慢查询日志的分析工具" class="headerlink" title="慢查询日志的分析工具"></a>慢查询日志的分析工具</h3><p>mysqldumpslow输出</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/04/24/mysqlperformance01/" data-id="cla6cx71i0032osxd5khxi0cp" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/04/24/mysqlperformance01/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2016/04/25/laravel-primary/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          laravel初体验
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2016/04/23/tmux工具/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">tmux linux下的终端复用工具</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/MySQL/">MySQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/PHP/">PHP</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Thinking/">Thinking</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/其他/">其他</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据库范式/">数据库范式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/CI/" style="font-size: 10px;">CI</a> <a href="/blog/tags/JQuery/" style="font-size: 10px;">JQuery</a> <a href="/blog/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/blog/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/blog/tags/Python/" style="font-size: 10px;">Python</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/bash/" style="font-size: 10px;">bash</a> <a href="/blog/tags/composer/" style="font-size: 10px;">composer</a> <a href="/blog/tags/eloquent/" style="font-size: 10px;">eloquent</a> <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/blog/tags/idempotence/" style="font-size: 10px;">idempotence</a> <a href="/blog/tags/item/" style="font-size: 10px;">item</a> <a href="/blog/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/blog/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/memcacheq/" style="font-size: 10px;">memcacheq</a> <a href="/blog/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/blog/tags/nc/" style="font-size: 10px;">nc</a> <a href="/blog/tags/packageist/" style="font-size: 10px;">packageist</a> <a href="/blog/tags/php/" style="font-size: 13.33px;">php</a> <a href="/blog/tags/sed/" style="font-size: 10px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 10px;">shell</a> <a href="/blog/tags/static/" style="font-size: 10px;">static</a> <a href="/blog/tags/thinking/" style="font-size: 13.33px;">thinking</a> <a href="/blog/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/blog/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/blog/tags/validator/" style="font-size: 10px;">validator</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vuejs/" style="font-size: 10px;">vuejs</a> <a href="/blog/tags/zephir/" style="font-size: 10px;">zephir</a> <a href="/blog/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/blog/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/12/">十二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/04/">四月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2022/11/07/python日期格式转换/">python日期格式转换总结</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/10/18/laravel-validator/">Laravel Validator自定义参数验证规则</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/28/linux-sed/">linux常用命令之sed</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/27/shell-script-learning/">shell脚本由点到面学习总结</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/14/laravel-eloquent-index/">Eloquent ORM多个and和or条件查询</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Tayloryu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'tayloryu';
+  
+  var disqus_url = 'https://upeng.github.io/blog/2016/04/24/mysqlperformance01/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+  </div>
+</body>
+</html>

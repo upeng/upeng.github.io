@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta name="google-site-verification" content="k9iQUbEI9rWq3xYeh63ATztKdkthC4dNRHV_25maJ3Q">
+  <title>Taylor&#39;s Learning Diary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="LNMP">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Taylor&#39;s Learning Diary">
+<meta property="og:url" content="https://upeng.github.io/blog/index.html">
+<meta property="og:site_name" content="Taylor&#39;s Learning Diary">
+<meta property="og:description" content="LNMP">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Taylor&#39;s Learning Diary">
+<meta name="twitter:description" content="LNMP">
+  
+    <link rel="alternate" href="/atom.xml" title="Taylor&#39;s Learning Diary" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Taylor&#39;s Learning Diary</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://upeng.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-python日期格式转换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2022/11/07/python日期格式转换/" class="article-date">
+  <time datetime="2022-11-07T04:25:14.000Z" itemprop="datePublished">2022-11-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2022/11/07/python日期格式转换/">python日期格式转换总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Q：问什么做这个整理？</p>
+<p>A：在python项目开发过程中，经常遇到日期时间转换的操作，和php仅两个简单的转换函数不同，python的时间日期库函数较多，语义化不是很清晰，需要对datetime或time库函数非常熟悉才能熟练运用，而且网上随便搜一搜，得到的都是各种案例，没有一种通用的使用说明文档，导致每次都要重复search，效率很低，于是结合部分网友总结及对python时间日期库的查阅，总结了以下相对通用的方法，简单易记，减少浪费过多时间在这上面。</p>
+<h1 id="日期转换常见场景"><a href="#日期转换常见场景" class="headerlink" title="日期转换常见场景"></a>日期转换常见场景</h1><ul>
+<li>timestamp to string</li>
+<li>string to timestamp</li>
+</ul>
+<h1 id="datetime转换场景"><a href="#datetime转换场景" class="headerlink" title="datetime转换场景"></a>datetime转换场景</h1><ul>
+<li>timestamp to datetime struct</li>
+<li>string to datetime struct</li>
+<li>datetime struct to timestamp</li>
+<li>datetime struct to string</li>
+</ul>
+<h1 id="通用转换流程及方法"><a href="#通用转换流程及方法" class="headerlink" title="通用转换流程及方法"></a>通用转换流程及方法</h1><h3 id="1-timestamp-gt-datetime-time-struct-gt-string"><a href="#1-timestamp-gt-datetime-time-struct-gt-string" class="headerlink" title="1. timestamp -&gt; datetime/time struct -&gt; string"></a>1. timestamp -&gt; datetime/time struct -&gt; string</h3><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1667555103 </span>-&gt; datetime/time struct -&gt; <span class="number">2022</span>-<span class="number">11</span>-<span class="number">04</span> <span class="number">17</span>:<span class="number">45</span>:<span class="number">03</span> | <span class="number">20221104</span> | <span class="number">2022</span>/<span class="number">11</span>/<span class="number">04</span> 等format</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>方法1 datetime组件</p>
+<ul>
+<li>datetime_struct = datetime.datetime.utcfromtimestamp(1667555103)</li>
+<li>string = datetime_struct.strftime(“%Y-%m-%d %H:%M:%S”)</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>方法2 time组件</p>
+<ul>
+<li>time_struct = time.localtime(1667555103)</li>
+<li>string = time.strftime(“%Y-%m-%d %H:%M:%S”, time_struct)</li>
+</ul>
+</blockquote>
+<h3 id="2-string-gt-datetime-time-struct-gt-timestamp"><a href="#2-string-gt-datetime-time-struct-gt-timestamp" class="headerlink" title="2. string -&gt; datetime/time struct -&gt; timestamp"></a>2. string -&gt; datetime/time struct -&gt; timestamp</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2022</span><span class="number">-11</span><span class="number">-04</span> <span class="number">17</span><span class="string">:45:03</span> <span class="string">|</span> <span class="number">20221104</span> <span class="string">|</span> <span class="number">2022</span><span class="string">/11/04</span> <span class="string">等format</span> <span class="string">-&gt;</span> <span class="string">datetime/time</span> <span class="string">struct</span> <span class="string">-&gt;</span> <span class="number">1667555103</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>方法1 datetime组件</p>
+<ul>
+<li>datetime_struct = datetime.datetime.strptime(string, “%Y-%m-%d %H:%M:%S”)</li>
+<li>stamp = datetime_struct.timestamp()</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>方法2 time组件</p>
+<ul>
+<li>datetime_struct = datetime.datetime.strptime(string, “%Y-%m-%d %H:%M:%S”)</li>
+<li>time.mktime(datetime_struct.timetuple())</li>
+</ul>
+</blockquote>
+<h1 id="具体案例"><a href="#具体案例" class="headerlink" title="具体案例"></a>具体案例</h1><ul>
+<li>昨天此刻，向前/后退n天。 =&gt; 时间戳、指定格式</li>
+<li>昨天12:00，向前/后退n天。 =&gt; 时间戳、指定格式</li>
+</ul>
+<blockquote>
+<p>to 字符串string<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">datetime_struct = datetime.datetme.now() + datetime.timedelta(days=-<span class="number">1</span>)</span><br><span class="line">string = datetime_struct.strftime(<span class="string">"%Y-%m-%d %H:%M:%S"</span>)</span><br><span class="line">string = time.strftime(<span class="string">"%Y-%m-%d %H:%M:%S"</span>, datetime_struct.timetuple())</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>to 时间戳stamp<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">datetime_struct</span> = datetime.datetme.now() + datetime.timedelta(days=-<span class="number">1</span>)</span><br><span class="line"><span class="attr">stamp</span> = datetime_struct.timestamp()</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2022/11/07/python日期格式转换/" data-id="cla6cx71z003oosxdw7ebr3xy" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2022/11/07/python日期格式转换/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-laravel-validator" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2017/10/18/laravel-validator/" class="article-date">
+  <time datetime="2017-10-18T15:10:58.000Z" itemprop="datePublished">2017-10-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/10/18/laravel-validator/">Laravel Validator自定义参数验证规则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="自定义参数验证规则"><a href="#自定义参数验证规则" class="headerlink" title="自定义参数验证规则"></a>自定义参数验证规则</h2><p><code>public Validator make(array $data, array $rules, array $messages = [], array $attributes = [])</code></p>
+<p><strong>参数说明</strong></p>
+<ul>
+<li><code>$data</code>是要验证的数据,即 <code>$request-&gt;all()  | $request-&gt;input() | Request::all()</code></li>
+<li><code>$rules</code>是验证的规则</li>
+<li><code>$messages</code>是提示信息，自定义<code>rules</code>中的规则信息</li>
+<li><code>$attributes</code>是设置属性别名</li>
+</ul>
+<blockquote>
+<p>使用方法和流程见示例</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/blog/2017/10/18/laravel-validator/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2017/10/18/laravel-validator/" data-id="cla6cx705000sosxd7gxsnopj" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2017/10/18/laravel-validator/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/laravel/">laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/validator/">validator</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-sed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2017/09/28/linux-sed/" class="article-date">
+  <time datetime="2017-09-28T14:23:10.000Z" itemprop="datePublished">2017-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/09/28/linux-sed/">linux常用命令之sed</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="sed工作原理："><a href="#sed工作原理：" class="headerlink" title="sed工作原理："></a>sed工作原理：</h2><p>sed在正常情况下，将处理的行读入模式空间，脚本中的sed命令就一条接着一条进行处理，直到脚本执行完毕。然后该行被输出，模式空间被清空；接着，在重复执行刚才的动作，文件中的新的一行被读入，直到文件处理完毕。【读入的每一行删除行尾的换行符放入模式空间，再执行所有命令，执行完所有的命令之后，再加回删过的换行符并打印到输出】</p>
+<h2 id="sed替换操作（s命令）"><a href="#sed替换操作（s命令）" class="headerlink" title="sed替换操作（s命令）"></a>sed替换操作（s命令）</h2><ul>
+<li>使用后缀 <code>/g</code> 标记会替换每一行中的所有匹配, <code>/n</code>表示替换每一行第n处匹配</li>
+<li><code>sed -i</code> 表示在源文件基础上修改</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/blog/2017/09/28/linux-sed/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2017/09/28/linux-sed/" data-id="cla6cx708000xosxdaw68d3bp" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2017/09/28/linux-sed/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/sed/">sed</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell-script-learning" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2017/09/27/shell-script-learning/" class="article-date">
+  <time datetime="2017-09-27T14:38:00.000Z" itemprop="datePublished">2017-09-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/09/27/shell-script-learning/">shell脚本由点到面学习总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>以前只是零零散散写过一些简单的命令行，比如awk、sed、nc、ls、comm这些简单的命令，几乎没有写过一个完整的shell脚本，像循环、条件判断、数据库操作等几乎都没怎么写过，总觉得shell写起来太麻烦，要学习的东西太多了，其实主要是懒。这次由于业务需要，使用shell脚本能方便解决问题，便硬着头皮上了，借着这个机会把常用的命令整理一下，算作温习吧。</p>
+<h2 id="实现功能："><a href="#实现功能：" class="headerlink" title="实现功能："></a>实现功能：</h2><p>将下面未经处理的原始数据，批量导入到es，并记录导入的数据源；<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">20170101 </span>       ABCD-EF-G001-<span class="number">12345678</span>    <span class="number">1</span>rt2xete3   CD      <span class="number">1.1977199809152</span></span><br><span class="line"><span class="symbol">20170101 </span>       ABCD-EF-G001-<span class="number">12345678</span>    <span class="number">1</span>rt2xete4   CD      <span class="number">5.856237342947999</span></span><br><span class="line"><span class="symbol">20170101 </span>       ABCD-EF-G001-<span class="number">12345678</span>    <span class="number">1</span>rt2xete5   CD      <span class="number">5.1901199172992</span></span><br><span class="line"><span class="symbol">20170101 </span>       ABCD-EF-G001-<span class="number">12345678</span>    <span class="number">1</span>rt2xete6   CD      <span class="number">0.748574988072</span></span><br><span class="line"><span class="symbol">20170101 </span>       ABCD-EF-G001-<span class="number">12345678</span>    <span class="number">1</span>rt2xete7   CD      <span class="number">2.4472449769392</span></span><br><span class="line"><span class="symbol">20170101 </span>       ABCD-EF-G001-<span class="number">12345678</span>    <span class="number">1</span>rt2xete8   CD      <span class="number">9.62620145261278</span></span><br><span class="line"><span class="symbol">20170101 </span>       ABCD-EF-G001-<span class="number">12345678</span>    <span class="number">1</span>rt2xete9   CD      <span class="number">0.1249524996024</span></span><br></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/blog/2017/09/27/shell-script-learning/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2017/09/27/shell-script-learning/" data-id="cla6cx721003rosxdjosflnmr" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2017/09/27/shell-script-learning/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-laravel-eloquent-index" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2017/09/14/laravel-eloquent-index/" class="article-date">
+  <time datetime="2017-09-14T14:38:00.000Z" itemprop="datePublished">2017-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/09/14/laravel-eloquent-index/">Eloquent ORM多个and和or条件查询</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Eloquent-ORM和查询构造器Query-Builder"><a href="#Eloquent-ORM和查询构造器Query-Builder" class="headerlink" title="Eloquent ORM和查询构造器Query Builder"></a>Eloquent ORM和查询构造器Query Builder</h3><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Model::all();</span><br><span class="line">Model::where();</span><br><span class="line">Model::groupBy<span class="function"><span class="params">()</span>-&gt;</span>select<span class="function"><span class="params">(<span class="string">'field_name'</span>)</span>-&gt;</span>get<span class="function"><span class="params">()</span>-&gt;</span>toArray()</span><br></pre></td></tr></table></figure>
+<p>之前一直使用ORM，后面可以尝试使用查询构造器，ORM相比查询构造器，不需要指定table_name和field等信息，但是也有局限性，比如我们经常会需要查询指定字段field<br>对于查询构造器而言是十分方便的select字段名接近原生查询方法，易理解易记忆。<br>
+        
+          <p class="article-more-link">
+            <a href="/blog/2017/09/14/laravel-eloquent-index/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2017/09/14/laravel-eloquent-index/" data-id="cla6cx6zw000fosxdszrvh0fm" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2017/09/14/laravel-eloquent-index/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/eloquent/">eloquent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/laravel/">laravel</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux压缩解压缩命令-index" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2017/09/10/Linux压缩解压缩命令-index/" class="article-date">
+  <time datetime="2017-09-10T13:00:00.000Z" itemprop="datePublished">2017-09-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/09/10/Linux压缩解压缩命令-index/">Linux常用压缩解压缩命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>tar后缀文件</strong><br>//解包<br><code>tar xvf FileName.tar</code><br>//打包<br><code>tar cvf FileName.tar DirName</code></p>
+<p><strong>zip后缀文件</strong><br>//解压<br><code>unzip FileName.zip</code><br>//压缩<br><code>zip FileName.zip DirName</code><br>压缩一个目录使用 -r 参数，-r 递归。例： <code>$ zip -r FileName.zip DirName</code></p>
+        
+          <p class="article-more-link">
+            <a href="/blog/2017/09/10/Linux压缩解压缩命令-index/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2017/09/10/Linux压缩解压缩命令-index/" data-id="cla6cx6zh0000osxdltzojw3k" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2017/09/10/Linux压缩解压缩命令-index/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vuejs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/12/17/vuejs/" class="article-date">
+  <time datetime="2016-12-17T07:58:17.000Z" itemprop="datePublished">2016-12-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/前端/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/12/17/vuejs/">vuejs与后台数据的交互实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Vuejs是MVVM框架，数据和DOM视图双向绑定，数据驱动的 web 界面的库。</p>
+<p><strong>响应的数据绑定</strong>：数据与DOM保持同步非常简单，数据发生变化的时候，如果我们使用JQuery操作DOM的话自然是可行的，但是jQuery操作DOM代码复杂容易出错，就拿一个简单的例子，在列表中新增一行数据，使用JQuery可能会刷新整个DOM,并对页面refresh。但是vue实现数据与DOM的绑定后，只要数据发生变化，就自动改动DOM，所以我们的工作重点就是修改数据，不必与DOM更新搅在一起。</p>
+<p><strong>我的理解</strong>：Vuejs简化了操作DOM或者不再去手动操作DOM，一个简单的API就搞定了DOM的自动更新，让我们脱离了使用Js操作DOM的复杂流程。这也是Vue的迷人之处吧，其他的优点诸如：组件化、模块化、体积小等优点我就不再罗列了，本文重点也不在此。<br>
+        
+          <p class="article-more-link">
+            <a href="/blog/2016/12/17/vuejs/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/12/17/vuejs/" data-id="cla6cx72d004hosxdjeoa80mj" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/12/17/vuejs/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/vuejs/">vuejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/12/13/algorithm/" class="article-date">
+  <time datetime="2016-12-13T15:02:26.000Z" itemprop="datePublished">2016-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/算法/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/12/13/algorithm/">判断一个整数的二进制中1的个数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>无意间看到这个题目，最先想到是将整数转换成二进制，然后再统计这个二进制中有多少个1。对于php而言，这很容易实现，转成二进制可用<code>decbin()</code>这个函数，然后将二进制数按1位进行分割用str_split()，最后对分割后的数值进行foreach即可完成数据的统计，实际上这是最low的解决方案，网上大多数使用下面的算法进行求解，觉得很巧妙，于是就mark了！<br>
+        
+          <p class="article-more-link">
+            <a href="/blog/2016/12/13/algorithm/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/12/13/algorithm/" data-id="cla6cx6zl0001osxdzc0g429h" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/12/13/algorithm/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-idempotence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/12/08/idempotence/" class="article-date">
+  <time datetime="2016-12-08T14:46:55.000Z" itemprop="datePublished">2016-12-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Thinking/">Thinking</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/12/08/idempotence/">在编程中的幂等性idempotence</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在编程中，可能经常会听到幂等这个词，第一次是年初红包技术复盘时听到了这个词，这次是因为写脚本时被质疑，是否支持幂等。这里总结一下，也算是个记录吧。其实在编程中，很多时候都需要支持幂等，有的程序自然存在幂等，有的需要我们控制。比如与支付相关的场景，比如我们常见的HTTP方法。<br>
+        
+          <p class="article-more-link">
+            <a href="/blog/2016/12/08/idempotence/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/12/08/idempotence/" data-id="cla6cx70f0017osxdc8pp6791" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/12/08/idempotence/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/idempotence/">idempotence</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mysql-master-slave" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/12/05/mysql-master-slave/" class="article-date">
+  <time datetime="2016-12-05T14:40:03.000Z" itemprop="datePublished">2016-12-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/12/05/mysql-master-slave/">mysql主从复制原理理解与实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>只从最简单的mysql主从复制原理与实践着手，之前看到Yshiba老师讲解的挺细致透彻，顺便做下笔记并实践一下。</p>
+<h2 id="主从复制原理-replication"><a href="#主从复制原理-replication" class="headerlink" title="主从复制原理 replication"></a><a href="#主从复制原理-replication" title="主从复制原理 replication"></a>主从复制原理 replication</h2><p>主服务器(master)的binlog,记录master的各种操作（insert、update、delete），master的磁盘只要发生变化就会记录到自己的binlog里面。</p>
+<p>从服务器（slave）如果能读取到master的binlog,那么就可以将master的所做操作跟着执行一遍。但是由于master的binlog中含有master的一些信息，所以需要对binlog进行分析加工，slave的relaylog就是干这种事的，实际上slave将使用relaylog终极日志上的sql操作，保证主从数据一致性。<br><a id="more"></a><br><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/mysql-master-slave.gif" alt="mysql-master-slave"><br>
+        
+          <p class="article-more-link">
+            <a href="/blog/2016/12/05/mysql-master-slave/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/12/05/mysql-master-slave/" data-id="cla6cx70o001oosxdo9kzmsnp" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/12/05/mysql-master-slave/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><a class="extend next" rel="next" href="/blog/page/2/">下一页 &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/MySQL/">MySQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/PHP/">PHP</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Thinking/">Thinking</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/其他/">其他</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据库范式/">数据库范式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/CI/" style="font-size: 10px;">CI</a> <a href="/blog/tags/JQuery/" style="font-size: 10px;">JQuery</a> <a href="/blog/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/blog/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/blog/tags/Python/" style="font-size: 10px;">Python</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/bash/" style="font-size: 10px;">bash</a> <a href="/blog/tags/composer/" style="font-size: 10px;">composer</a> <a href="/blog/tags/eloquent/" style="font-size: 10px;">eloquent</a> <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/blog/tags/idempotence/" style="font-size: 10px;">idempotence</a> <a href="/blog/tags/item/" style="font-size: 10px;">item</a> <a href="/blog/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/blog/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/memcacheq/" style="font-size: 10px;">memcacheq</a> <a href="/blog/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/blog/tags/nc/" style="font-size: 10px;">nc</a> <a href="/blog/tags/packageist/" style="font-size: 10px;">packageist</a> <a href="/blog/tags/php/" style="font-size: 13.33px;">php</a> <a href="/blog/tags/sed/" style="font-size: 10px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 10px;">shell</a> <a href="/blog/tags/static/" style="font-size: 10px;">static</a> <a href="/blog/tags/thinking/" style="font-size: 13.33px;">thinking</a> <a href="/blog/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/blog/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/blog/tags/validator/" style="font-size: 10px;">validator</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vuejs/" style="font-size: 10px;">vuejs</a> <a href="/blog/tags/zephir/" style="font-size: 10px;">zephir</a> <a href="/blog/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/blog/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/12/">十二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/04/">四月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2022/11/07/python日期格式转换/">python日期格式转换总结</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/10/18/laravel-validator/">Laravel Validator自定义参数验证规则</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/28/linux-sed/">linux常用命令之sed</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/27/shell-script-learning/">shell脚本由点到面学习总结</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/14/laravel-eloquent-index/">Eloquent ORM多个and和or条件查询</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Tayloryu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'tayloryu';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+  </div>
+</body>
+</html>

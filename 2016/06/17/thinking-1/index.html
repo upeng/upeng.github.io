@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta name="google-site-verification" content="k9iQUbEI9rWq3xYeh63ATztKdkthC4dNRHV_25maJ3Q">
+  <title>In Recent Days | Taylor&#39;s Learning Diary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="首先我想吐糟一下为知笔记；我写了这么久，保存一下就丢了？丢了？发现最近为知还炒鸡慢，算了还是用Evernote吧，相对而言更靠谱（虽然不支持markdown格式）">
+<meta name="keywords" content="thinking">
+<meta property="og:type" content="article">
+<meta property="og:title" content="In Recent Days">
+<meta property="og:url" content="https://upeng.github.io/blog/2016/06/17/thinking-1/index.html">
+<meta property="og:site_name" content="Taylor&#39;s Learning Diary">
+<meta property="og:description" content="首先我想吐糟一下为知笔记；我写了这么久，保存一下就丢了？丢了？发现最近为知还炒鸡慢，算了还是用Evernote吧，相对而言更靠谱（虽然不支持markdown格式）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-11-07T03:13:42.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="In Recent Days">
+<meta name="twitter:description" content="首先我想吐糟一下为知笔记；我写了这么久，保存一下就丢了？丢了？发现最近为知还炒鸡慢，算了还是用Evernote吧，相对而言更靠谱（虽然不支持markdown格式）">
+  
+    <link rel="alternate" href="/atom.xml" title="Taylor&#39;s Learning Diary" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Taylor&#39;s Learning Diary</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://upeng.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-thinking-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/06/17/thinking-1/" class="article-date">
+  <time datetime="2016-06-16T18:07:38.000Z" itemprop="datePublished">2016-06-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/其他/">其他</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      In Recent Days
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先我想吐糟一下为知笔记；我写了这么久，保存一下就丢了？丢了？发现最近为知还炒鸡慢，算了还是用Evernote吧，相对而言更靠谱（虽然不支持markdown格式）<br><a id="more"></a><br>最近忙的没有规律，蓝v后台一直在处理零星bug，但是对蓝v心里不是很踏实；目前为知，对做蓝v后台有几点体会</p>
+<ul>
+<li>代码结构混乱，一个函数能有几百行，变量超级多，定位问题很困难；不同的页面使用同一个Controller和view，然后在里面做各种复杂的判断逻辑，代码辣眼睛！</li>
+<li>代码逻辑混乱，队列夹杂着数据库、调前台、平台接口同步数据；接口调的特隐晦，后台自己操作数据库要先入队列，然后通过脚本读队列操作数据库；其实量真没那么大！</li>
+<li>主观方面自己心不静，看到代码复杂心情就不好了，为了能够实现功能就又开始堆代码了，心情很复杂，想重构又无从下手！</li>
+</ul>
+<p>先说下自己这半个月来的学习进度；月初和校长约定要学习这些东西：</p>
+<ul>
+<li>mysql分库分表、主从复制同步；</li>
+<li>laravel和EPF的比较</li>
+<li>swoole的学习</li>
+</ul>
+<p>这个月已经过半，直到今天才写了这个文章，并不是说这半个月没有学，相反，几乎天天都在学，地铁上班和回去的路上，中午有时候午休前也会看；但是没有总结，没有思考，只是机械的装载知识，并没有多少收获；下午和校长谈话，校长给了很中肯的意见，说的很多地方都是我目前遇到的问题；总结这半个月，我也看了很多东西：laravel、vuejs、swoole。但都只是停留在表面，没有深入！我觉得校长说的很对，学习的时候要有个主线，沿着这个主线深入学习，遇到与主线相关的问题，就深入学习搞定它；与主线无关就先getpocket，或者收藏起来；等主线相关的内容都搞明白搞清楚后，再去搞定你pocket里的另一个主线。想想这半个月以来的学习状态，我不禁要批评自己了，偏离主线的方向有点远了！</p>
+<p>今天看到了<a href="http://xiaolai.li" target="_blank" rel="noopener">xiaolai</a>老师的文章，他说道：真正的工程师，时间分配大抵上是这样的，80% 的时间用来思考，20% 的时间把思考结果用代码表达出来，这个思考的过程包括反复搜索(search 多了，就叫 research)，深入阅读各种文档（因为今天的工程师必定要用到大量别人写好的模块），还要思考自己写出来的代码如何写好文档才能让更多的人使用……而刚入门的时候，可能是反过来的，80%的时间用来写代码，没有思想可以表达，就去模仿表达别人的思想…… 但，一定要有 20% 的时间花在真正的思考上，像工程师一样思考。<strong>很多人进步慢的根本原因在于，每天都在“学”，但从来不花大块的时间深入“想”。而我这半个月就是这种状态：每天都在学，但是没有花时间思考！</strong></p>
+<p>另外我在学习的时候有个问题，比如在学laravel和vuejs的时候，我总想把文档一次性看完，然后再去操作；其实这犯了学习大忌，就像xiaolai老师说的</p>
+<blockquote>
+<p>真实的学习过程是，学会一点最少必要知识（就是那些知道了之后就可以马上开始行动了的最少知识），然后就要马上开始实际操练…… 最终，大量的细节都是在实际操作过程中进一步学会的 —— 甚至，还有大量的细节如果不进行实际操练的话，就根本没机会学得到。</p>
+</blockquote>
+<p>这半个月来：</p>
+<ul>
+<li>思考的少，机械师忘脑袋装知识，只讲数量不讲质量，仅仅停留在表面</li>
+<li>总结的少，有点偏离主线</li>
+</ul>
+<p>后面要做的就是纠正这些学习上的毛病，一专而多精，看一个文章就要认真看，看懂！不能匆匆而过，看完要思考是什么？为什么？怎么做的？再针对这类问题做个总结，如果自己遇到这类问题你该怎么做，ok，fighting!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/06/17/thinking-1/" data-id="cla6cx723003wosxdjo5k50pk" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/06/17/thinking-1/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/thinking/">thinking</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2016/06/25/normal/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据库范式的思考
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2016/05/29/thinking/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">standing on the shoulders of the giants</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/MySQL/">MySQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/PHP/">PHP</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Thinking/">Thinking</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/其他/">其他</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据库范式/">数据库范式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/CI/" style="font-size: 10px;">CI</a> <a href="/blog/tags/JQuery/" style="font-size: 10px;">JQuery</a> <a href="/blog/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/blog/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/blog/tags/Python/" style="font-size: 10px;">Python</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/bash/" style="font-size: 10px;">bash</a> <a href="/blog/tags/composer/" style="font-size: 10px;">composer</a> <a href="/blog/tags/eloquent/" style="font-size: 10px;">eloquent</a> <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/blog/tags/idempotence/" style="font-size: 10px;">idempotence</a> <a href="/blog/tags/item/" style="font-size: 10px;">item</a> <a href="/blog/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/blog/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/memcacheq/" style="font-size: 10px;">memcacheq</a> <a href="/blog/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/blog/tags/nc/" style="font-size: 10px;">nc</a> <a href="/blog/tags/packageist/" style="font-size: 10px;">packageist</a> <a href="/blog/tags/php/" style="font-size: 13.33px;">php</a> <a href="/blog/tags/sed/" style="font-size: 10px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 10px;">shell</a> <a href="/blog/tags/static/" style="font-size: 10px;">static</a> <a href="/blog/tags/thinking/" style="font-size: 13.33px;">thinking</a> <a href="/blog/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/blog/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/blog/tags/validator/" style="font-size: 10px;">validator</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vuejs/" style="font-size: 10px;">vuejs</a> <a href="/blog/tags/zephir/" style="font-size: 10px;">zephir</a> <a href="/blog/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/blog/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/12/">十二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/04/">四月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2022/11/07/python日期格式转换/">python日期格式转换总结</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/10/18/laravel-validator/">Laravel Validator自定义参数验证规则</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/28/linux-sed/">linux常用命令之sed</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/27/shell-script-learning/">shell脚本由点到面学习总结</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/14/laravel-eloquent-index/">Eloquent ORM多个and和or条件查询</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Tayloryu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'tayloryu';
+  
+  var disqus_url = 'https://upeng.github.io/blog/2016/06/17/thinking-1/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+  </div>
+</body>
+</html>

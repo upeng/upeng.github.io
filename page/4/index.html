@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta name="google-site-verification" content="k9iQUbEI9rWq3xYeh63ATztKdkthC4dNRHV_25maJ3Q">
+  <title>Taylor&#39;s Learning Diary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="LNMP">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Taylor&#39;s Learning Diary">
+<meta property="og:url" content="https://upeng.github.io/blog/page/4/index.html">
+<meta property="og:site_name" content="Taylor&#39;s Learning Diary">
+<meta property="og:description" content="LNMP">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Taylor&#39;s Learning Diary">
+<meta name="twitter:description" content="LNMP">
+  
+    <link rel="alternate" href="/atom.xml" title="Taylor&#39;s Learning Diary" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Taylor&#39;s Learning Diary</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://upeng.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-mysqlperformance01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/04/24/mysqlperformance01/" class="article-date">
+  <time datetime="2016-04-23T19:25:05.000Z" itemprop="datePublished">2016-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/04/24/mysqlperformance01/">mysql之sql优化-慢查询日志开启和查看（1）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如何发现有问题的SQL？使用慢查询日志【slow_query_log】对有效率问题的sql进行监控</p>
+<h3 id="查看慢查询日志开启状态"><a href="#查看慢查询日志开启状态" class="headerlink" title="查看慢查询日志开启状态"></a>查看慢查询日志开启状态</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variable</span>  s <span class="keyword">like</span> <span class="string">'slow_query_log'</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/6a0acb38-fbe0-42e6-b9ca-f05955ca73e8.png" alt></p>
+<h3 id="记录未使用索引的查询"><a href="#记录未使用索引的查询" class="headerlink" title="记录未使用索引的查询"></a>记录未使用索引的查询</h3><p>未使用索引的查询默认是关闭的，如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'log_queries_not_using_indexes'</span>;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/2655ccd1-69ab-4c54-b7bf-50b01b2b45e5.png" alt><br>需要打开未使用索引的查询，即未使用索引的查询会记录在案<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> log_queries_not_using_indexes=<span class="keyword">on</span></span><br></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/blog/2016/04/24/mysqlperformance01/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/04/24/mysqlperformance01/" data-id="cla6cx71i0032osxd5khxi0cp" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/04/24/mysqlperformance01/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tmux工具" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/04/23/tmux工具/" class="article-date">
+  <time datetime="2016-04-22T17:10:45.000Z" itemprop="datePublished">2016-04-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/04/23/tmux工具/">tmux linux下的终端复用工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="tmux常用命令"><a href="#tmux常用命令" class="headerlink" title="tmux常用命令"></a>tmux常用命令</h2><p><code>tmux</code>打开tmux服务，列出几个最常用的命令<br>①：ctrl+B ②：字符<br>如：<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ctrl+B % 纵向切屏，将屏幕切成左右两半</span><br><span class="line"></span><br><span class="line">ctrl+B <span class="string">" 单个双引号，水平切割屏幕上下两半</span></span><br><span class="line"></span><br><span class="line">ctrl+B x 确定关掉当前面板（回话）吗？ 'y' -&gt;删除当前会话</span><br><span class="line"></span><br><span class="line">ctrl+B t 显示当前时间</span><br><span class="line"></span><br><span class="line">ctrl+B ↑ ↓ → ← 会话之间跳转</span><br></pre></td></tr></table></figure></p>
+<p>更多命令参考<br>[<a href="http://kumu-linux.github.io/blog/2013/08/06/tmux/][1]" target="_blank" rel="noopener">http://kumu-linux.github.io/blog/2013/08/06/tmux/][1]</a><br>[1]: <a href="http://kumu-linux.github.io/blog/2013/08/06/tmux/" target="_blank" rel="noopener">http://kumu-linux.github.io/blog/2013/08/06/tmux/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/04/23/tmux工具/" data-id="cla6cx7270044osxd4po7jzmd" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/04/23/tmux工具/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/tmux/">tmux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hexo-guidebook" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/04/20/hexo-guidebook/" class="article-date">
+  <time datetime="2016-04-20T13:31:48.000Z" itemprop="datePublished">2016-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/其他/">其他</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/04/20/hexo-guidebook/">hexo+github搭建blog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>hexo是一个快速、简介且高效的博客框架！</p>
+<h2 id="安装前置服务"><a href="#安装前置服务" class="headerlink" title="安装前置服务"></a>安装前置服务</h2><p>hexo依赖nodejs和git </p>
+<ul>
+<li>由于依赖nodejs，因此安装hexo之前需要先安装nodejs</li>
+<li>使用github搭建静态博客，因此需要安装git客户端（使用hexo命令编译并上传至github）</li>
+</ul>
+<blockquote>
+<p>[百度云盘下载链接][1]<br>  [1]: <a href="http://pan.baidu.com/s/1dENChzF" target="_blank" rel="noopener">http://pan.baidu.com/s/1dENChzF</a></p>
+</blockquote>
+<h2 id="快速创建博客页面"><a href="#快速创建博客页面" class="headerlink" title="快速创建博客页面"></a>快速创建博客页面</h2><h3 id="hexo-server"><a href="#hexo-server" class="headerlink" title="hexo server"></a>hexo server</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//启动本地服务，查看博客主页</span><br><span class="line">$ hexo server</span><br><span class="line">INFO  <span class="keyword">Start</span> processing</span><br><span class="line">INFO  Hexo <span class="keyword">is</span> running <span class="keyword">at</span> <span class="keyword">http</span>://localhost:<span class="number">4000</span>/. Press Ctrl+C <span class="keyword">to</span> stop.</span><br></pre></td></tr></table></figure>
+<h3 id="hexo-new-“my-new-post”"><a href="#hexo-new-“my-new-post”" class="headerlink" title="hexo new “my new post”"></a>hexo new “my new post”</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建文章页</span></span><br><span class="line">$ hexo <span class="keyword">new</span> <span class="string">"hexo guidebook"</span></span><br><span class="line">INFO  <span class="string">Created:</span> <span class="string">g:</span>\hexo\source\_posts\hexo-guidebook.md</span><br></pre></td></tr></table></figure>
+<h3 id="hexo-new-page-“categories”"><a href="#hexo-new-page-“categories”" class="headerlink" title="hexo new page “categories”"></a>hexo new page “categories”</h3><blockquote>
+<p>创建单页面，比如分类，关于</p>
+</blockquote>
+<h3 id="hexo-g-hexo-generate"><a href="#hexo-g-hexo-generate" class="headerlink" title="hexo g (hexo generate)"></a>hexo g (hexo generate)</h3><blockquote>
+<p>生成静态页面</p>
+</blockquote>
+<h3 id="hexo-deploy-（上传至github）"><a href="#hexo-deploy-（上传至github）" class="headerlink" title="hexo deploy （上传至github）"></a>hexo deploy （上传至github）</h3><blockquote>
+<p>如果没有建立github与本地git的关联，会报错，因为本地和github没有建立信任机制是不能随意上传至github的</p>
+</blockquote>
+<h2 id="补充：如何建立信任机制"><a href="#补充：如何建立信任机制" class="headerlink" title="补充：如何建立信任机制"></a>补充：如何建立信任机制</h2><h3 id="生成新的Key："><a href="#生成新的Key：" class="headerlink" title="生成新的Key："></a>生成新的Key：</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"your_email@youremail.com"</span>  <span class="comment">//（引号内的内容替换为你自己的邮箱）</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>输出显示</li>
+</ul>
+<blockquote>
+<p>Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</p>
+</blockquote>
+<ul>
+<li>直接回车，不要修改默认路劲。</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">Enter</span> <span class="string">passphrase</span> <span class="string">(empty</span> <span class="string">for</span> <span class="literal">no</span> <span class="string">passphrase):</span> </span><br><span class="line"><span class="attr">Enter same passphrase again:</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置一个密码短语，在每次远程操作之前会要求输入密码短语！闲麻烦可以直接回车，不设置。成功：</li>
+</ul>
+<blockquote>
+<p>Your identification has been saved in /Users/your_user_directory/.ssh/id_rsa. Your public key has been saved in /Users/your_user_directory/.ssh/id_rsa.pub. The key fingerprint is: … …</p>
+</blockquote>
+<h3 id="提交公钥："><a href="#提交公钥：" class="headerlink" title="提交公钥："></a>提交公钥：</h3><ul>
+<li><p>找到.ssh文件夹，用文本编辑器打开“id_rsa.pub”文件，复制内容到剪贴板。</p>
+</li>
+<li><p>打开 <a href="https://github.com/settings/ssh" target="_blank" rel="noopener">https://github.com/settings/ssh</a> ，点击 Add SSH Key 按钮，粘贴进去保存即可。</p>
+</li>
+</ul>
+<h2 id="踩到的坑"><a href="#踩到的坑" class="headerlink" title="踩到的坑"></a>踩到的坑</h2><p>hexo deploy后报一堆错误如下，在初次使用git命令也许会遇到<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">warning</span>: LF will <span class="keyword">be </span>replaced <span class="keyword">by </span>CRLF in .....</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>有效解决方法：</p>
+</blockquote>
+<ol>
+<li><p>在git bash  输入下面的命令：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global core.autocrlf  <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删掉项目中的.git文件夹 <code>rm -rf .git</code></p>
+</li>
+<li><p>重新<br>git init<br>hexo deploy<br>问题解决！</p>
+</li>
+</ol>
+<p>参考【其他一些主题配置文章】<br><a href="http://jianghao.wang/2015/hexo-github/" target="_blank" rel="noopener">http://jianghao.wang/2015/hexo-github/</a><br><a href="http://zhiho.github.io/2015/09/29/hexo-next/" target="_blank" rel="noopener">http://zhiho.github.io/2015/09/29/hexo-next/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/04/20/hexo-guidebook/" data-id="cla6cx6zo0004osxd596g72bm" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/04/20/hexo-guidebook/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/hexo/">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mysql-grant" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/04/10/mysql-grant/" class="article-date">
+  <time datetime="2016-04-10T06:26:00.000Z" itemprop="datePublished">2016-04-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/04/10/mysql-grant/">mysql添加用户管理员及授权</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="mysql添加用户管理员及授权"><a href="#mysql添加用户管理员及授权" class="headerlink" title="mysql添加用户管理员及授权"></a>mysql添加用户管理员及授权</h2><p>比如添加test用户，grant 高级 DBA 管理 MySQL 中所有数据库的权限</p>
+<h3 id="step1-创建用户"><a href="#step1-创建用户" class="headerlink" title="step1 创建用户"></a>step1 创建用户</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"%"</span>,<span class="string">"test"</span>,<span class="keyword">password</span>(<span class="string">"123qwe"</span>));</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"localhost"</span>,<span class="string">"test"</span>,<span class="keyword">password</span>(<span class="string">"123qwe"</span>));</span><br><span class="line">注：%和localhost的区别</span><br><span class="line">此处的"localhost"，是指该用户只能在本地登录，不能在另外一台机器上远程登录。如果想远程登录的话，将"localhost"改为"%"，表示在任何一台电脑上都可以登录。也可以指定某台机器可以远程登录。</span><br></pre></td></tr></table></figure>
+<h3 id="step2-为用户授权"><a href="#step2-为用户授权" class="headerlink" title="step2 为用户授权"></a>step2 为用户授权</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">授权格式：<span class="keyword">grant</span> 权限 <span class="keyword">on</span> 数据库.* <span class="keyword">to</span> 用户名@登录主机 <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">"密码"</span>;　</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> testDB.testTable <span class="keyword">to</span> <span class="keyword">test</span>@localhost <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'1234'</span>;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="keyword">test</span>@<span class="string">'%'</span>;  //全部数据库表的权限</span><br></pre></td></tr></table></figure>
+<h3 id="step3-刷新系统权限表"><a href="#step3-刷新系统权限表" class="headerlink" title="step3 刷新系统权限表"></a>step3 刷新系统权限表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>; //刷新系统权限表</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/04/10/mysql-grant/" data-id="cla6cx70m001losxdjuxm8p3i" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/04/10/mysql-grant/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mysql-think" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/02/25/mysql-think/" class="article-date">
+  <time datetime="2016-02-24T16:19:00.000Z" itemprop="datePublished">2016-02-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/02/25/mysql-think/">一个脚本引发的思考</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题来源："><a href="#问题来源：" class="headerlink" title="问题来源："></a>问题来源：</h2><p>前段时间写了一个crontab脚本，每5分钟连接一次数据库，遍历库中待处理的任务，一旦发现待处理(status=0)的任务,则将该任务状态置为处理中(status=1)，然后开始执行这个任务（dealing process），执行完成status=2</p>
+<blockquote>
+<p>最初我是一次性将所有任务设为处理中，然后一个一个串行处理，这样效率极低，一个任务可能要1个小时，其他的只能排队等。</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/blog/2016/02/25/mysql-think/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/02/25/mysql-think/" data-id="cla6cx70q001tosxdvsmet6ye" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/02/25/mysql-think/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-awk" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/01/31/linux-awk/" class="article-date">
+  <time datetime="2016-01-31T14:42:00.000Z" itemprop="datePublished">2016-01-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/01/31/linux-awk/">Linux常用命令-awk</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>详细的awk使用总结翻阅为知笔记</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>awk中 !a[$0]++ 与 !a[$1…]++<br>功能：</p>
+<blockquote>
+<p>去重</p>
+<ol>
+<li>a[$0]是未定义的，即undef</li>
+<li>!优先级高于++</li>
+</ol>
+</blockquote>
+<p>1.!a[$0]++<br>!a[$0]++可以去除一行中重复的记录，以记录作为数组（可以将a理解为数组）索引；基于上面两点说明，这个不难理解。例子如下<br><img src="http://upfriend-blog.stor.sinaapp.com/1.jpg" alt="请输入图片描述"></p>
+<p>从上面例子可以看出，重复的记录被删除掉，只保留重复记录中第一次出现的记录</p>
+<p>2.!a[$1]++ 或者 !a[$2]++等等<br>!a[$1]++可以根据记录中某个域删除这个域相同的记录，也可以根据这个域相同，执行另外一些相应的操作。例子如下;<br><img src="http://upfriend-blog.stor.sinaapp.com/2.jpg" alt="请输入图片描述"></p>
+<p>从上面例子可以看出，第二个域相同的多条记录被删除，只保留重复记录中第一次出现的记录</p>
+<h3 id="查看文件夹下的文件个数-当前目录的文件和子文件夹的文件数"><a href="#查看文件夹下的文件个数-当前目录的文件和子文件夹的文件数" class="headerlink" title="查看文件夹下的文件个数(当前目录的文件和子文件夹的文件数)"></a>查看文件夹下的文件个数(当前目录的文件和子文件夹的文件数)</h3><p> <code>find ./ -type f | wc -l</code></p>
+<h2 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h2><p>功能：</p>
+<blockquote>
+<p>统计指定文本文件的行数、字数、字符数</p>
+</blockquote>
+<p>用法：</p>
+<ol>
+<li>wc file</li>
+<li>wc -l file</li>
+<li>wc -w file</li>
+<li>wc -c file</li>
+</ol>
+<p>文章部分来源：<a href="http://blog.163.com/njut_wangjian/blog/static/16579642520141027103125556/" target="_blank" rel="noopener">http://blog.163.com/njut_wangjian/blog/static/16579642520141027103125556/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/01/31/linux-awk/" data-id="cla6cx703000nosxd5799oqum" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/01/31/linux-awk/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/awk/">awk</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/01/30/linux命令/" class="article-date">
+  <time datetime="2016-01-30T13:36:00.000Z" itemprop="datePublished">2016-01-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/01/30/linux命令/">linux常用命令（总是forget）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="linux操作历史查询"><a href="#linux操作历史查询" class="headerlink" title="linux操作历史查询"></a>linux操作历史查询</h2><ul>
+<li>我们知道上下键可以选择出输入的history历史;</li>
+<li>如果输入命令很多，只记得命令的部分字符，可以使用<code>ctrl+R</code>，然后模糊匹配，输入部分字符串，就可以定位命令</li>
+</ul>
+<h2 id="linux-删除已输入的命令-常用"><a href="#linux-删除已输入的命令-常用" class="headerlink" title="linux 删除已输入的命令(常用)"></a>linux 删除已输入的命令(常用)</h2><p><code>ctr + w</code> 往回删除一个单词，光标放在最末尾<br><code>ctl + u</code> 删除光标以前的字符<br><code>ctl + k</code> 删除光标以后的字符<br><code>ctl + a</code> 移动光标至的字符头<br><code>ctl + e</code> 移动光标至的字符尾<br><code>ctl + l</code> 清屏</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2016/01/30/linux命令/" data-id="cla6cx70d0013osxdbcrptpo6" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2016/01/30/linux命令/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-bash" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2015/10/28/linux-bash/" class="article-date">
+  <time datetime="2015-10-28T09:56:00.000Z" itemprop="datePublished">2015-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2015/10/28/linux-bash/">常用的bash命令快捷建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>ctrl</code>键组合<br><code>ctrl+a</code>:光标移到行首。<br><code>ctrl+b</code>:光标左移一个字母<br><code>ctrl+c</code>:杀死当前进程。<br><code>ctrl+d</code>:退出当前 Shell。<br><code>ctrl+e</code>:光标移到行尾。<br><code>ctrl+h</code>:删除光标前一个字符，同 backspace 键相同。<br><code>ctrl+k</code>:清除光标后至行尾的内容。<br><code>ctrl+l</code>:清屏，相当于clear。<br><code>ctrl+r</code>:搜索之前打过的命令。会有一个提示，根据你输入的关键字进行搜索bash的history<br><code>ctrl+u</code>: 清除光标前至行首间的所有内容。<br><code>ctrl+w</code>: 移除光标前的一个单词<br><code>ctrl+t</code>: 交换光标位置前的两个字符<br><code>ctrl+y</code>: 粘贴或者恢复上次的删除<br><code>ctrl+d</code>: 删除光标所在字母;注意和backspace以及ctrl+h的区别，这2个是删除光标前的字符<br><code>ctrl+f</code>: 光标右移<br><code>ctrl+z</code> : 把当前进程转到后台运行，使用’ fg ‘命令恢复。比如top -d1 然后ctrl+z ，到后台，然后fg,重新恢复<br>esc组合<br><code>esc+d</code>: 删除光标后的一个词<br><code>esc+f</code>: 往右跳一个词<br><code>esc+b</code>: 往左跳一个词<br><code>esc+t</code>: 交换光标位置前的两个单词。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2015/10/28/linux-bash/" data-id="cla6cx707000uosxdnhnzyt86" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2015/10/28/linux-bash/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/bash/">bash</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-php-design-single" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2015/10/14/php-design-single/" class="article-date">
+  <time datetime="2015-10-14T14:21:00.000Z" itemprop="datePublished">2015-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2015/10/14/php-design-single/">PHP设计模式-单例模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p><code>场景</code>:有多个类需要读取数据库，而数据库连接类只需要一个对象就够了。其他的类只需调用这个类的连接对象即可<br><code>问题</code>：如何获取两个严格相等（全等）的对象（===）<br><code>答案</code>：只有当两个对象是同一个对象的时候才是全等的！</p>
+        
+          <p class="article-more-link">
+            <a href="/blog/2015/10/14/php-design-single/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2015/10/14/php-design-single/" data-id="cla6cx71r003eosxdzl1fykzp" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2015/10/14/php-design-single/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-php-design-model" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2015/10/12/php-design-model/" class="article-date">
+  <time datetime="2015-10-12T14:12:00.000Z" itemprop="datePublished">2015-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2015/10/12/php-design-model/">PHP设计模式-工厂模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><p>直接上代码，直观了解工厂模式！<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="comment">//接口，是客户端和服务端共同遵守的开发规范</span></span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">interface</span> <span class="title">db</span></span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span>&#123;&#125;;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//服务端</span></span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Dbmysql</span> <span class="keyword">implements</span> <span class="title">db</span></span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'connected the mysql'</span>;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Dbsqlite</span> <span class="keyword">implements</span> <span class="title">db</span></span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'connected the sqlite'</span>;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//客户端 </span></span></span><br><span class="line"><span class="php">$mysql = <span class="keyword">new</span> Dbmysql();</span></span><br><span class="line"><span class="php">$mysql-&gt;conn();</span></span><br><span class="line"></span><br><span class="line"><span class="php">$sqlite = <span class="keyword">new</span> Dbsqlite();</span></span><br><span class="line"><span class="php">$sqlite-&gt;conn();</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//如果服务端不想让客户端知道自己内部类的实现细节，统一一个固定的入口，这样就是我们所说的</span></span></span><br><span class="line"><span class="php"><span class="comment">//使用方知道的越少越好！将上述两个类封装起来</span></span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//服务端，开发接口Dbconnect::type(@param)</span></span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Dbconnect</span> </span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">type</span><span class="params">($type)</span></span></span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">if</span> ($type == <span class="string">'mysql'</span>)</span></span><br><span class="line"><span class="php">        &#123;</span></span><br><span class="line"><span class="php">            <span class="keyword">return</span> <span class="keyword">new</span> Dbmysql();</span></span><br><span class="line"><span class="php">        &#125;</span></span><br><span class="line"><span class="php">        <span class="keyword">else</span> <span class="keyword">if</span> ($type == <span class="string">'sqlite'</span>)</span></span><br><span class="line"><span class="php">        &#123;</span></span><br><span class="line"><span class="php">            <span class="keyword">return</span> <span class="keyword">new</span> Dbsqlite();</span></span><br><span class="line"><span class="php">        &#125;</span></span><br><span class="line"><span class="php">        <span class="keyword">else</span></span></span><br><span class="line"><span class="php">        &#123;</span></span><br><span class="line"><span class="php">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"Error type is not exist"</span>, <span class="number">1</span>);</span></span><br><span class="line"><span class="php">            </span></span><br><span class="line"><span class="php">        &#125;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//客户端</span></span></span><br><span class="line"><span class="php">$mysql = Dbconnect::type(<span class="string">'mysql'</span>);</span></span><br><span class="line"><span class="php">$mysql-&gt;conn();</span></span><br><span class="line"></span><br><span class="line"><span class="php">$sqlite = Dbconnect::type(<span class="string">'sqlite'</span>);</span></span><br><span class="line"><span class="php">$sqlite-&gt;conn();</span></span><br></pre></td></tr></table></figure></p>
+<p>在我们使用围脖的接口时，和这个有点类似，一个业务需求给你一个方法如showbatch(),friendship(),show()；当然他们是某个类的静态方法，我们不需要知道它是如何具体实现的，只要知道，当我们传递合适的参数，使用这个接口，就可以获得自己想要的数据即可</p>
+<p><code>Q:现在如果需要连接oracle、PDO、SqlServer，怎么办？当然php可以直接修改服务端的代码，增加else if，但是对于java,c++而言，如果修改代码，还需要再次编译，这是非常耗时的!</code></p>
+<blockquote>
+<p><strong>在面向对象设计（OOD）设计法则中，重要的开闭原则：对于修改是封闭，对于扩展是开放的</strong></p>
+</blockquote>
+<h2 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h2><p><strong>注意开闭原则</strong><br>//<strong>服务端</strong><br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Factory</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span></span>()&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mysqlFactory</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">Factory</span></span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span></span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">Dbmysql</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sqliteFactory</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">Factory</span></span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span></span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">Dbsqlite</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//**客户端**</span></span><br><span class="line"><span class="comment">//由于开放了两个接口，一个是创建数据库，一个是连接数据库</span></span><br><span class="line"></span><br><span class="line">$fact = <span class="keyword">new</span> <span class="type">mysqlFactory</span>();</span><br><span class="line">$db = $fact-&gt;createDb();</span><br><span class="line">$db-&gt;conn();</span><br><span class="line"></span><br><span class="line">$fact = <span class="keyword">new</span> <span class="type">sqliteFactory</span>();</span><br><span class="line">$db-&gt;$fact-&gt;createDb();</span><br><span class="line">$db-&gt;conn(); </span><br><span class="line"></span><br><span class="line"><span class="comment">//现在如果新增了oracle数据库连接，就可以扩展oracle，不需要修改代码，扩展如下：</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dboracle</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">db</span></span>()</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span></span>()</span><br><span class="line">    &#123;</span><br><span class="line">        echo <span class="string">'connected oracle database'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">oracleFactory</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">Factory</span></span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span></span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">Dboracle</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$fact = <span class="keyword">new</span> <span class="type">oracleFactory</span>();</span><br><span class="line">$db = $fact-&gt;createDb();</span><br><span class="line">$db-&gt;conn();</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/blog/2015/10/12/php-design-model/" data-id="cla6cx71q003bosxdzu7v03to" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/blog/2015/10/12/php-design-model/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/blog/page/3/">&laquo; 上一页</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><a class="extend next" rel="next" href="/blog/page/5/">下一页 &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/MySQL/">MySQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/PHP/">PHP</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Thinking/">Thinking</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/其他/">其他</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/数据库范式/">数据库范式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/CI/" style="font-size: 10px;">CI</a> <a href="/blog/tags/JQuery/" style="font-size: 10px;">JQuery</a> <a href="/blog/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/blog/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/blog/tags/Python/" style="font-size: 10px;">Python</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/bash/" style="font-size: 10px;">bash</a> <a href="/blog/tags/composer/" style="font-size: 10px;">composer</a> <a href="/blog/tags/eloquent/" style="font-size: 10px;">eloquent</a> <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/blog/tags/idempotence/" style="font-size: 10px;">idempotence</a> <a href="/blog/tags/item/" style="font-size: 10px;">item</a> <a href="/blog/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/blog/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/memcacheq/" style="font-size: 10px;">memcacheq</a> <a href="/blog/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/blog/tags/nc/" style="font-size: 10px;">nc</a> <a href="/blog/tags/packageist/" style="font-size: 10px;">packageist</a> <a href="/blog/tags/php/" style="font-size: 13.33px;">php</a> <a href="/blog/tags/sed/" style="font-size: 10px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 10px;">shell</a> <a href="/blog/tags/static/" style="font-size: 10px;">static</a> <a href="/blog/tags/thinking/" style="font-size: 13.33px;">thinking</a> <a href="/blog/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/blog/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/blog/tags/validator/" style="font-size: 10px;">validator</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vuejs/" style="font-size: 10px;">vuejs</a> <a href="/blog/tags/zephir/" style="font-size: 10px;">zephir</a> <a href="/blog/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/blog/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/12/">十二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/04/">四月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2022/11/07/python日期格式转换/">python日期格式转换总结</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/10/18/laravel-validator/">Laravel Validator自定义参数验证规则</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/28/linux-sed/">linux常用命令之sed</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/27/shell-script-learning/">shell脚本由点到面学习总结</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2017/09/14/laravel-eloquent-index/">Eloquent ORM多个and和or条件查询</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Tayloryu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'tayloryu';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+  </div>
+</body>
+</html>
