@@ -66,6 +66,106 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-php-design-single" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/14/php-design-single/" class="article-date">
+  <time datetime="2015-10-14T14:21:00.000Z" itemprop="datePublished">2015-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/14/php-design-single/">PHP设计模式-单例模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p><code>场景</code>:有多个类需要读取数据库，而数据库连接类只需要一个对象就够了。其他的类只需调用这个类的连接对象即可<br><code>问题</code>：如何获取两个严格相等（全等）的对象（===）<br><code>答案</code>：只有当两个对象是同一个对象的时候才是全等的！</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/10/14/php-design-single/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/2015/10/14/php-design-single/" data-id="cla7pegs20035zcxdb6rw4lqh" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/2015/10/14/php-design-single/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-php-design-model" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/12/php-design-model/" class="article-date">
+  <time datetime="2015-10-12T14:12:00.000Z" itemprop="datePublished">2015-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/12/php-design-model/">PHP设计模式-工厂模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h2><p>直接上代码，直观了解工厂模式！<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="comment">//接口，是客户端和服务端共同遵守的开发规范</span></span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">interface</span> <span class="title">db</span></span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span>&#123;&#125;;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//服务端</span></span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Dbmysql</span> <span class="keyword">implements</span> <span class="title">db</span></span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'connected the mysql'</span>;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Dbsqlite</span> <span class="keyword">implements</span> <span class="title">db</span></span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span></span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'connected the sqlite'</span>;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//客户端 </span></span></span><br><span class="line"><span class="php">$mysql = <span class="keyword">new</span> Dbmysql();</span></span><br><span class="line"><span class="php">$mysql-&gt;conn();</span></span><br><span class="line"></span><br><span class="line"><span class="php">$sqlite = <span class="keyword">new</span> Dbsqlite();</span></span><br><span class="line"><span class="php">$sqlite-&gt;conn();</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//如果服务端不想让客户端知道自己内部类的实现细节，统一一个固定的入口，这样就是我们所说的</span></span></span><br><span class="line"><span class="php"><span class="comment">//使用方知道的越少越好！将上述两个类封装起来</span></span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//服务端，开发接口Dbconnect::type(@param)</span></span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Dbconnect</span> </span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">type</span><span class="params">($type)</span></span></span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">if</span> ($type == <span class="string">'mysql'</span>)</span></span><br><span class="line"><span class="php">        &#123;</span></span><br><span class="line"><span class="php">            <span class="keyword">return</span> <span class="keyword">new</span> Dbmysql();</span></span><br><span class="line"><span class="php">        &#125;</span></span><br><span class="line"><span class="php">        <span class="keyword">else</span> <span class="keyword">if</span> ($type == <span class="string">'sqlite'</span>)</span></span><br><span class="line"><span class="php">        &#123;</span></span><br><span class="line"><span class="php">            <span class="keyword">return</span> <span class="keyword">new</span> Dbsqlite();</span></span><br><span class="line"><span class="php">        &#125;</span></span><br><span class="line"><span class="php">        <span class="keyword">else</span></span></span><br><span class="line"><span class="php">        &#123;</span></span><br><span class="line"><span class="php">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"Error type is not exist"</span>, <span class="number">1</span>);</span></span><br><span class="line"><span class="php">            </span></span><br><span class="line"><span class="php">        &#125;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="php"><span class="comment">//客户端</span></span></span><br><span class="line"><span class="php">$mysql = Dbconnect::type(<span class="string">'mysql'</span>);</span></span><br><span class="line"><span class="php">$mysql-&gt;conn();</span></span><br><span class="line"></span><br><span class="line"><span class="php">$sqlite = Dbconnect::type(<span class="string">'sqlite'</span>);</span></span><br><span class="line"><span class="php">$sqlite-&gt;conn();</span></span><br></pre></td></tr></table></figure></p>
+<p>在我们使用围脖的接口时，和这个有点类似，一个业务需求给你一个方法如showbatch(),friendship(),show()；当然他们是某个类的静态方法，我们不需要知道它是如何具体实现的，只要知道，当我们传递合适的参数，使用这个接口，就可以获得自己想要的数据即可</p>
+<p><code>Q:现在如果需要连接oracle、PDO、SqlServer，怎么办？当然php可以直接修改服务端的代码，增加else if，但是对于java,c++而言，如果修改代码，还需要再次编译，这是非常耗时的!</code></p>
+<blockquote>
+<p><strong>在面向对象设计（OOD）设计法则中，重要的开闭原则：对于修改是封闭，对于扩展是开放的</strong></p>
+</blockquote>
+<h2 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h2><p><strong>注意开闭原则</strong><br>//<strong>服务端</strong><br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Factory</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span></span>()&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mysqlFactory</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">Factory</span></span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span></span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">Dbmysql</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sqliteFactory</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">Factory</span></span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span></span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">Dbsqlite</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//**客户端**</span></span><br><span class="line"><span class="comment">//由于开放了两个接口，一个是创建数据库，一个是连接数据库</span></span><br><span class="line"></span><br><span class="line">$fact = <span class="keyword">new</span> <span class="type">mysqlFactory</span>();</span><br><span class="line">$db = $fact-&gt;createDb();</span><br><span class="line">$db-&gt;conn();</span><br><span class="line"></span><br><span class="line">$fact = <span class="keyword">new</span> <span class="type">sqliteFactory</span>();</span><br><span class="line">$db-&gt;$fact-&gt;createDb();</span><br><span class="line">$db-&gt;conn(); </span><br><span class="line"></span><br><span class="line"><span class="comment">//现在如果新增了oracle数据库连接，就可以扩展oracle，不需要修改代码，扩展如下：</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dboracle</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">db</span></span>()</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">conn</span></span>()</span><br><span class="line">    &#123;</span><br><span class="line">        echo <span class="string">'connected oracle database'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">oracleFactory</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">Factory</span></span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createDb</span></span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">Dboracle</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$fact = <span class="keyword">new</span> <span class="type">oracleFactory</span>();</span><br><span class="line">$db = $fact-&gt;createDb();</span><br><span class="line">$db-&gt;conn();</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/2015/10/12/php-design-model/" data-id="cla7pegsa003fzcxdblcc1idb" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/2015/10/12/php-design-model/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-php-ci1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/08/13/php-ci1/" class="article-date">
@@ -153,7 +253,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2015/08/13/php-ci1/" data-id="cla6er6i8003hnwxdxo665jl2" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2015/08/13/php-ci1/" data-id="cla7pegs00031zcxds7al66l1" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2015/08/13/php-ci1/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -217,7 +317,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2015/08/03/mysql导入导出/" data-id="cla6er6hw002vnwxdgp094lp7" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2015/08/03/mysql导入导出/" data-id="cla7pegru002szcxddxeomy4s" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2015/08/03/mysql导入导出/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -264,7 +364,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2015/07/15/html-js/" data-id="cla6er6g60004nwxdr82rggak" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2015/07/15/html-js/" data-id="cla7pegq60006zcxd4ajqxf0m" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2015/07/15/html-js/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -291,7 +391,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Thinking/">Thinking</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库范式/">数据库范式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Thinking/">Thinking</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库范式/">数据库范式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -301,7 +401,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/JQuery/" style="font-size: 10px;">JQuery</a> <a href="/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/composer/" style="font-size: 10px;">composer</a> <a href="/tags/eloquent/" style="font-size: 10px;">eloquent</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/idempotence/" style="font-size: 10px;">idempotence</a> <a href="/tags/item/" style="font-size: 10px;">item</a> <a href="/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/memcacheq/" style="font-size: 10px;">memcacheq</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/nc/" style="font-size: 10px;">nc</a> <a href="/tags/packageist/" style="font-size: 10px;">packageist</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/thinking/" style="font-size: 13.33px;">thinking</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/tags/validator/" style="font-size: 10px;">validator</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/vuejs/" style="font-size: 10px;">vuejs</a> <a href="/tags/zephir/" style="font-size: 10px;">zephir</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
+      <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/JQuery/" style="font-size: 10px;">JQuery</a> <a href="/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/composer/" style="font-size: 10px;">composer</a> <a href="/tags/eloquent/" style="font-size: 10px;">eloquent</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/idempotence/" style="font-size: 10px;">idempotence</a> <a href="/tags/item/" style="font-size: 10px;">item</a> <a href="/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/memcacheq/" style="font-size: 10px;">memcacheq</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/nc/" style="font-size: 10px;">nc</a> <a href="/tags/packageist/" style="font-size: 10px;">packageist</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/thinking/" style="font-size: 13.33px;">thinking</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/tags/validator/" style="font-size: 10px;">validator</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/vuejs/" style="font-size: 10px;">vuejs</a> <a href="/tags/zephir/" style="font-size: 10px;">zephir</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
     </div>
   </div>
 
@@ -310,7 +410,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -327,19 +427,19 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
           </li>
         
           <li>
+            <a href="/2018/03/26/guzzle-http/">关于Guzzle http的使用总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/26/redis-commands/">Redis常用命令学习总结</a>
+          </li>
+        
+          <li>
             <a href="/2017/10/18/laravel-validator/">Laravel Validator自定义参数验证规则</a>
           </li>
         
           <li>
             <a href="/2017/09/28/linux-sed/">linux常用命令之sed</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/27/shell-script-learning/">shell脚本由点到面学习总结</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/14/laravel-eloquent-index/">Eloquent ORM多个and和or条件查询</a>
           </li>
         
       </ul>
@@ -354,7 +454,7 @@ views/user/bloguser.php   载入时$this-&gt;load-&gt;view(&quot;user/bloguser&q
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 Tayloryu<br>
+      &copy; 2022 Tayloryu【yupeng0906@gmail.com】<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

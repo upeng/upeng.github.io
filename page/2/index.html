@@ -66,6 +66,106 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-idempotence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/08/idempotence/" class="article-date">
+  <time datetime="2016-12-08T14:46:55.000Z" itemprop="datePublished">2016-12-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Thinking/">Thinking</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/08/idempotence/">在编程中的幂等性idempotence</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在编程中，可能经常会听到幂等这个词，第一次是年初红包技术复盘时听到了这个词，这次是因为写脚本时被质疑，是否支持幂等。这里总结一下，也算是个记录吧。其实在编程中，很多时候都需要支持幂等，有的程序自然存在幂等，有的需要我们控制。比如与支付相关的场景，比如我们常见的HTTP方法。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/08/idempotence/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/2016/12/08/idempotence/" data-id="cla7pegqo0011zcxdaumip4ou" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/2016/12/08/idempotence/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/idempotence/">idempotence</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mysql-master-slave" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/05/mysql-master-slave/" class="article-date">
+  <time datetime="2016-12-05T14:40:03.000Z" itemprop="datePublished">2016-12-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/05/mysql-master-slave/">mysql主从复制原理理解与实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>只从最简单的mysql主从复制原理与实践着手，之前看到Yshiba老师讲解的挺细致透彻，顺便做下笔记并实践一下。</p>
+<h2 id="主从复制原理-replication"><a href="#主从复制原理-replication" class="headerlink" title="主从复制原理 replication"></a><a href="#主从复制原理-replication" title="主从复制原理 replication"></a>主从复制原理 replication</h2><p>主服务器(master)的binlog,记录master的各种操作（insert、update、delete），master的磁盘只要发生变化就会记录到自己的binlog里面。</p>
+<p>从服务器（slave）如果能读取到master的binlog,那么就可以将master的所做操作跟着执行一遍。但是由于master的binlog中含有master的一些信息，所以需要对binlog进行分析加工，slave的relaylog就是干这种事的，实际上slave将使用relaylog终极日志上的sql操作，保证主从数据一致性。<br><a id="more"></a><br><img src="https://raw.githubusercontent.com/upeng/upeng.github.io/master/image/mysql-master-slave.gif" alt="mysql-master-slave"><br>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/05/mysql-master-slave/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://upeng.github.io/2016/12/05/mysql-master-slave/" data-id="cla7pegro002izcxdw79u7hoj" class="article-share-link">Share</a>
+      
+        <a href="https://upeng.github.io/2016/12/05/mysql-master-slave/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-zsh-and-item2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/04/zsh-and-item2/" class="article-date">
@@ -101,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/12/04/zsh-and-item2/" data-id="cla6er6ir004enwxddtt5wmyk" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2016/12/04/zsh-and-item2/" data-id="cla7pegss004dzcxdfjwjcv3u" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2016/12/04/zsh-and-item2/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -152,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/11/13/linux-php-command/" data-id="cla6er6gp000znwxdk7a7ahjd" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2016/11/13/linux-php-command/" data-id="cla7pegqp0013zcxd2hz6ciky" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2016/11/13/linux-php-command/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -204,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/10/12/static/" data-id="cla6er6ik0041nwxds79xrbng" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2016/10/12/static/" data-id="cla7pegsi003wzcxdogpqomg0" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2016/10/12/static/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -256,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/10/11/publish-laravel-package/" data-id="cla6er6ic003lnwxdcpi6j1mv" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2016/10/11/publish-laravel-package/" data-id="cla7pegs7003czcxdc8ewm58z" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2016/10/11/publish-laravel-package/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -314,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/09/11/vim/" data-id="cla6er6iq004cnwxdkim1x102" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2016/09/11/vim/" data-id="cla7pegso0048zcxdx1of1jim" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2016/09/11/vim/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -375,7 +475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/08/28/mac-lnmp/" data-id="cla6er6gu0017nwxd2yrc7vy0" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2016/08/28/mac-lnmp/" data-id="cla7pegrm002fzcxdk6ys626k" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2016/08/28/mac-lnmp/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -432,7 +532,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/08/28/mac-primary/" data-id="cla6er6gx001cnwxd7b9pih6o" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2016/08/28/mac-primary/" data-id="cla7pegqu001dzcxd8m2i1lh3" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2016/08/28/mac-primary/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -482,118 +582,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/08/15/laravel-basic/" data-id="cla6er6gb000bnwxdybpd6hxu" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2016/08/15/laravel-basic/" data-id="cla7pegqd000hzcxd4zkc4xx5" class="article-share-link">Share</a>
       
         <a href="https://upeng.github.io/2016/08/15/laravel-basic/#disqus_thread" class="article-comment-link">留言</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-vagrant" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/13/vagrant/" class="article-date">
-  <time datetime="2016-07-13T15:32:54.000Z" itemprop="datePublished">2016-07-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/13/vagrant/">vagrant-快速搭建linux开发环境</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>平时开发测试使用公司提供的弹性开发机（Centos），自己想折腾一些东西又不方面在上面部署,鉴于</p>
-<ul>
-<li>学习linux考虑（比如经常装扩展插件啥的），装WAMP有些low而且不适合扩展。</li>
-<li>在windows上装linux虚拟机（VMare等）又太占内存（o(╯□╰)o我的笔记本只有4G内存。。。）</li>
-</ul>
-<p>有没有那种快捷的搭建linux开发环境的东东呢？答案是肯定的。偶然间发现了vagrant，它就像一个容器一样（Docker？），部署LAMP十分快捷；<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/13/vagrant/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/07/13/vagrant/" data-id="cla6er6im0044nwxd0ihgtcbh" class="article-share-link">Share</a>
-      
-        <a href="https://upeng.github.io/2016/07/13/vagrant/#disqus_thread" class="article-comment-link">留言</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vagrant/">vagrant</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-memcacheq" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/11/memcacheq/" class="article-date">
-  <time datetime="2016-07-11T15:29:55.000Z" itemprop="datePublished">2016-07-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/其他/">其他</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/11/memcacheq/">MCQ学习笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>初次接触MCQ源于蓝v，之前也听同事说微博的消息推送也是使用MCQ。认识MCQ之前感觉它很神秘，用之后才发现并也不过如此，所以很多知识不能只凭想象或者言传，需要自身实践才可知晓。这里想记录一下自己使用MCQ的过程，以及MCQ的使用场景、优缺点等等。</p>
-<blockquote>
-<p>MemcacheQ - Simple Queue Service over Memcache<br>在memcache基础上的简单队列服务，所以它兼具memcache和队列的特点。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/11/memcacheq/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/07/11/memcacheq/" data-id="cla6er6gy001fnwxdu6g4dqcg" class="article-share-link">Share</a>
-      
-        <a href="https://upeng.github.io/2016/07/11/memcacheq/#disqus_thread" class="article-comment-link">留言</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memcacheq/">memcacheq</a></li></ul>
 
     </footer>
   </div>
@@ -615,7 +609,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Thinking/">Thinking</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库范式/">数据库范式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Thinking/">Thinking</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库范式/">数据库范式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -625,7 +619,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/JQuery/" style="font-size: 10px;">JQuery</a> <a href="/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/composer/" style="font-size: 10px;">composer</a> <a href="/tags/eloquent/" style="font-size: 10px;">eloquent</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/idempotence/" style="font-size: 10px;">idempotence</a> <a href="/tags/item/" style="font-size: 10px;">item</a> <a href="/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/memcacheq/" style="font-size: 10px;">memcacheq</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/nc/" style="font-size: 10px;">nc</a> <a href="/tags/packageist/" style="font-size: 10px;">packageist</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/thinking/" style="font-size: 13.33px;">thinking</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/tags/validator/" style="font-size: 10px;">validator</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/vuejs/" style="font-size: 10px;">vuejs</a> <a href="/tags/zephir/" style="font-size: 10px;">zephir</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
+      <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/JQuery/" style="font-size: 10px;">JQuery</a> <a href="/tags/Mac/" style="font-size: 13.33px;">Mac</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/composer/" style="font-size: 10px;">composer</a> <a href="/tags/eloquent/" style="font-size: 10px;">eloquent</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/idempotence/" style="font-size: 10px;">idempotence</a> <a href="/tags/item/" style="font-size: 10px;">item</a> <a href="/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/memcacheq/" style="font-size: 10px;">memcacheq</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/nc/" style="font-size: 10px;">nc</a> <a href="/tags/packageist/" style="font-size: 10px;">packageist</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/thinking/" style="font-size: 13.33px;">thinking</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a> <a href="/tags/validator/" style="font-size: 10px;">validator</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/vuejs/" style="font-size: 10px;">vuejs</a> <a href="/tags/zephir/" style="font-size: 10px;">zephir</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a>
     </div>
   </div>
 
@@ -634,7 +628,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -651,19 +645,19 @@
           </li>
         
           <li>
+            <a href="/2018/03/26/guzzle-http/">关于Guzzle http的使用总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/26/redis-commands/">Redis常用命令学习总结</a>
+          </li>
+        
+          <li>
             <a href="/2017/10/18/laravel-validator/">Laravel Validator自定义参数验证规则</a>
           </li>
         
           <li>
             <a href="/2017/09/28/linux-sed/">linux常用命令之sed</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/27/shell-script-learning/">shell脚本由点到面学习总结</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/14/laravel-eloquent-index/">Eloquent ORM多个and和or条件查询</a>
           </li>
         
       </ul>
@@ -678,7 +672,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 Tayloryu<br>
+      &copy; 2022 Tayloryu【yupeng0906@gmail.com】<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
