@@ -4,23 +4,20 @@
   <meta charset="utf-8">
   
   <meta name="google-site-verification" content="k9iQUbEI9rWq3xYeh63ATztKdkthC4dNRHV_25maJ3Q">
-  <title>数据库范式的思考 | Taylor&#39;s Learning Diary</title>
+  <title>关于Guzzle http的使用总结 | Taylor&#39;s Learning Diary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="还记得第一本数据库教程《数据库系统概论》，从最初的范式讲起，只记得当时学的还模模糊糊，今天又看到类似的文章【从范式谈起-余晟】，粗略总结一下数据库范式，也是加深一下记忆吧！在这之前，说下我对关系型数据库管理系统RDBMS和NOSQL的理解：RDBMS主要突出其R(Relation)关系；而NoSQL如：常见的MC、Redis、MongoDB，支持key-value型等简单的数据类型，适用于大数据时">
-<meta name="keywords" content="MySQL">
+  <meta name="description" content="What is the difference between form data and request payload? if a request (typically POST) has Content-type header set to application/x-www-form-urlencoded the body is expected to be in the form of a">
+<meta name="keywords" content="http">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库范式的思考">
-<meta property="og:url" content="https://upeng.github.io/2016/06/25/normal/index.html">
+<meta property="og:title" content="关于Guzzle http的使用总结">
+<meta property="og:url" content="https://upeng.github.io/2018/04/21/guzzle-http/index.html">
 <meta property="og:site_name" content="Taylor&#39;s Learning Diary">
-<meta property="og:description" content="还记得第一本数据库教程《数据库系统概论》，从最初的范式讲起，只记得当时学的还模模糊糊，今天又看到类似的文章【从范式谈起-余晟】，粗略总结一下数据库范式，也是加深一下记忆吧！在这之前，说下我对关系型数据库管理系统RDBMS和NOSQL的理解：RDBMS主要突出其R(Relation)关系；而NoSQL如：常见的MC、Redis、MongoDB，支持key-value型等简单的数据类型，适用于大数据时">
+<meta property="og:description" content="What is the difference between form data and request payload? if a request (typically POST) has Content-type header set to application/x-www-form-urlencoded the body is expected to be in the form of a">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://upeng.github.io/image/table1.png">
-<meta property="og:image" content="http://upeng.github.io/image/table2.png">
-<meta property="og:updated_time" content="2022-11-07T03:13:42.756Z">
+<meta property="og:updated_time" content="2022-11-08T04:54:20.226Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库范式的思考">
-<meta name="twitter:description" content="还记得第一本数据库教程《数据库系统概论》，从最初的范式讲起，只记得当时学的还模模糊糊，今天又看到类似的文章【从范式谈起-余晟】，粗略总结一下数据库范式，也是加深一下记忆吧！在这之前，说下我对关系型数据库管理系统RDBMS和NOSQL的理解：RDBMS主要突出其R(Relation)关系；而NoSQL如：常见的MC、Redis、MongoDB，支持key-value型等简单的数据类型，适用于大数据时">
-<meta name="twitter:image" content="http://upeng.github.io/image/table1.png">
+<meta name="twitter:title" content="关于Guzzle http的使用总结">
+<meta name="twitter:description" content="What is the difference between form data and request payload? if a request (typically POST) has Content-type header set to application/x-www-form-urlencoded the body is expected to be in the form of a">
   
     <link rel="alternate" href="/atom.xml" title="Taylor&#39;s Learning Diary" type="application/atom+xml">
   
@@ -69,14 +66,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="database-normal" class="article article-type-database" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-guzzle-http" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/25/normal/" class="article-date">
-  <time datetime="2016-06-25T08:32:12.000Z" itemprop="datePublished">2016-06-25</time>
+    <a href="/2018/04/21/guzzle-http/" class="article-date">
+  <time datetime="2018-04-21T04:02:20.000Z" itemprop="datePublished">2018-04-21</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/数据库范式/">数据库范式</a>
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
   </div>
 
   </div>
@@ -87,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      数据库范式的思考
+      关于Guzzle http的使用总结
     </h1>
   
 
@@ -95,32 +92,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>还记得第一本数据库教程《数据库系统概论》，从最初的范式讲起，只记得当时学的还模模糊糊，今天又看到类似的文章【从范式谈起-余晟】，粗略总结一下数据库范式，也是加深一下记忆吧！在这之前，说下我对关系型数据库管理系统RDBMS和NOSQL的理解：RDBMS主要突出其R(Relation)关系；而NoSQL如：常见的MC、Redis、MongoDB，支持key-value型等简单的数据类型，适用于大数据时代的很多场景，为开发提供了巨大便利；使用场景不同，各有千秋。<br><a id="more"></a><br>数据库范式，简单的说就是<strong>规范化，在不丢失数据的情况下，把表拆分成更小、冗余度更小的表，通过不同表之间的外键用链接join方式得到需求数据</strong>，范式NF可以粗略的理解为一张数据表的表结构所符合的某种设计标准的级别，数据库范式也分为1NF，2NF，3NF，BCNF，4NF，5NF。</p>
-<p><strong>通常一张表满足了第三范式，就认为这个表是规范化的，增删改查不会出现异常。</strong></p>
-<h3 id="第一范式：属性不可拆分"><a href="#第一范式：属性不可拆分" class="headerlink" title="第一范式：属性不可拆分"></a>第一范式：属性不可拆分</h3><p>即表中的任何列（属性）都应当是承载信息的最小单位，不可再分；<br><em>1NF是所有关系型数据库的最基本要求</em></p>
-<h3 id="第二范式：主键必须最小"><a href="#第二范式：主键必须最小" class="headerlink" title="第二范式：主键必须最小"></a>第二范式：主键必须最小</h3><p>即：在满足第一范式的基础上，所有非主属性必须完全依赖于主键，而且不能依赖于主键的某个子集<br><img src="http://upeng.github.io/image/table1.png" alt="表格"><br>主键：（学号，课名），系主任通过学号就可以确定；上表不满足2NF</p>
+        <p>What is the difference between form data and request payload?</p>
+<p>if a request (typically POST) has Content-type header set to application/x-www-form-urlencoded the body is expected to be in the form of a standard querystring with url-encoded key=value pairs joined by &amp;. Form data section then shows the key-value parameters (when viewed parsed). This way was much more common in past because it is a default for HTML forms. other cases are shown in Request payload section (and nowadays parsed for readability as well for common formats like JSON).</p>
+<p>Form Data 和 Request Payload 区别</p>
+<p>如果请求头里设置<code>Content-Type: application/x-www-form-urlencoded</code>，那么这个请求被认为是表单请求，参数出现在<code>Form Data</code>里，格式为<code>key=value&amp;key=value&amp;key=value...</code>原生的<code>AJAX</code>请求头里设置<code>Content-Type:application/json</code>，或者使用默认的请求头<code>Content-Type:text/plain</code>;参数会显示在<code>Request payload</code>块里提交。</p>
+<a id="more"></a>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><h2 id="1-创建客户端"><a href="#1-创建客户端" class="headerlink" title="1. 创建客户端"></a>1. 创建客户端</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> GuzzleHttp\<span class="keyword">Client</span>;</span><br><span class="line"></span><br><span class="line">$client = new Client([</span><br><span class="line">    // Base URI is used <span class="keyword">with</span> <span class="keyword">relative</span> requests</span><br><span class="line">    <span class="string">'base_uri'</span> =&gt; <span class="string">'http://api.com'</span>,</span><br><span class="line">    // You can <span class="keyword">set</span> <span class="keyword">any</span> <span class="built_in">number</span> <span class="keyword">of</span> <span class="keyword">default</span> request options.</span><br><span class="line">    <span class="string">'timeout'</span>  =&gt; <span class="number">2.0</span>,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>如何判断是否符合2NF？</p>
+<p>关于base_uri<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create a client with a base URI</span></span><br><span class="line">$client = <span class="keyword">new</span> GuzzleHttp\Client([<span class="string">'base_uri'</span> =&gt; <span class="string">'https://foo.com/api/'</span>]);</span><br><span class="line"><span class="comment">// Send a request to https://foo.com/api/test</span></span><br><span class="line">$response = $client-&gt;request(<span class="string">'GET'</span>, <span class="string">'test'</span>);</span><br><span class="line"><span class="comment">// Send a request to https://foo.com/root</span></span><br><span class="line">$response = $client-&gt;request(<span class="string">'GET'</span>, <span class="string">'/root'</span>);</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<ul>
-<li>第一步：找出数据表中所有的码。</li>
-<li>第二步：根据第一步所得到的码，找出所有的主属性。</li>
-<li>第三步：数据表中，除去所有的主属性，剩下的就都是非主属性了。</li>
-<li>第四步：查看是否存在非主属性对码的部分函数依赖。</li>
-</ul>
-<p><em>2NF在1NF的基础之上，消除了非主属性对于码的部分函数依赖</em></p>
-<h3 id="第三范式（3NF）：主键必须直接依赖，不能传递依赖"><a href="#第三范式（3NF）：主键必须直接依赖，不能传递依赖" class="headerlink" title="第三范式（3NF）：主键必须直接依赖，不能传递依赖"></a>第三范式（3NF）：主键必须直接依赖，不能传递依赖</h3><p><img src="http://upeng.github.io/image/table2.png" alt="表格"><br>上图表1符合3NF<br>上图表2主键是学号，其他3个是非主属性，学号-&gt;系名，系名-&gt;系主任；存在传递依赖，故表2不满足3NF<br><em>3NF在2NF的基础之上，消除了非主属性对于码的传递函数依赖</em>。</p>
-<p>更深入的理解：<a href="https://www.zhihu.com/question/24696366" target="_blank" rel="noopener">知乎</a> ，注：文中图片均来源于此</p>
+<h2 id="2-发送请求"><a href="#2-发送请求" class="headerlink" title="2. 发送请求"></a>2. 发送请求</h2><blockquote>
+<p>GET请求<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//style1</span></span><br><span class="line">$response = $client-&gt;request(<span class="string">'GET'</span>, <span class="string">'http://api.com/get?foo=bar'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//style2</span></span><br><span class="line">$response = $client-&gt;request(<span class="string">'GET'</span>, <span class="string">'http://api.com/get'</span>, [<span class="string">'query'</span> =&gt; <span class="string">'foo=bar'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">//style3</span></span><br><span class="line"><span class="comment">//提供的数组参数将会使用PHP的 http_build_query</span></span><br><span class="line">$response = $client-&gt;request(<span class="string">'GET'</span>, <span class="string">'http://api.com/get'</span>, [</span><br><span class="line">    <span class="string">'query'</span> =&gt; [<span class="string">'foo'</span> =&gt; <span class="string">'bar'</span>]</span><br><span class="line">]);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>POST请求<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//style1  content-type:application/x-www-form-urlencoded</span></span><br><span class="line">$response = $client-&gt;request(<span class="string">'POST'</span>, <span class="string">'http://api.com/post'</span>, [</span><br><span class="line">    <span class="string">'form_params'</span> =&gt; [<span class="string">'foo'</span> =&gt; <span class="string">'bar'</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment">//style2  content-type:application/json</span></span><br><span class="line">$response = $client-&gt;request(<span class="string">'POST'</span>, <span class="string">'http://api.com/post'</span>, [</span><br><span class="line">    <span class="string">'json'</span> =&gt; [<span class="string">'foo'</span> =&gt; <span class="string">'bar'</span>]</span><br><span class="line">]);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>获取请求返回结果<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$body</span> = <span class="variable">$response</span>-&gt;getBody();</span><br><span class="line"><span class="variable">$result</span> = json_decode(<span class="variable">$body</span>, <span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="3-请求选项-request-options"><a href="#3-请求选项-request-options" class="headerlink" title="3.请求选项 request options"></a>3.请求选项 request options</h2><p>上述 query、form_params、json 都属于请求选项，多个请求选项组成的数组作为发起请求的第三个参数，第三个参数是请求格式、内容、超时、header、cookie等的集合<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置请求header</span></span><br><span class="line">$client-&gt;request(<span class="string">'GET'</span>, <span class="string">'/get'</span>, [<span class="string">'headers'</span> =&gt; [<span class="string">'X-Foo'</span> =&gt; <span class="string">'test'</span>]);</span><br><span class="line"><span class="comment">//设置请求超时时间</span></span><br><span class="line">$client-&gt;request(<span class="string">'GET'</span>, <span class="string">'/delay/5'</span>, [<span class="string">'connect_timeout'</span> =&gt; <span class="number">3.14</span>]);</span><br><span class="line"><span class="comment">//同时设置请求头和请求体</span></span><br><span class="line">$client-&gt;request(<span class="string">'GET'</span>, <span class="string">'/get'</span>, [<span class="string">'headers'</span> =&gt; [<span class="string">'X-Foo'</span> =&gt; <span class="string">'test'</span>], <span class="string">'json'</span> =&gt; [<span class="string">'foo'</span> =&gt; <span class="string">'bar'</span>]);</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://upeng.github.io/2016/06/25/normal/" data-id="cla7qn51b002t58xdtq41ko7u" class="article-share-link">Share</a>
+      <a data-url="https://upeng.github.io/2018/04/21/guzzle-http/" data-id="cla7qn4zj000158xdpkjtinu6" class="article-share-link">Share</a>
       
-        <a href="https://upeng.github.io/2016/06/25/normal/#disqus_thread" class="article-comment-link">留言</a>
+        <a href="https://upeng.github.io/2018/04/21/guzzle-http/#disqus_thread" class="article-comment-link">留言</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
 
     </footer>
   </div>
@@ -128,19 +128,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/06/30/zephir/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/11/07/python日期格式转换/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          使用zephir快速编写php扩展
+          python日期格式转换总结
         
       </div>
     </a>
   
   
-    <a href="/2016/06/17/thinking-1/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/03/26/redis-commands/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">In Recent Days</div>
+      <div class="article-nav-title">Redis常用命令学习总结</div>
     </a>
   
 </nav>
@@ -242,7 +242,7 @@
 <script>
   var disqus_shortname = 'tayloryu';
   
-  var disqus_url = 'https://upeng.github.io/2016/06/25/normal/';
+  var disqus_url = 'https://upeng.github.io/2018/04/21/guzzle-http/';
   
   (function(){
     var dsq = document.createElement('script');
